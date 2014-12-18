@@ -1,0 +1,2100 @@
+"Join Data Attachment":
+    #info: change to a world script if this is ready
+    type: task
+    debug: false
+    events:
+#################################################################################################################
+######################### Server State Changes ##################################################################
+#################################################################################################################
+
+
+        on reload scripts:
+        #<context.sender> returns the name of the sender who triggered the reload. 
+        #<context.all> returns whether 'reload -a' was used. 
+        #<contex.haderror> returns whether there was an error.
+        
+  
+Name(s) on server start 
+ 
+Triggers when the server starts 
+ 
+Context  
+Determine "CANCELLED" to save all plugins and cancel server startup. 
+ 
+        
+ 
+#################################################################################################################
+######################### Server Core Events ####################################################################
+#################################################################################################################
+
+
+        on server list ping:
+        #<context.motd> returns the MOTD that will show. 
+        #<context.max_players> returns the number of max players that will show. 
+        #<context.num_players> returns the number of online players that will show. 
+        #<context.address> returns the IP address requesting the list. 
+        
+        #determine: Element(Number) to change the max player amount that will show 
+        #determine: Element(Number)|Element to set the max player amount and change the MOTD. 
+        #determine: Element to change the MOTD that will show. 
+        
+        
+        
+
+        
+        
+        
+#################################################################################################################
+######################### Player Events ########################################################################
+#################################################################################################################
+
+        on player enter <biome>:
+        on player exits <biome>:
+        on player enters biome:
+        on player exits biome:
+        #<context.from> returns the block location moved from. 
+        #<context.to> returns the block location moved to. 
+        #<context.old_biome> returns an element of the biome being left. 
+        #<context.new_biome> returns an element of the biome being entered.  
+        #determine cancelled
+        #fires similar event right away
+                
+        
+        on player enters <notable cuboid>: 
+        on player exits <notable cuboid>:
+        on player enters notable cuboid: 
+        on player exits notable cuboid:
+        #<context.from> returns the block location moved from. 
+        #<context.to> returns the block location moved to.
+        #determine cancelled
+        
+        
+        on player breaks block:
+        on player breaks block in <notable cuboid>:
+        on player breaks <material>:
+        on player breaks <material> in <notable cuboid>:
+        on player breaks block with <item>:
+        on player breaks <material> with <item>:
+        on player breaks <material> with <item> in <notable cuboid>:
+        on player breaks block with <material>:
+        on player breaks <material> with <material>:
+        on player breaks <material> with <material> in <notable cuboid>:
+        #<context.location> returns the dLocation the block was broken at. 
+        #<context.material> returns the dMaterial of the block that was broken. 
+        #<context.cuboids> returns a dList of notable cuboids surrounding the block broken. 
+        
+        #"CANCELLED" to stop the block from breaking. 
+        #"NOTHING" to make the block drop no items. 
+        #dList(dItem) to make the block drop a specified list of items. 
+        
+        
+        
+        
+        on block being built:
+        on block being built on <material>:
+        on <material> being built:
+        on <material> being built on <material>:
+        #<context.location> returns the dLocation of the block the player is trying to build on. 
+        #<context.old_material> returns the dMaterial of the block the player is trying to build on. 
+        #<context.new_material> returns the dMaterial of the block the player is trying to build. 
+        
+        #"BUILDABLE" to allow the building. 
+        #"CANCELLED" to cancel the building. 
+        
+        
+        
+        on player damages block:
+        on player damages <material>:
+        on player damages block in <notable cuboid>:
+        on player damages <material> in <notable cuboid>:
+        #<context.location> returns the dLocation the block that was damaged. 
+        #<context.material> returns the dMaterial of the block that was damaged. 
+        #<context.cuboids> returns a dList of notable cuboids which the damaged block is contained. 
+        
+        #"CANCELLED" to stop the block from being damaged. 
+        #"INSTABREAK" to make the block get broken instantly. 
+        
+        
+Name(s) on player places block 
+on player places <material> 
+on player place <item> 
+on player places block in <notable cuboid> 
+on player places <material> in <notable cuboid> 
+on player places <item> in <notable cuboid> 
+Triggers when a player places a block. 
+ 
+Context <context.location> returns the dLocation of the block that was placed. 
+<context.material> returns the dMaterial of the block that was placed. 
+<context.item_in_hand> returns the dItem of the item in hand. 
+ 
+Determine "CANCELLED" to stop the block from being placed. 
+
+
+
+
+ 
+Name(s) on player takes item from furnace 
+on player takes <item> from furnace 
+on player takes <material> from furnace 
+ 
+Triggers when a player takes an item from a furnace. 
+ 
+Context <context.location> returns the dLocation of the furnace. 
+<context.item> returns the dItem taken out of the furnace. 
+ 
+Determine Element(Integer) to set the amount of experience the player will get. 
+
+
+ 
+ 
+Name(s) on player changes sign 
+on player changes (<material>) 
+ 
+Triggers when a player changes a sign. 
+ 
+Context <context.location> returns the dLocation of the sign. 
+<context.new> returns the new sign text as a dList. 
+<context.old> returns the old sign text as a dList. 
+<context.new_escaped> returns the new sign text as a dList, pre-escaped to prevent issues. 
+<context.old_escaped> returns the old sign text as a dList, pre-escaped to prevent issues. 
+<context.material> returns the dMaterial of the sign. 
+ 
+Determine "CANCELLED" to stop the sign from being changed. 
+dList to change the lines (Uses escaping, see language/Property Escaping) 
+ 
+ 
+
+
+ 
+Name(s) on player places hanging 
+on player places <hanging> 
+ 
+Triggers when a hanging entity (painting or itemframe) is placed. 
+ 
+Context <context.hanging> returns the dEntity of the hanging. 
+<context.location> returns the dLocation of the block the hanging was placed on. 
+ 
+Determine "CANCELLED" to stop the hanging from being placed. 
+ 
+ 
+
+
+Name(s) on player dyes sheep (<color>) 
+on sheep dyed (<color>) 
+ 
+Triggers when a sheep is dyed by a player. 
+ 
+Context <context.entity> returns the dEntity of the sheep. 
+<context.color> returns an Element of the color the sheep is being dyed. 
+ 
+Determine "CANCELLED" to stop it from being dyed. 
+Element(String) that matches DyeColor to dye it a different color. 
+ 
+ 
+ 
+#################################################################################################################
+######################### Player Action #########################################################################
+#################################################################################################################
+
+        on player jumps:
+        #<context.location> returns the location the player jumped at. 
+
+
+
+
+        
+#################################################################################################################
+######################### Environment Actions ###################################################################
+#################################################################################################################
+
+
+        on block falls:
+        on <material> falls:
+        #<context.location> returns the location of the block. 
+        #determine cancelled
+
+        
+        on block burns:
+        on <block> burns:
+        #<context.location> returns the dLocation the block was burned at. 
+        #<context.material> returns the dMaterial of the block that was burned. 
+        
+        #"CANCELLED" to stop the block from being destroyed. 
+        
+ 
+Name(s) on block dispenses item 
+on block dispenses <item> 
+on <block> dispenses item 
+on <block> dispenses <item> 
+Triggers when a block dispenses an item. 
+
+Context <context.location> returns the dLocation of the dispenser. 
+<context.item> returns the dItem of the item being dispensed. 
+ 
+Determine "CANCELLED" to stop the block from dispensing. 
+Element(Double) to set the power with which the item is shot. 
+ 
+
+ 
+ 
+Name(s) on block fades 
+on <block> fades 
+Triggers when a block fades, melts or disappears based on world conditions. 
+ 
+Context <context.location> returns the dLocation the block faded at. 
+<context.material> returns the dMaterial of the block that faded. 
+ 
+Determine "CANCELLED" to stop the block from fading. 
+ 
+ 
+ 
+ 
+Name(s) on block forms 
+on <block> forms 
+Triggers when a block is formed based on world conditions, 
+ e.g. when snow forms in a snow storm or ice forms 
+ in a snowy biome 
+ 
+Context <context.location> returns the dLocation the block. 
+<context.material> returns the dMaterial of the block. 
+ 
+Determine "CANCELLED" to stop the block from forming. 
+
+
+
+
+Name(s) on liquid spreads 
+on <liquid block> spreads 
+Triggers when a liquid block spreads. 
+ 
+Context <context.destination> returns the dLocation the block spread to. 
+<context.location> returns the dLocation the block spread from. 
+<context.material> returns the dMaterial of the block that spread. 
+ 
+Determine "CANCELLED" to stop the block from spreading. 
+
+
+
+
+Name(s) on block grows 
+on <block> grows 
+Triggers when a block grows naturally in the world, 
+ e.g. when wheat, sugar canes, cactuses, 
+ watermelons or pumpkins grow 
+ 
+Context <context.location> returns the dLocation the block. 
+<context.material> returns the dMaterial of the block. 
+ 
+Determine "CANCELLED" to stop the block from growing. 
+
+
+
+Name(s) on block ignites 
+on <block> ignites 
+Triggers when a block is set on fire. 
+ 
+Context <context.location> returns the dLocation the block was set on fire at. 
+<context.material> returns the dMaterial of the block that was set on fire. 
+ 
+Determine "CANCELLED" to stop the block from being ignited. 
+ 
+
+ 
+ 
+Name(s) on piston extends 
+on <block> extends 
+Triggers when a piston extends. 
+ 
+Context <context.location> returns the dLocation of the piston. 
+<context.material> returns the dMaterial of the piston. 
+<context.length> returns the number of blocks that will be moved by the piston. 
+ 
+Determine "CANCELLED" to stop the piston from extending. 
+ 
+
+ 
+ 
+Name(s) on piston retracts 
+on <block> retracts 
+Triggers when a piston retracts. 
+ 
+Context <context.location> returns the dLocation of the piston. 
+<context.retract_location> returns the new dLocation of the block that 
+ will be moved by the piston if it is sticky. 
+<context.material> returns the dMaterial of the piston. 
+ 
+Determine "CANCELLED" to stop the piston from retracting. 
+
+
+
+
+Name(s) on block spreads 
+on <block> spreads 
+Triggers when a block spreads based on world conditions, 
+ e.g. when fire spreads, when mushrooms spread 
+ 
+Context <context.location> returns the dLocation the block. 
+<context.material> returns the dMaterial of the block. 
+ 
+Determine "CANCELLED" to stop the block from growing. 
+
+
+
+
+
+Name(s) on brewing stand brews 
+Triggers when a brewing stand brews a potion. 
+ 
+Context <context.location> returns the dLocation of the brewing stand. 
+<context.inventory> returns the dInventory of the brewing stand's contents. 
+ 
+Determine "CANCELLED" to stop the brewing stand from brewing. 
+ 
+
+
+ 
+Name(s) on furnace burns item 
+on furnace burns <item> 
+ 
+Triggers when a furnace burns an item used as fuel. 
+ 
+Context <context.location> returns the dLocation of the furnace. 
+<context.item> returns the dItem burnt. 
+ 
+Determine "CANCELLED" to stop the furnace from burning the item. 
+Element(Integer) to set the burn time for this fuel. 
+
+
+
+
+ 
+Name(s) on furnace smelts item (into <item>) 
+on furnace smelts <item> (into <item>) 
+ 
+Triggers when a furnace smelts an item. 
+ 
+Context <context.location> returns the dLocation of the furnace. 
+<context.source_item> returns the dItem that is being smelted. 
+<context.result_item> returns the dItem that is the result of the smelting. 
+ 
+Determine "CANCELLED" to stop the furnace from smelting the item. 
+dItem to set the item that is the result of the smelting. 
+
+
+
+Name(s) on leaves decay 
+on <block> decay 
+ 
+Triggers when leaves decay. 
+ 
+Context <context.location> returns the dLocation of the leaves. 
+<context.material> returns the dMaterial of the leaves. 
+ 
+Determine "CANCELLED" to stop the leaves from decaying. 
+ 
+ 
+
+ 
+Name(s) on time changes in <world> 
+on <0-23>:00 in <world> 
+on time <0-23> in <world> 
+ 
+Triggers when the current time changes in a world (once per mine-hour). 
+ 
+Context <context.time> returns the current time. 
+<context.world> returns the world. 
+ 
+Determine  
+
+
+
+
+
+Name(s) on hanging breaks 
+on hanging breaks because <cause> 
+on <hanging> breaks 
+on <hanging> breaks because <cause> 
+ 
+Triggers when a hanging entity (painting or itemframe) is broken. 
+ 
+Context <context.cause> returns the cause of the entity breaking. 
+<context.entity> returns the dEntity that broke the hanging entity, if any. 
+<context.hanging> returns the dEntity of the hanging. 
+ 
+Determine "CANCELLED" to stop the hanging from being broken.
+
+
+
+
+
+  
+#################################################################################################################
+######################### Entity Event Changes ##################################################################
+#################################################################################################################
+
+        
+        on entity spawns:
+        on entity spawns in <notable cuboid:
+        on entity spawns because <cause>:
+        on entity spawns in <notable cuboid> because <cause>:
+        on <entity> spawns:
+        on <entity> spawns in <notable cuboid>:
+        on <entity> spawns because <cause>:
+        on <entity> spawns in <notable cuboid> because <cause>:
+        #<context.entity> returns the dEntity that spawned. 
+        #<npc> if the entity spawned is a NPC. 
+        #<context.reason> returns the reason the entity spawned. 
+        #<context.location> returns the location the entity will spawn at. 
+        #<context.cuboids> returns a list of cuboids that the entity spawned inside. 
+        #determine cancelled
+
+        
+        on flag cleared:
+        on player flag cleared:
+        on player flag <flagname> cleared:
+        on npc flag cleared:
+        on npc flag <flagname> cleared:
+        on server flag cleared:
+        on server flag <flagname> cleared:
+        #<context.owner> returns an Element of the flag owner's object. 
+        #<context.name> returns an Element of the flag name. 
+        #<context.type> returns an Element of the flag type. 
+        #<context.old_value> returns an Element of the flag's previous value. 
+        
+        
+        on flag changed:
+        on player flag changed:
+        on player flag <flagname> changed:
+        on npc flag changed:
+        on npc flag <flagname> changed:
+        on server flag changed:
+        on server flag <flagname> changed:
+        #<context.owner> returns an Element of the flag owner's object. 
+        #<context.name> returns an Element of the flag name. 
+        #<context.type> returns an Element of the flag type. 
+        #<context.old_value> returns an Element of the flag's previous value. 
+
+
+Name(s) on entity combusts 
+on <entity> combusts 
+ 
+Triggers when an entity combusts. 
+ 
+Context <context.duration> returns how long the entity takes to combust. 
+<context.entity> returns the dEntity that combusted. 
+ 
+Determine "CANCELLED" to stop the entity from combusting. 
+ 
+ 
+
+#################################################################################################################
+######################### Entity Environment Changes ############################################################
+#################################################################################################################
+This could be player related changes too?
+
+
+Name(s) on entity forms block 
+on entity forms <block> 
+on <entity> forms block 
+on <entity> forms <block> 
+Triggers when a block is formed by an entity, 
+ e.g. when a snowman forms snow 
+ 
+ 
+Context <context.location> returns the dLocation the block. 
+<context.material> returns the dMaterial of the block. 
+<context.entity> returns the dEntity that formed the block. 
+ 
+Determine "CANCELLED" to stop the block from forming. 
+
+
+ 
+ 
+ 
+Name(s) on <entity> breaks hanging 
+on <entity> breaks hanging because <cause> 
+on <entity> breaks <hanging> in <notable cuboid> 
+on <entity> breaks <hanging> because 
+on <entity> breaks <hanging> because <cause> 
+ 
+Triggers when a hanging entity is broken by an entity. 
+ 
+Context <context.cause> returns the cause of the entity breaking. 
+<context.entity> returns the dEntity that broke the hanging entity. 
+<context.hanging> returns the hanging entity as a dEntity. 
+ 
+Determine "CANCELLED" to stop the hanging entity from being broken. 
+
+
+
+Name(s) on creeper powered (because <cause>) 
+Triggers when a creeper is struck by lightning and turned into a powered creeper. 
+ 
+Context <context.entity> returns the dEntity of the creeper. 
+<context.lightning> returns the dEntity of the lightning. 
+<context.cause> returns an Element of the cause for the creeper being powered. 
+ 
+Determine "CANCELLED" to stop the creeper from being powered. 
+ 
+
+
+ 
+Name(s) on entity changes block 
+on <entity> changes block 
+on <entity> changes block 
+Triggers when an entity changes the material of a block. 
+ 
+Context <context.entity> returns the dEntity that changed the block. 
+<context.location> returns the dLocation of the changed block. 
+<context.old_material> returns the old material of the block. 
+<context.new_material> returns the new material of the block. 
+ 
+Determine "CANCELLED" to stop the entity from changing the block. 
+ 
+ 
+ 
+Name(s) on entity damaged 
+on entity damaged by <cause> 
+on <entity> damaged 
+on <entity> damaged by <cause> 
+ 
+Triggers when an entity is damaged. 
+ 
+Context <context.cause> returns the reason the entity was damaged. 
+<context.damage> returns the amount of damage dealt. 
+<context.entity> returns the dEntity that was damaged. 
+ 
+Determine "CANCELLED" to stop the entity from being damaged. 
+Element(Double) to set the amount of damage the entity receives. 
+ 
+ 
+ 
+ 
+Name(s) on entity killed 
+on entity killed by <cause> 
+on <entity> killed 
+on <entity> killed by <cause> 
+ 
+Triggers when an entity is killed. 
+ 
+Context <context.cause> returns the reason the entity was killed. 
+<context.entity> returns the dEntity that was killed. 
+<context.damage> returns the amount of damage dealt. 
+<context.damager> returns the dEntity damaging the other entity. 
+<context.projectile> returns the projectile shot by the damager, if any. 
+ 
+Determine "CANCELLED" to stop the entity from being killed. 
+Element(Double) to set the amount of damage the entity receives, instead of dying. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+#################################################################################################################
+######################### #################### ##################################################################
+#################################################################################################################
+
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity kills entity 
+on entity kills <entity> 
+on <entity> kills entity 
+on <entity> kills <entity> 
+ 
+Triggers when an entity kills another entity. 
+ 
+Context <context.cause> returns the reason the entity was killed. 
+<context.entity> returns the dEntity that was killed. 
+<context.damager> returns the dEntity killing the other entity. 
+<context.projectile> returns the projectile, if one caused the event. 
+ 
+Determine "CANCELLED" to stop the entity from being killed. 
+Element(Number) to set the amount of damage the entity receives, instead of dying. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity dies 
+on <entity> death 
+ 
+Triggers when an entity dies. 
+ 
+Context <context.entity> returns the dEntity that died. 
+<context.damager> returns the dEntity damaging the other entity, if any. 
+<context.message> returns an Element of a player's death message. 
+<context.inventory> returns the dInventory of the entity if it was a player. 
+<context.cause> returns the cause of the death. 
+ 
+Determine Element(String) to change the death message. 
+"NO_DROPS" to specify that any drops should be removed. 
+"NO_DROPS_OR_XP" to specify that any drops or XP orbs should be removed. 
+"NO_XP" to specify that any XP orbs should be removed. 
+dList(dItem) to specify new items to be dropped. 
+Element(Number) to specify the new amount of XP to be dropped. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity explodes 
+on <entity> explodes 
+ 
+Triggers when an entity explodes. 
+ 
+Context <context.blocks> returns a dList of blocks that the entity blew up. 
+<context.entity> returns the dEntity that exploded. 
+<context.location> returns the dLocation the entity blew up at. 
+ 
+Determine "CANCELLED" to stop the entity from exploding. 
+dList(dLocation) to set a new lists of blocks that are to be affected by the explosion. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on potion splash 
+on <item> splashes 
+ 
+Triggers when a splash potion breaks open 
+ 
+Context <context.potion> returns a dItem of the potion that broke open. 
+<context.entities> returns a dList of effected entities. 
+<context.location> returns the dLocation the splash potion broke open at. 
+<context.entity> returns a dEntity of the splash potion. 
+ 
+Determine "CANCELLED" to stop the potion effects. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity heals (because <cause>) 
+on <entity> heals (because <cause>) 
+ 
+Triggers when an entity heals. 
+ 
+Context <context.amount> returns the amount the entity healed. 
+<context.entity> returns the dEntity that healed. 
+<context.reason> returns the cause of the entity healing. 
+ 
+Determine "CANCELLED" to stop the entity from healing. 
+Element(Double) to set the amount of health the entity receives. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity enters portal 
+on <entity> enters portal 
+ 
+Triggers when an entity enters a portal. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.location> returns the dLocation of the portal block touched by the entity. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+
+Name(s) on entity exits portal 
+on <entity> exits portal 
+ 
+Triggers when an entity exits a portal. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.location> returns the dLocation of the portal block touched by the entity. 
+ 
+Determine  
+
+
+
+
+
+
+
+Name(s) on entity shoots bow 
+on <entity> shoots bow 
+on entity shoots <item> 
+on <entity> shoots <item> 
+ 
+Triggers when an entity shoots something out of a bow. 
+ 
+Context <context.entity> returns the dEntity that shot the bow. 
+<context.projectile> returns a dEntity of the projectile. 
+<context.bow> returns the bow item used to shoot. 
+<context.force> returns the force of the shot. 
+ 
+Determine "CANCELLED" to stop the entity from shooting the bow. 
+dList(dEntity) to change the projectile(s) being shot. 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity tamed 
+on <entity> tamed 
+on player tames entity 
+on player tames <entity> 
+ 
+Triggers when an entity is tamed. 
+ 
+Context <context.entity> returns a dEntity of the tamed entity. 
+ 
+Determine "CANCELLED" to stop the entity from being tamed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity targets (<entity>) 
+on entity targets (<entity>) because <cause> 
+on <entity> targets (<entity>) 
+on <entity> targets (<entity>) because <cause> 
+ 
+Triggers when an entity targets a new entity. 
+ 
+Context <context.entity> returns the targeting entity. 
+<context.reason> returns the reason the entity changed targets. 
+<context.target> returns the targeted entity. 
+ 
+Determine "CANCELLED" to stop the entity from being targeted. 
+dEntity to make the entity target a different entity instead. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity teleports 
+on <entity> teleports 
+ 
+Triggers when an entity teleports. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.origin> returns the dLocation the entity teleported from. 
+<context.destination> returns the dLocation the entity teleported to. 
+ 
+Determine "CANCELLED" to stop the entity from teleporting. 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity unleashed (because <reason>) 
+on <entity> unleashed (because <reason>) 
+ 
+Triggers when an entity is unleashed. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.reason> returns an Element of the reason for the unleashing. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+
+
+Name(s) on entity explosion primes 
+on <entity> explosion primes 
+ 
+Triggers when an entity decides to explode. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.origin> returns an Element of the explosion's radius. 
+<context.fire> returns an Element with a value of "true" if the explosion will create fire and "false" otherwise. 
+ 
+Determine "CANCELLED" to stop the entity from deciding to explode. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity changes food level 
+on <entity> changes food level 
+ 
+Triggers when an entity's food level changes. 
+ 
+Context <context.entity> returns the dEntity. 
+<context.food> returns an Element(Integer) of the entity's new food level. 
+ 
+Determine "CANCELLED" to stop the entity's food level from changing. 
+Element(Double) to set the entity's new food level. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on horse jumps 
+on (<color>) (<type>) jumps 
+ 
+Triggers when a horse jumps. 
+ 
+Context <context.entity> returns the dEntity of the horse. 
+<context.color> returns an Element of the horse's color. 
+<context.variant> returns an Element of the horse's variant. 
+<context.food> returns an Element(Float) of the jump's power. 
+ 
+Determine "CANCELLED" to stop the horse from jumping. 
+Element(Double) to set the power of the jump. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on item despawns 
+on <item> despawns 
+on <material> despawns 
+ 
+Triggers when an item entity despawns. 
+ 
+Context <context.item> returns the dItem of the entity. 
+<context.entity> returns the dEntity. 
+ 
+Determine "CANCELLED" to stop the item entity from despawning. 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on item spawns 
+on <item> spawns 
+on <material> spawns 
+ 
+Triggers when an item entity spawns. 
+ 
+Context <context.item> returns the dItem of the entity. 
+<context.entity> returns the dEntity. 
+<context.location> returns the location of the entity to be spawned. 
+ 
+Determine "CANCELLED" to stop the item entity from spawning. 
+ 
+ 
+ 
+ 
+ 
+Name(s) on pig zapped 
+ 
+Triggers when a pig is zapped by lightning and turned into a pig zombie. 
+ 
+Context <context.pig> returns the dEntity of the pig. 
+<context.pig_zombie> returns the dEntity of the pig zombie. 
+<context.lightning> returns the dEntity of the lightning. 
+ 
+Determine "CANCELLED" to stop the pig from being zapped. 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on projectile hits block 
+on projectile hits <material> 
+on <projectile> hits block 
+on <projectile> hits <material> 
+ 
+Triggers when a projectile hits a block. 
+ 
+Context <context.projectile> returns the dEntity of the projectile. 
+<context.shooter> returns the dEntity of the shooter, if there is one. 
+<context.location> returns the dLocation of the block that was hit. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Determine  
+Name(s) on entity shoots block 
+on entity shoots <material> (with <projectile>) 
+on <entity> shoots block 
+on <entity> shoots <material> (with <projectile>) 
+ 
+Triggers when a projectile shot by an entity hits a block. 
+ 
+Context <context.projectile> returns the dEntity of the projectile. 
+<context.shooter> returns the dEntity of the shooter, if there is one. 
+<context.location> returns the dLocation of the block that was hit. 
+ 
+Determine  
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+Name(s) on sheep regrows wool 
+ 
+Triggers when a sheep regrows wool. 
+ 
+Context <context.entity> returns the dEntity of the sheep. 
+ 
+Determine "CANCELLED" to stop it from regrowing wool. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on slime splits (into <#>) 
+ 
+Triggers when a slime splits into smaller slimes. 
+ 
+Context <context.entity> returns the dEntity of the slime. 
+<context.count> returns an Element(Integer) of the number of smaller slimes it will split into. 
+ 
+Determine "CANCELLED" to stop it from splitting. 
+Element(Integer) to set the number of smaller slimes it will split into. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on item enchanted 
+on <item> enchanted 
+ 
+Triggers when an item is enchanted. 
+ 
+Context <context.location> returns the dLocation of the enchanting table. 
+<context.inventory> returns the dInventory of the enchanting table. 
+<context.item> returns the dItem to be enchanted. 
+ 
+Determine "CANCELLED" to stop the item from being enchanted. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player (<click type>) clicks (<item>) (in <inventory>) (with <item>) 
+on player (<click type>) clicks (<material>) (in <inventory>) (with <item>) 
+on player (<click type>) clicks (<item>) (in <inventory>) (with <material>) 
+on player (<click type>) clicks (<material>) (in <inventory>) (with <material>) 
+ 
+Triggers when a player clicks in an inventory. 
+ 
+Context <context.item> returns the dItem the player has clicked on. 
+<context.inventory> returns the dInventory. 
+<context.cursor_item> returns the item the Player is clicking with. 
+<context.click> returns an Element with the name of the click type. 
+<context.slot_type> returns an Element with the name of the slot type that was clicked. 
+<context.slot> returns an Element with the number of the slot that was clicked. 
+<context.is_shift_click> returns true if 'shift' was used while clicking. 
+<context.action> returns the inventory_action. See language/Inventory Actions. 
+ 
+Determine "CANCELLED" to stop the player from clicking. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player closes inventory 
+on player closes <inventory> 
+ 
+Triggers when a player closes an inventory. 
+ 
+Context <context.inventory> returns the dInventory. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+
+
+Name(s) on player drags in inventory 
+on player drags (<item>) (in <inventory>) 
+ 
+Triggers when a player drags in an inventory. 
+ 
+Context <context.item> returns the dItem the player has dragged. 
+<context.inventory> returns the dInventory. 
+ 
+Determine "CANCELLED" to stop the player from dragging. 
+ 
+Name(s) on item moves from inventory (to <inventory>) 
+on item moves from <inventory> (to <inventory>) 
+ 
+Triggers when an entity or block moves an item from one inventory to another. 
+ 
+Context <context.origin> returns the origin dInventory. 
+<context.destination> returns the destination dInventory. 
+<context.initiator> returns the dInventory that initiatied the item's transfer. 
+<context.item> returns the dItem that was moved. 
+ 
+Determine "CANCELLED" to stop the item from being moved. 
+dItem to set a different item to be moved. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player opens inventory 
+on player opens <inventory> 
+ 
+Triggers when a player opens an inventory. 
+ 
+Context <context.inventory> returns the dInventory. 
+ 
+Determine "CANCELLED" to stop the player from opening the inventory. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on inventory picks up item 
+on inventory picks up <item> 
+on <inventory> picks up item 
+on <inventory> picks up <item> 
+ 
+Triggers when a hopper or hopper minecart picks up an item. 
+ 
+Context <context.inventory> returns the dInventory that picked up the item. 
+<context.item> returns the dItem. 
+ 
+Determine "CANCELLED" to stop the item from being moved. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player chats 
+ 
+Triggers when a player chats. 
+ 
+Context <context.message> returns the player's message as an Element. 
+ 
+Determine "CANCELLED" to stop the player from chatting. 
+Element(String) to change the message. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player edits book 
+on player signs book 
+ 
+Triggers when a player edits or signs a book. 
+ 
+Context <context.title> returns the name of the book, if any. 
+<context.pages> returns the number of pages in the book. 
+<context.book> returns the book item being edited. 
+<context.signing> returns whether the book is about to be signed. 
+ 
+Determine "CANCELLED" to prevent the book from being edited. 
+"NOT_SIGNING" to prevent the book from being signed. 
+dScript to set the book information to set it to instead. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player breaks item 
+on player breaks <item> 
+ 
+Triggers when a player breaks the item they are holding. 
+ 
+Context <context.item> returns the item that broke. 
+ 
+Determine "CANCELLED" to prevent the item from breaking, restoring it with one usage left. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player animates (<animation>) 
+ 
+Triggers when a player performs an animation. 
+ 
+Context <context.animation> returns the name of the animation. 
+ 
+Determine "CANCELLED" to stop the player from animating. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player enters bed 
+ 
+Triggers when a player enters a bed. 
+ 
+Context <context.location> returns the dLocation of the bed. 
+ 
+Determine "CANCELLED" to stop the player from entering the bed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player leaves bed 
+ 
+Triggers when a player leaves a bed. 
+ 
+Context <context.location> returns the dLocation of the bed. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+
+Name(s) on player empties bucket 
+ 
+Triggers when a player empties a bucket. 
+ 
+Context <context.item> returns the dItem of the bucket. 
+<context.location> returns the dLocation of the block clicked with the bucket. 
+ 
+Determine "CANCELLED" to stop the player from emptying the bucket. 
+dItem to set the item in the player's hand after the event. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player fills bucket 
+ 
+Triggers when a player fills a bucket. 
+ 
+Context <context.item> returns the dItem of the bucket. 
+<context.location> returns the dLocation of the block clicked with the bucket. 
+ 
+Determine "CANCELLED" to stop the player from filling the bucket. 
+dItem to set the item in the player's hand after the event. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player changes world (from <world>) to (<world>) 
+ 
+Triggers when a player moves to a different world. 
+ 
+Context <context.origin_world> returns the dWorld that the player was previously on. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+Name(s) on command 
+on <command_name> command (in <notable cuboid>) 
+ 
+Triggers when a player or console runs a Bukkit command. This happens before 
+any code of established commands allowing scripters to 'override' existing commands. 
+ 
+Context <context.command> returns the command name as an Element. 
+<context.raw_args> returns any args used as an Element. 
+<context.args> returns a dList of the arguments. 
+<context.server> returns true if the command was run from the console. 
+<context.cuboids> returns a list of cuboids the player is in when using the command. 
+ 
+Determine "FULFILLED" to tell Bukkit the command was handled. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player drops item 
+on player drops <item> 
+ 
+Triggers when a player drops an item. 
+ 
+Context <context.item> returns the dItem. 
+<context.entity> returns a dEntity of the item. 
+<context.location> returns a dLocation of the item's location. 
+ 
+Determine "CANCELLED" to stop the item from being dropped. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player throws (hatching/non-hatching) egg 
+ 
+Triggers when a player throws an egg. 
+ 
+Context <context.item> returns the dEntity of the egg. 
+<context.is_hatching> returns an Element with a value of "true" if the egg will hatch and "false" otherwise. 
+ 
+Determine dEntity to set the type of the hatching entity. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player changes xp 
+ 
+Triggers when a player's experience amount changes. 
+ 
+Context <context.amount> returns the amount of changed experience. 
+ 
+Determine "CANCELLED" to stop the player from changing experience. 
+Element(Number) to set the amount of changed experience. 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player fishes (while <state>) 
+ 
+Triggers when a player uses a fishing rod. 
+ 
+Context <context.hook> returns a dItem of the hook. 
+<context.state> returns an Element of the fishing state. 
+<context.entity> returns a dEntity, dPlayer or dNPC of the entity being fished. 
+ 
+Determine "CANCELLED" to stop the player from fishing. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player changes gamemode (to <gamemode>) 
+ 
+Triggers when a player's gamemode is changed. 
+ 
+Context <context.gamemode> returns an Element of the gamemode. 
+ 
+Determine "CANCELLED" to stop the gamemode from being changed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player (<click type>) clicks (<material>) (with <item>) (in <notable cuboid>) 
+on player (<click type>) clicks block (with <item>) 
+on player stands on <pressure plate> 
+ 
+Triggers when a player clicks on a block or stands on a pressure plate. 
+ 
+Context <context.item> returns the dItem the player is clicking with. 
+<context.location> returns the dLocation the player is clicking on. 
+<context.cuboids> returns the notable cuboids that contain the clicked block 
+ 
+Determine "CANCELLED" to stop the click from happening. 
+"CANCELLED:FALSE" to uncancel the event. Some plugins may have this cancelled by default. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player right clicks entity (with <item>) 
+on player right clicks entity in <notable cuboid> 
+on player right clicks entity in cuboid 
+on player right clicks <entity> (with <item>) 
+on player right clicks <entity> in <notable cuboid> 
+on player right clicks <entity> in cuboid 
+ 
+Triggers when a player right clicks on an entity. 
+ 
+Context <context.entity> returns the dEntity the player is clicking on. 
+<context.item> returns the dItem the player is clicking with. 
+<context.cuboids> returns a dList of cuboids that contain the interacted entity 
+ 
+Determine "CANCELLED" to stop the click from happening. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player consumes item 
+on player consumes <item> 
+ 
+Triggers when a player consumes an item. 
+ 
+Context <context.item> returns the dItem. 
+ 
+Determine "CANCELLED" to stop the item from being consumed. 
+dItem to change the item being consumed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player joins 
+on player join 
+ 
+Triggers when a player joins the server. 
+ 
+Context <context.message> returns an Element of the join message. 
+ 
+Determine Element(String) to change the join message. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player kicked 
+ 
+Triggers when a player is kicked from the server. 
+ 
+Context <context.message> returns an Element of the kick message. 
+ 
+Determine Element(String) to change the kick message. 
+
+This could happen if the player is dreaming and has a text vision or prememoniton
+for narration "Everthing goes black: You see in the distant fields a girl..."
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player leashes entity 
+on player leashes <entity> 
+ 
+Triggers when a player leashes an entity. 
+ 
+Context <context.entity> returns the dEntity of the leashed entity. 
+<context.holder> returns the dEntity that is holding the leash. 
+ 
+Determine  
+
+
+
+
+
+
+Name(s) on player levels up (from <level>/to <level>) 
+ 
+Triggers when a player levels up. 
+ 
+Context <context.level> returns an Element of the player's new level. 
+ 
+Determine  
+
+
+
+
+
+
+
+Name(s) on player logs in 
+on player login 
+ 
+Triggers when a player logs in to the server. 
+ 
+Context <context.hostname> returns an Element of the player's hostname. 
+ 
+Determine "KICKED" to kick the player from the server. 
+"KICKED Element(String)" to kick the player and specify a message to show. 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player walks over notable 
+on player walks over <location> 
+ 
+Triggers when a player walks over a notable location. 
+ 
+Context <context.notable> returns an Element of the notable location's name. 
+ 
+Determine "CANCELLED" to stop the player from moving to the notable location. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player picks up item 
+on player picks up <item> 
+on player takes item 
+on player takes <item> 
+ 
+Triggers when a player picks up an item. 
+ 
+Context <context.item> returns the dItem. 
+<context.entity> returns a dEntity of the item. 
+<context.location> returns a dLocation of the item's location. 
+ 
+Determine "CANCELLED" to stop the item from picked up. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player quits 
+on player quit 
+ 
+Triggers when a player quit the server. 
+ 
+Context <context.message> returns an Element of the quit message. 
+ 
+Determine Element(String) to change the quit message. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player respawns (at bed/elsewhere) 
+ 
+Triggers when a player respawns. 
+ 
+Context <context.location> returns a dLocation of the respawn location. 
+ 
+Determine dLocation to change the respawn location. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player shears entity 
+on player shears <entity> 
+on player shears <color> sheep 
+ 
+Triggers when a player shears an entity. 
+ 
+Context <context.state> returns the dEntity. 
+ 
+Determine "CANCELLED" to stop the player from shearing the entity. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player toggles flight 
+on player starts flying 
+on player stops flying 
+ 
+Triggers when a player starts or stops flying. 
+ 
+Context <context.state> returns an Element with a value of "true" if the player is now flying and "false" otherwise. 
+ 
+Determine "CANCELLED" to stop the player from toggling flying. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player toggles sneak 
+on player starts sneaking 
+on player stops sneaking 
+ 
+Triggers when a player starts or stops sneaking. 
+ 
+Context <context.state> returns an Element with a value of "true" if the player is now sneaking and "false" otherwise. 
+ 
+Determine "CANCELLED" to stop the player from toggling sneaking. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on player toggles sprint 
+on player starts sprinting 
+on player stops sprinting 
+ 
+Triggers when a player starts or stops sprinting. 
+ 
+Context <context.state> returns an Element with a value of "true" if the player is now sprinting and "false" otherwise. 
+ 
+Determine "CANCELLED" to stop the player from toggling sprinting. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on vehicle collides with block 
+on vehicle collides with <material> 
+on <vehicle> collides with block 
+on <vehicle> collides with <material> 
+ 
+Triggers when a vehicle collides with a block. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.location> returns the dLocation of the block. 
+ 
+Determine  
+
+
+
+
+
+
+
+Name(s) on vehicle collides with entity 
+on vehicle collides with <entity> 
+on <vehicle> collides with entity 
+on <vehicle> collides with <entity> 
+ 
+Triggers when a vehicle collides with an entity. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.entity> returns the dEntity of the entity the vehicle has collided with. 
+ 
+Determine "CANCELLED" to stop the collision from happening. 
+"NOPICKUP" to stop the vehicle from picking up the entity. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on vehicle created 
+on <vehicle> created 
+ 
+Triggers when a vehicle is created. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+ 
+Determine "CANCELLED" to stop the entity from entering the vehicle. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on vehicle damaged 
+on <vehicle> damaged 
+on entity damages vehicle 
+on <entity> damages vehicle 
+on entity damages <vehicle> 
+on <entity> damages <vehicle> 
+ 
+Triggers when a vehicle is damaged. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.entity> returns the dEntity of the attacking entity. 
+ 
+Determine "CANCELLED" to stop the entity from damaging the vehicle. 
+Element(Double) to set the value of the damage received by the vehicle. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on vehicle destroyed 
+on <vehicle> destroyed 
+on entity destroys vehicle 
+on <entity> destroys vehicle 
+on entity destroys <vehicle> 
+on <entity> destroys <vehicle> 
+ 
+Triggers when a vehicle is destroyed. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.entity> returns the dEntity of the attacking entity. 
+ 
+Determine "CANCELLED" to stop the entity from destroying the vehicle. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on entity enters vehicle 
+on <entity> enters vehicle 
+on entity enters <vehicle> 
+on <entity> enters <vehicle> 
+ 
+Triggers when an entity enters a vehicle. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.entity> returns the dEntity of the entering entity. 
+ 
+Determine "CANCELLED" to stop the entity from entering the vehicle. 
+
+
+
+
+
+
+
+
+Name(s) on entity exits vehicle 
+on entity exits <vehicle> 
+on <entity> exits vehicle 
+on <entity> exits <vehicle> 
+ 
+Triggers when an entity exits a vehicle. 
+ 
+Context <context.vehicle> returns the dEntity of the vehicle. 
+<context.entity> returns the dEntity of the exiting entity. 
+ 
+Determine "CANCELLED" to stop the entity from exiting the vehicle. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on lightning strikes (in <world>) 
+ 
+Triggers when lightning strikes in a world. 
+ 
+Context <context.world> returns the dWorld the lightning struck in. 
+<context.reason> returns the dLocation where the lightning struck. 
+ 
+Determine "CANCELLED" to stop the lightning from striking. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on weather changes/rains/clears (in <world>) 
+ 
+Triggers when weather changes in a world. 
+ 
+Context <context.world> returns the dWorld the weather changed in. 
+<context.weather> returns an Element with the name of the new weather. 
+ 
+Determine "CANCELLED" to stop the weather from changing. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on portal created (in <world>) (because <reason>) 
+ 
+Triggers when a portal is created in a world. 
+ 
+Context <context.world> returns the dWorld the portal was created in. 
+<context.reason> returns an Element of the reason the portal was created. 
+ 
+Determine "CANCELLED" to stop the portal from being created. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on spawn changes (in <world>) 
+ 
+Triggers when the world's spawn point changes. 
+ 
+Context <context.world> returns the dWorld that the spawn point changed in. 
+<context.old_location> returns the dLocation of the old spawn point. 
+<context.new_location> returns the dLocation of the new spawn point. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+Name(s) on structure grows (naturally/from bonemeal) (in <world>) 
+on <structure> grows (naturally/from bonemeal) (in <world>) 
+ 
+Triggers when a structure (a tree or a mushroom) grows in a world. 
+ 
+Context <context.world> returns the dWorld the structure grew in. 
+<context.location> returns the dLocation the structure grew at. 
+<context.structure> returns an Element of the structure's type. 
+ 
+Determine "CANCELLED" to stop the structure from growing. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Name(s) on world initializes 
+on <world> initializes 
+ 
+Triggers when a world is initialized. 
+ 
+Context <context.world> returns the dWorld that was initialized. 
+ 
+Determine  
+
+
+
+
+
+
+
+
+
+
+Name(s) on world loads 
+on <world> loads 
+ 
+Triggers when a world is loaded. 
+ 
+Context <context.world> returns the dWorld that was loaded. 
+ 
+Determine  
+
+
+
+
+
+
+Name(s) on world saves 
+on <world> saves 
+ 
+Triggers when a world is saved. 
+ 
+Context <context.world> returns the dWorld that was saved. 
+ 
+Determine  
+
+
+
+
+
+
+Name(s) on world unloads 
+on <world> unloads 
+ 
+Triggers when a world is unloaded. 
+ 
+Context <context.world> returns the dWorld that was unloaded. 
+ 
+Determine  
+
+
+
+
+
+
+Name(s) on hero changes class (to <class>) 
+Triggers when a Hero changes classes. 
+ 
+Context <context.class> returns the class that the Hero changed to. 
+<context.cost> returns the cost of changing the class. 
+<context.entity> returns the Hero changing classes. 
+ 
+Determine  
+Note This tag requires Depenizen and the plugin Heroes! 
+
+
+
+
+
+
+
+
+Name(s) on arena starts 
+ 
+Triggers when an arena starts a round. 
+ 
+Context <context.arena> returns the arena name. 
+<context.fighters> returns a dList of the fighters in the round. 
+ 
+Determine  
+Note This tag requires Depenizen and the plugin PvP Arena! 
+Name(s) on votifier vote 
+ 
+Triggers when a Votifier vote is made. 
+ 
+Context <context.time> returns the time the vote was sent. 
+<context.service> returns what service was used to send the vote. 
+ 
+Determine  
+Note This tag requires Depenizen and the plugin Votifier! 
+
+
+
+
+
+
+
+Name(s) on bungeefier vote 
+ 
+Triggers when a Bungeefier vote is made. 
+ 
+Context <context.time> returns the time the vote was sent. 
+<context.service> returns what service was used to send the vote. 
+ 
+Determine  
+Note This tag requires Depenizen and the plugin Bungeefier! 
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

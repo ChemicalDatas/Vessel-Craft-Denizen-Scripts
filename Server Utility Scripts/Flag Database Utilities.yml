@@ -1,0 +1,313 @@
+#################################################################################################################################
+#                                                                                                                               #
+# A set of procedures to aid in flag manipulation                                                                               #
+#                                                                                                                               #
+# Procedure that turns a list into a flag item                                                                                  #
+# List manipulations                                                                                                            #
+#                                                                                                                               #
+# todo:                                                                                                                      #
+# Pop left                                                                                                                      #
+# Pop right                                                                                                                     #
+# Append left                                                                                                                   #
+# Append right                                                                                                                  #
+# pop index                                                                                                                     #
+# append index                                                                                                                  #
+# reversal                                                                                                                      #
+#                                                                                                                               #
+# notice: Flags act like stacks. You add with flag:->:item. You get from the top of it with: <ref.flag[name]>                #
+# notice: Flag:<-: pops the first encountered value from the flag, FROM LEFT TO RIGHT. Pops like a queue.                    #
+#                                                                                                                               #
+#################################################################################################################################
+
+
+
+Toggle Flag:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Toggles a flag to be true or false                                                                                        #
+    # Given options narration to player                                                                                         #
+    # flag is the name of the flag to toggle                                                                                    #
+    # narrate_true is the true value to narrate                                                                                 #
+    # narrate_false is the the false value to narrate                                                                           #
+    # format should be the format script to apply                                                                               #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: flag|narrate_true|narrate_false|format
+    script:
+    - if <player.has_flag[<def[flag]>]> {
+        - ^narrate format:<def[format]> <def[narrate_false]> 
+        - ^flag player <def[flag]>:!
+        } else {
+        - ^narrate format:<def[format]> <def[narrate_true]>
+        - ^flag player <def[flag]>:true
+        }
+    
+
+
+Flag Reverse:
+    #
+    # info: This dose not handle flags that are a list of lists
+    # todo: make this handle list of lists
+    type: task
+    definitions: reference|flag
+    script:
+    #to store the refrences in the definitions correctly, this might require custom escaping...
+    #- foreach <%refrence%.flag[%flag%]> {
+    #    - define items_in_flag <proc[List Append Right].context[%items_in_flag%|%value%]>
+    #    }
+    - define list <def[reference].flag[<def[flag]>].as_list>
+    - flag <def[reference]> <def[flag]>:!
+    - flag <def[reference]> <def[flag]>:|:<def[list].reversed>
+    
+
+
+"Flag Append Left":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: reference|flag|item
+    script:
+    - if <%reference%.flag[%flag%]> = null {
+        - flag %reference% %flag%:%item%
+        } else {
+        - flag %reference% %flag%:%item%|<%reference%.flag[%flag%].as_list.substring[4]>
+        }
+
+"Flag Append Right":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                     p@chemical_datas | server | n@(npc name | id)                                                         #
+    # Reference should be an object (player | server | npc)                                                                     #
+    #  flag: string to access the flag in the reference                                                                         #
+    #  value should be a value to append                                                                                        #
+    #  This is the default denizen construction                                                                                 #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: reference|flag|item
+    script:
+    - flag %reference% %flag%:->:%item%
+    
+Flag Operator:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Modifies a flag with the operator                                                                                         #
+    # value us unescaped so keep that in mind when using this                                                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: reference|flag|operator|value
+    script:
+    - if %operator% == ! {
+        - flag %reference% %flag%:!
+        } else {
+        - flag %reference% %flag%:%operator%:<unescape:%value%>
+        }
+
+"Flag Pop Left":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Usable in the - define first <player.flag[task_queue]>                                                                    #
+    # This gets and removes the first item in the flag.                                                                         #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: reference|flag
+    script:
+    - define item <%reference%.flag[%flag%].get[1]>
+    - flag %reference% %flag%:<-:%item%
+    - determine %item%
+    
+"Flag Pop Right":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Usable in the - define last <player.flag[task_queue]>                                                                     #
+    # This gets and removes the last item in the flag.                                                                          #
+    # You could try to flag:<-:item but theres no guarantee that it will be unique and pop the farthest right value.            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: reference|flag
+    script:
+    - define index <%reference%.flag[%flag%].size>
+    - define item <%reference%.flag[%flag%]>
+    - define new_flag <%reference%.flag[%flag%].get[1].to[<def[size].sub[1]>]>
+    - flag %reference% %flag%:%new_flag%
+    - determine %item%
+
+"Flag Change Value":
+    type: task
+    definitions: reference|flag|index|value
+    script:
+    - flag %reference% %flag%[%index%]:%value%
+
+"Flag Pop Index":
+    #
+    # todo: updateme
+    # A procedure that returns the flag value and removes that index value from the reference
+    #
+    type: procedure
+    definitions: reference|flag|index
+    script:
+    #Copy flag info to variables for saving
+    - define size <%reference%.flag[%flag%].size>
+    - repeat %size% {
+        - define cur_value <%reference%.flag[%flag%].get[%value%]>
+        - define flag_values "<proc[List Append Right].context[<def[flag_values]||li@>|<escape:%cur_value%>]>"
+        }
+    
+    #Save index value
+    - define return <%reference%.flag[%flag%].get[%index%]>
+    
+    #Delete flag
+    - flag %reference% %flag%:!
+    
+    #Rebuild flag
+    - repeat %size% {
+        - if !<el@%value%.is[=].to[%index%]> {
+            - define cur_value <li@<unescape:%flag_values%>.get[%value%]>
+            - flag %reference% %flag%:->:<unescape:%cur_value%>
+            }
+        }
+    #return value
+    - determine %return%
+
+
+Flag Index That Contains:
+    #
+    # A procedure that returns a list of indexs int that contains the value supplied
+    # The desired_value can be a regex reference
+    # This may return null if there is no value that matches
+    #
+    type: procedure
+    definitions: reference|flag|desired_value
+    script:
+    - repeat <def[refrence].flag[<def[flag]>].size> {
+        - define checked_value <def[reference].flag[<def[flag]>].get[<def[value]>]>
+        - if <def[checked_value].contains[<def[desired_value]>]> {
+            - define return "<proc[List Append Right].context[<def[return]||li@>|<def[value]>]>"
+            }
+        }
+    - determine <def[return].unescaped>
+
+
+Yaml Load:
+    #
+    # Loads a yaml into memory with an id
+    # creates a new yaml in memory if the location dosnt already have that path.
+    # Usable when the server starts so that there is a yaml id in server memory already.
+    # Youll need to schedule a regular save or on shutdown a saving feature.
+    #
+    type: task
+    definitions: path|id
+    script:
+    - if <server.has_file[<def[path]>]> {
+        - announce "Found and loading file: <def[path]>"                             format:Database_Formatting to_console
+        - yaml load:<def[path]> id:<def[id]>
+        } else {
+        - announce "Could not find file: <def[path]>"                                format:Database_Formatting to_console
+        - announce "Creating fresh yaml database: <def[id]>"                         format:Database_Formatting to_console
+        - yaml create id:<def[id]>
+        }
+    - if <yaml.list.contains[<def[id]>]> {
+        - announce "Database creation for: <def[id]> <blue>SUCCESSFULL!"             format:Database_Formatting to_console
+        } else {
+        - announce "Database id: <def[id]> <red>~~~~~~~failed to load.~~~~~~~~~~~"   format:Database_Formatting to_console
+        }
+
+
+Yaml Save:
+    type: task
+    definitions: path|id
+    script:
+    - announce "Saving id: <def[id]> <def[path]>"                                     format:Database_Formatting to_console
+    - yaml savefile:<def[path]> id:<def[id]>
+    
+Database_Formatting:
+    type: format
+    format: "<blue>[<reset>Scripting Database Manager<blue>] <proc[Iconize].context[<text>]>"
+
+
+
+Temp Yaml Handling:
+    #Reset the temp database, not too often though
+    type: world
+    events:
+        on server start:
+        - run "Yaml Load" def:_temp_yaml_location_|temp
+        - run "Repeated Task Call" "def:Expire Temp Yaml Data|d@6h|<queue>|<queue>"
+
+Expire Temp Yaml Data:
+    type: task
+    script:
+    - yaml unload id:temp
+    - yaml create id:temp
+
+
+    
+Write Timed Data:
+    #
+    # Data to write, path is the location of data
+    # Expiration is a duration object
+    # Id is the database id
+    # only writes a value
+    type: task
+    definitions: data|path|expiration|id
+    script:
+    #- inject "Announce Arguments Passed"
+    - define expiration
+      <def[expiration]||none>
+    
+    - define id
+      <def[id]||temp>
+    
+    - define path
+      <def[path]||none>
+    
+    - if <def[path]> == none
+      queue
+      clear
+    
+    
+    - if !<yaml.list.contains[<def[id]>]>
+      run "Yaml Load"
+      def:_temp_yaml_location_|temp
+      instantly
+    
+    - if "<proc[Yaml Data Expired].context[<def[path]>|<def[id]>]>" {
+        - yaml id:<def[id]> set <def[path]>:!
+        - yaml id:<def[id]> set <def[path]>-expiration:!
+        }
+    
+    #- announce ""
+    #- announce "<SCRIPT.NAME> <light_purple>Setting expiration data: <def[expiration]> <&nl><server.current_time_millis><&nl> + <&nl><def[expiration].in_milliseconds>"
+    - define expiration
+      <server.current_time_millis.add_int[<def[expiration].in_milliseconds>]>
+    
+    #- announce "<SCRIPT.NAME> <light_purple><def[expiration]> <----New expiration data"
+    
+    - yaml id:<def[id]> set <def[path]>:<def[data]>
+    - yaml id:<def[id]> set <def[path]>-expiration:<def[expiration]>
+    
+Yaml Data Expired:
+    type: procedure
+    definitions: path|id
+    script:
+    #- inject "Announce Arguments Passed"
+    - define id <def[id]||temp>
+    #the tag fails to parse
+    - if !<yaml.list.contains[<def[id]>]>                               queue clear
+    - if !<yaml[<def[id]>].contains[<def[path]>-expiration]>            determine false
+    - define expiration <yaml[<def[id]>].read[<def[path]>-expiration]>
+    - define time <server.current_time_millis>
+    #- announce ""
+    #- announce "<SCRIPT.NAME> <tern[<def[time].is[less].than[<def[expiration]>]>]:<blue>Server time less than expiration||<red>server time more than expiration> <&nl><green>current:    <def[time]> <&nl><red>expiration: <def[expiration]>"
+    - if <def[time].is[less].than[<def[expiration]>]> determine false
+    #- announce "<SCRIPT.NAME> <gold>AUTOMATICALY RETURNING EXPIRED AS DATA"
+    - determine true
+
+
+

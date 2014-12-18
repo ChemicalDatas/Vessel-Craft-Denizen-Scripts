@@ -1,0 +1,217 @@
+Sentry:
+    type: assignment
+    debug: false
+    default constants:
+        anchor: "curent_wander_location"
+        delay: d@1s
+        
+        #stats
+        strength: 1
+        armor: 1
+        speed: 1.0
+        health: 20
+        heal rate: 0.0
+        night vision: 16
+        range: 10
+        warning range: 0
+        respawn: 10
+        follow distance: 4
+        
+        #options
+        drops: false
+        kill drops: true
+        criticals: true
+        invincible: true
+        retaliate: true
+        friendly fire: true
+        
+        
+        
+    interact scripts:
+    - 0 Sentry Interact Script
+
+    actions:
+        on assignment:
+        #health trait
+        - trait state:true MobProx
+        - trait state:true Health
+        #set npc defaults
+        - trigger name:chat state:true 
+        - trigger name:click state:true
+        - trigger name:proximity state:true radius:<npc.constant[range]> cooldown:<npc.constant[delay]>
+        - trigger name:damage state:true
+        
+        - chat "This is my guard location until you change it."
+        - anchor add <npc.location> id:<npc.constant[anchor]>
+        - flag npc "targets:|:"
+        - flag npc "ignores:|:"
+        
+        on spawn:
+        # return to guard spot
+        #set guard spot
+        #- chat "I will guard this location with my life."
+        #- anchor id:guarding_location add <npc.location>
+        
+        on hit:
+        # check if need to alter target / return to guard post / entity
+        
+        on cancel navigation:
+        #return to guard post
+        - anchor id:guarding_location walkto 
+        
+
+        on attack closest target:
+        - announce "Sentry is setting its attack target"
+        - define npc_location <npc.location>
+        - define first_entity "<npc.flag[targets]>"
+        - if %first_entity% == null {
+            - chat "I have no target to attack" no_target
+            - queue clear
+            }
+        
+        - define current_closest_distance <%first_entity%.location.distance[%npc_location%]>
+        
+        
+        #todo: make this faster for lots of npcs in the list... think battle galore!
+        #todo: if entity still exists check then attack.
+        - foreach <npc.flag[local_targets].as_list> {
+            - define distance <%value%.location.distance[%npc_location%]>
+            - if <def[distance].is[or_less].than[%current_closest_distance%]> {
+                - define current_closest_distance   %distance%
+                - define current_target             %value%
+                }
+            }
+        - chat "My current target is: <%current_target%.name>" no_target
+        - attack <npc> target:%current_target%
+        
+    
+        on mob enter proximity:
+        #check if its on the target list
+        #This is where I can cancel the last attack when another mob gets closer to the sentry than the current one
+        - define targets <npc.flag[targets].as_list>
+        - define ignores <npc.flag[ignores].as_list>
+        - define mob <context.entity>
+        - define type <%mob%.name>
+        
+        
+        - chat "<context.entity.name> entered my proximity" no_target
+        - chat "targets: %targets%" no_target
+        - chat "ignores: %ignores%" no_target
+        - chat "mob: %mob%" no_target
+        - chat "type: %type%" no_target
+        
+        - define ignore_target <def[ignores].find[%type%].is[more].than[0]>
+        - chat "Did I find an ignorable target? %ignore_target%" no_target
+        
+        # %ignore_target% when is false seems to be working anyways....
+        - if %ignore_target% {
+            - chat "Ignoring %type%" no_target
+            - queue clear
+            }
+        - if <%targets%.find[%type%].is[more].than[0]> {
+            - flag npc local_targets:|:%mob%
+            - chat "Alright, Getting ready to attack." no_target
+            }
+        - chat "Ive seen a %type% I might attack it if its on my attack list." no_target
+        - action "attack closest target" <npc>
+        - action "Select Closest Target" <npc>
+        
+
+        
+        on mob exit proximity:
+        - chat "<context.entity.name> exited my proximity" no_target
+        #return to guarding
+        - if <npc.navigator.target_entity> == <context.entity> {
+            - attack <npc> stop
+            }
+        - anchor id:guarding_location walkto 
+        
+        
+        
+        on push:
+        #return to guard position
+        
+        on chat:
+        - if <context.message.contains[targets]> {
+            - define mob "<context.message.after[targets ]>"
+            - flag npc targets:->:%mob%
+            - chat "I<&sc>m adding %mob% to my target list."
+            }
+        - if <context.message.contains[ignores]> {
+            - define mob "<context.message.after[ignores ]>"
+            - flag npc targets:->:%mob%
+            - chat "I<&sc>m adding %mob% to my ignore list."
+            }
+        #chat style menus
+        
+        on click:
+        # guard notify or guard message
+        
+        on no damage trigger:
+        # maybe add to target list?
+        
+        
+        on damage:
+        #maybe targets on the no damage list or not on the entity whitelist
+        # retailate?
+        # add target to targets list?
+        # notify local guards of damage
+        
+        on exit proximity:
+        #pre attack warning
+        #Check stop attacking current target
+        #return to guard post
+        #if guarding player, return to them
+        
+        on enter proximity:
+        - chat "<player.name> entered my proximity"
+        #pre attack warning
+        #check if targets on target list
+        
+        on kill:
+        on death:
+        #fire the death event handler for the npc
+        on attack:
+        #
+        on sentry targets entity:
+        on sentry targets <entity>:
+        on PVNPC:
+        on PVP:
+        on PVSentry:
+        on PVEntity:
+        on player enters restricted cuboid:
+        
+    
+"Sentry Logic Tick":
+    type: task
+    definitions:
+    script:
+    -
+    
+
+
+"Sentry Interact Script":
+    type: Interact
+    requirement:
+    steps:
+        "default":
+            click Trigger:
+                script:
+                
+            chat Trigger:
+                'Password Yes':
+                    Trigger: "/Yes/ I want to use a password each time I login. Could you do that for me?"
+                    script:
+                'Password No':
+                    Trigger: "/No/, I dont want to use a password anymore when I login."
+                    script:
+                    
+            proximity Trigger:
+                enter:
+                    script:
+                    
+                
+            
+        
+    
+#

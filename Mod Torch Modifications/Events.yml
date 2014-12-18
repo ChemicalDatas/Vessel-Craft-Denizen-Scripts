@@ -1,0 +1,115 @@
+Torch Modifications:
+    affected_mobs: wolf|spider|cavespider|witch
+    success rate: 6|10
+    success max: 10
+    success min: 6
+    duration: d@2s-15s
+    show_other_players: true
+    
+    type: world
+    events:
+        on player damages entity:
+        - if !<player.item_in_hand> == i@torch queue clear
+        - define rate "<script.yaml_keys[Success Rate]>"
+        - define max "<script.yaml_keys[success max]>"
+        - define min "<script.yaml_keys[success min]>"
+        - define roll <util.random.int[0].to[<def[max]>]>
+        - if !<def[roll].is[or_more].than[<def[min]>]> queue clear
+        - define duration <script.yaml_keys[duration]>
+        - burn <context.entity> duration:%duration%
+        
+        on entity targets player:
+        - if !<script.yaml_keys[affected_mobs].contains[<context.entity.name>]> queue clear
+        - if !<context.reason.contains[closest_player]>                         queue clear
+        - if !<player.item_in_hand.contains[i@torch]>                           queue clear
+        - determine cancelled
+        
+        
+        
+        
+        
+        #############################################################################################################
+        ##### These next 2 events are for projecting light from a torch in the players hand #########################
+        ##### These can be costly!                                                          #########################
+        #############################################################################################################
+        
+        on player holds item:
+        - wait d@1t
+        - if <player.item_in_hand> == i@torch {
+            - if <script.yaml_keys[show_other_players]>
+              define to <server.list_online_players>
+              else
+              define to <player>
+            
+            - define key <script.name>.last_light_location
+              
+            - define old_loc
+              <player.flag[<def[key]>]||<player.location>>
+              
+            - define loc
+              <player.location.add[0,3,0].simple.as_location>
+              
+            - showfake
+              m@ender_portal
+              <def[loc]>
+              to:<def[to]>
+              d:d@10m
+              
+            - showfake
+              m@air
+              <def[old_loc]>
+              to:<def[to]>
+              d:d@1t
+              
+            - flag <player>
+              <def[key]>:<def[loc]>
+              duration:d@10m
+            
+            } else {
+            
+            - if <script.yaml_keys[show_other_players]>
+              define to <server.list_online_players>
+              else
+              define to <player>
+            
+            - showfake
+              m@air
+              <player.location.add[0,3,0].simple.as_location>
+              to:<def[to]>
+              d:d@1t
+            }
+        
+        on player walks:
+        - wait d@1t
+        - if <player.item_in_hand> == i@torch {
+            - if <script.yaml_keys[show_other_players]>
+              define to <server.list_online_players>
+              else
+              define to <player>
+            
+            - define key 
+              <script.name>.last_light_location
+              
+            - define old_loc
+              <player.flag[<def[key]>]>
+              
+            - define loc
+              <player.location.add[0,3,0].simple.as_location>
+            
+            - if <def[loc].is[!=].to[<def[old_loc]>]>
+              showfake m@air
+              <def[old_loc]>
+              to:<def[to]>
+              d:d@1t
+            
+            - showfake
+              m@ender_portal
+              <def[loc]>
+              to:<def[to]>
+              d:d@10m
+              
+            - flag <player>
+              <def[key]>:<def[loc]>
+              duration:d@10m
+            }
+    

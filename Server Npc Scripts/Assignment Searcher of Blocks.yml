@@ -1,0 +1,62 @@
+"Search Test":
+    type: assignment
+
+    interact scripts:
+    - 0 Search and Destroy Test
+    
+    actions:
+        on assignment:
+        - trigger name:click toggle:true
+        - trigger name:chat toggle:true
+        
+        on complete navigation:
+        - look <npc> <npc.flag[found_list].get[<npc.flag[current_index].as_int>]>
+        - animate <npc> animation:arm_swing
+        - modifyblock <npc.flag[found_list].get[<npc.flag[current_index].as_int>]> 0
+        - drop <npc.flag[searching_for]> <npc.flag[found_list].get[npc.flag[current_index]]> qty:1
+        - flag npc current_index:++
+        - chat "new index <npc.flag[current_index]>"
+        - run "Dispatcher test"
+
+        on cancel navigation:
+        - flag npc current_index:++
+        - run "Dispatcher test"
+
+        on dig:
+        - announce "<npc.name> broke a block at: <context.location>"
+        
+        
+
+"Search and Destroy Test":
+    type: interact
+    requirements:
+        mode: none
+    steps:
+        'default':
+            click Trigger:
+                script:
+                - chat "Stopping what I was doing"
+                - queue clear
+                
+            chat Trigger:
+                "Pick Target Block":
+                    trigger: "I want you to find block /REGEX:.+/."
+                    script:
+                    # Every flag is a list: ':' just adds 1 item to the list ':|:'
+                    # On that note Need to reset the flag everytime or it accumulates a huge list....
+                    - flag npc searching_for:<context.message>
+                    - Narrate "<npc.name> is now searching for item number <npc.flag[searching_for]>."
+                    - flag npc found_list:!
+                    - flag npc found_list:|:<npc.location.find.blocks[<npc.flag[searching_for]>].within[15]>
+                    - flag npc current_index:1
+                    - flag npc total_index:<npc.flag[found_list].size.as_int>
+                    - run "Dispatcher test"
+
+
+        
+"Dispatcher test":
+    type: task
+    script:
+    - if <npc.flag[current_index]> > <npc.flag[total_index]> queue clear 
+    - narrate "Npc walking to <npc.flag[found_list].get[<npc.flag[current_index]>]>"
+    - walkto <npc.flag[found_list].get[<npc.flag[current_index].as_int>]>

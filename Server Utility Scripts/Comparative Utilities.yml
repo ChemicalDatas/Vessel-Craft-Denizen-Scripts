@@ -1,0 +1,1047 @@
+# A set of utilities for comparing values
+# These are easy to reproduce, but I thought the language in how they are used make the diffrence.
+#
+
+
+"Compare":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A procedure that compares value 1 and value 2 with an operator
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: first|operator|second
+    script:
+    - if %first% %operator% %second% {
+        - determine true 
+        } else {
+        - determine false
+        }
+
+"Is":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: first|second
+    script:
+    - if %first% == %second% {
+        - determine true
+        } else {
+        - determine false
+        }
+    
+
+Player is Owner:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # True if attached player is the owner if attached npc.                                                                     #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #   - if <proc[Player is Owner]> {                                                                                          #
+    #      - chat "Hello sir, you can have whatever is in my pockets!"                                                          #
+    #      } else {                                                                                                             #
+    #      - chat "Get your grubby hands off of my pants!"                                                                      #
+    #      }                                                                                                                    #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    script:
+    - if <player.name> == <npc.owner.name> determine true
+    - determine false
+    
+
+Meets Black White List:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A type of script that checks if an item is on a black / white list.                                                       #
+    # Then Returns if it meets the requirements.                                                                                #
+    # Lists need to be escaped <escape:%your list%>                                                                             #
+    # Blacklist trumps whitelist items                                                                                          #
+    #                                                                                                                           #
+    # Checks blacklist for item: if not on there proceed else determine rejected (false)                                        #
+    #       if whitelist has stuff on it.... defer to the white list for results                                                #
+    #           if item on whitelist return true                                                                                #
+    #           else not on whitelist and return false                                                                          #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: item|black_list|white_list
+    script:
+    - define black_list <def[black_list].unescaped.as_list||li@>
+    - if <def[black_list].contains[<def[item]>]>                    determine false
+    
+    - define white_list <def[white_list].unescaped||none>
+    - if <def[white_list]> == none || <def[white_list].is_empty>    determine true
+    - if <def[white_list].contains[<def[item]>]>                    determine true
+    - determine false
+    
+
+
+"Is Custom Item":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # If this returns anything at all it should be true                                                                         #
+    # I used this a long time ago. This might even just return somthing like...                                                 #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: item
+    script:
+    - if "<def[item].scriptname||non scripted item>" == "non scripted item" {
+        - determine false
+        } else {
+        - determine true
+        }
+    
+"Is Int":
+    # There is the possibility that this can return true. 
+    # In denizen there is little or no type checking so 
+    # This is an attempt to hold the element to a is_int feature
+    type: procedure
+    definitions: element
+    script:
+    - define add_meh <util.random.int[-1000].to[1000]>
+    - define to_be_checked "<def[element].add[<def[add_meh]>]>"
+    
+    #This is where its possible for the 0.0 to be a real answer.
+    #This counts on the fact that when denizen adds a string and a number together
+    #It automatically returns 0.0
+    #math.as_int: should return an int, not a float so if a float is recieves
+    #this presumes it has failed.
+    - if %to_be_checked% == 0.0 {
+        - determine false
+        } else {
+        - determine true
+        }
+    
+#todo: Make me use the new yaml database for cuboids information extraction
+"Player Owns Cuboid":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Requires an escaped cuboid.                                                                                               #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: cuboid
+    script:
+    - define owners "<server.flag[cuboids.%cuboid%.owners]>"
+    - if <%owners%.contains[<player.name>]> determine true else determine false
+
+
+
+
+"Is Between Numbers":
+    #
+    # Performs a check to see wether the_checked is in between the 2 ints
+    # Inclusive of the first element being checked: "or_more"
+    # performs 2 checks,
+    #   one is using the 1st int and 2nd
+    #   then checks the 2nd the_checked 1st
+    # if it fails both checks then it returns a fail
+    #
+    type: procedure
+    definitions: 1st|the_checked|2nd
+    script:
+    - if <def[the_checked].is[or_more].than[%2nd%]> && <def[the_checked].is[less].than[%1st%]> {
+        - determine true
+        }
+    - if <def[the_checked].is[or_more].than[%1st%]> && <def[the_checked].is[less].than[%2nd%]> {
+        - determine true
+        }
+    - determine false
+
+
+
+
+
+"Has Moved":
+    #
+    # Checks a flag on the player for last known position
+    # after check is performed reset the players flag again to last known position
+    #
+    type: procedure
+    script:
+    - define flag <script.name>.last_known_position
+    - define now <player.location.simple>
+    - if !<player.has_flag[%flag%]> {
+        - flag player %flag%:%now%
+        - determine false
+        }
+    
+    - define last <player.flag[%flag%]>
+    - if %last% == %now% {
+        - determine false
+        }
+    - determine true
+
+    
+"Timed Has Moved":
+    #
+    # Has a delayed task that eventually returns true.
+    # todo: find out if you can delay the rest of the script with a ~ in front of the define command
+    #
+    type: procedure
+    definitions: delay
+    script:
+    - if %delay% == null define delay d@1s
+    - define location <player.location.simple>
+    - wait %delay%
+    - if %location% == <player.location.simple> {
+        - determine true
+        }
+    - determine false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

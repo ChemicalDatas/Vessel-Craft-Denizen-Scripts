@@ -1,0 +1,12 @@
+CUI Display Event:
+    type: world
+    events:
+        on player right clicks block with i@wood_axe:
+        - if <player.selection_region> == null queue clear
+        - showfake m@glowstone <player.selection_region> to:<player>
+        
+
+        
+        on player left clicks block with i@wood_axe:
+        - if <player.selection_region> == null queue clear
+        - showfake m@glowstone <player.selection_region> to:<player>

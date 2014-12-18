@@ -1,0 +1,554 @@
+#Every npc will have a list of task schedulers in the list to assign tasks for the lists of tasks to complete.
+#Idea: Each scheduler handles 1 task...
+#Idea: Each scheduler handles 1 room?
+#Idea: There is a task scheduler for Work and then one for home and so on.
+#Should the work scheduler also handle npc skill improvments?
+
+#This handles personal schedules for the npc
+#Eating, sleeping, drinking. sitting. Like a personality stamp
+
+#info: idea... create a central database with these tactics for all npcs to reference
+
+
+#The npc state is the branch that controls the behaviour sets for the npc
+#Npc state should be a lifo stack
+
+#npc.flag[tactics.<npc_state>]
+#npc.flag[tactics.<npc.flag[npc_state]>]
+#npc.flag[tactics.in_combat]
+#npc.flag[tactics.at_work]
+#npc.flag[tactics.at_home]
+#npc.flag[tactics.travelling]
+#npc.flag[tactics.searching]
+#npc.flag[tactics.patrolling]
+#Npc should have a flag of a list of conditions that a player would like them to follow
+#
+#   - condition procedure| arguments | task to execute
+#   - condition procedure| arguments | task to execute
+#   - condition procedure| arguments | task to execute
+#
+# - if <proc[entity nearby].context[<entity list>|<distance>]>
+#       - do your script
+#
+# - if <proc[npc status].context[<status list>|<>]> 
+#       - find food
+#       - find healing
+#       - find bed
+#       - sleep
+#       - sit
+#       - make food
+#
+# - if <proc[]
+#
+
+#Setup for the npc test
+define at_home tactic:
+    type: task
+    script:
+    - flag npc npc_state:at_home
+    - flag npc food:<def[food_level]||60>
+    - flag npc 
+    - flag npc tactics.<npc.flag[npc_state]>:!
+    - flag npc tactics.<npc.flag[npc_state]>:li@is_hungry|50|npc_hunger_script
+    - flag npc tactics.<npc.flag[npc_state]>:->:li@is_homeless||npc_homeless_script
+    - narrate "set the flags for the script"
+
+define living tactic:
+    type: task
+    script:
+    - flag npc tactics.living:!
+    - flag npc "tactics.living:->:li@is_thirsty|60|drink something"
+    - flag npc "tactics.living:->:li@is_hungry|10|eat something"
+    #- flag npc "tactics.living:->:li@is_fatigued|60|sit nearby"
+    #- flag npc "tactics.living:->:li@is_tired|80|sleep nearby"
+    - flag npc "tactics.living:->:Tactics_Else|true|wander nearby"
+
+define navigation tactic:
+    #The npc should have a flag telling its target location
+    type: task
+    script:
+    - flag npc tactics.navigation:!
+    
+    #If the npc has arrived, resume the rest of the action queue
+    - flag npc "tactics.navigation:->:Is_Within_Last_Navigation_Target|4|resume queue"
+    #Npc arrived at a node in the nav list
+    - flag npc "tactics.navigation:->:Is_Within_Next_Navigation_Target|4|pop_and_walk"
+    
+    #Check if the npc can see the location
+    #If the npc is within navigator range schedule a walk to
+    - flag npc "tactics.navigation:->:Is_Within|<npc.navigation.range>|walk to"
+    - flag npc "tactics.navigation:->:Is_Within|100|Navigate to Looking location"
+    - flag npc "tactic.navigation:->:Tactics_Else||Schedule Travel>"
+    - flag npc "tactic.navigation:->:Tactics_Else||Schedule Travel>"
+
+
+
+
+
+#
+#Schedulers for npc action
+#
+npc_homeless_script:
+    type: task
+    script:
+    - chat "Im cold and with out a home! Guess I better start to build one before a zombie eats my brainz!"
+
+
+#task to execute if condition check passes
+npc_hunger_script:
+    type: task
+    script:
+    - chat "Man im hungry!"
+
+
+
+
+#Gets the task based on the npc state
+Npc Tactics Executor:
+    type: task
+    script:
+    - define next_tactic "<proc[Npc tactics Selector]>"
+    - if <def[next_tactic]> == "No Tactic Available" {
+        - action "Empty tactics Execution" context:type|<def[tactic_type]>
+        } else {
+        - run <def[next_tactic]> id:<npc.id>_action_queue
+        }
+
+Npc Tactics Selector:
+    type: procedure
+    script:    
+    # Get the tactics branch
+    - define npc <npc||<player.selected_npc>>
+    - define tactic_type <def[npc].flag[npc_state]>
+    - define flag tactics.<def[tactic_type]>
+    
+    #todo: Raise an error for the npc owner to create a tactics branch
+    - if !<def[npc].has_flag[%flag%]> {
+        - announce "Npc did not have the Tactics branch: <def[tactic_type]>"
+        - queue clear
+        }
+    
+    #loop though the conditions
+    #   if the condition passes execute and exit
+    - define size <def[npc].flag[tactics.<def[tactic_type]>].as_list.size>
+    
+    - repeat <def[size]> {
+        - define tactics <def[npc].flag[tactics.<def[tactic_type]>].as_list.get[<def[value]>]>
+        - define condition <def[tactics].as_list.get[first]>
+        - define args <def[tactics].as_list.get[2]>
+        
+        - define condition_output <proc[<def[condition]>].context[<def[args].unescaped>]||Invalid_Procedure>
+        - if <def[condition_output]> == Invalid_Procedure announce "Checking condition for <def[condition]>: <&nl>Parsed to Invalid Procedure."
+        - if <def[condition_output]> {
+            - determine <def[tactics].as_list.get[3]>
+            }
+        }
+    - determine "No Tactic Available"
+
+
+
+
+
+
+#I want these to schedule tasks for the npc to achieve
+
+
+Personal Task Scheduler:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    -
+
+Work Task Scheduler:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #This handles work related schedules                                                                                        #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    -
+
+
+
+Travel Scheduler:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This scheduler will determine the method of reaching a goal point.                                                        #
+    # Id currently like this to handle |Anthony|'s tasks for travel.                                                            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: location
+    script:
+    
+#
+
+
+
+
+
+
+
+
+
+Add Task:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: task
+    script:
+    - define task "<def[task]||s@Wander Nearby>"
+    - run "Flag Append Right" def:<npc>|task_queue|<def[task]>
+    
+
+
+Add Priority Task:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: task
+    script:
+    - run "Flag Append Left" def:npc|task_queue|%task%
+
+
+
+
+
+Npc Task Execute:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Runs a script from arguments found in the npc.flag task_queue                                                             #
+    # Each list item in a new task.                                                                                             #
+    # In each task the first argument is the script name to run                                                                 #
+    # Everything after that is arguments in order to be passed to it                                                            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    #If the npc is engaged do not keep scheduling tasks... 
+    #Could be if the npc is sleeping.
+    - while <npc.is_engaged> {
+        - wait d@1s
+        }
+    
+    - define task <npc.flag[task_queue]||none>
+    - if <def[task]> == none {
+        - action "No Task Execute" <npc> 
+        - queue clear
+        }
+    - flag npc task_queue:<-:%task%
+    
+    
+    # This dumps the task queue into the action queue
+    - define task_name <def[task].unescaped.as_list.get[first]>
+    - define args "<def[task].unescaped.as_list.get[2].to[<def[task].unescaped.as_list.size>]||>"
+    
+    - run %task_name% def:%args%
+    #This adds a task execution to the end of the action queue to keep it running.
+    - run <script> delay:d@10s                       id:<npc.id>_action_queue
+    
+
+
+Npc Delayed Task Execute:
+    #############################################################################################################################
+    #                                                                                                                           #    
+    # Designed as a task delay to execute the next item in the task list.                                                       #
+    #                                                                                                                           #
+    ############################################################################################################################# 
+    type: task
+    script:
+    - run "Npc Task Execute" delay:<npc.constant[delay_time]>
+    
+
+
+
+Wander Scheduler:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: from|to
+    script:
+    #Schedule wandering with delays to simulate a timed wander search
+    - define from <def[from]||5>
+    - define to <def[to]||10>
+    - repeat <util.random.int[<def[from]>].to[<def[to]>]> {
+        - run "Add Task" "def:Wander Nearby" id:<npc.id>_action_queue
+        }
+    
+
+
+####################################################################################################################################
+########################### Unit Work Task Schedulers ##############################################################################
+####################################################################################################################################
+
+#Checks for:
+#   Facilities
+#   Items in inventory
+#   Required Tools for job
+#   Required Items for job
+#then:
+#Determines Quality of product
+#Awards Stats to actor based on quality
+
+
+"UW Smith Scheduler":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: unit_type
+    script:
+    -
+    #unit to create
+    #If 
+
+    #if npc has facilities
+        #Fire
+        #Water
+        #Lava
+        #Cauldron with water
+        #anvil
+    
+    #If npc has tools
+        #hammer
+        #Tongs
+        
+    #if npc has ingredients
+    #if npc 
+    #
+
+
+"UW Cook Scheduler":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions:
+    script:
+    - if <proc[Has Required Facilities].context[Cook]>
+    
+    #Stove
+    #If npc has ingredients
+        #animations
+        
+        #Determine Quality
+            #Add item cooked to inventory
+            #Add exp to npcs cooking stat
+    -
+
+#################################
+
+
+        
+        #linking for anchor names...
+        #like a private search for npcs to see if they have that in thier memory
+        #Public ones are designated by players
+        #Private ones are designated by players but locked to most npc's
+        
+        #This is also becoming a list of task types based upon profession or what you do at those locations
+        #not only picking a task for wandering but for activities
+        
+
+        # public options:
+            # eat:
+                # - cafe
+                # - inn
+                # - pub
+                # - cafe
+                
+            # drink:
+                # - water
+                # - pub
+                # - inn
+                # - cafe
+                
+            # sleep:
+                # - inn
+                # - safe
+                
+            # work:
+                # #Break / place blocks
+                # - mine
+                # - logger
+                # - farmer
+                # - fields
+                
+                # #Attack farm animals
+                # - butcher
+                
+                # #Read walk arround. Write books.
+                # - librarian
+                # - forrest
+                    # - hunt
+                # - anvil
+                    # - play sounds
+                    # - forge
+                    # - craft
+                # - apathacary
+                    # - craft potions
+                # - kitchen
+                    # - cook
+                # - construction site'
+                # - office work
+                    # - records
+                # - guard
+                    # - attack
+                    # - train
+                    # - guard...
+                # - chat with coworkers
+                # - rule
+                # - redstone engineer
+                    # - switch
+                # - thief
+                    # - steal
+                        # - from players
+                        # - from npc's
+                        
+                # - griefer
+                    # - break blocks
+                
+            # shop:
+                # - appraise
+                # - buy
+                # - sell
+                # - browse
+                # - steal
+                # - 
+               
+            # live:
+                # - lounge
+                # - bed
+                # - chair
+                # - fridge
+                # - stove
+                # - pictures
+                # - cook
+                # - fish
+                # - 
+                
+            # storage?:
+                # - bank
+                # - storage
+            
+        
+        # private options:
+        
+            # food:
+            # - kitchen
+            # - water
+            # - farm
+            # - cook
+            # - eat
+            
+            # home:
+            # - kitchen:
+                # - eat
+                # - drink
+                # - sit
+            # - bedroom:
+                # - sleep
+                # - sit
+                # - read
+                # - study
+                # - dress
+                # - heal
+                # - play music
+            # - study:
+                # - study
+                # - read
+                # - sit
+                # - lounge
+                # - play music
+                # - write books
+            # - storage:
+                # - organize
+                # - deposit
+                # - debit
+            # - closet:
+            # - bathroom:
+                # - sit
+                # - clean up
+                # - shower
+                # - bathe
+                # - dress
+                # - change_face
+                # - heal
+                # - play music
+            # - training room:
+                # - train
+                # - gain strength
+                # - gain health
+                # - shoot
+                # - attack
+                
+            # - portal room:
+                # - go somplace?
+                
+            # work:
+            # - read
+            # - butcher animals
+            # - fish
+            # - craft
+            # - build
+            # - brew
+            # - anvil
+            # - stove
+            # - farm
+            # - field
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

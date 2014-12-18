@@ -1,0 +1,640 @@
+#################################################################################################################################
+# A set of general procedures and tasks for use in other scripts.                                                               #
+#                                                                                                                               #
+#                                                                                                                               #
+#Script notes:                                                                                                                  #
+#  2:                                                                                                                           #
+#   li@##.exclude[] dose not escape properly. so when li@item1 is found li@item1|val2|val3 is encountered it dose not           #
+#   exclude li@ properly maybe it was an issue with <util.random.element[]>                                                     #
+#   anyway that would pass on the li@valu1 to exclude                                                                           #
+#                                                                                                                               #
+#  3:                                                                                                                           #
+#   By the nature of how scripts are interpreted, '|'s are interpreted as a way to separate items in a list. Every procedure    #
+#   that has multiple arguments take those arguments as elements in a list. Well... what happens if you want to pass a list     #
+#   as 1 argument? There then becomes a misinterpretation of the arguments. This is where escaping becomes necessary.           #
+#   Escaping hids the '|' from the interpreter allowing the player to decide when the fake list becomes a real list. This       #
+#   allows lists to be passed as 1 argument and not multiple arguments.                                                         #
+#                                                                                                                               #
+#                                                                                                                               #
+#   A way to work around the issue is by passing lists 'escaped' first.                                                         #
+#                                                                                                                               #
+#   - run 'test task' def:<escape:%your list with '|s' in it%>|argument2|argument3                                              #
+#                                                                                                                               #
+#                                                                                                                               #
+#   Then for retrieval in the sub-procedure....                                                                                 #
+#                                                                                                                               #
+# "test task":                                                                                                                  #
+#   type: task  (or procedure)                                                                                                  #
+#   definitions: your_list_name|another_argument|argument_pertaining_to_prefrence                                               #
+#   script:                                                                                                                     #
+#   - define list_as_1_argument "<unescape:%your_list_name%>"                                                                   #
+#                                                                                                                               #
+#################################################################################################################################
+
+
+Modify Sign Line:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # location is a sign location.                                                                                              #
+    # Line is a line number to alter                                                                                            #
+    # Text is the text to alter with                                                                                            #
+    #                                                                                                                           #
+    #todo: set this up so that it no longer requires a _type option. Get the sign type from the location and match it here.  #
+    #############################################################################################################################
+    type: task
+    debug: false
+    definitions: _type|location|line|text
+    script:
+    - ^if %line% = 1 ^define line1 %text% else ^define line1 <%location%.sign_contents.get[1]>
+    - ^if %line% = 2 ^define line2 %text% else ^define line2 <%location%.sign_contents.get[2]>
+    - ^if %line% = 3 ^define line3 %text% else ^define line3 <%location%.sign_contents.get[3]>
+    - ^if %line% = 4 ^define line4 %text% else ^define line4 <%location%.sign_contents.get[4]>
+    - ^define sign "%line1%|%line2%|%line3%|%line4%"
+    - ^sign "type:%_type%" %sign% %location%
+    
+
+
+Threshold Random Success:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # if roll <= threshold = success                                                                                            #
+    # Takes a threshold (target to fall under)                                                                                  #
+    # Takes a max value (to randomly roll within)                                                                               #
+    # - if <proc[Threshold Random Success].context[10|100]> #do somthing                                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: threshold|max
+    script:
+    - if <util.random.int[0].to[<def[max]>]> <= <def[threshold]> {
+        - determine true
+        } else {
+        - determine false
+        }
+    
+
+"Random Range":
+    # A utility that Handles an element that contains -'s
+    # Returns a random int from in between the 2 numbers
+    # If its dose not contain the '-', it just returns that element
+    # - narrate "you rolled a <proc[Random Range].context[1-6]>"
+    # - define extra_diamonds <proc[Random Range].context[1-2]>
+    # - announce "Player got %extra_diamonds% and is that much richer!"
+    # - 
+    type: procedure
+    definitions: element
+    script:
+    - if %element% contains "-" {
+        - define from <el@%element%.before[-]>
+        - define to <el@%element%.after[-]>
+        - define number <util.random.int[%from%].to[%to%]>
+        - determine "%number%"
+        } else {
+        - determine %element%
+        }
+    
+
+"Strip Prefix":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Strips the first prefix it finds then returns the value                                                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: element
+    script:
+    - define prefix nation@|job@|town@|faction@|el@|li@|ch@|in@|cu@|l@|d@|p@|n@|s@|e@|i@|m@|w@|q@
+    - foreach <def[prefix].as_list> {
+        - if <def[element].contains[<def[value]>]> {
+            - determine <def[element].replace[<def[value]>]>
+            }
+        }
+    
+
+"Strip All Prefix":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Strips an elements prefix then returns the value                                                                          #
+    # By the nature of the procedure container. And the nature of how scripts are packaged when sent.                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: element
+    script:
+    - determine <def[element].formatted>
+    
+
+
+"Configurable Escaping":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Use denizen escaped characters for the character to check for.                                                            #
+    # Also usable replace a word in a set of words.                                                                             #
+    #                                                                                                                           #
+    # like:                                                                                                                     #
+    #   "." = <&dot>                                                                                                            #
+    #   "," = <&cm>                                                                                                             #
+    #   "'" = <&sq>                                                                                                             #
+    #   ";" = <&sc>                                                                                                             #
+    # http://mcmonkey.org/tags/&                                                                                                #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: words|character|replacement
+    script:
+    - if <def[words].contains[<def[character]>]> {
+        - determine <def[words].replace[<def[character]>].with[<def[replacement]>]>
+        } else {
+        - determine <def[words]>
+        }
+    
+
+#fixme: This dose not work currently... 
+"Determine Pair Locations":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Input is a string, and a couple of elements to search within.                                                             #
+    # This returns a list of complete element pairs within the string.                                                          #
+    # used as a [companion] to [detect] [where] the [values] are [that] you [might] be [interested] in [replacing].             #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: words|last|first|prev_pairs_list
+    script:
+    - define words <def[words].formatted>
+    - if <def[words].last_index_of[<def[last]>]> >= 3 {
+        - define end_index <def[words].last_index_of[<def[last]>]>
+        - if "<el@%words%.last_index_of[%first%]>" >= 1 {
+            - define start_index "<el@%words%.last_index_of[%first%]>"
+            - define new_pair_list "<proc[Append Right].context[%prev_pairs_list%|%start%,%end%]>"
+            - define new_words "<el@%words%.substring[0,%start%]>"
+            - define check_again "<proc[Determine Pair Locations].context[li@%new_words%|<def[last]>|<def[first]>|<def[new_pair_list]>]>"
+            }
+        - determine %prev_pairs_list%
+        }
+    - determine %prev_pairs_list%
+    
+
+"Djistras Stack Component?":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: Finish me                                                                                                        #
+    # Uncompleted yet.... Still needs the stack component. This is just a framework idea...                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: words|closing_arg|opening_arg
+    script:
+    - if "<def[words].index_of[<def[closing_arg]>]>" >= 1 {
+        - define view_right <def[words].index_of[<def[closing_arg]>]>
+        - define up_to <def[words].substring[%view_right%]>
+        - if "<def[up_to].last_index_of[<def[opening_arg]>]>" >= 1 {
+            - define view_left "<def[up_to].last_index_of[<def[opening_arg]>]>"
+            - determine <def[words].substring[%view_left%,%view_right%]>
+            }
+        }
+    
+
+
+"Word Index":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Finds the index of the target_word that it matches in words                                                               #
+    # Returns an empty string if did not find any match.                                                                        #
+    # If it finds one returns a '2,3' tuple index numbers.                                                                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: words|target
+    script:
+    - define target_size <def[target].length>
+    - define first_index <def[words].last_index_of[<def[target]>]>
+    - if <def[first_index]> != 0 {
+        - define last_index <def[first_index].add[<def[target_size]>]>
+        - determine "%first_index%,%last_index%"
+        }
+    - determine null
+    
+
+
+"Letters Within":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Finds the last string that's in between 2 characters and including the characters                                         #
+    # Returns the word including the first and the last.                                                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: words|last|first
+    script:
+    - if "<def[words].last_index_of[<def[last]>]>" >= 1 {
+        - define end "<def[words].last_index_of[<def[last]>]>"
+        - if "<def[words].last_index_of[<def[first]>]>" >= 1 {
+            - define start "<def[words].last_index_of[<def[first]>]>"
+            - define target "<def[words].substring[<def[start]>,<def[end]>]>"
+            - determine <def[target]>
+            }
+        }
+    - determine ''
+    
+
+#info: Just a playing script
+Lazer:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A script that gets a block list from the players line of sight.                                                           #
+    # Then for each of them shows a fake block change event and plays a effect there.                                           #
+    # Currently set up to get a cube around the players location instead.                                                       #
+    # Just uncomment the block list you want to get the list of blocks for.                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: false
+    definitions: particle|distance
+    script:
+    #- define block_list "<proc[Block Line].context[<player>|%distance%]>"
+    - define block_list "<proc[Cube Surrounding].context[<player.location>]>"
+    - foreach <def[block_list].as_list> {
+        - showfake m@cobblestone <def[value]> to:<player> d:d@10s
+        - playeffect <def[value]> effect:<def[particle]>
+        }
+    #- playeffect <li@%block_list%.last> "effect:ender_signal"
+    
+
+
+"String Scroll":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # String:            is the string to display.                                                                              #
+    # index:             is the next set to calculate                                                                           #
+    # length to display: optional, picks the amount of letter to return. Defaults to 16.                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: true
+    definitions: string|index|len_to_display
+    script:
+    - define len_to_display <def[len_to_display]||16>
+    - define total_size <def[string].length>
+    - define left_slice <def[index]>
+    - define right_slice <def[index].add[<def[len_to_display]>]>
+    - determine<def[string].substring[<def[left_slice]>,<def[right_slice]>]>
+
+
+
+Create Scroll Display:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Utility for creating a scroll set. A list of words for display limitations or effects.                                    #
+    # notice: Text will be <escape:>'s.                                                                                      #
+    # notice: Bad things might happen of the string is longer than nameplate limit size.                                     #
+    #                                                                                                                           #
+    # words:        is the set of words to create a scrolling set of text for.                                                  #
+    # display_size: is the total size of each set to limit the length of the display to.                                        #
+    # type:         is the cutoff for the beginning of the display set and the end.                                             #
+    #   VANITY is where the display starts and ends off padded with spaces from the edge of the display                         #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: true
+    definitions: words|VANITY|display_size
+    script:
+    - define display_size <def[display_size]||16>
+    - define size <def[words].length>
+    - define vanity <def[vanity]||false>
+    - if <def[vanity]||false> {
+        - define full_index <def[size].add[<def[display_size]>]>
+        - repeat <def[full_index]> {
+            - define index <def[value].sub[<def[display_size]>]>
+            - define next_word_display "<proc[String Scroll].context[%words%|%index%|%display_size%]>"
+            - define display_set "<proc[List Append Right].context[<def[display_set]||li@>|<def[next_word_display]>]>"
+            }
+        } else {
+        - define full_index <def[size].sub[<def[display_size]>]>
+        - repeat <def[full_index]> {
+            - define next_word_display "<proc[String Scroll].context[%words%|%value%|%display_size%]>"
+            - define display_set "<proc[List Append Right].context[<def[display_set]||li@>|<def[next_word_display]>]>"
+            }
+        }
+    #This returns an unescaped set by reason that its a list of strings ready to be passed on to other functions
+    #that require a list
+    - determine <def[display_set]>
+    
+
+
+Repeated String:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Takes a string and returns that string repeated over and over                                                             #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: string|num_of_repeats
+    script:
+    - repeat <def[num_of_repeats]> {
+        - define new_string "<proc[Append Right].context[<def[new_string]||>|<def[string]>]>"
+        }
+    - determine <def[new_string]>
+    
+
+
+"Build Passenger List":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # info: recursive iterator for going through a set of passengers                                                            #
+    # notice: REQUIRES a definition sudo list called 'entity' to already be present in calling function!                     #
+    # todo: bugtest me!                                                                                                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: entity
+    script:
+    - define next_entity <def[entity].get_passenger||none>
+    - if <def[entity]||none> != none {
+        - define entity "<proc[List Append Right].context[<def[entity]||li@>|<def[next_entity]>]"
+        - define try_again "<proc[Build Entity List].context[<def[next_entity]>]>"
+        }
+    - determine <def[entity]>
+    
+
+
+
+
+
+# http://jd.bukkit.org/rb/doxygen/d3/dfe/enumorg_1_1bukkit_1_1Sound.html
+#A procedure to play a appropriate sound 
+#todo: Utilize a yaml[id] database on server start
+"Location Sound Determinate":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Draws from the script database that determines a locations reaction                                                       #
+    # todo: finish my counterpart                                                                                            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: location
+    script:
+    - define material <def[location].material>
+    - determine "<s@Material Interaction Defaults.constants[<def[material]>.sound].random>"
+    
+
+#todo: Utilize a yaml[id] database on server start
+"Location Effect Determinate":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Draws from the script database that determines a locations reaction                                                       #
+    # todo: finish my counterpart                                                                                            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #Draws from the script that determines a locations reaction
+    type: procedure
+    definitions: location
+    script:
+    - define material <def[location].material>
+    - determine"<s@Material Interaction Defaults.constants[<def[material]>.effect].random>"
+
+
+
+    
+
+
+"Iconize":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This is the script that determines replacements for a string.                                                             #
+    # Using recursive calls                                                                                                     #
+    # Searches for all bracketed words to find replacement icons                                                                #
+    # Based off of the procedure 'Modify Words V5'                                                                              #
+    #                                                                                                                           #
+    # This returns null if it receives an empty string ''                                                                       #
+    #                                                                                                                           #
+    # Whatever this returns is the string that the caller gets.                                                                 #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: words
+    script:
+    - define words "<def[words]||>"
+    - if <def[words]> == "" determine ""
+    - define replaceme "<proc[Letters Within].context[<def[words]>|<&rb>|<&lb>]||none>"
+    
+    - if <def[replaceme]> == '' || <def[replaceme]> == none determine <def[words].unescaped>
+    - define replacement "<proc[Determine Word Replacement].context[<def[replaceme]>]>"
+    - define set <def[words].replace[<def[replaceme]>].with[<def[replacement].escaped>]>
+    - determine <proc[Iconize].context[<def[set]>]>
+
+
+"Generate Relative Location List":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: figure out why this is returning an item with-out the li@                                                        #
+    #           And fix it and the subscripts that use this.                                                                    #
+    # A procedure for getting a list of relative locations from a base location                                                 #
+    # operator is optional as it determines the operation done to both points.                                                  #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: refrence_point|location_list|operator
+    script:
+    - define location_list <def[location_list].unescaped.as_list>
+    - define operator <def[operator]||sub>
+    - foreach <def[location_list].as_list> {
+        - define relative_point "<def[refrence_point].simple>.<def[operator]>[<def[value]>]>"
+        - define relative_list "<proc[List Append Right].context[<def[relative_list]||li@>|<def[relative_point].simple>]>"
+        }
+    - determine <def[relative_list].unescaped>
+    
+
+
+"Generate Location List from Relative Point":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Base point is the starting point for the refrences                                                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: location_list|base_point|refrence_point
+    script:
+    - define base_offset "<proc[Generate Relative Location List].context[<def[refrence_point]>|<def[base_point]>]>"
+    #location list should already be escaped
+    - define new_locations "<proc[Generate Relative Location List].context[<def[base_offset]>|<def[location_list]>|add]>"
+    - determine <def[new_locations]>
+    
+
+
+"Move Schematic":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: finishme / write examples                                                                                        #  
+    #                                                                                                                           #
+    #############################################################################################################################
+    #old location is a refrence point to where... the initial refrence point was?
+    type: task
+    definitions: name|old_location|new_location
+    script:
+    -  define distance <def[distance]||1>
+    
+
+"Get Schematic":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: finishme / write examples                                                                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #A script that returns a schem name but in the process gets a schematic of a cuboid in server memory
+    type: procedure
+    definitions: cuboid
+    script:
+    - define name ""
+    - determine %name%
+    
+
+"Rotate Schematic":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: finishme / write examples                                                                                        # 
+    # schematic list is a list of schematics to load into memory                                                                #
+    # rotation type is how this schedules the rotation of schematics. In list form.                                             #
+    #   options are:                                                                                                            #
+    #   cycle                                                                                                                   #
+    #   random                                                                                                                  #
+    #   repeat                                                                                                                  #
+    #   1 time                                                                                                                  #
+    #   delay                                                                                                                   #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: schematic_list|rotation_options|delay
+    script:
+    - define schematic_list <def[schematic_list].unescaped>
+    - define rotation_options <def[rotation_options].unescaped>
+    - foreach <def[schematic_list].as_list> {
+        - schematic 
+        }
+
+
+#################################################################################################################################
+#                                                                                                                               #
+#todo: make a block moving script that switches places with the blocks its replacing...                                      #
+#           like for water... and burying objects in stone / sand? Like animating sinking.                                      #
+#                                                                                                                               #
+#################################################################################################################################
+
+"Move Block List":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # fixme: fix the generate location list from relative issue with creating an list with-out the 'li@'                     #
+    # todo: maybe make it just show to 1 player? maybe optional?                                                             #
+    # todo: modify block and showfake take block lists and 1 material                                                        #
+    #            id like to take advantage of java run abilities and not scripted methods...                                    #
+    # Requires 3 args:                                                                                                          #
+    #  block list                                                                                                               #
+    #  the starting reference to the points                                                                                     #
+    #  the ending reference to the points                                                                                       #
+    # fake is how the blocks are placed (optional)                                                                              #
+    # duration is is for the fake command. Duration for how long to keep the fake display. (optional)                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: block_list|old_location|new_location|fake|duration
+    script:
+    - define fake <def[fake]||false>
+    - define duration <def[duration]||d@1s>
+    #performed in this order because block_list is already escaped
+    - define new_block_list "<proc[Generate Location List from Relative Point].context[<def[block_list]>|<def[old_location]>|<def[new_location]>]>"
+    - define block_list <def[block_list].unescaped>
+    
+    - repeat <def[new_block_list].as_list.size> {
+        - define old_loc <def[block_list].get[<def[value]>]>
+        - define new_loc <def[new_block_list].as_list.get[<def[value]>]>
+        - define material <def[old_loc].material>
+        - if <def[fake]> {
+            - showfake <def[material]> <def[new_loc]> d:<def[duration]>
+            - showfake m@air <def[old_loc]> d:<def[duration]>
+            } else {
+            - modifyblock <def[new_loc]> <def[material]> no_physics
+            - modifyblock <def[old_loc]> m@air no_physics
+            }
+        }
+
+"Move Block List Tester Script":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A script I was using to test out the relative place and remove                                                            #
+    # This script performs block modifications either fake or real. Generates                                                   #
+    # A list of blocks arround the player, then moves those arround the npc.                                                    #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    - define b_type li@m@glowstone
+    - define block_list <player.location.find.blocks[<def[b_type]>].within[2]>
+    #                                  block list        first location| 2nd location |fake?| duration of fake
+    - run "Move Block List" def:<def[block_list].escaped>|<player.location>|<npc.location>|false|5s
+    
+    
+
+In Allowed Group:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A permissions group checker. This may not work with some permissions plugins.                                             #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: allowed_groups
+    script:
+    - if <player.is_op> determine true
+    - foreach <def[allowed_groups].unescaped> {
+        - if <player.in_group[<def[value]>].global> {
+            - determine true
+            }
+        }
+    - determine false
+    
+
+"Definition":
+    type: procedure
+    definitions: definition_name
+    script:
+    - determine %definition_name%
+    
+
+Announce Arguments Passed:
+    #Injected script to announce all the args passed to a script
+    type: task
+    script:
+    - announce ""
+    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
+    - foreach <queue.definitions> {
+        - announce "<blue><bold>%value%: <reset><def[%value%]>"
+        }
+
+
+# todo: turn this into a task
+        # on player default flags check:
+        # - define flags_to_check <context.flags.unescaped>
+        # - define default_values  <context.default_values.unescaped>
+        # - foreach <def[flags_to_check]> {
+            # - if <player.has_flag[<def[value]>]> foreach next
+            # - define default_value <def[default_values].get[<def[loop_index]>]>
+            # - flag player <def[value]>:<def[default_value]>
+            # }
+        
+
+#
+__Return__:
+    #
+    # Gets code from a script
+    # Expects a definition to defined in code called return. Returns that.
+    #
+    type: procedure
+    definitions: script|path
+    script:
+    - define return none
+    - inject <def[script]> path:<def[path]>
+    
+

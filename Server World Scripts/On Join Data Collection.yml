@@ -1,0 +1,10 @@
+Join Data Collection:
+    type: world
+    events:
+        on player join:
+        - wait d@6s
+        - if !<player.is_online||false> queue clear
+        - define time <util.date.time>
+        - flag player last_join_date:<util.date>
+        - flag player last_join_time:<def[time]>
+        - flag player ip:<player.ip>

@@ -1,0 +1,316 @@
+# Script that listens for players opening inventories and checks if they have the right key for it.
+Chest Locking:
+    type: world
+    lock type:
+        pick: i@stick[displayname=lockpick]
+        lock: i@iron_ingot[displayname=lock]
+        key: i@blazerod[displayname=key]
+        
+        #lock difficulty descriptions
+        #max value of 8 at the most.
+        Redstone: 2
+        Lapis: 3
+        Coal: 4
+        Iron: 5
+        Gold: 6
+        Obsidian: 7
+        Diamond: 8
+        Dragon: unpickable
+        
+        #Just replace with the first name of the lock type you want.
+        #master: unpickable
+        #dwarven: 8
+        #elven:7
+        #human:4
+        #hard: 5
+        #medium: 3
+        #easy: 2
+        
+    
+    events:
+        on test_lock command:
+        - determine passively fulfilled
+        - define inventory <player.location.cursor_on[10].inventory>
+        - define lock_type "<def[inventory].list_contents.get[1].display.before[ ]>"
+        - define debug_output "Lock difficulty is: <script.yaml_keys[lock type.<def[lock_type].strip_color>]>"
+        - narrate "<def[debug_output]>"
+        
+        
+        
+        on synclore command:
+        - determine passively fulfilled
+        #Player bar is listed first 1 - 9 taken.
+        - define chng <player.inventory.list_contents.get[1]>
+        - define standard <player.inventory.list_contents.get[2]>
+        #- narrate "Player inventory: <player.inventory.list_contents>"
+        #- narrate "Changing the lore now"
+        
+        #- give "i@iron_ingot[display_name=lock;lore=abcd]" to:<player.inventory> slot:10
+        - run "Sync Lore" def:<def[chng]>|<def[standard]>
+        #- run "Add KeyString" def:<def[chng]>
+        
+        
+        #This is to cancel the clicking on an inventory
+        on player right clicks m@chest:
+        - define chest <context.location.inventory>
+        - if !<proc[Is_Locked].context[<def[chest]>]> queue clear
+        - narrate "<red>Is locked"
+        - if !<proc[Has_Key_For].context[<def[chest]>]>{
+            - narrate "<gray>You need a key for this "
+            - narrate "Seems to be locked with a <proc[Lock Type].context[<def[chest]>]> lock."
+            - determine cancelled
+            }
+        - narrate "You have the key for this "
+        
+        
+        on player breaks m@chest:
+        - define chest <context.location.inventory>
+        - if !<proc[Is_Locked].context[<def[chest]>]> queue clear
+        - if !<proc[Has_Key_For].context[<def[chest]>]> {
+            - narrate "<gray>You are not allowed to break this with out a key."
+            - determine cancelled
+            }
+        
+        on player opens inventory:
+        #- narrate "opened inventory"
+        - if !<player.has_flag[in_lockpick_minigame]> queue clear
+        - flag player in_lockpick_minigame:!
+        - narrate "Got tons of lockpicking experience sorta... tell chem to work on that!"
+        
+        
+    
+
+###############################################
+## Custom Lock Events #########################
+###############################################
+
+
+#todo: Create a black list option called deny. Deny takes precidence
+Book Lock Player Allow Check:
+    type: world
+    events:
+        on player locked item interaction:
+        - define players
+          <context.players.unescaped||li@>
+        
+        - define signers
+          <context.signers.unescaped||li@>
+        
+        - if <def[players].contains[all]>
+          queue clear
+        
+        - foreach <def[signers].as_list>
+          if <server.match_player[<def[value]>].is[==].to[<player>]>
+          queue clear
+        
+        - if <def[players].is_empty>
+          queue clear
+        
+        - if <def[players].contains[<player.name>]>
+          queue clear
+        
+        - foreach <def[players].as_list>
+          if <server.match_player[<def[value]>].is[==].to[<player>]>
+          queue clear
+        
+        - if <player.is_op>
+          queue clear
+        
+        - if <player.has_permission[booklocks.admin]>
+          queue clear
+        
+        - narrate
+          "<red>You did not meet the player requirements for accessing this object."
+        
+        - determine
+          cancelled
+    
+
+Book Lock Group Allow Check:
+    type: world
+    events:
+        on player locked item interaction:
+        - define group_list <context.groups.unescaped.as_list>
+        - if <def[group_list].is_empty> queue clear
+        - foreach <def[group_list]> {
+            - if <player.in_group[<def[value]>]> {
+                - narrate "Your group: <blue><def[value]> <reset>is allowed to enter."
+                - queue clear
+                }
+            }
+        
+        - if <player.is_op>
+          queue clear
+        
+        - if <player.has_permission[booklocks.admin]>
+          queue clear
+        
+        - narrate "<red>You did not meet the group requirements for this object."
+        - determine cancelled
+    
+
+Book Lock Password Allow Check:
+    type: world
+    events:
+        on player locked item interaction:
+        #- announce "<context.passwords.unescaped>"
+        - define passwords <def[passwords].unescaped>
+        - if <def[passwords].is_empty> queue clear
+        - if <player.is_op>
+          queue clear
+        
+        - if <player.has_permission[booklocks.admin]>
+          queue clear
+        
+        - if <player.has_flag[granted_access_to_locked_object]> {
+            - flag player granted_access_to_locked_object:!
+            - queue clear
+            }
+        
+        - narrate
+          "<red>Please chat your password, the next thing you say will not be transmitted"
+        
+        
+        - run "Locked by Password Entry"
+          def:<context.passwords>|<context.location>|<context.inventory>
+          id:<player.name.display>_entry_capture_<player>
+          player:<player>
+        
+        - determine cancelled
+    
+
+Locked by Password Entry:
+    type: task
+    definitions: passwords|location|inventory
+    script:
+    - queue pause
+    - define passwords <def[passwords].unescaped>
+    - define found_password false
+    - if !<def[passwords].contains[<player.chat_history[1]>]> {
+        - narrate "<red>Your last chat did not contain any password that matched."
+        - queue clear
+        }
+    
+    
+    - if !<def[inventory]||none> == none {
+        - if <player.location.distance[<def[distance]>].is[or_more].than[5]> queue clear
+        - flag player granted_access_to_locked_object:true
+        - inventory open destination:<def[inventory]>
+        - queue clear
+        }
+    - switch <def[location]> state:toggle duration:d@10s
+    
+    
+#todo: 
+Book Lock Cost Allow Check:
+    type: world
+    events:
+        on player locked item interaction:
+        - announce <context.costs.unescaped>
+        - if <player.is_op>
+          queue clear
+        
+        - if <player.has_permission[booklocks.admin]>
+          queue clear
+        #- determine "Paid the cost"
+    
+#
+
+
+
+###############################################
+## Book Lock Event Triggers ###################
+###############################################
+
+
+
+
+Book Lock Events:
+    lockable:
+      li@wooden_door|dark_oak_door_block|spruce_door_block|jungle_door_block|acacia_door_block|iron_door_block|fence_gate|dark_oak_fence_gate|acacia_fence_gate|spruce_fence_gate|birch_fence_gate|jungle_fence_gate|
+    type: world
+    events:
+        on player breaks block:
+        - define lockable <script.yaml_keys[lockable]>
+        - if !<def[lockable].contains[<context.location.material.bukkit_enum>]> queue clear
+        - define location <context.location>
+        - inject locally "path:Build Locked Object Event"
+        
+        
+        
+        on player right clicks block:
+        #- announce "<context.location.material.bukkit_enum>"
+        - define lockable <script.yaml_keys[lockable]>
+        - if !<def[lockable].contains[<context.location.material.bukkit_enum>]> queue clear
+        - define location <context.location>
+        - inject locally "path:Build Locked Object Event"
+        
+        
+        
+        on player opens inventory:
+        - if !<context.inventory.id_type.is[==].to[location]> queue clear
+        - define inventory <context.inventory||none>
+        - define location <context.inventory.location>
+        - inject locally "path:Build Locked Object Event"
+        
+        
+        
+        on item_frame damaged:
+        - if !<context.entity.has_framed_item> queue clear
+        - if !<context.entity.framed_item.is_book> queue clear
+        - define location <context.entity.location>
+        - inject locally "path:Build Locked Object Event"
+        
+    
+        on player chats:
+        - if <queue.exists[<player.name.display>_entry_capture_<player>]> {
+            - queue q@<player.name.display>_entry_capture_<player> resume
+            - determine cancelled
+            }
+    
+    
+    
+    Build Locked Object Event:
+    - define players li@
+    - define passwords li@
+    - define costs li@
+    - define groups li@
+    - define signer li@
+    - define local_framed_books <proc[get_framed_books].context[<def[location]>]>
+    
+    - foreach <def[local_framed_books]> {
+        - define signer <def[signer].include[<def[value].book.author||li@>]>
+        - foreach <def[value].book.pages.escaped> {
+            - define entry_list "<def[value].split[&nl]>"
+            - define page_function <def[entry_list].get[first].replace[&co]>
+            - define included_entries <def[entry_list].get[2].to[<def[entry_list].size>]>
+            - define %page_function% <def[%page_function%].include[<def[included_entries]>]>
+            }
+        }
+    - ~event "Player Locked item interaction"
+        context:players|<def[players].escaped>|costs|<def[costs].escaped>|passwords|<def[passwords].escaped>|groups|<def[groups].escaped>|signers|<def[signer].escaped>|location|<def[location]>|inventory|<def[inventory]>
+        save:determination
+    - ~define determination <entry[determination].determination>
+    - if <def[determination].is[==].to[none]> queue clear
+    - determine <def[determination]>
+
+#
+
+
+
+get_framed_books:
+    # Search for item frames within area
+    # If item frame contains book add to list
+    # return list
+    type: procedure
+    definitions: location
+    script:
+    - define book_list li@
+    - define frames <def[location].find.entities[item_frame].within[2]>
+    - if <def[frames].is_empty> queue clear
+    - foreach <def[frames]> {
+        - if !<def[value].framed_item.is_book> foreach next
+        - define book_list <def[book_list].include[<def[value].framed_item>]>
+        }
+    - determine <def[book_list]>
+    

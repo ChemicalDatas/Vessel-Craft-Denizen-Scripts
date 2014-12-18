@@ -1,0 +1,55 @@
+Healing Mechanic:
+    type: world    
+    salves: i@lime_dye|i@red_dye
+    shears: i@shears
+    bandages: i@paper
+    heal time: 8
+    cooldown time: 30
+    
+    target heal msg: "<gray>You have been <green>bandaged <gray>by <gold><player.name>"
+    healer heal msg: "<gray>You bandaged"
+        
+        
+        
+    events:
+        on player right clicks entity:
+        - define item <player.item_in_hand>
+        - define salves <script.yaml_key[salves]>
+        - define bandages <script.yaml_key[bandages]>
+        - define shears <script.yaml_key[shears]>
+        
+        - if <def[item]> == <def[bandages]> {
+            - flag <context.entity> bandaged duration:10
+            }
+            
+        - if <def[salves].as_list.contains[<def[item]>]> {
+            - flag <context.entity> salved duration:10
+            }
+            
+        - if <def[item]> == <def[shears]> {
+            - define max_health <context.entity.health.max.as_int>
+            - define cur_health <context.entity.health.as_int>
+            - narrate "<red><context.entity.name> <gray>looks <red><context.entity.health.formatted>.  <def[cur_health]> \ <def[max_health]>"
+            - if <context.entity.has_flag[bandage_cooldown]> {
+                - define cooldown_time "<context.entity.flag[bandage_cooldown].expiration.in_seconds>"
+                - narrate "<red><context.entity.name> <gray>can not be bound for another <yellow><def[cooldown_time]> <gray>seconds."
+                - queue clear
+                }
+                
+            - define bandaged <context.entity.has_flag[bandaged]>
+            - define salved <context.entity.has_flag[salved]>
+            - if <def[bandaged]> 
+              && <def[salved]> {
+                - define time "<script.yaml_keys[heal time]>"
+                - define cooldown "<script.yaml_keys[cooldown time]>"
+                - define healed "<script.yaml_keys[healer heal msg]>"
+                - define target_heal_msg "<script.yaml_keys[target heal msg]>"
+                
+                - narrate <def[target_heal_msg]> targets:<context.entity>
+                - narrate "<def[healed]> <context.entity.name>"
+                - cast regeneration duration:<def[time]> power:1 <context.entity>
+                
+                - flag <context.entity> bandage_cooldown duration:<def[cooldown]>
+                - flag <context.entity> bandaged:!
+                - flag <context.entity> salved:!
+                }

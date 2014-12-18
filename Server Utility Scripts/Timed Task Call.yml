@@ -1,0 +1,189 @@
+#Denizen handles time adjustments
+
+
+Server Scheduled Task Queue:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: world
+    events:
+        on time changes:
+        - define time <context.time>
+        - define hour <def[time]>
+        - if <server.has_flag[time_scheduled_tasks]>
+            - foreach <server.flag[time_scheduled_tasks.%hour%.%min%].as_list>
+                - run <def[value]>
+                }
+            }
+
+
+Repeated Task Call:
+    type: task
+    debug: false
+    definitions: task|delay|queue_name|queue
+    script:
+    - run <def[task]> id:<def[queue_name]||>
+    - run <script> def:<def[task]>|<def[delay]>|<def[queue_name]>|<def[queue]||<queue>> delay:<def[delay]>
+    
+
+"Injected Repeated Task Call":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # There should be a few definitions defined before you run this task.
+    # There are side effects with this too as this hijacts your queue....
+    # <def[task]> should be a task to be called repeatedly                                                                      #
+    # <def[delay]> should be a delay to before calling <def[task]> again.                                                       #
+    # info: this can make a repeated loop forever if theres an error or not.
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: true
+    script:
+    - if <def[task].exists> {
+        - inject <def[task]>
+        } else {
+        - define message "Task for queue: <queue.id> dose not exist."
+        - announce "<def[message]> type:warning file:logs/denizen/Injected Repeated Task Call.log"
+        }
+        
+    - if <def[delay].exists> {
+        - wait <def[delay]>
+        } else 
+        - wait 1s
+    - inject "Injected Repeated Task Call"
+    
+"Limited Task Call":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # <def[task]> should be a task to be called repeatedly                                                                      #
+    # <def[delay]> should be a delay to before calling <def[task]> again.                                                      #
+    # <def[calling_name]> if provided a script name to trace back. <-Not really needed but for debugging                        #
+    # <def[number_of_times_to_call]> is the number of times to call the script.....                                             #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: false
+    definitions: task|delay|number_of_times_to_call|calling_name|variable_
+    script:
+    - define debug_info "<script.name>: <red><def[calling_name]> <blue>called <yellow><def[task]> <blue>delay of: <yellow><def[delay]>"
+    - if <def[number_of_times_to_call]> >= 0 {
+        - define number_of_times_to_call <def[number_of_times_to_call].sub[1]>
+        - run <def[task]>
+        - run "Limited Task Call" def:<def[task]>|<def[delay]>|<def[number_of_times_to_call]>|<def[calling_name]> delay:<def[delay]>
+        }
+    
+
+
+
+Schedule Task for Time:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # info: This requires the brother world script that runs the tasks on server time change                                    #
+    # This is only called on the top of each hour. Only runs the script on the hour. 24 hour format.                            #
+    #  <def[task]> should be a task to call                                                                                     #
+    #  <def[hour]> should be an int                                                                                             #
+    #                                                                                                                           #
+    # notice: This requires a script to search the servers flag time_scheduled_tasks and run the tasks listed in there.     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: task|hour
+    script:
+    - define hour <def[hour]||0>
+    - define task <def[task].unescaped>
+    - flag server time_scheduled_tasks.<def[hour]>:->:<def[task]>
+    
+
+Conditional Repeated Task Call:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: task|delay|condition|is|comparable
+    script:
+    - if <proc[Compare].context[<def[condition]>|<def[is]>|<def[comparable]>]> {
+        - run <def[task]>
+        - run "Conditional Repeated Task Call" def:<def[task]>|<def[delay]>|<def[condition]>|<def[is]>|<def[comparable]> delay:<def[delay]>
+        }
+
+Remember Task Call:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # info: this is the remnant of an idea for producing a type of pythonic yield for an iterator                               #
+    # fixme: Non functioning                                                                                                 #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: script
+    script:
+    - run <def[script]>
+    - determine <util.random.uuid>
+    
+    
+
+
+Serial Task Execute:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This dose not run stuff in a queue, but sets a delay for the actions to be executed in order.                             #
+    #                                                                                                                           #
+    # This runs a task over the list of arguments passed.                                                                       #
+    # This should be used in sets of scripts that require a task to be run in a timeley fashion                                 #
+    # after another task.                                                                                                       #
+    # The delay is a valid duration object.                                                                                     #
+    #                                                                                                                           #
+    # ex:                          #if you have a script like this                                                              #
+    #   - run "Delayed Task Set" def:Kill_Player|<escape:<server.list_online_ops>>|d@1s                                         #
+    #                                                                                                                           #
+    # idea: To run a task that requires multiple definitions require a ';' separated list. Then break that into Items           #
+    #       Then unescape each value to pass to the task.                                                                       #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: task|args_list|delay
+    script:
+    - define args_list <def[args_list].unescaped>
+    - define next_delay d@0t
+    - foreach <def[args_list]> {
+        - run <def[task]> def:<def[value]> delay:<def[next_delay]>
+        - define next_delay d@<def[next_delay].in_ticks.add[<def[delay].in_ticks>]>t
+        }
+
+
+
+
+
+Run Script While:
+    #
+    # A script that runs another script based on a condition
+    # Magic: to pass extra definitions for your task just pass them along anyway.
+    # the extra values will be passed in order to your script to be called.
+    #
+    # requirement_check should be in the format 'player.is_sneaking'
+    # requirement_check should be in the format 'player.is_sprinting'
+    # requirement_check should be in the format 'el@<player.location.simple>.is[==].to[<def[last_location]>]'
+    #   # the last one should run a script that updates a definition that was the players last location
+    #   # and then whatever else you want done based on player last position
+    #
+    # the MAGIC here is how this searches for extra values passed to this script
+    # this catches any other values that are passed in order and passes those on to the script that's being called.
+    # any other arguments will be captured in order
+    #
+    type: task
+    definitions: requirement_check|script_to_run|check_delay|args
+    script:
+    - wait d@1t
+    - announce "<red><script.name><reset>  <parse:%requirement_check%>"
+    - while <%requirement_check%> {
+        - run <def[script_to_run]> def:<def[args].unescaped>
+        - wait <def[check_delay]>
+        }
+
+
+
+
+
+

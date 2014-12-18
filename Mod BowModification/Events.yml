@@ -1,0 +1,140 @@
+Player Bow Handling:
+    type: world
+    # Damage Calculations:
+    #  !crit and !crouching: (damage / armor) * base arrow damage
+    #  !crit and crouch: (damage * crouch / armor) * base arrow damage
+    #  crit and !crouch: (damage * crit / armor) * base arrow damage
+    #  crit and crouch: (damage * crit * crouch / armor) *base arrow damage
+    #
+    
+    constants:
+        crouch multi: 1.2
+        crit multi: 2.0
+        massive: 4.0
+        armor penalty: "0.5 - 2.0  anything above 1.5 = encumbered"
+        
+        arrow cost:
+            lignting: m@air
+            razor:
+            piercing:
+            explosive:
+            compression:
+            poison:
+            slow:
+            net:
+            fire:
+            doombringer:
+        
+        arrow cooldown:
+            lignting: 
+            razor:
+            piercing:
+            explosive:
+            compression:
+            poison:
+            slow:
+            net:
+            fire:
+            doombringer:
+    
+    events:
+    
+    
+##############################################################################################
+#Special Abilities? Changing the type of projectile when shot.
+        #<context.entity> returns the dEntity that shot the bow. 
+        #<context.projectile> returns a dEntity of the projectile. 
+        #<context.bow> returns the bow item used to shoot. 
+        #<context.force> returns the force of the shot.
+        
+        #determine
+        #  cancelled, <projectile>
+        on entity shoots bow:
+        -
+        
+        on <entity> shoots <item>:
+        -
+        
+        on entity shoots block:
+        -
+        
+        on entity damaged by arrow:
+        - If <context.projectile.location.y> >= <context.entity.eye_location.y.sub[-0.05]> && <context.projectile.location.y> <= <context.entity.eye_location.y.add[0.70]> {
+            - ^playeffect <context.entity.eye_location> effect:RED_DUST qty:10 offset:0.5     
+            - ^If <context.damager.is_player> Narrate targets:<context.damager> "<proc:Headshot>"
+            - ^If <context.entity.equipment.helmet> == null determine <math:<context.damage>*1.5>
+            } else {
+            - determine <math:<context.damage>*1.25>
+            }
+
+
+  
+#######################################################################################        
+#Breaking glass, ice, blocks with bows
+#Special Abilities: Lightning, Razor, Piercing, Explosive, Compression, Poison, Slow, Net, Fire, Doombringer
+
+        on entity shoots <material> (with <projectile>):
+        -
+        
+        on <entity> shoots block:
+        -
+        
+        on <entity> shoots <material> (with <projectile>):
+        -
+        
+ ###############################################################################   
+ #Breaking glass, ice, crumbling blocks with tools / weapons
+ #
+        #<context.animation>
+        on player animates:
+        
+        #<e@entity.item_in_hand>
+        on player animates ARM_SWING:
+        
+        # on player damages block 
+        # on player damages <material> 
+        # on player damages block in <notable cuboid> 
+        # on player damages <material> in <notable cuboid> 
+        
+        #<context.location> returns the dLocation the block that was damaged. 
+        #<context.material> returns the dMaterial of the block that was damaged. 
+        #<context.cuboids> returns a dList of notable cuboids which the damaged block is contained.        
+        
+##################################################################################        
+        # on entity damages entity 
+        # on entity damages <entity> 
+        # on entity damaged by entity 
+        # on entity damaged by <entity> 
+        # on <entity> damages entity 
+        # on <entity> damaged by entity 
+        # on <entity> damaged by <entity> 
+        # on <entity> damages <entity> 
+        
+        # <context.cause> returns the reason the entity was damaged. 
+        # <context.entity> returns the dEntity that was damaged. 
+        # <context.damage> returns the amount of damage dealt. 
+        # <context.damager> returns the dEntity damaging the other entity. 
+        # <context.projectile> returns the projectile, if one caused the event. 
+        
+        #"CANCELLED" to stop the entity from being damaged. 
+        #Element(Double) to set the amount of damage the entity receives.
+        
+
+
+
+
+#Determines the message to send on headshot
+'Headshot':
+  type: Procedure
+  script:
+  - if <context.entity.name> == "Spider"{
+    - random 3
+    - determine "Critical!"
+    - determine "Abdomen Shot!"
+    - determine "Nice Shot!"
+    } else {
+    - random 3
+    - determine "Boom! Headshot!"
+    - determine "That's gonna leave a mark!"
+    - determine "Headshot!"
+    }

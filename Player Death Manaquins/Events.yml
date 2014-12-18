@@ -1,0 +1,47 @@
+On Death Body Generation Event:
+    body_decay_time: d@10m
+    type: world
+    events:
+        on player death:
+        - create player <context.entity.name.display> <context.entity.location> save:body
+        - define npc <entry[body].created_npc>
+        - adjust <def[npc]> "set_assignment:s@dead body assignment"
+        - inventory swap d:<def[npc].inventory> o:<player.inventory>
+        - define time <script.yaml_keys[body_decay_time]>
+        - narrate "<red>You have <script.yaml_keys[body_decay_time].formatted> to get back to your body to get its loot."
+        - determine NO_DROPS_OR_XP
+        
+        #todo: mor
+        #on npc death:
+        #- determine NO_DROPS_OR_XP
+
+
+dead body assignment:
+    type: assignment
+    actions:
+        on assignment:
+        - define decay_time "<s@On Death Body Generation Event.yaml_keys[body_decay_time]>"
+        - flag npc date_of_death:<server.current_time_millis>
+        - flag npc deadbody
+        #- wait d@1s
+        - animate <npc> animation:sleep
+        - run remove def:<npc> delay:<def[decay_time]>
+        
+        #todo:
+        #right click loot
+        #shift right click pickup body
+        on click:
+        - define age_millis <server.current_time_millis.sub_int[<npc.flag[date_of_death]>]>
+        - narrate "The body appears to be <def[age_millis].div[1000].as_duration.formatted> old..."
+        - inventory open d:<npc.inventory>
+        
+        
+        on spawn:
+        - define decay_time "<s@On Death Body Generation Event>"
+        - if <util.date.time.duration.in_ticks.sub_int[<def[decay_time].in_ticks>].is[or_more].than[<npc.flag[date_of_death]>]>
+          remove <npc>
+        
+        on remove:
+        - announce "The body of <npc.name> is decaying."
+        #maybe one day put a gravestone there with a chest underneath with date and name and reason of death
+        # Gravestone? maybe a temp gravestone then....

@@ -1,0 +1,19 @@
+Announcement Bar:
+    type: world
+    debug: false
+    individual: "welcome to <green>Vessel Craft"
+    server:     "has returned. Give them a big welcome back."
+    farewell:   "Thanks for playing"
+    
+    events:
+        on player join:
+        - wait d@2s
+        - if !<player.is_online||false> queue clear
+        - define individual_greet       "<player.name.display>, <script.yaml_key[individual]>"
+        - define server_announcement    "<player.name.display> <script.yaml_key[server]>"
+        - define other_players          <server.list_online_players.exclude[<player>]>
+        
+        #This has issues with the <player> reference as its not trimming the extra spaces in the script...
+        #todo: tell mcmonkey about the adding spaces in your list causes invalid player tag recognition...
+        - run "Boss Bar" def:<def[individual_greet]>|<player>|0|d@3t
+        - run "Boss Bar" def:<def[server_announcement]>|<def[other_players].escaped>|0|d@3t

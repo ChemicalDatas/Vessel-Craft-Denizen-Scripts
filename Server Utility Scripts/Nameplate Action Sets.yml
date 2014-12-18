@@ -1,0 +1,183 @@
+#A set of procedures designed to manipulate whole sets of entities that have to do with nameplates
+
+
+"Nameplate Attractor":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # The name plate attractor is the invisible npc that handles                                                                #
+    # The players linkages to their display                                                                                     #
+    # This is the buffer zone in between directly handling the displays them selves                                             #
+    # This also allows displays to not be anchored to a single location, but attached to a                                      #
+    # movable server trackable object. Intractable object.                                                                      #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # Usage ideas are having the display follow the player                                                                      #
+    # Chat interaction with the display                                                                                         #
+    # Hit interactions                                                                                                          #
+    # on push interaction                                                                                                       #
+    # Return interaction                                                                                                        #
+    #                                                                                                                           #
+    # Mob proximity actions                                                                                                     #
+    # Player proximity interactions                                                                                             #
+    #                                                                                                                           #
+    # on_damage interaction: local explosions, drown?                                                                           #
+    # Complete navigation screen flashing                                                                                       #
+    # Begin navigation screen minimise                                                                                          #
+    #                                                                                                                           #
+    # Unavailable Reactions                                                                                                     #
+    #                                                                                                                           #
+    # Proximity Actions including                                                                                               #
+    #    vanish                                                                                                                 #
+    #    wave                                                                                                                   #
+    #    narration of display items                                                                                             #
+    #    display visibility                                                                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    
+    type: assignment
+    debug: false
+    default constants:
+        anchor: "curent_wander_location"
+        speed: .65
+        delay: d@1s-10s
+        range: 10
+        owner: Server
+        
+        
+        
+    # interact scripts:
+    # - 0 Nameplate Menu Interaction
+
+    actions:
+        on spawn:
+        - execute as_npc "npc owner <player.name>"
+        - execute as_npc "npc select <npc.id>"
+        - execute as_npc "npc playerlist"
+        - invisible npc state:true
+        
+        on assignment:
+        - trigger name:chat state:true 
+        - trigger name:click state:true
+        - trigger name:proximity state:true radius:6 cooldown:20
+
+        on chat:
+        - if !"<proc[Player is Owner]>" queue clear
+        - chat "<blue>Creating Display: <reset>'<context.message>'"
+        - run "Attractor Spawn Display" "def:<context.message>"
+        
+        on begin navigation:
+        - chat "Your display started navigation" no_target
+        - invisible npc state:true
+        - flag npc is_moving:true
+        - narrate "testing " to_console
+        - run "Conditional Repeated Task Call" "def:Move Display|d@1t|npc.flag[is_moving]|==|true"
+        - chat "<npc.flag[is_moving]>" no_target
+        
+        on complete navigation:
+        - chat "Your display met its location" no_target
+        - invisible npc state:false
+        - flag npc is_moving:false
+        
+        on cancel navigation:
+        - chat "Canceled Navigation!" no_target
+        - invisible npc state:false
+        - flag npc is_moving:false
+        
+        on click:
+        - if <player.is_op> {
+            - narrate "Toggling invisibility now."
+            - invisible npc state:toggle
+            }
+        
+        #- if "<proc[Player is Owner]>" {
+        #    - chat "Your display is following you!" no_target
+        #    - walk <npc> <player.location> auto_range radius:20
+        #    }
+    
+# "Nameplate Menu Interaction":
+    # type: Interact
+    # steps:
+        # "default":
+            # click Trigger:
+                # script:
+                # -
+
+
+"Flash Display":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    speed: 2s
+    definitions: num_flashes
+    script:
+    - repeat <def[num_flashes]> {
+        - cast invisibility duration:1 <npc.flag[displays].as_list>
+        - narrate "cycling"
+        }
+
+
+"Move Display":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A script that moves the display entities to its current location                                                          #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #A script that moves the display entities to its current location
+    type: task
+    script:
+    - ^define display_type "<proc[Attractor Display Type]>"
+    - ^define display_location "<npc.location.add[0,<def[display_type]>,0]>"
+    - teleport <npc.flag[displays].as_list> <def[display_location]>
+    
+
+
+
+"Attractor Display Type":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A script returns the display height adjustment for visibility. Returns a int for height.                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    script:
+    - define display_type <tern[<npc.name.contains[personal]>]:personal||server>
+    - determine "<s@Display Defaults.constants[constants.display <def[display_type]>]>"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

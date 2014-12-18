@@ -1,0 +1,138 @@
+
+"Modify Words":
+    #Takes a list of words and replaces them with values from matching keys
+    #in script Global Word Replace.yml
+    type: procedure
+    definitions: words
+    script:
+    #- narrate "<&nl><&nl><&nl>"
+    #- narrate "before modification: <def[words]>"
+    - define words "<def[words].split[ ]>"
+    #- narrate "modifying words: <def[words]>"
+    
+    #to escape the period for the yaml lookup
+    - define period "."
+    - define codedperiod "`period`"
+    
+    - foreach <def[words]> {
+        - if <def[words].contains[<def[period]>]> {
+            - define words "<def[words].replace[<def[period]>].with[<def[codedperiod]>]>"
+            }
+            
+        - define replacement "<s@kvreplacement.constant[key.<def[value]>]>"
+        - if <def[replacement]> != null {
+            - define words <def[words].replace[<def[value]>].with[<def[replacement]>]>
+            }
+        }
+    #- narrate "Words after replacement: <def[words]>"
+    
+    - define words "<def[words].as_string>"
+    #- narrate "Words after string-ization: <def[words]>"
+    
+    - define words "<def[words].replace[li@]>"
+    - define words "<def[words].replace[<def[codedperiod]>].with[<def[period]>]>"
+    #- narrate "Words cleanup: <def[words]>"
+    
+    - determine <def[words]>
+    
+
+
+"Modify Words v2":
+    #Searches for only 1 word in braces to replace with an icon.
+    type: procedure
+    definitions: words
+    script:
+    - if "<el@<def[words]>.last_index_of[<&rb>]>" >= 1 {
+        - define end "<el@<def[words]>.last_index_of[<&lb>]>"
+        - if "<el@<def[words]>.last_index_of[<&lb>]>" >= 1 {
+            - define start "<el@<def[words]>.last_index_of[<&lb>]>"
+            - define word_to_replace "<el@<def[words]>.substring[<def[start]>,<def[end]>]>"
+            
+            - define period "<&dot>"
+            - define codedperiod "`period`"
+            
+            - if <def[word_to_replace].contains[<def[period]>]> {
+                - define words "<def[word_to_replace].replace[<def[period]>].with[<def[codedperiod]>]>"
+                }
+                
+            - define replacement  "<s@kvreplacement.constant[key.<def[word_to_replace]>]>"
+            - if <def[replacement]> != null {
+                - define words <def[words].replace[<def[word_to_replace]>].with[<def[replacement]>]>
+                }
+                
+            - if <def[words].contains[<def[codedperiod]>]> {
+                - define words "<def[words].replace[<def[codedperiod]>].with[<def[period]>]>"
+                }
+            }
+        }
+    - determine <def[words]>
+    
+
+
+"Modify Words v3":
+    #Searches for only 1 word in brackets to replace with an icon.
+    type: procedure
+    definitions: words
+    script:
+    #Could use denizen escaping characters here
+    #or yaml escaping characters here
+    #Either way  denizen escaping characters are more likely to work in all scripts using those variables
+    #Yaml:   then add a / in front of them / [ / ]
+    #denizen: <&lb> <&rb>
+    - define replaceme "<proc[Letters Within].context[<def[words]>|<&rb>|<&lb>]>"
+    
+    #if there is a word that the users desires to replace. Search for that replacement in the kvreplacements script. 
+    #The 'determine word replacement' script gives the replacement if found or the same word.
+    
+    - if <def[replaceme]> != '' {
+        - define replacement "<proc[Determine Word Replacement].context[<def[replaceme]>]>"
+        - determine "<def[words].replace[<def[replaceme]>].with[<def[replacement]>]>"
+        }
+    #if nothing is found
+    - determine <def[words]>
+    
+
+
+
+"Modify Words v4":
+    #Using recursive calls
+    #Searches for all bracketed words to find replacement icons
+    #Allthough it searches all brackets. and Replaces them all. The error is if it finds
+    #A bracket that dosnt have a match for it. Then it just keeps searching that bracket over and over again.
+    
+    type: procedure
+    definitions: words
+    script:
+    
+    - define replaceme "<proc[Letters Within].context[<def[words]>|<&rb>|<&lb>]>"
+    
+    #need some sort of escaping for [] that didnt get replaced
+    #See determine pair locations and djistras stack componet for ideas
+    
+    - if <def[replaceme]> != '' {
+        - define replacement "<proc[Determine Word Replacement].context[<def[replaceme]>]>"
+        - if <def[replacement].contains[]>
+        - define set "<def[words].replace[<def[replaceme]>].with[<def[replacement]>]>"
+        - determine "<proc[Modify Words v4].context[<def[set]>]>"
+        } else {
+        - determine <def[words]>
+        }
+    
+
+
+
+"Modify Words v5":
+    #Using recursive calls
+    #Searches for all bracketed words to find replacement icons
+    type: procedure
+    definitions: words
+    script:
+    - define replaceme "<proc[Letters Within].context[<def[words]>|<&rb>|<&lb>]>"
+    - if <def[replaceme]> != '' {
+        - define replacement "<proc[Determine Word Replacement].context[<def[replaceme]>]>"
+        - define set "<def[words].replace[<def[replaceme]>].with[<escape:<def[replacement]>>]>"
+        - determine "<proc[Modify Words v5].context[<def[set]>]>"
+        } else {
+        - determine <def[words].unescaped>
+        }
+    

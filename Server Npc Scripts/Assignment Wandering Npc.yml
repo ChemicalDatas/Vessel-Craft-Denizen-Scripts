@@ -1,0 +1,90 @@
+"Npc Vagrant":
+    #This script depends on the constants assigned.
+    #When you click on the npc he will then set that location as an anchor. 
+    #Then wander around it from time to time.
+    debug: false
+    type: assignment
+    default constants:
+        greeting: "Good day sir!"
+        anchor: "curent_wander_location"
+        #Only gets set on spawn....
+        speed: .65
+        delay: d@1s-10s
+        range: 10
+        sleep_time: d@1s-10s
+        task_reschedule: d@1m-2m
+        
+        #refrences the type of work 'scheduler' for the npc.
+        #Types of personal schedulers too.
+        occupation: Vagrant
+        #Could be: blacksmith, king, fisherman, bandit, thief, apothecary, scribe, 
+        #librarian, mage, enchanter, craftsman, farmer, merchant, inn_keeper, guard, royal_guard
+        #Priest, hunter, miner, logger, information_and_service (server use)
+    
+    actions:
+        on assignment:
+        - chat "I am now wandering arround this location."
+        - anchor add <npc.location> "id:<npc.constant[anchor]>"
+        
+        on enter proximity:
+        - run "Show Npc Task Queue"
+        
+        on complete navigation:
+        - run "Npc Task Execute" delay:<npc.constant[delay]>
+        
+        on cancel navigation:
+        #Reschedule Previous Task to see it completed.
+        #Add some countdown for retries to get there.
+        #Else find a fall back method.
+        - run "Npc Task Execute" delay:<npc.constant[delay]>
+        
+        on spawn:
+        - run "Npc Task Execute" delay:<npc.constant[delay]>
+        
+    
+        #This is just a debug input. This will be removed.
+        on chat:
+        #Used to add a queue item to the npcs task
+        - flag npc task_queue:->:<context.message>
+        - chat "I added to my task_queue: <context.message>"
+        - chat "My next task is: <npc.flag[task_queue]>"
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

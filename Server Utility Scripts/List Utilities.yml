@@ -1,0 +1,423 @@
+#info: This is a set of scripts designed for list manipulation.
+#Beware that they might not accept a list or output one though.
+
+Compress Arguments:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This compresses many arguments into 1 argument.                                                                           #
+    # so the value can be passed on to a procedure with 1 definition for a list.                                                #
+    # This can handle AS MANY arguments as you pass to it.                                                                      #
+    # This can be extended as needed.                                                                                           #
+    #                                                                                                                           #
+    # warning: This dose not preserve the order of the arguments passed to it...                                                #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    script:
+    - foreach <queue.definitions> {
+        - define argument_list "<proc[List Append Right].context[<def[argument_list]||li@>|<def[value]>]>"
+        }
+    - determine <def[argument_list].unescaped>
+
+
+    
+"Append Left":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # notice: Be ware of what this takes in the form of a single string, not a list                                         #
+    # This also outputs a single string as well.                                                                                #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: value|string
+    script:
+    - if %string% = '' || %string% = null {
+        - determine "%value%"
+        } else {
+        - determine "%value% %string%"
+        }
+
+
+"Append Right":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # notice: Be ware of what this takes in the form of a single string, not a list                                         #
+    # This also outputs a single string as well. Its up to the user to convert it back with                                     #
+    # <el@%string%.split[ ]>                                                                                                    #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: string|value
+    script:
+    - if %string% = '' || %string% = null {
+        - determine "%value%"
+        } else {
+        - determine "%string% %value%"
+        }
+
+
+"Pop Right":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Re-alters the definition to exclude the right most item.                                                                   #
+    # and returns that item                                                                                                     #
+    # info: splitting_character is optional as with out it, this defaults to a space to split the string into a list.           #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #   - define instruction_stack "left right left forward"                                                                    #
+    #   - define next_instruction "<proc[Pop Right].context[instruction_stack]>"                                                #
+    #                                                                                                                           #
+    #   #instruction_stack now contains: "left right left"                                                                      #
+    #   #and next_instruction contains: "forward"                                                                               #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: definition_name|splitting_character
+    script:
+    - if !<def[splitting_character].exists> {
+        - define target_index "<el@%definition_name%.last_index_of[ ]>"
+        } else {
+        - define target_index <el@%definition_name%.last_index_of[%splitting_character%]>
+        }
+    - define last_index el@<%definition_name%.length>
+    - define return def[definition_name].substring[%target_index%,%last_index%]>
+    - define definition_name <def[definition_name].substring[1,<def[target_index].sub[1]>]>
+    - determine %return%
+    
+
+"Pop Left":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Re-alters the definition to exclude the left most item.                                                                   #
+    # and returns that item                                                                                                     #
+    # notice: This requires a string of a pre-defined definition....                                                        #
+    # info: splitting_character is optional as with out it, this defaults to a space to split the string into a list.           #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #   - define instruction_stack "left right left forward"                                                                    #
+    #   - define next_instruction "<proc[Pop Left].context[instruction_stack]>"                                                 #
+    #                                                                                                                           #
+    #   #instruction_stack now contains: "right left forward"                                                                   #
+    #   #and next_instruction contains: "left"                                                                                  #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: definition_name|splitting_character
+    script:
+    - if !<def[splitting_character].exists> {
+        - define target_index "<el@%definition_name%.index_of[ ]>"
+        } else {
+        - define target_index <el@%definition_name%.index_of[%splitting_character%]>
+        }
+    - define last_index el@<%definition_name%.length>
+    - define return <el@%definition_name%.substring[1,%target_index%]>
+    - define %definition_name% <def[definition_name].substring[<def[target].add[1]>,%last_index%]>
+    - determine %return%
+    
+
+List Append Right:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Takes an escaped <escape:iterable>                                                                                        #
+    # Takes a value to append to that iterable (can be another list :)   )                                                      #
+    # Returns a list                                                                                                            #
+    # notice: This escapes the return value. Youll NEED TO <unescape:> or <element.unescaped>IT FIRST!                          #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #   - define griefer_list <p@chemical_Datas>|<p@calico-kid>|<p@ghost_bawb>|<p@noobzilla>                                    #
+    #   - foreach <def[griefer_list].as_list> {                                                                                 #
+    #       - if !<def[value].is_op> {                                                                                          #
+    #          - define bad_list "<proc[List Append Right].context[<def[bad_list]||li@>|<def[value]>]>"                         #
+    #          }                                                                                                                #
+    #       }                                                                                                                   #
+    #  #in some other script that recieved a list from this.....                                                                #
+    #   - foreach <def[bad_list].unescaped> {                                                                                   #
+    #        - execute as_server "ban <def[value].name>"                                                                        #
+    #        }                                                                                                                  #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: iterable|value
+    script:
+    - define iterable <def[iterable].unescaped||none>
+    - if <def[iterable]> == none {
+        - determine <def[value].escaped||<li@.escaped>>
+        } else {
+        - determine <def[iterable].as_list.include[<def[value].unescaped||li@>].escaped>
+        }
+
+
+Transform List:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # The idea is that it takes a list then a string to apply to each element in that list                                      #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #  <server.list_online_ops>  | name                                                                                         #
+    # turns it into a list of player names                                                                                      #
+    # ex:                                                                                                                       #
+    #  define op_locations "<proc[Transform List].context[''|<escape:<server.list_online_ops>>|location]>"                      #
+    # instead of:                                                                                                               #
+    #  - foreach <server.list_online_ops> {                                                                                     #
+    #        - define op_locations "<proc[List Append Left].context[<escape:list>|<%value%.location>]>"                         #
+    #        }                                                                                                                  #
+    #                                                                                                                           #
+    # - define name_length "<proc[Transform List].context[<escape:el@>|<escape:<server.list_online_players>>|length]>"          #
+    # instead of:                                                                                                               #
+    #  - foreach <server.list_online_players> {                                                                                 #
+    #        - define op_locations "<proc[List Append Left].context[<escape:list>|<el@%value%.length>]>"                        #
+    #        }                                                                                                                  #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: precursor|list|transformer
+    script:
+    - define precursor "<def[precursor].unescaped||>"
+    - foreach <def[list].unescaped.as_list> {
+        - define new_value <%precursor%%value%.%transformer%>
+        - define return "<proc[List Append Right].context[<def[return]||li@>|%new_value%]>"
+        }
+    - determine <def[return].unescaped>
+
+tlist:
+    type: procedure
+    script:
+    - define locations "<proc[Transform List].context[|<server.list_online_players.escaped>|location|]>"
+    - determine "<proc[Transform List].context[|<def[locations].escaped>|simple|]>"
+    
+
+
+"List Append Left":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Takes an escaped <escape:iterable>                                                                                        #
+    # Takes a value to append to that iterable                                                                                  #
+    # Takes a value to append to that iterable (can be another list :)   )                                                      #
+    # Returns a list                                                                                                            #
+    # notice: This escapes the return value. Youll NEED TO <unescape:> IT FIRST!                                             #
+    #                                                                                                                           #
+    # Differs in convention from List Append Right in that this provides the 'li@' in its finished produce.                     #
+    # Mainly because if the iterable is a "li@" it automaticaly strips it. I might change this in the future to maintain        #
+    # convention                                                                                                                #
+    #                                                                                                                           #
+    #############################################################################################################################
+    debug: false
+    type: procedure
+    definitions: value|iterable
+    script:
+    - define iterable "<unescape:%iterable%>"
+    - if %iterable% == '' || %iterable% == null {
+        - determine "<escape:li@%value%>"
+        } else {
+        - determine "<escape:li@%value%|<el@%iterable%.substring[4]>>"
+        }
+    
+
+
+
+
+#this script is an idea, if you use it it might not work as intended.
+"Index In":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # THIS SCRIPT IS AN IDEA, A WIP AND SHOULD BE TESTED AND MODIFIED BEFORE USE                                                #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # Mimics pythons range object.                                                                                              #
+    # Takes a escaped element (an element that returns a number) and returns another iterable                                   #
+    # containing numbers up to the max of iterable.                                                                             #
+    # usable like this:                                                                                                         #
+    # - foreach <proc[Index_In].context[%large_list%]> {                                                                        #
+    #     - define val1 <%list1%.get[%value%]>                                                                                  #
+    #     - define val2 <%list2%.get[%value%]>                                                                                  #
+    #     - flag player list_of_tuples:->:li@%val1%|%val2%                                                                      #
+    # Like performing a repeat with a passed value of the size of the object                                                    #
+    # notice: can run into problems if theres a list of elements with any of the items in it.                               #
+    # notice: This requires the escaped_sizeable to be in <escape:> tags.                                                   #
+    # todo: finish me                                                                                                       #
+    #                                                                                                                           #
+    # works with cuboids in a cuboid                                                                                            #
+    # works with how many items can fit in a stack                                                                              #
+    # works with size of a list                                                                                                 #
+    # works with size of a inventory (5, 9, 27, 54) I think....                                                                 #
+    # works with size of a queue                                                                                                #
+    # works with amount of faction land                                                                                         #
+    # works with blocks a town owns                                                                                             #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: escaped_sizeable
+    script:
+    - define sizeable                       <def[sizeable].unescaped>
+    - if <def[sizeable].abs> != null        define access_attribute ""
+    - if <def[sizeable].contains[cu@]>      define access_attribute "members_size"
+    - if <def[sizeable].contains[m@]>       define access_attribute "max_stack_size"
+    - if <def[sizeable].contains[li@]>      define access_attribute "size"
+    - if <def[sizeable].contains[in@]>      define access_attribute "size"
+    - if <def[sizeable].contains[q@]>       define access_attribute "size"
+    - if <def[sizeable].contains[faction@]> define access_attribute "size"
+    - if <def[sizeable].contains[town@]>    define access_attribute "size"
+    - define max_size <def[sizeable].<def[access_attribute]>>
+    - repeat <def[max_size]> {
+        - define range_object "<proc[List Append Right].context[<def[range_object]||li@>|<def[value]>]>"
+        }
+    - determine <def[range_object].unescaped>
+    
+"Resolvable Index In":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # THIS SCRIPT IS AN IDEA, A WIP AND SHOULD BE TESTED AND MODIFIED BEFORE USE                                                #
+    #                                                                                                                           #
+    # Mimics pythons range object.                                                                                              #
+    # Takes a resolvable element (an element that returns a number) and returns another iterable                                #
+    # containing numbers up to the max of iterable.                                                                             #
+    # usable like this:                                                                                                         #
+    # - foreach <proc[Index_In].context[%large_list%]> {                                                                        #
+    #     - define val1 <%list1%.get[%value%]>                                                                                  #
+    #     - define val2 <%list2%.get[%value%]>                                                                                  #
+    #     - flag player list_of_tuples:->:li@%val1%|%val2%                                                                      #
+    # Like performing a repeat with a passed value of the size of the object                                                    #
+    # todo: finish me                                                                                                        #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: resolvable_sizeable
+    script:
+    - define sizeable <%resolvable_sizeable%>
+    - if <def[sizeable].abs> != null        define access_attribute ""
+    - if <def[sizeable].contains[cu@]>      define access_attribute "members_size"
+    - if <def[sizeable].contains[m@]>       define access_attribute "max_stack_size"
+    - if <def[sizeable].contains[li@]>      define access_attribute "size"
+    - if <def[sizeable].contains[in@]>      define access_attribute "size"
+    - if <def[sizeable].contains[q@]>       define access_attribute "size"
+    - if <def[sizeable].contains[faction@]> define access_attribute "size"
+    - if <def[sizeable].contains[town@]>    define access_attribute "size"
+    - define max_size <def[sizeable].<def[access_attribute]>>
+    - repeat <def[max_size]> {
+        - define range_object "<proc[List Append Right].context[<def[range_object]||li@>|<def[value]>]>"
+        }
+    - determine <def[range_object].unescaped>
+
+
+"Index In Range":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Mimics pythons range object. This is dose not contain YIELD. So it generates the whole list before moving on.             #
+    # Takes an int and returns another iterable                                                                                 #
+    # containing numbers up to the max size of int.                                                                             #
+    # usable like this:                                                                                                         #
+    # - foreach <proc[Index_In_Range].context[%int%]> {                                                                         #
+    #     - define val1 <%large_list%.get[%value%]>                                                                             #
+    #     - define val2 <%large_list2%.get[%value%]>                                                                            #
+    #     - flag player list_of_tuples:->:li@%val1%|%val2%                                                                      #
+    #     }                                                                                                                     #
+    # Like Performing a repeat with an known int to pass to it.                                                                 #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: int
+    script:
+    # Could be performed using a while loop checking
+    - repeat <def[int]> {
+        - define range_object "<proc[List Append Right].context[<def[range_object]||li@>|<def[value]>]>"
+        }
+    - determine <def[range_object].unescaped>
+    
+
+"Reverse Index In Range":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Takes an int and returns another iterable                                                                                 #
+    # containing numbers counting down from the max size of int.                                                                #
+    # usable like this:                                                                                                         #
+    # - foreach <proc[Reverse_Index_In_Range].context[%int%]> {                                                                 #
+    #     - define val1 <%large_list%.get[%value%]>                                                                             #
+    #     }                                                                                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: int
+    script:
+    # Could be performed using a while loop checking
+    # define index 1
+    # while <el@%index%.is[or_more].than[%int%]>
+    - repeat <def[int]> {
+        - define range_object "<proc[List Append Left].context[<def[value]>|<def[range_object]||li@>]>"
+        }
+    - determine <def[range_object].unescaped>
+    
+
+"Random Index In Range":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Takes an int and returns another iterable                                                                                 #
+    # containing numbers counting down from the max size of int.                                                                #
+    # usable like this:                                                                                                         #
+    # - define random_index <proc[Random_Index_In_Range].context[10]>                                                           #
+    # - foreach %random_index% {                                                                                                #
+    #   -narrate %value%                                                                                                        #
+    #   }                                                                                                                       #
+    # -> 4,7,2,9,8,1,3,6,5,10                                                                                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: int
+    script:
+    - define bag "<proc[Index In Range].context[<def[int]>]>"
+    - repeat <def[int]> {
+        - define index <util.random.int[1].to[<def[bag].size>]>
+        - define next_item <def[bag].get[<def[index]>]>
+        - define bag <def[bag].exclude[<def[next_item]>]>
+        - define range_object "<proc[List Append Right].context[<def[range_object]||li@>|<def[next_item]>]>"
+        }
+    - determine <def[range_object].unescaped>
+    
+#
+
+"Modify Index":
+    #Takes a modifies an index of the supplied list with the value.
+    #This would be quicker if put in else if {} statments.... but this looks nicer
+    #todo: if needed make quicker....
+    type: procedure
+    definitions: list|index|value
+    script:
+    - define list <def[list].unescaped>
+    - define new_list <def[list].remove[<def[index]>]>
+    - determine <def[new_list].insert[<def[value]>].at[<def[index]>]>
+    
+
+
+
+
+
+"Get indexes of Occurrence":
+    type: procedure
+    definitions: list|target|current_occurrance_list
+    script:
+    - define list <def[list].unescaped>
+    - if !<def[list].is_empty> determine <def[current_occurrance_list]>
+    - define current_occurrance_list <def[current_occurrance_list].unescaped>
+    -
+    - define remaining_elements_to_check "<un>"
+    - define occurrance_list "<proc[List Append Right].context[<def[occurrance_list]||li@>|%%]>"
+    - if <def[found_occurance]> {
+        - define run_again "<proc[Get Indexes of Occurrence].context[%list%|%target%|%current_occurrance_list%]>"
+        }
+
+
+
+
+
+
+

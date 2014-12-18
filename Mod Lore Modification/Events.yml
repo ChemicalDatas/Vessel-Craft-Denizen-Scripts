@@ -1,0 +1,92 @@
+Lore Modification Event Detection:
+    type: world    
+    restricted_actions: "MOVE_TO_OTHER_INVENTORY"
+    suspicious_actions: "PICKUP_ALL PICKUP_HALF PICKUP_ONE PICKUP_SOME PLACE_ALL PLACE_ONE PLACE_SOME SWAP_WITH_CURSOR"
+    ignored_inventory_types: li@workbench
+    events:
+        on player clicks in inventory:
+        - define inventory <context.inventory>
+        - define slot <context.raw_slot>
+        - define item <context.item||i@air>
+        - if <context.inventory> == <player.inventory> queue clear
+        - if <def[item]> == i@air queue clear
+        
+        #todo: sometimes these numbers dont matter when it comes to unusual inventorys like...
+        # furnaces | potion stands 
+        - if <def[slot].is[or_more].than[27]> 
+          || <def[slot].is[or_less].than[0]> queue clear
+        
+        #checking if the inventorys owner is the player or nobody. if either don't need to proceed
+        - if <def[inventory].inventory_type> == workbench queue clear
+        - if <def[inventory].inventory_type> == chest {
+            - define location <def[inventory].location>
+            - define owner "<proc[Get Location Property].context[<def[location]>|owner]>"
+            - if <def[owner]> == null 
+              || <def[owner]> == <player.name> queue clear
+            }
+        - if <def[inventory].type> == player {
+            - define owner "<def[inventory].id_holder.name>"
+            }
+        
+        
+        - if <script.yaml_keys[restricted_actions]> contains <context.action> {
+            - event "player steals item" context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determination
+            }
+        - if <script.yaml_keys[suspicious_actions]> contains <context.action> {
+            - event "player steals item" context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determination
+            }
+            
+        
+        
+        - define results <entry[determination].determination> 
+        - if <def[results]> == cancelled determine cancelled
+        - determine passively cancelled
+        
+        - take <def[item]> from:<def[inventory]> qty:<def[item].qty>
+        - give <def[results]>
+        
+        
+        on player drags in inventory:
+        #- announce "<yellow>Drags in inventory: <context.inventory.type>"
+        
+        on player steals from player:
+        -
+        
+        on player steals item:
+        - define item <context.item>
+        - define old_lore "<def[item].lore||>"
+        - define new_lore "<proc[List Append Right].context[<def[old_lore]>|<red>stolen from <context.owner||Unknown>]>"
+        - determine "<proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>"
+    
+        #player cant be looking at player
+        #behind
+        #distance restricted
+        #player seen closes down menu
+        #player gets hit it confuses them
+        #random item on click
+        #or selected item on click
+        #random amounts from inventory
+        # stack from click
+        #Success rate popup when the player shift clicks another target in the distanace?
+        
+        #on player right clicks npc:
+        #- narrate "Opening npc inventory..."
+        #- inventory open d:<context.entity.inventory>
+        
+        on player right clicks player:
+        - narrate "trying to open <context.entity.name>'s inventory"
+        - inventory open d:<context.entity.inventory>
+
+
+"Modify Lore":
+    #
+    # Takes a ditem or stack and returns an modified item or stack with the lore_list added
+    #
+    type: procedure
+    definitions: item_list|lore_list
+    script:
+    #expect an item or a ditem stack
+    - define lore_list <def[lore_list].unescaped>
+    - define item_list <def[item_list].unescaped>
+    - adjust <def[item_list]> lore:<def[lore_list]> save:item
+    - determine <entry[item].result>

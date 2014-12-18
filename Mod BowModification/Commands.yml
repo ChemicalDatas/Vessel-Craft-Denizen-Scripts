@@ -1,0 +1,26 @@
+# A set of commands for player bow modifications
+
+Mod Bow Modification Commands:
+    type: world
+    message:
+        _permission denied: "<gold>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
+    
+    allowed_groups:
+    - Owner
+    - Admin
+    - MasterBuilder
+    - Moderator
+    - Builder
+    
+    is permitted:
+    - define groups <script.yaml_key[allowed_groups]>
+    - if "!<proc[In Allowed Group].context[<def[groups].escaped>]>" {
+        - narrate format:Formatted "<script.yaml_key[message._permission denied]>"
+        - queue clear
+        }
+    
+    events:
+        
+        on vc-test_dummy_command command:
+        -
+   

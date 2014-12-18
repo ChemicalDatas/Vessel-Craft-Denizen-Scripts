@@ -1,0 +1,52 @@
+#info: A Set of signs set up for analysis of signs for player npc interaction.
+
+
+
+#Designed specificaly for the event as the sign dose not register with a
+#contents untill after accepted by bukkit    
+"hasNpcCommandSignature":
+    type: procedure
+    definitions: signature
+    script:
+    - define command_text "[npc]"
+    - if %signature% contains %command_text% {
+        - determine true
+        } else {
+        - determine false
+        }
+    
+
+
+#Takes a location where a sign is at. Returns true if its a npc command sign    
+"isNpcCommandSign":
+    type: procedure
+    definitions: location
+    script:
+    - define command_text "&lbnpc&rb"
+    - define words <%location%.sign_contents>
+    - if <%words%> contains <%command_text%> {
+        - determine true
+        } else {
+        - determine false
+        }
+    
+
+
+#Takes a location and a string to look for. Returns a list of signs
+"Relevant Sign Search":
+    type: procedure
+    definitions: location|comparable|distance
+    script:
+    - if %distance% == null define distance 20
+    - define sign <location.find.blocks[63|68].within[%distance%]>
+    - foreach %sign% {
+        - define sign_contents <%value%.sign_contents.escaped>
+        - if %sign_contents% contains %comparable% {
+            - define sign_list "<proc[List Append Right].context[<def[sign_list]||li@>|%value%]>"
+            }
+        }
+    - narrate "[<script.name>]: Rel sign search: <unescape:%sign_list%>"
+    - determine "<unescape:%sign_list%>"
+    
+
+

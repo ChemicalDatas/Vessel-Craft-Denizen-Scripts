@@ -1,0 +1,28 @@
+"Player Chat Clearing":
+    type: task
+    debug: false
+    definitions: num_repeats
+    script:
+    - narrate "Clearing Chat"
+    - repeat <def[num_repeats]> {
+        - narrate ""
+        }
+    
+"Server Chat Clearing":
+    type: task
+    debug: false
+    definitions: num_repeats
+    script:
+    - repeat <def[num_repeats]> {
+        - announce ""
+        }
+
+"Global Chat Clearing":
+    type: task
+    debug: false
+    definitions: num_repeats
+    script:
+    - repeat <def[num_repeats]> {
+        - execute as_server say ""
+        }
+    

@@ -1,0 +1,65 @@
+# Script that adds extra drops to broken blocks based on player flags
+# Needs event resolution flag 
+
+
+Player Flagged Bonuses:    
+    #Player flags contains the data to determine block bonuses
+    #break_"material": threshold|out_of|item_to_drop|amt_to_drop
+    #flagname:
+    #   Each line is a new item to determine if it drops.
+    #   - thresh|out_of|item_to_drop|amt_to_drop
+    #   - 1     | 1000 | i@diamond  | 1
+    #   - thresh|out_of|item_to_drop|range
+    #   - 1     | 1    | i@coal     | 1-4
+    type: world
+    debug: false
+    events:
+        on player breaks block:
+        - determine  "<proc[Bonus Handling].context[break_<context.material.name>|<player>]>"
+        
+        on entity dies:
+        - determine  "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
+        
+    
+
+#Searches for an event resolution in the players flagged data
+Bonus Handling:
+    # This builds an dlist of items for the drop command to handle
+    type: procedure
+    debug: false
+    definitions: flag|actor
+    script:
+    - define drop_list li@
+    - if <def[actor].has_flag[<def[flag]>]> {
+        - repeat <def[actor].flag[<def[flag]>].size> {
+            - define item_set <def[actor].flag[<def[flag]>].get[<def[value]>]>
+            - define thresh <li@<def[item_set]>.get[1]>
+            - define out_of <li@<def[item_set]>.get[2]>
+            - define bonus <li@<def[item_set]>.get[3]>
+            - define amt <li@<def[item_set]>.get[4]>
+            - define amt "<proc[Random Range].context[<def[amt]>]>"
+            
+            - if "<proc[Threshold Random Success].context[<def[thresh]>|<def[out_of]>]>" {
+                - repeat <def[amt]> {
+                    - define drop_list "<proc[List Append Right].context[<def[drop_list]||li@>|<def[bonus]>]>"
+                    }
+                }
+            - define drop_list <def[drop_list].unescaped>
+            }
+        }
+    - if <def[drop_list].is_empty> determine NO_DROPS_OR_XP
+    - determine <def[drop_list]>
+    
+#
+
+
+
+
+
+
+
+
+
+
+
+

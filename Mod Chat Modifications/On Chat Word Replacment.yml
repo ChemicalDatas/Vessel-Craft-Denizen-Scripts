@@ -1,0 +1,44 @@
+Player Word Replacement:
+    # There is 1 character that can mess the whole line up.
+    # that is the back-slash: '\'
+    # in denizen its an character that was added after <escape:<def[your thing]>>.
+    #
+    path: "../../../Vessel Craft SAI/Database/Word Replacement Database.yml"
+    id: word_replacement
+    type: world
+    events:
+        on server start:
+        - define path <script.yaml_keys[path]>
+        - define id <script.yaml_keys[id]>
+        - run "Yaml Load" def:<def[path]>|<def[id]>
+        
+        on player chats:
+        - determine "<proc[Iconize].context[ <context.message.replace[\]> ]>"
+        
+        on reload_database command:
+        - determine passively fulfilled
+        - define path <script.yaml_keys[path]>
+        - define id <script.yaml_keys[id]>
+        - run "Yaml Load" def:<def[path]>|<def[id]>
+        - narrate "See console for details on database."
+    
+
+# Script that replaces predefined characters for their ASCII equivalents
+# Utilizes a world script as a key value lookup table. The world script name should be: kvreplacment
+#todo: optimise me
+Determine Word Replacement:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Specific to the word replacement typing as it checks the script kvreplacement script for its values                       #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: word
+    script:
+    - define replacement <def[word].replace[<&dot>].with[$dot$]>
+    - define replacement <yaml[word_replacement].read[database.%replacement%]>
+    - define replacement <def[replacement].replace[$dot$].with[<&dot>]>
+    - if <def[replacement]> != null {
+        - define word <def[replacement]>
+        }
+    - determine <def[word]>

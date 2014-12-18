@@ -1,0 +1,175 @@
+
+#
+# An Event Constructor for player class powers
+#
+# Creates special events called slot triggers
+# Player assigned scripts activators
+# for stuff like shift click
+# shift jumping
+# jumping while running
+# slot list:
+#   - shift click
+#   - jump while running
+# this should fire an event with the slot trigger name
+
+
+#
+# The notification depends on this script
+# "<player.has_flag[No Control Action Notification]>" 
+#
+
+
+
+
+
+
+Powers Event Constructor:
+    type: world
+    events:
+        on player crouch jump:
+        - define action "crouch jump"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player smart crouch jump:
+        - define action "smart crouch jump"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sprint jump:
+        - define action "sprint jump"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player doubletap sneak:
+        - define action "doubletap sneak"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sudden start:
+        - define action "sudden start"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sudden stop:
+        - define action "sudden stop"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sprint right click:
+        - define action "sprint right click"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sprint left click:
+        - define action "sprint left click"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player sneak right click:
+        - define action "sneak right click"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else 
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+
+        
+        
+        on player sneak left click:
+        - define action "sneak left click"
+        - define flag "control slots.<def[action]>"
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>"
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player concentrates on block:
+        - define action "concentrates on block"
+        - define flag "control slots.<def[action]>"
+        #- if <context.level.mod[10].is[more].than[0]> queue clear
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>" context:level|<context.level>|location|<context.location>
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+        
+        
+        
+        on player concentrates on entity:
+        - define action "concentrates on entity"
+        - define flag "control slots.<def[action]>"
+        #- if <context.level.mod[10].is[more].than[0]> queue clear
+        - if <player.has_flag[<def[flag]>]> {
+            - event "<player.flag[<def[flag]>]>" context:level|<context.level>|entity|<context.entity>
+            } else {
+            - run "No Control Event Narration" def:<def[action]>
+            }
+#
+
+
+No Control Event Narration:
+    #
+    # 
+    #
+    type: task
+    definitions: action
+    script:
+    - if "<player.has_flag[No Control Action Notification]>" narrate <def[action]> "format:No Control Action For Event"
+
+No Control Action For Event:
+    type: format
+    format: "<gray>You have no control action identified for this event: <blue><text>"

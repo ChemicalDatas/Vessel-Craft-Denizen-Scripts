@@ -1,0 +1,165 @@
+#Convert all values passed into durration objects
+
+#For the discovery of duration objects
+#A duration object is a number of seconds
+"Duration Conversion Testing":
+    type: task
+    debug: false
+    definitions: element
+    script:
+    - define duration <def[element].as_duration>
+    - define sub_element li@in_hours|in_minutes|in_seconds|in_milliseconds|in_ticks|time|time.year|time.month|time.day|time.hour|time.minute|time.second|formatted
+    
+    # server time to duration object
+    - define real_dur <server.current_time_millis.div[1000]
+    - narrate "server time should be: <def[real_dur].as_duration.time>"
+    
+    - foreach <def[sub_element]> {
+        - define cur_value <def[duration].<def[value]>>
+        - narrate "<red>duration <def[value]>: <green><def[cur_value]>"
+        }
+     
+
+#Time format will be "1h 24m 10s"
+#Converts a time to an Duration object.
+#Then accessable by object.(in_hours|in_minutes|in_seconds|in_milliseconds|in_ticks|)
+"From Time To Duration":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - ^define time "<def[time].split[ ]>"
+    - ^narrate "<red>Args for time conversions: <gold><def[time]>"
+    - ^define total_seconds 0
+    - foreach <def[time]> {
+        - if <def[value].contains[y]> {
+            - define years <def[value].before[y].mul[31556952]>
+            - define total_seconds <def[total_seconds].add[<def[years]>]>
+            }
+        - if <def[value].contains[mo]> {
+            - define months "<math.as_int:<el@<def[value]>.before[mo]> * 2557794>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[months]>>"
+            }
+        - if <def[value].contains[w]> {
+            - define weeks "<math.as_int:<el@<def[value]>.before[w]> * 604800>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[weeks]>>"
+            }
+        - if <def[value].contains[d]> {
+            - define days "<math.as_int:<el@<def[value]>.before[d]> * 86400>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[days]>>"
+            }
+        - if <def[value].contains[h]> {
+            - define hours "<math.as_int:<el@<def[value]>.before[h]> * 3600>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[hours]>>"
+            }
+        - if <def[value].contains[ms]> {
+            - define milliseconds "<math.as_int:<el@<def[value]>.before[ms]> / 1000>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[milliseconds]>>"
+            }
+        - if <def[value].contains[m]> {
+            - define minutes "<math.as_int:<el@<def[value]>.before[m]> * 60>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[minutes]>>"
+            }
+        - if <def[value].contains[s]> {
+            - define seconds "<el@<def[value]>.before[s]>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[seconds]>>"
+            }
+        - if <def[value].contains[t]> {
+            - define ticks  "<math.as_int:<el@<def[value]>.before[t]> / 20>"
+            - define total_seconds "<math.as_int:<def[total_seconds]> + <def[ticks]>>"
+            }
+        }
+    - narrate "<red>time to dur:<blue> <def[total_seconds]>"
+    - determine <el@<def[total_seconds]>.as_duration>
+    
+#365.2425 days a year
+"Convert Years to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine <def[time].mul[31556952]>
+    
+#avg 29.6041 days a month
+"Convert Months to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> * 2557794>"
+    
+#7 days a week
+"Convert Weeks to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> * 604800>"
+    
+#24hours a day
+"Convert Days to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> * 86400>"
+    
+#60mins a hour
+"Convert Hours to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> * 3600>"
+    
+#60 seconds an min
+"Convert Minutes to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> * 60>"
+    
+
+"Convert Ticks to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> / 20>"
+    
+
+"Convert Milliseconds to Seconds":
+    type: procedure
+    debug: false
+    definitions: time
+    script:
+    - determine "<math.as_int:<def[time]> / 1000>"
+    
+#Non functional and errous
+"Hours24 to Hours12":
+    type: procedure
+    definitions: num_hours
+    script:
+    - define remainder <def[num_hours].mod[12].as_int>
+    - define daynight_hour <def[num_hours].div[12]>
+    - if <def[daynight_hour]> > 0 {
+        - define apm "pm" 
+        else 
+        - define apm "am"
+        }
+    - determine "<def[remainder]> <def[apm]>"
+    
+
+"Num_Hours24 to Ticks":
+    # Converts the equivalent hours into its ticks equivalent for time of day.
+    # 19 hours converts into the ticks equivalent for 7pm
+    # d@17h.in_ticks turns into 17 * 60 * 60 * 20
+    type: procedure
+    debug: false
+    definitions: num_hours
+    script:
+    - define real_time <def[num_hours]>
+    - define time_convert <def[real_time].mul[1000]>
+    - define ticks <def[time_convert].sub[6000]>
+    - determine <def[ticks]>

@@ -1,0 +1,8 @@
+# Script that replaces predefined characters for their ASCII equivalents
+# Utilizes a world script as a key value lookup table. The world script name should be: kvreplacment
+
+Player Chat Noise Activation:
+    type: world
+    events:
+        on player chats:
+        - playsound <player.location> sound:villager_haggle volume:10

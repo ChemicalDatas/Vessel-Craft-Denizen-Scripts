@@ -1,0 +1,405 @@
+#A set of procedures designed to manipulate nameplates
+#A display is classified as a list of entities with custom name plates
+#A displays 'anchor' is the wither skull to which the entities are attached to
+
+#todo: Use math to figure out what option the player is really looking at to make a better feel.
+
+
+Display Defaults Events:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # 65 range of 9 blocks view distance                                                                                        #
+    # 65 is the max before it cant be seen at all                                                                               #
+    # 60 25 view distance                                                                                                       #
+    # 55 36 view distance                                                                                                       #
+    # 55 is the point where its possible that the dismembered horse can be seen                                                 #
+    # 50 43 view distance                                                                                                       #
+    # 40 is 45 view distance                                                                                                    #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: world
+    constants:
+        menu check delay: d@20t
+        update delay: 20t
+        display flash time: d@10s
+        display personal: 65
+        display server: 60
+        display picture: 50
+        
+        Display Player Spawn Distance: 4
+        
+        display time: 2
+    
+    events:
+        #on display created in <cuboids>:
+        #on display created in <cuboids> owned by <owner>:
+        #on display titled <title>:
+        #on display titled <title> in <cuboids>:
+        on display creation:
+        
+        #on display titled <title> in <cuboids>:
+        #<context.entitys>
+        #<context.location>
+        #<context.calling_script>
+        #<context.removal_method>
+        
+        #keep all displays stored in a display list and check if  they have a removal method, 
+        #   if not remove them maybe on shutdown or creation?
+    
+        
+        on player opens context menu:
+        - announce "opens context menu"
+        on player opens title menu:
+        - announce "opens title menu"
+        
+        #on player opens <context> menu:
+        #- announce "opens named context: <context.context> menu"
+        #on player opens <title> menu:
+        #- announce "opens named title: <context.title> menu"
+        # on <player> opens context menu:
+        # on <player> opens title menu:
+        # on <player> opens <context> menu:
+        # on <player> opens <title> menu:
+        
+        
+        # on player selects option in context menu:
+        # on player selects option in title menu:
+        # on player selects option in <context> menu:
+        # on player selects option in <title> menu:
+        
+        # on player selects <option> in context menu:
+        # on player selects <option> in title menu:
+        # on player selects <option> in <context> menu:
+        # on player selects <option> in <title> menu:
+        
+        
+        # on <player> selects option in context menu:
+        # on <player> selects option in <title> menu:
+        # on <player> selects <option> in title menu:
+        # on <player> selects <option> in context menu:
+        
+        # on player selects <option> in context menu:
+        # on player selects <option> in <context> menu:
+
+
+Line to Age:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Sub procedure for figuring out an entities nameplate distance (age) for each line.                                        #
+    # Returns a age value                                                                                                       #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: line_number
+    script:
+    - determine <def[line_number].mul[-7000]>
+    
+Height to Age:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Sub procedure for figuring out an entities nameplate distance (age) from the entity.                                      #
+    # Returns an age value.                                                                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: distance
+    script:
+    - determine <def[distance].mul[-30335].sub[50000]>
+
+Determine Max Possible Display Height:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # procedure for figuring out selection indexes                                                                              #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #todo: Calibrate the setting for accuracy at long and short distances.
+    type: procedure
+    definitions: num_plates
+    script:
+    - determine <def[num_plates].mul[.5]>
+    
+
+#todo: complete me
+Update Display Line:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A task to update a line in a display                                                                                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: line|text
+    script:
+    - define <def[nameplate]> <>
+    - execute as_npc "npc select <<def[nameplate]>.id>"
+    - execute as_npc "npc rename <def[text]>"
+    
+    - adjust <def[entity]> custom_name:<def[new_text]>
+    - remove
+    - rotate
+    - teleport
+    
+
+
+Determine Selection Index:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This expects a display to be at a premeasured distance  to the player.                                                    #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: display_size
+    script:
+    - define pitch <player.location.pitch>
+    - define subdivision 11.849
+    - define selection <player.location.pitch.mul[-1].div[<def[subdivision].round_up>]>
+    - if <def[selection]> <= 0 determine 1
+    - if <def[selection]> >= <def[display_size]> determine <def[display_size]>
+    - determine <def[selection]>
+    
+
+
+
+#########################################################################################################################
+############################# Display Handlers ##########################################################################
+#########################################################################################################################
+
+"Remove Stray Display":
+    type: task
+    definitions: location|range
+    script:
+    - if <def[range]> == null define range 10
+    - define target <def[location].add[0,60,0].find.entities[Wither_Skull].within[<def[range]>]>
+    - define num_entities 0
+    
+    #todo: add a display checking to see if the display is in the server flag display list.
+    - foreach <def[target]> {
+        - define num_entities <def[num_entities].add[1]>
+        - if <def[value].get_passenger.name> == EntityHorse {
+            - remove <def[value]>|<def[value].get_passenger>
+            }
+        }
+    - announce "<blue>Cleared <red><def[num_entities]> <blue>stray displays."
+
+"Remove Display":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Stored by location
+    # 1st item in the display is the anchor
+    # All items else are entities
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: location
+    script:
+    - if <def[location]> == null define location "<proc[Find Nearby Display].context[<def[location]>]>"
+    - define entity_targets <server.flag[Server_Displays.<def[location].simple>].as_list>
+    - remove <def[entity_targets]>
+    - flag server Server_Displays.<def[location].simple>:!
+
+"Find Nearby Display":
+    type: procedure
+    definitions: location|range
+    script:
+    - if <def[range]> == null define range 10
+    - define target <def[location].add[0,60,0].find.entities[Wither_Skull|Horse].within[<def[range]>]>
+    - foreach <def[target]> {
+        - define saved_location <def[value].location.add[0,-60,0].simple>
+        - if <server.has_flag[Server_Displays.<def[saved_location]>]> {
+            - determine <def[value].location>
+            }
+        }
+
+"Display Base":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This is a procedure that creates a display. You have to capture the output of it so you can remove or store               #
+    # the display entites as you wish.                                                                                          #
+    #                                                                                                                           #
+    # When done this way that gives the scripter the power to store the entites as they desire.                                 #
+    #                                                                                                                           #
+    # Creates the entities and returns the entity list.                                                                         #
+    # Youll need to choose how to store the entities for removal later.                                                         #
+    #                                                                                                                           #
+    # notice: This is a script that needs to be managed by another script.                                                  #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: location|text|spawn_command|title
+    script:
+    # Raise error if recieved bad arguments
+    - if <def[location]||none> == none {
+        - define message "<script.name> requires that a location is not null."
+        - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
+        - queue clear
+        }
+    - if <def[text]||none> == none {
+        - define message "<script.name> requires that the text list not be null. (null dose not parse with <&sq>.size<&sq>)"
+        - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
+        - queue clear
+        }
+    
+    # If the type of entity spawning technique is not provided set to default
+    - if <def[spawn_command]||none> == none  define spawn_command summon
+    - if <def[title]||none>         == none  define title "Context Menu"
+    
+    
+    #gives other scripts a say about whats displayed
+    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player>|text|<def[text]>|title|<def[title]>" save:Display
+    - define event_determination <entry[Display].determination>
+    - if <def[event_determination]> == cancelled queue clear
+    - if <def[event_determination]> != none define text <def[event_determination]>
+    
+    
+    
+    # The meat of the script
+    - define text <def[text].unescaped>
+    - define size <def[text].size>
+    - define height 60
+
+    - define base_age "<proc[Height to Age].context[<def[height]>]>"
+    - define word_index "<proc[Reverse Index In Range].context[<def[size]>]>"
+    - define entity_location "<def[location].add[0,<def[height]>,0]>"
+
+        #Add to stack on top of the starting line.
+        #Subtract to stack under the starting line.
+        #/summon WitherSkull ~ ~1 ~ {direction:[],CustomName:Wither_budum,CustomNameVisible:1}
+    - repeat <def[size]> {
+        - define line <def[text].get[<def[word_index].get[<def[value]>]>]>
+        - define line <proc[Iconize].context[<def[line]>]>
+        - define line_age "<proc[Line to Age].context[<def[value]>]>"
+        - define age <def[base_age].sub[<def[line_age]>]>
+        - execute as_server "summon EntityHorse <def[entity_location].x> <def[entity_location].y> <def[entity_location].z> {Riding:{id:WitherSkull,direction:[0.0,0.0,0.0]},CustomName:<def[line]>,CustomNameVisible:1,Invulnerable:1,Age:<def[age]>}"
+        }
+    #any other ideas for events for this?
+    - define display_entities <def[entity_location].find.entities[Wither_Skull|Horse].within[0]>
+    - announce <def[display_entities]>
+    #
+    #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
+    #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
+    
+    - determine <def[display_entities]>
+    
+Display:
+    #
+    # The culmulation of the display sets of scripts
+    # display_time is optional as it defaults to 2 seconds
+    #
+    #
+    type: task
+    definitions: location|text|display_time
+    script:
+    - queue clear
+    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]||li@>"
+    - run Remove def:<def[display_entities].escaped> delay:<def[display_time]||d@2s>
+    
+
+Context Menu:
+    type: task
+    definitions: option_list|script_list|argument_list|context|title|time_out
+    script:
+    - queue clear
+    - define events
+        player opens context menu|
+        player opens title menu|
+        player opens <def[context]> menu|
+        player opens <def[title]> menu| 
+        <player> opens context menu|
+        <player> opens title menu|
+        <player> opens <def[context]> menu|
+        <player> opens <def[title]> menu
+    
+    - define context
+        context<&co>
+        options     |<def[option_list]>|
+        scripts     |<def[script_list]>|
+        arguments   |<def[argument_list]>|
+        context     |<def[context]>|
+        title       |<def[title]>|
+        timeout     |<def[time_out]>
+    
+    - event <def[events]> <def[context]> save:context_readjust
+    - if <entry[context_readjust].determination> == cancelled queue clear
+    
+    - ^define time_out <def[time_out]||d@10s>
+    - ^define options <def[option_list].unescaped>
+    - ^define scripts <def[script_list].unescaped>
+    - ^define argument_list <def[argument_list].unescaped>
+    - ^define num_options <def[options].size>
+    
+    - define display_location "<proc[Entity Display Location].context[<player>]>"
+    - define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
+    - ^announce <def[displays_list]>
+    - run "Context Menu Display Timeout" def:<def[displays_list].escaped> delay:<def[time_out]> id:<player>_display_timeout
+    - queue pause
+    - ^queue queue:<player>_display_timeout stop
+    - ^remove <def[displays_list]>
+    - define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
+    
+    - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
+    - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
+    - run <def[script]> def:<def[arguments]> instantly
+    #- ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+
+
+Context Menu Display Timeout:
+    #
+    # Removes entities after the timeout
+    # Destroys the players display queue
+    #
+    type: task
+    definitions: displays
+    script:
+    #- announce "<player.name><&sq>s menu timed out."
+    #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
+    - remove <def[displays].unescaped>
+    - queue queue:<player>_context_menu stop
+
+    
+#####################################################################################
+#####################################################################################
+#Using the best options, if denizen wasnt buggy in how it spawns entities
+Test Display:
+    type: procedure
+    definitions: text_list|location
+    script:
+    - define height 65
+    - define base_age -1700000
+    - define display_entities li@
+    - define text_list <def[text_list].unescaped.as_list>
+    - define size <def[text_list].size>
+    - define entity_location <def[location].add[0,<def[height]>,0]>
+
+    - foreach <def[text_list]> {
+        - define line <proc[Iconize].context[<def[value]>]>
+        - define index <def[size].sub[<def[loop_index]>]>
+        - define line_age <def[index].mul[7000]>
+        - define age <def[base_age].add[<def[line_age]>]>
+        
+        - spawn e@wither_skull[velocity=0,0,0,<def[entity_location].world.name>;custom_name=<def[line]>;custom_name_visibility=true] <def[entity_location]> save:display_anchor
+        - define display_entities <def[display_entities].include[<entry[display_anchor].spawned_entities>]>
+        }
+    - determine <def[display_entities]>
+
+tdm:
+    type: task
+    definitions: text
+    script:
+    - define entity_list "<proc[test display].context[<def[text]>|<player.location>]>"
+    - wait 10
+    - announce "removing entitities: <def[entity_list].unescaped>"
+    - remove <def[entity_list]>
+
+
+tstr:
+    type: task
+    definitions: text
+    script:
+    - spawn e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0]> save:display_anchor
+    - announce "<entry[display_anchor].spawned_entities>"
+
+
+
+
+
+

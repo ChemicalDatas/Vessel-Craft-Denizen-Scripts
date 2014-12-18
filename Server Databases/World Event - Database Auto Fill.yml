@@ -1,0 +1,186 @@
+#A library of material reactions when a called upon.
+
+#Create a script that fills in missing material information. And a script that enables editing (adding / removing)
+#of items on this database
+
+#info: havnt figured out the icon_crack yet. That might be where the auto script for filling this out might come in handy.
+
+"SAI Database Manager":
+    type: task
+    
+    database location names:
+    - player
+    - entity
+    - location
+    - material
+    
+    database locations:
+        player:   "../../../Vessel Craft SAI/Database/Player/player_data.yml"
+        entity:   "../../../Vessel Craft SAI/Database/Player/entity_data.yml"
+        location: "../../../Vessel Craft SAI/Database/Player/location_data.yml"
+        material: "../../../Vessel Craft SAI/Database/Player/material_data.yml"
+    script:
+    -
+    
+    events:
+        on server start:
+        #load database
+        #use a script in the flag / database managment yml
+        #- foreach "<script.yaml_keys[database locations names]>" {
+        #    - yaml "load:<script.yaml_keys[database locations.%value%]>" id:%value%
+        #    - if <yaml.list.contains[%value%]> {
+        #        - announce "Loaded Database>" format:SAI to_console
+        #        }
+        #    }
+        
+        on stop command:
+        #save unload database
+        #save unload player information
+        #save player last chat to player database
+        #save / unload all loaded datbases
+        #yaml.list
+        #- yaml unload:SAI_Information
+        #- foreach <yaml.list> {
+        #    - yaml save
+        #    - yaml unload id:%value%
+        #    }
+        
+        on player first login:
+        #if player dose not exist create one
+        on player join:
+        #load player database
+        - wait d@2s
+        - if !<player.is_online||false> queue clear
+        
+        on player quit:
+        #save player last chat to player database
+        #save player database
+        #unload database
+        
+        
+        on player places block:
+        on player breaks block:
+        on player signs book:
+        on player edits book:
+        on brewing stand brews:
+        #<context.inventory>
+        on block burns:
+        on block fades:
+        on block forms:
+        on block grows:
+        on block spreads:
+        on leaves decay:
+        on entity forms block:
+        on furnace burns item:
+        on player takes item from furnace:
+        on furnace smelts item:
+        #context.source_item
+        #context.result_item
+        on creeper powered:
+        #context.cause
+        on entity changes block:
+        #context.entity
+        #context.old_material
+        #context.new_material
+        on entity damaged:
+        #context.cause
+        #context.entity
+        #context.damage
+        on entity combusts:
+        #context.entity
+        on entity killed:
+        #context.cause
+        on entity death:
+        #context.cause
+        on entity explodes:
+        #context.entity
+        on entity heals:
+        #context.reason
+        #context.amount
+        #context.entity
+        on entity enters portal:
+        on entity exits portal:
+        #context.entity
+        on player uses portal:
+        #context.to
+        #context.from
+        #whoes outside the destination portal...
+        on entity shoots bow:
+        #context.entity
+        on entity tamed:
+        #context.entity
+        #<player>
+        on entity targets:
+        #context.entity
+        #context.targets
+        #context.reason
+        on entity teleports:
+        #context.entity
+        on sheep dyed:
+        #context.color
+        #add color to database
+        on item enchanted:
+        #context.inventory
+        #context.item
+        on player animates:
+        #context.animation
+        on player consumes item:
+        #context.item
+        on player kicked:
+        #context.message
+        on player leashes entity:
+        #context.entity
+        #context.holder
+        on player respawns:
+        #context.location
+        on player toggles flight:
+        #<player> can fly
+        on portal created:
+        #context.reason
+        on spawn changes:
+        #context.world
+        #context.old_location
+        #context.new_location
+        
+        
+        
+    
+    anvil:
+        sound:
+        - anvil_hit
+        effect:
+        - iconcrack_
+        - smoke
+        - drip_lava
+        - flame
+    
+    glass:
+        sound:
+        - glass_break
+        effect:
+        - iconcrack_
+    
+"Write to Database":
+    #
+    # A task that takes a already loaded yaml file, and writes to it 
+    # 
+    # 
+    type: task
+    definitions: id|path|data
+    script:
+    - yaml write:%path% value:%data% id:%id%
+    
+    
+    
+#
+
+
+
+
+
+
+
+
+
+
+

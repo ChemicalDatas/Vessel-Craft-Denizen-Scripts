@@ -1,0 +1,13 @@
+
+Hawkeye:
+    type: procedure
+    definitions: location|player|event
+    script:
+    -
+    - determine ""
+
+Essentials:
+    type: procedure
+    script:
+    - execute as_server "gc" save:output
+    - determine ""

@@ -1,0 +1,320 @@
+################################################################################################################################
+################################################################################################################################
+#                                                                                                                              #
+#                        A set of utilities for getting blocks in a list                                                       #
+#                                                                                                                              #
+#                                                                                                                              #
+################################################################################################################################
+################################################################################################################################
+    
+    
+"Block Line":
+    ############################################################################################################################
+    #                                                                                                                          #
+    # Returns a list of block that the line of sight of the entity encompasses                                                 #
+    # Limits self to range                                                                                                     #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: entity|distance
+    script:
+    - repeat <def[distance]> {
+        - define block <def[entity].location.cursor_on[<def[value]>]>
+        - define list "<proc[List Append Right].context[<def[list]||li@>|<def[block]>]>"
+        }
+    - determine <def[list].unescaped>
+    
+
+
+"Cube Surrounding":
+    ############################################################################################################################
+    #                                                                                                                          #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: entity|outset
+    script:
+    - define outset <def[outset]||1>
+    - determine <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
+    
+"Outset Cuboid":
+    ############################################################################################################################
+    #                                                                                                                          #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: cuboid|outset
+    script:
+    - define outset <def[outset]||1>
+    - determine <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
+
+
+"Cube Surrounding Location":
+    ############################################################################################################################
+    #                                                                                                                          #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: location|outset
+    script:
+    - define outset <def[outset]||1>
+    - determine "<def[location].sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[location].add[<def[outset]>,<def[outset]>,<def[outset]>]>"
+
+
+Spawnable Locations In Cuboid:
+    ############################################################################################################################
+    #                                                                                                                          #
+    # Material list is optional as it provides a default set to work with                                                      #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: cuboid|white_list|black_list
+    script:
+    - define white_list <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks>
+    - define black_list <def[black_list].unescaped.as_list||li@>
+    - define spawnable_locations <def[cuboid].unescaped.get_spawnable_blocks>
+    - foreach <def[spawnable_locations]> {
+        - if "<proc[Meets Black White List].context[<def[value]>|<def[black_list]>|<def[white_list]>]>" {
+            - define target_locations "<proc[List Append Right].context[<def[target_locations]||li@>|<def[value]>]>"
+            }
+        }
+    - determine <def[target_locations].unescaped>
+
+Random Location Around Point:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This returns a list of locations that meet black list / white list requirements of materials.                             #
+    # Optional values are also range and number_locations. Both default to 1                                                    #
+    #                                                                                                                           #
+    # ex:                                                                                                                       #
+    #   - define next_wander_point "<proc[Random Location Around Point].context[<npc.location>|<npc.navigator_range>||<escape:m@soul_sand>|1]>"#
+    #                                                                                                                           #
+    # ex2:                                                                                                                      #
+    #   - define player_random_spawn "<proc[Random Location Around Point].context[<player.flag[last_death_point]>|200|m@grass||1]>"#
+    #                                                                                                                           #
+    # ex3:                                                                                                                      #
+    #   - define arena_size 50                                                                                                  #
+    #   - define location <server.flag[free_for_all_arena]>                                                                     #
+    #   - define target_players "<def[location].find.players.within[<def[arena_size]>]>"                                        #
+    #   - define size "<def[target_players].size>"                                                                              #
+    #   - define spawn_block "m@obsidian"                                                                                       #
+    #   - define player_scatter_list "<proc[Random Location Around Point].context[<def[location]>|<def[arena_size]>|<def[spawn_block]>||<def[size]>]>"#
+    #   - repeat <def[size]> {                                                                                                  #
+    #       - teleport <def[target_players].get[<def[value]>]> <def[player_scatter_list].get[<def[value]>]>                     #
+    #       }                                                                                                                   #
+    #                                                                                                                           #
+    # Location required. All else optional... Defaults range to 1 sooo a 3x3 cuboid arround the location                        #
+    # White List and Black List are just list checks to see if the value is on the white list.                                  #
+    # Number of locations defaults to 1, but its possible to get multiple spawnable locations                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: location|range|white_list|black_list|number_locations
+    script:
+    - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|<def[range]||10>].escaped>"
+    - define locations "<proc[Spawnable Locations In Cuboid].context[<def[cuboid]>|<def[white_list]||li@>|<def[black_list]||li@>]>"
+    - determine <def[locations].random[<def[number_locations]||1>]>
+    
+
+
+
+Neighbour Blocks:
+    ############################################################################################################################
+    #                                                                                                                          #
+    # A script that returns the locations of all blocks touching a block. Optional Filters                                     #
+    # Blacklist has priority over the white_list. Any item in the blacklist will not allow the whitelist to add items to it.   #
+    #                                                                                                                          #
+    # Direction is optional as it provides the orders the elements the list.                                                   #
+    # This is more powerful as you can specify a block search pattern....                                                      #
+    # This can now become a element of a path search algorithm                                                                 #
+    # Maybe a way to map out the flow of water                                                                                 #
+    #                                                                                                                           #
+    # notice: This filters blocks by material.                                                                              #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: location|black_list|white_list|direction
+    script:
+    #                                                      above, north, east, south, west, below
+    - define direction <def[direction].unescaped||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+    - foreach <def[direction].as_list> {
+        - define locat <def[location].add[<def[value]>]>
+        - define mater <def[locat].material.name>
+        - announce "<blue>material: <def[mater]>"
+        - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>" {
+            - announce "Checking <def[locat].simple>"
+            - announce "met black white list"
+            - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[locat]>]>"
+            }
+        }
+    - determine <def[block_list].unescaped||li@>
+
+
+
+#todo: finishme
+"Build Connected Block List":
+    # A form of a 3d version of the 4 way flood fill algorithm
+    type: procedure
+    definitions: location|block_type
+    script:
+    - foreach "<proc[Neighbour Blocks].context[<def[location]>|null|<def[block_type]>]>" {
+        - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[value]>]>"
+        }
+    
+
+
+
+
+Entity Get Target Block:
+    type: procedure
+    definitions: entity|distance
+    script:
+    - if <def[distance]> == null define distance 5
+    - define target <def[entity].location.cursor_on[5]>
+    - determine material <def[target].material>
+
+
+
+
+
+    ############################################################################################################################
+    ############################################################################################################################
+    ############################################################################################################################
+
+Location Has Property:
+    #
+    # This is not the most effecient way to check if theres a property...
+    # as this will most be likely used like this....
+    # ex:
+    #   - if <proc[Location Has Property].context[<context.location>|owner]> {
+    #       - define owner <proc[Get Location Property].context[<context.location>|owner]>
+    #       - run display "def:<context.location>|li@This is owned by: <def[owner]>|d@3s"
+    #       }
+    #
+    # This means that the script Get Location Property will be called 2 times to perform the same check....
+    #
+    type: procedure
+    definitions: location|property_name
+    script:
+    - define property "<proc[Get Location Property].context[<def[location]>|<def[property_name]>]||none>"
+    - if <def[property]||none> != none {
+        - determine true
+        } else {
+        - determine false
+        }
+
+#todo: CHECK if location.cuboids is an escaped list
+Get Location Property:
+    #
+    # if theres multiple cuboids with the same property at the location#
+    # This will return a list of properties
+    # property is optional,
+    # if property is not specified it returns a list of all properties for that location
+    #
+    type: procedure
+    definitions: location|property
+    script:
+    - foreach <def[location].cuboids> {
+        - define property "<proc[Get Cuboid Property].context[<def[value]>|<def[property]>]>"
+        - define property_list "<proc[List Append Right].context[<def[property_list]||li@>|<def[property]>]>"
+        }
+    - determine <def[property_list].unescaped>
+
+
+Get Cuboid Property:
+    #
+    # The input cuboid can only be a name of a cuboid.
+    # There is no way to get a name of a cuboid from 2 points
+    # All this dose is separate the name data provided
+    # 
+    type: procedure
+    definitions: cuboid|property
+    script:
+    - define p_list "<def[cuboid].split[ ]>"
+    - if <def[property]> == null || <def[property]> == '' {
+        - determine <def[p_list]>
+        }
+    - define entries <def[p_list].get_sub_items[1].split_by[-]>
+    - define values <def[p_list].get_sub_items[2].split_by[-]>
+    - define index <def[entries].find[<def[property]>]>
+    - determine <def[values].get[<def[index]>]>
+
+
+
+
+
+Entity Display Location:
+    #
+    # This is a script that returns the block in front of the entity and
+    # in the general height of what the entity is looking at...
+    # Used is display scripts to place a display right in front of the entity.
+    # todo: rewrite this so that it takes a players vector to get a smoother side to side transition
+    # 
+    offset directions:
+        north:      0,0,-1
+        north east: 1,0,-1
+        east:       1,0,0
+        south east: 1,0,1
+        south:      0,0,1
+        south west: -1,0,1
+        west:       -1,0,0
+        north west: -1,0,-1
+    type: procedure
+    definitions: entity|vertical
+    script:
+    - define yaw <def[entity].location.yaw>
+    - if "<proc[Is Between Numbers].context[157.5|<def[yaw]>|202.5]>" {
+        - define offset "<script.yaml_keys[offset directions.north]>"
+        } else if "<proc[Is Between Numbers].context[202.5|<def[yaw]>|247.5]>" {
+        - define offset "<script.yaml_keys[offset directions.north east]>"
+        } else if "<proc[Is Between Numbers].context[247.5|<def[yaw]>|292.5]>" {
+        - define offset "<script.yaml_keys[offset directions.east]>"
+        } else if "<proc[Is Between Numbers].context[292.5|<def[yaw]>|337.5]>" {
+        - define offset "<script.yaml_keys[offset directions.south east]>"
+        } else if "<proc[Is Between Numbers].context[337.5|<def[yaw]>|360]>" {
+        - define offset "<script.yaml_keys[offset directions.south]>"
+        } else if "<proc[Is Between Numbers].context[0|<def[yaw]>|22.5]>" {
+        - define offset "<script.yaml_keys[offset directions.south]>"
+        } else if "<proc[Is Between Numbers].context[22.5|<def[yaw]>|67.5]>" {
+        - define offset "<script.yaml_keys[offset directions.south west]>"
+        } else if "<proc[Is Between Numbers].context[67.5|<def[yaw]>|112.5]>" {
+        - define offset "<script.yaml_keys[offset directions.west]>"
+        } else if "<proc[Is Between Numbers].context[112.5|<def[yaw]>|157.5]>" {
+        - define offset "<script.yaml_keys[offset directions.north west]>"
+        }
+    - if <def[vertical].exists> {
+        - define pitch <def[entity].location.pitch>
+        - define y_offset <def[pitch].mul[-1].div[30]>
+        - if <def[y_offset].is[less].than[-1]> define y_offset -1
+        - define location <def[location].eye_location[0,<def[y_offset]>,0]>
+        }
+    - define location <def[entity].eye_location.add[<def[offset]>]>
+    - determine <def[location]>
+    
+
+Beacon Location:
+    type: task
+    definitions: location|player_list|duration
+    script:
+    - define location <def[location].as_location.simple.as_location>
+    - define current_point <def[location].highest>
+    - define locations li@
+    - while <def[current_point].is[!=].to[<def[location]>]> {
+        - if !<def[current_point].material.is_transparent> {
+            - define locations "<proc[list Append Right].context[<def[locations]>|<def[current_point]>]>"
+            }
+        - define current_point <def[current_point].sub[0,1,0]>
+        }
+    - define beacon_base cu@<def[location].add[-1,-2,-1]>|<def[location].add[1,-2,1]>
+    - define targets <def[player_list].unescaped||<player>>
+    - define duration <def[duration]||d@20s>
+    - showfake m@glass <def[locations].unescaped>           to:<def[targets]> d:<def[duration]>
+    - showfake m@beacon <def[location].below>               to:<def[targets]> d:<def[duration]>
+    - showfake m@iron_block <def[beacon_base].get_blocks>   to:<def[targets]> d:<def[duration]>
+    
+
+
+

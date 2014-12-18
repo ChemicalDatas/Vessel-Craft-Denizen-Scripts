@@ -1,0 +1,129 @@
+#################################################################################################################################
+#                                                                                                                               #
+# A Set of debugging ideas that might be useful for others.                                                                     #
+#                                                                                                                               #
+#                                                                                                                               #
+#################################################################################################################################
+
+"Player Desires Debug":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This usage is a little funky as it requires {} at the end of the if statement.                                            #
+    # Or what you want to do if the player wants debug else it wont display any output.                                         #
+    # - if "<proc[Player Desires Debug].context[your debug output]>" {}                                                         #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    debug: false
+    definitions: words
+    script:
+    - if <player.has_flag[desires_debug]> {
+        - determine true
+        } else {
+        - determine false
+        }
+    
+
+"Debug Dispatcher":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Debug dispatcher will unescape the information sent to the dispatcher.                                                    #
+    #                                                                                                                           #
+    # Id like this to have multiple ways to inform the player of the debug                                                      #
+    # 1 boss bar                                                                                                                #
+    # 2 side bar                                                                                                                #
+    # 3 in a book                                                                                                               #
+    # 4 Under the npc name?                                                                                                     #
+    # 5 In the tab menu.                                                                                                        #
+    # 6 Using the holo menus                                                                                                    #
+    # 7 Plain old Chat Display                                                                                                  #
+    # 8 Using the log command                                                                                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: true
+    definitions: debug_text|method_of_display
+    script:
+    - define debug_text <def[debug_text].unescaped>
+    - define method_of_display <def[method_of_display].unescaped||chat>
+    
+#
+"x5":
+    #
+    # A script for testing out an idea for denizen automated script tests
+    #
+    scripttest:
+        test_1:
+            input: 1
+            expected: 5
+            setup:
+            - define scripts_input "<script.yaml_key[scripttest.test_1.input]>"
+            test:
+            - define scripts_real_return <proc[<script.name>].context[<def[scripts_input]>]>
+            teardown:
+            - announce Tearing_down_script
+            - flag server delete_me !
+            
+    type: procedure
+    definitions: number
+    script:
+    - determine <def[number].mul[5]>
+
+
+"Test Path":
+    scripttest:
+        test_1:
+            input:
+            expected: "This is the <blue>expected value"
+            setup:
+            test:
+            teardown:
+    type: procedure
+    definitions:
+    script:
+    - determine "But this is the <red>received value"
+    
+"STest":
+    #
+    # A script that runs the tests set up in the script name provided
+    #
+    # The script in question requires 
+    #
+    type: task
+    definitions: script_name
+    script:
+    - define path <def[script_name].relative_filename>
+    - yaml load:<def[path]> id:UT
+    - announce "<blue>Loaded yaml ids: <yellow><yaml.list>" to_console
+    
+    - define number_of_tests <yaml[UT].list_keys[<def[script_name]>.scripttest].size>
+    - announce "<blue>Starting <green><def[number_of_tests]> <blue>tests." to_console
+    - repeat <def[number_of_tests]> {
+        - define path scripttest.test_<def[value]>
+        - if <def[script_name].container_type> == procedure {
+            - inject <def[script_name]> "path:<def[path]>.setup"
+            - inject <def[script_name]> "path:<def[path]>.test"
+            - inject <def[script_name]> "path:<def[path]>.teardown"
+            - define scripts_expected_return <def[script_name].constant[<def[path]>.expected]>
+            - if <def[scripts_real_return]> == <def[scripts_expected_return]> {
+                - define script_name <def[script_name]>
+                - define test_results "<proc[Append Right].context[]>"
+                - define test_names
+                - announce "<gold>Script was successful" to_console
+                - announce "<blue>Scripts Return: <gold><def[scripts_real_return]>" to_console
+                - announce "<blue>Expected Value: <gold><def[scripts_expected_return]>" to_console
+                } else {
+                - announce "<red>Script failed"
+                }
+            }
+        
+        - if <def[script_name].constant[type]> == task {
+            - announce "Testing a task"
+            - run <def[script_name]> path:script2
+            }
+        }
+        
+    
+    - yaml unload id:UT
+

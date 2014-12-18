@@ -1,0 +1,58 @@
+#A set of scripts that are relevant geometry and trigonometry.
+
+
+
+#I suppose this should be called Solve AAS Triangle.
+"Solve ASA Triangle":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #takes angles in degrees
+    #Solves line segment CA   aka b
+    #  C
+    #  |`
+    # b|  ` a
+    #  |    `
+    #  |______`
+    #  A   c    B
+    #
+    # b/sin_B = side_c/sin_C
+    # (side_c * sin_B) / sin_C == side_b
+    type: procedure
+    definitions: angle_C|side_c|angle_B
+    script:
+    - define sin_C "<el@<def[angle_C]>.to_radians.sin>"
+    - define numerator "<el@<def[side_c]>.mul[<el@<def[angle_B]>.to_radians.sin>]>"
+    - define side_b <def[numerator].div[<def[sin_C]>]>
+    - determine <def[side_b]>
+    
+
+"Points On Linesegment":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Handles each dimension separately. Gets total length of each, then divides it into the number of points needed.           #
+    # Then adds each length segment to point 1 to get points along the line                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: num_of_points|point1|point2
+    script:
+    - define delta_x <def[point1].x.sub[<def[point2].x>].abs>
+    - define delta_y <def[point1].y.sub[<def[point2].y>].abs>
+    - define delta_z <def[point1].z.sub[<def[point2].z>].abs>
+    
+    #Size of each section in size
+    - define x_section <def[delta_x].div[<def[num_of_points].add[1]>]>
+    - define y_section <def[delta_y].div[<def[num_of_points].add[1]>]>
+    - define z_section <def[delta_z].div[<def[num_of_points].add[1]>]>
+    - repeat <def[num_of_points]> {
+        - define x <def[x_section].mul[<def[value]>]>
+        - define y <def[y_section].mul[<def[value]>]>
+        - define z <def[z_section].mul[<def[value]>]>
+        - define point <def[point1].sub[<def[x]>,<def[y]>,<def[z]>]>
+        - define points "<proc[List Append Right].context[<def[points]||li@>|<def[point]>]>"
+        }
+    - determine <def[points].unescaped>
+
+

@@ -1,0 +1,92 @@
+#info: A Set of  procedures that the tactic executor runs through to determine a npcs next set of actions
+
+
+
+#Condition check
+#The npc's interface with the world    
+
+is_homeless:
+    type: procedure
+    script:
+    - if <npc.flag[locations.home]||none> == none determine true
+    - determine false
+    
+
+is_hungry:
+    type: procedure
+    definitions: threshold
+    script:
+    - if !<npc.has_flag[food]> flag npc saturation:100
+    - if <npc.flag[food].is[less].than[<def[threshold]||60>]> determine true
+    - determine false
+
+is_thirsty:
+    type: procedure
+    definitions: threshold
+    script:
+    - if !<npc.has_flag[hydration]> flag npc hydration:100
+    - if <npc.flag[hydration].is[less].than[<def[threshold]||60>]> determine true
+    - determine false
+    
+is_fatigued:
+    type: procedure
+    definitions: threshold
+    script:
+    - if !<npc.has_flag[fatigued]> flag npc fatigued:0
+    - if <npc.flag[fatigued].is[more].than[<def[threshold]||60>]> determine true
+    - determine false
+    
+# Used to determine how tired the npc is
+is_tired:
+    type: procedure
+    definitions: threshold
+    script:
+    - if !<npc.has_flag[exhausted]> flag npc exhausted:0
+    - if <npc.flag[exhausted].is[more].than[<def[threshold]||60>]> determine true
+    - determine false
+    
+is_alive:
+    type: procedure
+    script:
+    - if !<npc.has_flag[alive]> flag npc alive
+    - if <npc.flag[alive]> determine true
+    - determine false
+    
+
+tactics_else:
+    type: procedure
+    script:
+    - determine true
+
+################################################################################################
+################ Location States ###############################################################
+################################################################################################
+
+Is_Within:
+    type: procedure
+    definitions: range
+    script:
+    - define target_location <npc.flag[navigation_target]>
+    - if <npc.location.distance[<def[target_location]>].is[less].than[<def[range]>]> {
+        - determine true
+        }
+    - determine false
+
+Is_Within_Next_Navigation_Target:
+    type: procedure
+    definitions:
+    script:
+    - define target_location <>
+
+
+Is_Within_Last_Navigation_Target:
+    type: procedure
+    script:
+    - define list_size <npc.flag[navigation_target].size>
+    - if <def[list_size]> == 1 {
+        - determine true
+        }
+    - determine false
+
+
+

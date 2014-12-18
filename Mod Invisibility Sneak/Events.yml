@@ -1,0 +1,71 @@
+#todo: I want to intregrat this with jobs. Set up a custom assassin skill
+#Then use jobs to check the players level. 
+#If thier sucessfull in sneaking or disappearing add xp to thier job
+#Add xp to thier job for killing npc's 
+#Add xp to thier jobs for killing players
+
+Invisibility Sneak:
+    type: world
+    #invisibility ranges.
+    close_range: 6
+    max_range: 30
+        
+    events:
+        on player starts sneaking:
+        - if "<proc[Reason to Turn Invisible]>" {
+            - playeffect <player.location> large_smoke qty:50
+            - invisible <player> state:true
+            - while <player.has_effect[invisibility]> {
+                - playeffect <player.location.sub[0,1.5,0]> effect:footstep
+                - wait d@15t-2s
+                }
+            
+            }
+        
+        on player stops sneaking:
+        #This could be an issue if the player has an effect from invisibility other than crouching.
+        - if <player.has_effect[invisibility]> {
+            - playeffect <player.location> large_smoke qty:50
+            - invisible <player> state:false
+            }
+    
+Reason to Turn Invisible:
+    type: procedure
+    script:
+    - if "<proc[Players Within Range]>" determine true
+    - if "<proc[Npcs Within Range]>" determine true
+    - determine false
+
+Players Within Range:
+    type: procedure
+    script:
+    - define range "<s@Invisibility Sneak.yaml_keys[close_range]>"
+    - define close_players <player.location.find.players.within[<def[range]>].exclude[<player>].get[1]||li@>
+        
+    - if <def[close_players].is_empty> {
+        - define range "<s@Invisibility Sneak.yaml_keys[max_range]>"
+        - define players <player.location.find.players.within[<def[range]>].exclude[<player>].get[1]||li@>
+        - if !<def[players].is_empty> determine true
+        }
+    - determine false
+    
+
+
+Npcs Within Range:
+    type: procedure
+    script:
+    - define range "<s@Invisibility Sneak.yaml_keys[close_range]>"
+    - define close_npcs <player.location.find.npcs.within[<def[range]>].get[1]||li@>
+    - if <def[close_npcs].is_empty> {
+        - define range "<s@Invisibility Sneak.yaml_keys[max_range]>"
+        - define npcs <player.location.find.npcs.within[<def[range]>].get[1]||li@>
+        - if !<def[npcs].is_empty> determine true
+        }
+    - determine false
+
+
+
+
+
+
+

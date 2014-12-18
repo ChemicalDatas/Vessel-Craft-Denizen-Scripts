@@ -1,0 +1,81 @@
+Mod Scripted Fire Protection:
+    script_name: "<red>[<blue>Mod Scripted Fire Protection<red>]<reset>"
+    fire_restoration_delay: d@60s
+    fire_warning: 100
+    fire_emergency: 500
+    
+    blocks:
+    - m@oak_leaves
+    - m@oak_log
+    - m@birch_leaves
+    - m@birch_log
+    - m@spruce_leaves
+    - m@spruce_log
+    - m@leaves
+    - m@oak_planks
+    - m@fence
+    
+    enums:
+    - wood
+    - fence
+    - step
+    - leaves
+    - log
+    - double_step
+    - wall_sign
+    - sign_post
+    - long_grass
+    
+    
+    
+    type: world
+    events:
+        on server start:
+        - announce "<script.yaml_keys[script_name]>: Your server is being protected against fires now." to_console
+        
+        on block burns:
+        - define location <context.location>
+        
+        #could modify to handle bukkit enums too
+        # The next lines are to build up a queue to check the size of.
+        # The intent is that the queue will count down when its executed the tasks at hand.
+        #- if "<script.yaml_keys[blocks].contains[<def[location].material>]>" {} 
+        #- if "<script.yaml_keys[enums].contains[<def[location].material.bukkit_enum>]>" {} 
+        - run ModifyBlock def:<def[location]>|<def[location].material> id:fire_restoration delay:<script.yaml_keys[fire_restoration_delay]>
+        
+        
+        - define size <q@fire_restoration.size||0>
+        
+        - if <server.has_flag[fire_emergency]> {
+            - define fire_locations <def[location].find.blocks[m@fire].within[15]>
+            
+            - define announce_targets <def[location].find.players.within[150]>
+            - define num_fire_blocks <def[fire_locations].size>
+            - define text1 "<script.yaml_keys[script_name]> <red>Server has a fire emergency"
+            - define text2 "<script.yaml_keys[script_name]> <red>fire blocks nearby: <yellow><def[num_fire_blocks]> <blue>@location: <yellow><def[location].simple>"
+            - narrate <def[text1]> targets:<def[announce_targets]>
+            - narrate <def[text2]> targets:<def[announce_targets]>
+            
+            - modifyblock <def[fire_locations]> air naturally
+            - determine cancelled
+            }
+        
+        - if <def[size].is[or_more].than[<script.yaml_keys[fire_emergency]>]> {
+            - if !<server.has_flag[fire_emergency]> flag server fire_emergency duration:60
+            }
+        
+        - if <def[size].is[more].than[<script.yaml_keys[fire_warning]>]> 
+          && <def[size].is[less].than[<script.yaml_keys[fire_emergency]>]> {
+            - if !<server.has_flag[fire_warning]> flag server fire_warning duration:60
+            }
+        
+        
+        on fire spreads:
+        #- announce "spreading fire"
+        - if <server.has_flag[fire_warning]> {
+            - if !<context.location.world.has_storm> weather storm world:<context.location.world>
+            - determine cancelled
+            }
+
+
+

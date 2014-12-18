@@ -1,0 +1,80 @@
+#A set of test chat utilities for having chat click-able links that interact with npcs
+
+#todo: Finish me
+
+"Red or Blue":
+    type: world
+    events:
+        on choice_selector command:
+        - foreach <context.args> {
+            - announce "Argument <def[loop_index]>:<def[value]>"
+            }
+        - determine fulfilled
+
+
+"Test Chat Links":
+    #
+    # This is an example of using denizen to construct a chat link that executes a 
+    # command that denizen then reads the arguments for...
+    # Im thinking useful for...
+    #   spells
+    #   chat inputs
+    #   world teleportations
+    #   command lists
+    #
+    # custom built commands?
+    # smite player selection
+    #   arguments command target
+    #   - foreach <server.list_online_players>
+    type: task
+    script:
+    - execute as_server "tellraw <player.name> {text:'hi there',color:'blue'}"
+    - execute as_server "tellraw <player.name> {text:'Here your Text',color:'Here your color',extra:[{text:'Here your Second Text',color:'Here your Second Color',hoverEvent:{action:'show_text',value:'Here your Hover Text'},clickEvent:{action:'run_command',value:'/choice_selector red_pill swallow_it_quickly'}}]}"
+    
+"Chat Input Formatting":
+    #all text here should be escaped then unescaped before executing
+    #
+    # "Do you want the [clickable link] or the [clickable link]?"
+    # input:
+    #   ...context[word_1|command_1|color_1|hover_text_1|hover_text_color]
+    type: procedure
+    script:
+    - foreach <queue.definitions> { 
+        - define 
+        }
+    
+JSONTest:
+    type: yaml data
+    text: hello there
+    color: blue
+
+tellRaw_test:
+    type: command
+    debug: true
+    name: json
+    description: test json
+    usage: <&nl>/json
+    aliases: ''
+    allowed help:
+    - determine <player||false>
+    script:
+    - define cmd "tellraw <player.name> <s@JSONTest.to_json>"
+    #- execute as_server "tellraw <player.name> {TEXT:'hello there',COLOR:'blue'}"
+    #- execute as_server "tellraw <player.name> {text:'hello there',color:'blue'}"
+    - execute as_server <def[cmd]>
+    - announce "Should have: <blue><def[cmd]>"
+    
+level 1 locked chest:
+    type: inventory
+    inventory: chest
+    title: Locked Chest
+    size: 45
+    definitions: 
+        tumbler: I@IRON_BLOCK
+        walls:   I@IRON_FENCE
+    slots:
+    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"
+    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
+    - "[]        [] [] [] [] [] [] [] [WALLS]"
+    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
+    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"

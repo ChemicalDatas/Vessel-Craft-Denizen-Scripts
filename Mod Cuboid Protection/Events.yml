@@ -1,0 +1,26 @@
+Cuboid Protection Event:
+    player_max_display_queue: 1
+    display_time: 2
+    type: world
+    events:
+        on player damages block:
+        - define owner "<proc[Get Location Property].context[<context.location>|owner]>"
+        #Checking if theres no owner found || location has the player listed as owner
+        - if <def[owner].is[=].to[null]>                            queue clear
+        - if <def[owner].find[<player.name>].is[or_more].than[1]>   queue clear
+        
+        #This checks whether the player already has a display open from spamming the click button on other locations.
+        #This just exits before running the rest of the display script
+        - define q_ID <display_queue_<player.name>>
+        - if <queue.exists[<def[q_ID]>]> {
+            - announce queue_exists
+            - define size <<def[q_ID]>.size>
+            - define max_displays <script.yaml_keys[player_max_display_queue]>
+            - if <def[size].is[more].than[<def[max_displays]>]> determine cancelled
+            }
+        
+        - define text "<escape:li@<blue>This place is|<green>owned by|<yellow><def[owner]>>"
+        - define location "<proc[Entity Display Location].context[<player>]>"
+        - run "Display" "def:<def[location]>|<def[text]>|<script.yaml_keys[display_time]>" id:<def[q_ID]>
+        - determine cancelled
+        

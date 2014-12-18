@@ -1,0 +1,121 @@
+On Join Player Management:
+    type: world
+    subtitle: "Welcome back <gold><player.name>"
+    title: "<blue>Vessel Craft"
+    password_token_lifetime: d@1h
+    mod_title: <blue>[Scripted Account Secure]<reset>
+    password_required_permission: AccountProtection.PasswordRequired
+    login_every_time_permission: AccountProtection.LoginEveryTime
+    script_cooldown: d@10t
+    events:
+        on server start:
+        #- if <server.list_script.contains[<script>]>
+        - announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
+        
+        
+        on player joins:
+        - adjust <player> gamemode:survival
+        - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
+        - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
+          flag player AccountProtection.EnteredPassword:!
+        - wait d@1s
+        - execute as_server "title <player.name> subtitle <&dq><script.yaml_keys[subtitle]><&dq>" silent
+        - execute as_server "title <player.name> title <&dq><script.yaml_keys[title]><&dq>" silent
+        
+        on player toggles flight:
+        - inject locally "path:eligible for password protection"
+        - inject locally "path:action password check"
+        
+        on player uses portal:
+        - inject locally "path:eligible for password protection"
+        - inject locally "path:action password check"
+        
+        on player steps on block:
+        - if <script.cooldown[<player>].is[!=].to[d@0t]>
+          queue clear
+        - inject locally "path:eligible for password protection"
+        - inject locally "path:action password check"
+        
+        on player jumps:
+        - if <script.cooldown[<player>].is[!=].to[d@0t]>
+          queue clear
+        - inject locally "path:eligible for password protection"
+        - inject locally "path:action password check"
+        
+        
+        
+        on command in spawn_lockdown:
+        - if <context.server> queue clear
+        - inject locally "path:eligible for password protection"
+        - inject locally "path:command password check"
+        
+        on set_spawn_lockdown:
+        - determine passively fulfilled
+        - if <player.selected_region||true> {
+            - narrate "You need to select a region first for setting the lockdown region for login commands"
+            - queue clear
+            }
+        - note <player.selected_region> as:spawn_lockdown
+        - narrate "Set <blue<player.selected_region><reset> as the command lockdown area."
+        
+        on login command:
+        - determine passively fulfilled
+        - if <player.has_flag[AccountProtection.EnteredPassword]> {
+            - narrate "<script.yaml_keys[mod_title]> <green>You<&sq>ve already entered your password."
+            - queue clear
+            }
+        - if <player.flag[AccountProtection.Password]> != <context.args.escaped> {
+            - narrate "<script.yaml_keys[mod_title]> <red>Incorrect Password for <player.name.display||<player.name>>"
+            - queue clear
+            }
+        - narrate "<script.yaml_keys[mod_title]> <script.yaml_keys[subtitle]>"
+        - flag player AccountProtection.EnteredPassword:true duration:<script.yaml_keys[password_token_lifetime]>
+        
+        on setpass command:
+        - determine passively fulfilled
+        - define args <context.args.escaped>
+        - flag <player> AccountProtection.Password:<def[args]>
+    
+    
+    
+    #Allows script to continue is theres no protections involved.
+    eligible for password protection:
+    - cooldown <script.yaml_keys[script_cooldown]> s:<script.name>
+    - if <player.has_flag[AccountProtection.EnteredPassword]>
+      queue clear
+    
+    - if !<player.has_permission[<script.yaml_keys[password_required_permission]>]>
+      queue clear
+    
+    
+    
+    command password check:
+    - if !<player.has_flag[AccountProtection.Password]> {
+        - narrate "<script.yaml_keys[mod_title]>
+          <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
+        - determine fulfilled
+        }
+    - if !<player.has_flag[AccountProtection.EnteredPassword]> {
+        - narrate "<script.yaml_keys[mod_title]> <red>You need to enter your <red>PASSWORD."
+        - narrate "<blue>./login (password)"
+        - determine fulfilled
+        }
+
+
+    action password check:
+    - cooldown <script.yaml_keys[script_cooldown]> s:<script.name>
+    - if !<player.has_flag[AccountProtection.Password]> {
+        - narrate "<script.yaml_keys[mod_title]>
+          <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
+        - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
+        }
+    - if !<player.has_flag[AccountProtection.EnteredPassword]> {
+        - narrate "<script.yaml_keys[mod_title]> <red>You need to enter your <red>PASSWORD."
+        - narrate "<blue>./login (password)"
+        - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
+        }
+
+
+
+
+

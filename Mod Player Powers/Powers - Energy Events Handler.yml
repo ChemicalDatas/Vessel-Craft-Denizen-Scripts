@@ -1,0 +1,221 @@
+#todo: have the delta energy change update a nother method of notifying the player of an energy change....
+# like with a boss bar or exp bar... 
+Energy Packet Representation:
+    #
+    # This is a delayed event that needs to be resumed
+    # This queue should be stopped with - queue id:<the queue refrence> stop || clear
+    # so that the rest of the stuff on this queue dose not resume.... if! you dont want the energy
+    # to be put back into the players energy reserve.
+    type: task
+    definitions: delta|modifier|energy_type
+    script:
+    - queue pause
+    # This needs to reverse the modifer as this queue should be resumed
+    # This is the action of recombining the energy back if something failed to use the energy.
+    - narrate "<blue>Returning the requested power"
+    - event "Player Delta Energy" context:delta|<def[delta]>|modifier|<def[modifier]>|energy_type|<def[energy_type]>
+
+Player Powers Energy Events:
+    type: world
+    events:        
+        on player delta energy:
+        ####################################################################################################################
+        #
+        # This is a script event that handles the altering of player energy for player powers.
+        # This can add or subtract, multiply or divide the players power levels according to what you specify.
+        #
+        # context.delta  is the int of change in power level
+        # context.modifier
+        # context.energy_type   for getting the type of flag to modify for the player
+        #
+        ####################################################################################################################
+        - define delta                          <context.delta>
+        - define modifier                       <context.modifier>
+        - define energy_type                    <context.energy_type>
+        - define flag_energy_list               energy.energy_list
+        - define flag_time_flag                 energy.<def[energy_type]>.last checked
+        - define flag_energy_flag               energy.<def[energy_type]>.value
+        - define flag_energy_max                energy.<def[energy_type]>.max
+        - define flag_e_time_increment          energy.<def[energy_type]>.time increment
+        - define cur_time                       <server.current_time_millis.div[1000]>
+        
+        # Cascading check to see of any defaults have been set yet...
+        - if <player.has_flag[<def[flag_energy_max]>]> {
+            - define max_energy                 <player.flag[<def[flag_energy_max]>]>
+            } else {
+            - define required_flags             "<escape:li@<def[flag_time_flag]>|<def[flag_energy_flag]>|<def[flag_energy_max]>|<def[flag_e_time_increment]>>"
+            - define default_values             "<escape:li@<def[cur_time]>      |0                 |-1               |.1                     >"
+            - event "Player Default Energy Flags Check" context:flags|<def[required_flags]>|default_values|<def[default_values]>
+            
+            - wait 2t
+            - define max_energy                 <player.flag[<def[flag_energy_max]>]>
+            }
+        
+        # figuring out the current energy by using temporal distance
+        # reset the time flag for next time its called upon
+        - define delta_time                     <def[cur_time].sub[<player.flag[<def[flag_time_flag]>]>]>
+        - flag player                           <def[flag_time_flag]>:<def[cur_time]>
+        
+        # figuring out the new energy
+        #   time energy addition, slow gain
+        - define time_increment                 <player.flag[<def[flag_e_time_increment]>]>
+        - define base_energy                    <player.flag[<def[flag_energy_flag]>]>
+        - define energy_over_time               <def[delta_time].mul[<def[time_increment]>]>
+        - define new_base_energy                <def[energy_over_time].add[<def[base_energy]>]>
+        
+        # Max energy capping
+        - if <def[new_base_energy].is[more].than[<def[max_energy]>]>    define new_base_energy <def[max_energy]>
+        - define total_energy                                           <math:<def[new_base_energy]><def[modifier]><def[delta]>>
+        - if <def[total_energy].is[or_more].than[<def[max_energy]>]>    define total_energy <def[max_energy]>
+        
+        - flag player <def[flag_energy_flag]>:<def[total_energy]>
+        - determine <def[total_energy]>
+        
+        
+        
+        on player default energy flags check:
+        - announce "Default flags initialization in progress..."
+        - define flags_to_check <context.flags.unescaped>
+        - define default_values  <context.default_values.unescaped>
+        - foreach <def[flags_to_check]> {
+            - announce "checking for flag: <def[value]>"
+            - if <player.has_flag[<def[value]>]> foreach next
+            - define default_value <def[default_values].get[<def[loop_index]>]>
+            - flag player <def[value]>:<def[default_value]>
+            
+            - announce "setting flag: <def[value]>"
+            - announce "to: <def[default_value]>"
+            }
+        - event "Player Energy Discovery Check" context:energy|<>|default_values|<>
+        
+        
+        
+        on player request energy:
+        #
+        # An event that returns an energy packet of the players energy.
+        # A 'energy packet' is a set of commands that return the energy taken back to the players energy pool
+        # Resume the queue if you want to return the energy back into the players energy pool.
+        # Else stop or clear the energy packet with - queue id:<entry[event energy packet].determination> (clear || stop)
+        #
+        # # It is possible to request a positive amount of energy.... But the energy packet will be a
+        # # negative energy value to return the original value
+        # 
+        - define delta <context.amount>
+        - define action <context.action>
+        - define energy_type <context.energy_type>
+        - if <def[action].is[==].to[+]>    define counter_action -
+        - if <def[action].is[==].to[-]>    define counter_action +
+        - if <def[action].is[==].to[*]>    define counter_action /
+        - if "<def[action].is[==].to[/ ]>" define counter_action *
+        
+        
+        - event "Player Delta Energy" context:delta|<context.amount>|energy_type|<def[energy_type]>|modifier|<def[action]> save:Energy_Result
+        - run "Energy Packet Representation" def:<context.delta>|<def[after_mod]>|<context.energy_type> id:<player.name>_Epacket_<util.random.duuid> save:Energy_Packet
+        - define Energy_Result <entry[Energy_Result].determination>
+        - define energy_packet <entry[Energy_Packet].created_queue>
+        
+        #todo: Feedback for the player "<def[energy]>: <def[ammount_remaining]>"
+        # if the net energy is negative release the energy back to the player pool
+        - if <def[Energy_Result].is[less].than[0]> {
+            - narrate "<yellow><context.energy_type> <blue>energy: <light_purple><def[Energy_Result]>..."
+            - queue id:<def[energy_packet].id> resume
+            - queue id:<context.queue.id> clear
+            - determine "Not Enough Energy"
+            }
+        - queue id:<context.queue.id> resume
+        - determine <entry[energy_packet].created_queue>
+        
+
+        
+        
+        on player starts charging:
+        # the while script should run in a queue so that multiple charge checks arnt running at the same time... like
+        # advantages to teabaggers...
+        
+        # first 3 element while script are for the while scripts function.
+        #   the condition to check each iteration
+        #   the script to run if check is true
+        #   and the delay between each check
+        #
+        # the last 3 elements are for the charge script
+        #   the change in energy
+        #   the operator to perform the value change with (add or subtract from stored values)
+        #   the value is the type of energy to perform data on
+        
+        # The wait 1t is so that the script has time to let the player fulfill whatever condition. 
+        - wait 1t
+        - if !<player.has_flag[energy.energy_list]> queue clear
+        - foreach <player.flag[energy.energy_list].as_list> {
+            - define delay          "<player.flag[energy.<def[value]>.time increment]>"
+            - define condition      "<player.flag[energy.<def[value]>.condition]>"
+            - define delta_energy   "<player.flag[energy.<def[value]>.charge increment]>"
+            - define energy_type    "<def[value]>"
+            - define args           "<def[delta_energy]>|+|<def[energy_type]>"
+            - run "Run Script While" def:<def[condition]>|Charge|<def[delay]>|<escape:<def[args]>> id:<player.name>_<def[energy_type]>_charging_queue
+            }
+        
+    
+#
+
+"Charge":
+    type: task
+    definitions: increment|modifier|type
+    script:
+    - event "player delta energy" context:delta|<def[increment]>|modifier|<def[modifier]>|energy_type|<def[type]>
+    
+    
+"Cooldown Warm Handler for Player Powers":
+    # 
+    # A set of events that track cooldowns
+    # Manages callbacks for warmups
+    #   a warm up requires a callbacks
+    #   A callback can be a queue
+    #   A condition to meet
+    #   A task to run on each check
+    type: world
+    events:
+        on cooldown:
+        # <context.object> the unique object (should be a string with no special chars)
+        # <context.time> The cooldown
+        # <context.queue> To clear if there is a cooldown
+        # <context.task> to call when cooldown is up
+        # <context.args> to pass to the script when run
+        - define cooldown <script.name>.<context.object>.cooldown
+        #todo: Create a display showing how much cooldown time is left the the skill.... boss bar maybe?
+        - if <player.has_flag[<def[cooldown]>]> {
+            - narrate "<blue>cooldown completion <yellow>in <light_purple><player.flag[<def[cooldown]>].expiration>"
+            - queue queue:<context.queue.id> clear
+            - queue clear
+            }
+        - flag player <def[cooldown]> duration:<context.time>
+        - queue queue:<context.queue.id> resume
+        
+        #todo: Create a display showing how much cooldown time is left the the skill.... boss bar maybe?
+        - if <context.task.type.is[==].to[task]> {
+            - run <context.task> def:<context.args.unescaped> delay:<context.time>
+            }
+
+warmup:
+    #
+    # This is a script that keeps running a task until the condition returns false
+    # While this is running, if the current condition ever returns false, 
+    # this will clear the queue passed on runtime
+    # Each iteration updates the current condition
+    # Upon Creation you should save the id of this script and after a wait, clear this queue
+    # should you ever want to stop the "condition timer"
+    #
+    type: task
+    definitions: queue|condition|script|script_args|check_time
+    script:
+    - if <def[check_time]> == null define check_time d@1s
+    - define current_condition <<def[condition]>>
+    - while <def[current_condition]> {
+        - narrate "current condition: <def[condition]> <def[current_condition]> <blue>passed"
+        - run <def[script]> def:<def[script_args].unescaped>
+        - wait <def[check_time]>
+        - define current_condition <<def[condition]>>
+        }
+    - narrate "<script.name> <red>condition failed"
+    - queue queue:<def[queue].id> clear
+        
+        

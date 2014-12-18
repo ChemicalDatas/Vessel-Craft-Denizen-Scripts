@@ -1,0 +1,347 @@
+#Tasks - Actions Sets are composites of tasks - Base Sets.
+#This adds to the id:<npc.id>_action_queue a set of Tasks from the base set.
+#These should be scheduled from the npcs flag intention_queue
+
+#info: THESE ARE QUEUE LEVEL SCRIPTS. THIS IS JUST A LAYER OF SCRIPTS THAT MANAGE THE <npc.id>_action_queue
+#THERE SHOULD BE NO SUBQUEUES.
+#THSE SHOULD HANDLE THE BASE SETS DIRECTLY!
+#THERE SHOULD NO QUEUE LEVEL SCRIPTS IN A QUEUE LEVEL SCRIPT. 
+#If there is the queue will not execute in the order the user intends.
+
+
+Queue Scheduler:
+    type: task
+    definitions: task|tag_escaped_args
+    script:
+    - run <def[task]>
+      def:<def[tag_escaped_args].unescaped>
+      id:<npc.id>_action_queue
+
+
+
+Sleep On:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # todo: Make a timer gradually count down the  tiredness to wake-able lvls                                               #
+    # This should engage the npc so that he cant be woken up by the player unless his                                           #
+    # tiredness lvl is above a threshold                                                                                        #
+    # Enage the npc so that players cant interact with him.#                                                                    #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # todo: place needs to cover the whole bed with a blanket                                                               #
+    # todo: Teleport needs to pick the right location for sleeping on the bed                                                #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # This contains the first uses for multiple queues for a npc to handle.                                                     #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: location
+    script:
+    - define location 
+      <def[location]||<npc.location>>
+      
+    - run "Walk To"
+      def:<def[location]>
+      id:<npc.id>_action_queue
+      
+    - run "Pause Queue"
+      id:<npc.id>_action_queue
+    
+    - run Look
+      def:<def[location]>
+      id:<npc.id>_action_queue
+    
+    - run Teleport
+      def:<def[location].above>
+      id:<npc.id>_action_queue
+    
+    - run Engage
+      id:<npc.id>_action_queue
+    
+    - run Animate
+      def:SLEEP
+      id:<npc.id>_action_queue
+    
+    - run Action
+      "def:Completed Task|<escape:task|<script.name>>"
+      id:<npc.id>_action_queue
+    
+    ##########################################################
+    #This is just so I don't have to do it later, debug code.#
+    ##########################################################
+    - run Wait
+      def:d@10s-15s
+      id:<npc.id>_action_queue
+    
+    - run Wake
+      id:<npc.id>_action_queue
+    
+
+Sleep Nearby:
+    type: task
+    script:
+    - define suitable_beds
+      "<proc[Find Sleepables]>"
+      
+    - define bed
+      <def[suitable_beds].get[first]||none>
+    
+    - if <def[bed]> == none
+      queue clear
+    
+    - run "Sleep On"
+      def:<def[bed]>
+
+
+Wake:
+    type: task
+    script:
+    - run DisEngage
+      id:<npc.id>_action_queue
+      
+    - run Animate
+      def:STOP_SLEEPING
+      id:<npc.id>_action_queue
+    
+    - run Action
+      "def:Completed Task|<escape:task|<script.name>>"
+      id:<npc.id>_action_queue
+
+
+
+Walk and Look:
+    type: task
+    definitions: location
+    script:
+    - run "Walk To"
+      def:%location%
+      id:<npc.id>_action_queue
+      
+    - run "Pause Queue"
+      id:<npc.id>_action_queue
+    
+    - run Look
+      def:%location%
+      id:<npc.id>_action_queue
+    
+
+Navigate To:
+    #
+    # This changes the npc tactic to a navigating one
+    #
+    type: task
+    definitions: location_list
+    script:
+    - flag npc
+      state:->:navigating
+    
+    - flag npc
+      nav_waypoints:->:<def[location_list].unescaped||<npc.location>>
+    
+    - run "Walk To" def:%location%
+      id:<npc.id>_action_queue
+      
+    - run "Pause Queue"
+      id:<npc.id>_action_queue
+
+
+
+
+
+
+
+
+
+
+
+
+
+Drink Something:
+    type: task
+    script:
+    #Get a list of items from the global food database
+    - define drink_list
+      li@i@exp_bottle|i@milk_bucket|i@potion
+      
+    - run Drink
+      def:<def[food_list].random>
+    
+    
+
+Drink:
+    type: task
+    definitions: item
+    script:
+    - define previous_item
+      <npc.item_in_hand>
+    - run "Equip Args"
+      def:<escape:hand:%item%>
+      id:<npc.id>_action_queue
+      
+    - run "Drink Effect"
+      def:%item%
+      id:<npc.id>_action_queue
+    
+    - run "Equip Args"
+      def:<escape:hand:i@air>
+      id:<npc.id>_action_queue
+    
+    - run "Equip Args"
+      def:<escape:hand:%previous_item%>
+      id:<npc.id>_action_queue
+    
+    - run Action
+      "def:completed task|<escape:task|<script.name>>"
+      id:<npc.id>_action_queue
+    
+
+
+Eat Something:
+    type: task
+    script:
+    #Get a list of items from the global food database
+    - define food_list
+      li@i@cooked_salmon|i@baked_potato|i@cookie
+      
+    - run Eat
+      def:<def[food_list].random>
+
+
+
+Eat:
+    #Requires a denizen item. 'i@Whatever the item is'
+    type: task
+    definitions: item
+    script:
+    - define previous_item
+      <npc.item_in_hand>
+      
+    - run "Equip Args"
+      def:<escape:hand:%item%>
+      id:<npc.id>_action_queue
+    
+    - run "Eat Effect"
+      def:%item%
+      id:<npc.id>_action_queue
+    
+    - run "Equip Args"
+      def:<escape:hand:i@air>
+      id:<npc.id>_action_queue
+    
+    - run "Equip Args"
+      def:<escape:hand:%previous_item%>
+      id:<npc.id>_action_queue
+    
+    - run "Action"
+      "def:completed task|<escape:task|<script.name>>"
+      id:<npc.id>_action_queue
+    
+
+
+Sit On:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: location
+    script:
+    - run "Walk and Look"
+      def:<def[location]>
+      id:<npc.id>_action_queue
+    
+    - run "Teleport"
+      def:<def[location]>
+      id:<npc.id>_action_queue
+    
+    - run "Animate"
+      def:sit
+      id:<npc.id>_action_queue
+    
+    - run "Animate"
+      def:stop_sitting
+      id:<npc.id>_action_queue
+    
+
+Sit Nearby:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    #Display above the npc the status that it could not find a location to sit at.
+    - define locations
+      "<proc[Find Sitables].context[10]>"
+    
+    - define available_seat
+      <def[locations].get[1]||none>
+    
+    - if <def[available_seat]> == none 
+      || <def[available_seat].is_empty>
+      queue clear
+    
+    - run "Sit On"
+      def:<def[available_seat]>
+      id:<npc.id>_action_queue
+
+
+
+
+Location Available:
+    #todo: Fixme, returns true for <player.location>
+    #A procedure to determine if a location is 'available'. 
+    #To see if the location above it contains entities.
+    #Like for beds / chairs
+    type: procedure
+    definitions: location
+    script:
+    - define cuboid
+      cu@<def[location]>|<def[location].above>
+      
+    - if <def[cuboid].list_entities.is_empty>
+      determine true
+    
+    - determine false
+    
+
+
+
+
+
+
+
+
+
+
+
+Claim Location:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    #Walk to a sign, save it, then break it
+    #todo: make a better way for a npc to claim a zone with notables.
+    definitions: location
+    script:
+    #A cuboid reqires a loward bound and an upward bound.
+    #Loop though all connected building blocks and build the hight and low corners for it.
+    - define cuboid
+      "<proc[Cube Surrounding Location].context[%location%|10]>"
+      
+    - note %cuboid%
+    
+
+
+Remember Location:
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    #remember the location of a sign and save it in memory
+    type: task
+    definitions: location
+    script:
+    -

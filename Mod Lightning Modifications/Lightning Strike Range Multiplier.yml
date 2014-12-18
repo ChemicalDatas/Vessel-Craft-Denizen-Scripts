@@ -1,0 +1,84 @@
+
+Lightning Strike Range:
+    type: world
+    
+    attractive weapons: "li@m@iron_sword    |m@gold_sword       |m@diamond_sword        |m@fishing_rod      |m@anvil    |m@iron_door    |m@redstone_torch   |m@redstone_wire    |m@hopper"
+    attractive iron:    "li@m@iron_boots    |m@iron_leggings    |m@iron_chestplate      |m@iron_helmet"
+    attractive chain:   "li@m@chain_boots   |m@chain_leggins    |m@chain_chestplate     |m@chain_helmet"
+    attractive gold:    "li@m@gold_boots    |m@gold_leggings    |m@gold_chestplate      |m@gold_helmet"
+    attractive diamond: "li@m@diamond_boots |m@diamond_leggings |m@diamond_chestplate   |m@diamond_helmet"
+    attractive blocks:  "li@m@iron_block    |m@iron_ore         |m@iron_fence           |m@gold_block       |m@gold_ore |m@diamond_ore  |m@diamond_block  |m@mob_spawner    |m@anvil    |m@redstone_wire    |m@redstone_torch   |m@iron_door    |m@hopper"                                            
+    attraction range: 15
+    
+    
+
+    events:
+        #todo: adjust script to redirect lightning to conductive entities
+        #Lightning re-direction
+        on lightning strikes:
+        - define range "<script.yaml_keys[attraction range]>"
+        - define target_blocks "<script.yaml_keys[attractive blocks]>"
+        - define location <context.location>
+        
+        #Use a cuboid to determine a better string location outset a square then add height to the sky block checking
+        # use cuboids feature highest
+        # then use a fake lightning strike to not trigger another redirection
+        # from that lightning strike trigger event code for splash && custom damage
+        
+        - define blocks <def[location].find.blocks[<def[target_blocks]>].within[<def[range]>]>
+        - if !<def[blocks].is_empty> {
+            - define new_possible_location <def[blocks].get[1].highest>
+            - if !<def[new_possible_location].find.blocks[<def[target_blocks]>].within[<def[range]>].is_empty> {
+                - strike <context.location>
+                } else {
+                - strike <context.location>
+                }
+            }
+        
+        
+        on lightning strikes:
+        #Check for conductive materials if there are within ammount move lightning
+        - define range "<script.yaml_keys[attraction range]>"
+        - define location <context.location>
+        - define entities <def[location].find.living_entities.within[<def[range]>]>
+        #If theres entities within the range of the lightning, encour splash damage based on distance
+        #Give chance for multiple lightning strikes within location.highest
+        
+        #Decide on changing lightnings strike point
+        # if strike is within 15m of entities, 50<def[ of the time its canceled
+        # 50]> to redirect the lightning allowing strikes 2 or more times
+        
+        
+        #- foreach
+        #- if !<def[entities].is_empty> event "Lightning Redirection"    context:location|<def[entities]>
+        #- if !<def[entities].is_empty> event "Lightning Splash Damage"  context:entities|<def[entities]>
+        
+        
+        #TODO: Check for new location
+        #- if <proc[Threshold_Random_Sucess].context[1|2]> = true && <<def[entities]>> != null {
+        #    - define locations <>
+        #    - strike "<find better target>"
+        #    - determine cancelled
+        #    }
+        
+        
+        #Determine damage based on distance to lightning
+        #- hurt <def[damage]> <def[entity]>
+        
+        #- foreach <def[nearby_entities]> {
+        #    - define distance <context.location.distance[<def[value].location>]>
+        #    - if <def[]>
+        #    - narrate "You were hurt with lightning. Find cover, and dont wear anything that might attract it again."
+        #    }
+        - determine passively cancelled
+        
+        
+        on lightning splash damage:
+        -
+        
+        on entity damaged by lightning:
+        #<context.cause> returns the reason the entity was damaged. 
+        #<context.damage> returns the amount of damage dealt. 
+        #<context.entity> returns the dEntity that was damaged.
+    
+

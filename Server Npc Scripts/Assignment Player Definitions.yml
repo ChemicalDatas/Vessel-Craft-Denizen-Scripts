@@ -1,0 +1,70 @@
+﻿"Player Definition Assign":
+    type: assignment
+    
+    interact scripts:
+    - 0 Player Definition Interact
+    
+    default constants:
+        yaml path: "G:/Vessel Craft Minecraft Server/Player Files/<player.name>.yml"
+        main menu options: "OPTION: VALUE, Create, Load"
+        npc self identification: "I a player manager. I handle all info that the player give me."
+        possible options: "last_join, ip, money, last_inventory, class, gender, clan, house_hold, nick_name, story_born, killed_npcs, supporter_rank"
+
+    actions:
+        on assignment:
+        - trigger name:chat state:true 
+        - trigger name:click state:true
+            
+        on click:
+        - chat "<cons:npc self identification>"
+        - narrate format:ScriptOptions "<cons:main menu options>"
+    
+"Player Definition Interact":
+    type: Interact
+    requirement:
+        Mode: none
+        List: 
+        - op
+    steps:
+        "default":
+            chat Trigger:
+                'change key value':
+                    Trigger: "/REGEX:.+/"
+                    script:
+                    - ^define flag "<context.message.split[ ].get[1]>"
+                    - ^define value "<context.message.split[ ].get[2]>"
+                    - chat "I will record that %flag% is %value%."
+                    - flag player %flag%:%value%
+                    
+                'Create a New Yaml':
+                    Trigger: "/Create/ New Yaml"
+                    script:
+                    - yaml create id:<player.name>_definition
+                    - chat "Ok, ready to write to it."
+                    
+                'Load a Yaml':
+                    Trigger: "/Load/ Created Yaml"
+                    script:
+                    - yaml "load:<cons:yaml path>" id:<player.name>_definition
+                    - chat "Ok, ready your file is loaded."
+                    
+                    
+                "Write to File":
+                    trigger: "/write/ to temp yml and clear my key value settings."
+                    script:
+                    - ^narrate "Wrote: KEY: <player.flag[SK]> VALUE: <player.flag[SV]>"
+                    # Determine if the intended value is a single or list. Determines how its written to file.
+                    - if <player.flag[SSL]> = true yaml "write:<player.flag[SK]>" "value:<player.flag[SV].as_list>" "id:<s@KV Assign.constant[constants.id]> else yaml "write:<player.flag[SK]>" "value:<player.flag[SV].as_list>" split_list "id:<s@KV Assign.constant[constants.id]>"
+                    - ^flag player SV:!
+                    - ^flag player SK:!
+                    
+                'Save a Yaml':
+                    Trigger: "/Save/ Created Yaml"
+                    script:
+                    - yaml "savefile:<cons:yaml path>" id:<player.name>_definition
+                    - chat "Ok, ready your file is loaded."
+                    
+                    
+                    
+ 
+ 

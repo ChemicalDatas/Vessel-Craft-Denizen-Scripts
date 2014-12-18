@@ -1,0 +1,31 @@
+#A library of material reactions when a called upon.
+
+#Create a script that fills in missing material information. And a script that enables editing (adding / removing)
+#of items on this database
+
+#info: havnt figured out the icon_crack yet. That might be where the auto script for filling this out might come in handy.
+
+"Material Interaction Defaults":
+    type: task
+    script:
+    -
+    
+    cobblestone:
+    - step_stone
+    - dig_stone
+    
+    anvil:
+        sound:
+        - anvil_hit
+        effect:
+        - iconcrack_
+        - smoke
+        - drip_lava
+        - flame
+    
+    glass:
+        sound:
+        - glass_break
+        effect:
+        - iconcrack_
+    

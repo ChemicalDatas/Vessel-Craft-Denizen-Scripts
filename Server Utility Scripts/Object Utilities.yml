@@ -1,0 +1,85 @@
+#A set of scripts designed to replicate global namespace objects
+#
+#instead of define a new command called object?
+#- object noob.intelligence ????
+#
+#- define noob.intelligence "5"
+#- define noob.coding_skills "0"
+#- narrate "noob with <def[noob].intelligence> brains and <def[coding_skills]> coding skills is realllllyyy a noob"
+#- foreach <li@Each|time|he|studies> {
+#    - define noob.intelligence ++
+#    - define noob.coding_skills ++
+#    }
+Object Database On Start Setup:
+    Database: Object_Database
+    type: world
+    events:
+        on server start:
+        - run "Yaml Load" def:|<script.yaml_keys[database]>
+
+object:
+    #
+    # Returns an object id that coresponds to a temp yaml database entry
+    #
+    type: procedure
+    definitions: unique_name
+    script:
+    - if !<def[unique_name].exists> define object_id <util.random.uuid>
+    - yaml id:<script.yaml_keys[database]> set 
+    - determine <def[object_id]>
+
+object get:
+    type: procedure
+    definitions: object_id|attribute|as_list?
+    script:
+    - if !<def[as_list?].exists> {
+        - define as_list? ""
+        } else {
+        - define as_list? ".as_list"
+        }
+    - if <yaml[<def[object_id]>].contains[<def[attribute]>]> {
+        - determine <yaml[<def[object_id]>].read[<def[path]>]<def[as_list?]>>
+        } else {
+        - determine null
+        }
+
+object set:
+    # Takes escaped value|list pairs
+    # #Could be list of arguments then a list of values
+    type: procedure
+    definitions: object_id|attrib_value_set
+    script:
+    - foreach <queue.definitions> {
+        - if <def[value]> == object_id foreach next
+        - define object_attrib_value_set <def[<def[value]>].unescaped>
+        - define path <def[object_attrib_value_set].get[1]>
+        - define value <def[object_attrib_value_set].get[2]>
+        - yaml id:<def[object_id]> set <def[path]>:<def[value]>
+        
+        - narrate "<def[object_attrib_value_set].get[1]> <def[object_attrib_value_set].get[2]>"
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

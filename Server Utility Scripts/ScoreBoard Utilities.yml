@@ -1,0 +1,139 @@
+#A set of procedures designed to manipulate Scoreboards
+
+"ScoreBoard Defaults":
+    type: world
+    events:
+        on scoreboard_test command:
+        
+    default constants:
+        menu check delay: 20t
+ 
+
+####################################################################
+################## Base Set ########################################
+####################################################################
+
+#todo: Cannot Have messages longer than 16 characters wide!
+"Show Side Text":
+    type: task
+    definitions: objective|text_list
+    script:
+    - scoreboard add viewers:<player> lines:<unescaped:<def[text_list]>>  objective:<def[objective]> displayslot:sidebar
+    
+"Clear Side Text":
+    type: task
+    script:
+    - scoreboard remove viewers:<player> 
+
+"Update Side Text":
+    type: task
+    definitions: text|new_text
+    script:
+    -
+    
+
+
+####################################################################
+################## Base Group Set ##################################
+####################################################################
+
+"Show Side Text Group":
+    type: task
+    definitions: text_list|p_list
+    script:
+    -
+    
+
+"Clear Side Text Group":
+    type: task
+    definitions: text_list|p_list
+    script:
+    - scoreboard remove viewers:<def[p_list]>
+
+
+
+####################################################################
+################## Flash Set #######################################
+####################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################################
+################## Multi-Line Set ##################################
+####################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################################
+################## Scrolling Set ###################################
+####################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################################
+################## Special Set #####################################
+####################################################################
+
+#A Special Set of Displays for custom situations.
+
+
+"Show Npc Task Queue":
+    type: task
+    script:
+    - scoreboard add viewers:<player> "lines:<tern[<npc.flag[task_queue].is[EQUALS].than[null]>]:Nothing!||<npc.flag[task_queue].as_list>>"  objective:<npc.name>_queue displayslot:sidebar
+    - wait 8
+    - scoreboard remove viewers:<player> objective:<npc.name>_queue
+
+"Show Npc Task Status":
+    type: task
+    script:
+    - scoreboard add viewers:<npc.world.players> "obj:<npc>_current_task" lines:<npc.flag[task_queue]> displayslot:below_name

@@ -1,0 +1,12 @@
+Tcat test:
+    Type: assignment
+    actions:
+        on enter proximity:
+        - chat "Entering Trave's area." 
+        on exit proximity:
+        - chat "Leaving Trave's area."
+        on assignment:
+        - lookclose <npc>           state:true
+        - trigger name:chat         state:true
+        - trigger name:proximity    state:true
+        - chat "Now entering Trave's area."

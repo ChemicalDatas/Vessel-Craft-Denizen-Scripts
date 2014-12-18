@@ -1,0 +1,67 @@
+#A library of item componets for minecraft items.
+#todo: write a denizen script that will update all the mincraft items with thier:
+#   id
+#   data
+#   repairable
+#   is_crop
+#   is_book
+#   is_potion
+#   material.formatted
+#   material
+#   scriptname
+#   apple_enchanted
+#   max_uses
+#   Stage of growth
+#
+#   
+#   book.author
+#   book.title
+#   page_count
+#   book.pages.escaped
+#   book.pages
+#   book
+#
+#   CUSTOMITEM
+#   display
+#   has_display (custom_item)
+#   has_lore
+#   lore
+#   
+#   POTIONS
+#   has_potion_effect
+#   potion_effect.is_splash
+#   potion_effect.is_extended
+#   potion_effect.level
+#   potion_effect.type
+
+
+#fixme: finish me
+"Update Item in Items Database":
+    #a script to fill in some fields for the items script
+    type: task
+    definitions: item
+    script:
+    -
+
+#fixme: finish me
+"Update Book in Books Database":
+    #a script to fill in the list of books written on the server.
+    type: task
+    definitions: book
+    script:
+    -
+
+
+
+"Items":
+    type: task
+    script:
+    
+    "Air":
+        material:
+        recipie:
+        -
+        -
+        -
+        componets:
+        -

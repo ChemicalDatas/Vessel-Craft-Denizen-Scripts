@@ -1,0 +1,43 @@
+#This is a direction of scripts to run
+#Some way to interpret a key as a script or a replaceable tag that resolves to a list
+Test Menu:
+    type: task
+    script:
+    
+    narrate:
+        title: narrate
+        script:
+        arguments:
+        
+    search:
+        title: search
+        options:
+        - food
+        - water
+        - items
+        - weapons
+        script:
+        
+    teleport to:
+        title: Teleport Menu
+        script: tp player to
+        arguments:
+        
+        #any other key in the value is automaticaly turned into a menu option
+        #if title is not provided, take it from the parent menus name.
+        #Also replaceable tags for the script to input the value back to the waiting script.
+        #The transformer option transforms 
+        nearby players:
+            #
+            options: <player.location.find.players.within[100]>
+            transformer: ".location"
+            script: "teleport to location"
+            arguments: <option>
+        
+        
+        nearby entities:
+            options: <player.location.find.players.within[100]>
+            transformer: ".location"
+    
+    
+#

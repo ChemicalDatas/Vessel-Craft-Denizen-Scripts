@@ -1,0 +1,21 @@
+# This allows users to schedule a task with args for a server time.
+# Schedule the task "Clear up items on the ground by removal for every minecraft day at noon"
+
+Scheduled Task For Server Time:
+    header: "<&lb><script.name><&rb>"
+    type: world
+    events:
+        on time changes in w@hub:
+        - define hour <context.time>
+        - if <server.has_flag[time_scheduled_tasks.<def[hour]>]> {
+            - foreach <server.flag[time_scheduled_tasks.<def[hour]>]> {
+                - define task <server.flag[time_scheduled_tasks.<def[hour]>]>
+                - define name <def[task].get[1]>
+                - define args <def[task].get[2].to[<def[task].size>]>
+                
+                - announce "<script.yaml_keys[header]>: Running task: <def[task]>" to_console
+                - run <def[name]> def:<def[args]>
+                }
+            }
+        
+

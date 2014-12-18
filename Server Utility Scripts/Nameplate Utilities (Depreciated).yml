@@ -1,0 +1,133 @@
+#Old sets of Depreciated Code for the nameplate utilities
+
+############################### Other Methods of Getting a Display... 
+
+"Depreciated Shoot Display":
+    #testmounting
+    type: task
+    script:
+    - define loc <player.location.cursor_on[20]>
+    - narrate "Players looking at: <def[loc]>"
+    - shoot HORSE|WITHER_SKULL "orgin:<def[loc]>" "speed:0" "gravity:0" "script:Shoot Test Script" 
+    
+
+"Depreciated Shoot Test Script":
+    type: task
+    script:
+    - announce "last entity: <def[last_entity]>"
+    - announce "shot entities:<def[shot_entities]>"
+    - announce "location:<def[location]>"
+    - announce "hit entities:<def[hit_entities]>"
+    
+
+
+
+
+
+#Using Denizen to create the anchor and the mount
+#and using denizen to mount the horses to the skull and have them recorded.
+#Summon n Mount
+"Depreciated Spawn Display":
+    type: task
+    definitions: location|display_type|sudo_word_list
+    script:
+    #This sets the values needed to determine what line goes where
+    - ^define word_list "<el@<def[sudo_word_list]>.replace[;].with[|]>"
+    - ^define size "<li@<def[word_list]>.size>"
+    - ^define word_index "<proc[Reverse Index In Range].context[<def[size]>]>"
+    
+    #This stuff determines values based on entity location and sign type
+    - ^define type "<s@Display Defaults.constant[constants.display <def[display_type]>]>"
+    - ^define base_age "<proc[Height to Age].context[<def[type]>]>"
+    - ^define entity_location "<<def[location]>.add[0,<def[type]>,0]>"
+    #- ^define entity_location "<<def[location]>>"
+    
+    #todo: better way to remove an already displayed display
+    #clears the old flags
+    - if <def[display_type]> = personal {
+        - ^remove <player.flag[display].as_list>
+        - ^flag player display:!
+        } else {
+        - ^remove <server.flag[Server_Displays.<<def[location]>.simple>].as_list>
+        - ^flag server "Server_Displays.<<def[location]>.simple>:!"
+        }
+    
+    - repeat <def[size]> {
+        - define text "<li@<def[word_list]>.get[<<def[word_index]>.get[<def[value]>]>]>"
+        - define line_age "<proc[Line to Age].context[<def[value]>]>"
+        - define age "<math.as_int:<def[base_age]> - <def[line_age]>>"
+        
+        - create Horse <def[text]> <def[entity_location]> save:name_plate
+        - define line <entry[name_plate].created_npc>
+        
+        - execute as_server "npc select <<def[line]>.id>"
+        - execute as_server "npc gravity"
+
+        - narrate "<<def[line]>.name>'s age is: <def[age]>"
+        - narrate "<<def[line]>.name>'s position is: <<def[line]>.location.simple>"
+        
+        - age <def[line]> <def[age]>
+        - if <def[display_type]> = personal {
+            - ^flag player display:|:<def[line]>
+            } else {
+            - ^flag server "Server_Displays.<<def[location]>.simple>:|:<def[line]>"
+            }
+        }
+    
+
+
+
+
+#info: this is the first version of the task to create displays
+"Depreciated Summon Display":
+    #Input of a location
+    #type is a string consising of
+    #3 types of displays. Each type determines visibility distance.
+    #personal
+    #server
+    #picture
+    # word list is an escaped list.
+    type: task
+    definitions: location|type|word_list
+    script:
+    - define word_list "<unescape:<def[word_list]>>"
+    - define type "<s@Display Defaults.constant[constants.display <def[type]>]>"
+    - if <def[type]> = null {
+        - define type "60"
+        }
+
+    #remove npc triggers and assign a suitable assignment script for the display
+    - ^flag server "Server_Displays.<<def[location]>.simple>:!"
+    - ^define size "<li@<def[word_list]>.size>"
+    - ^define base_age "<proc[Height to Age].context[<def[type]>]>"
+    - ^define word_index "<proc[Reverse Index In Range].context[<def[size]>]>"
+    - ^define entity_location "<<def[location]>.add[0,<def[type]>,0]>"
+    
+        #Add to stack on top of the starting line.
+        #Subtract to stack under the starting line.
+    - repeat <def[size]> {
+        - define line "<li@<def[word_list]>.get[<<def[word_index]>.get[<def[value]>]>]>"
+        - define line_age "<proc[Line to Age].context[<def[value]>]>"
+        - define age "<math.as_int:<def[base_age]> - <def[line_age]>>"
+        - ^execute as_server "summon EntityHorse <<def[entity_location]>.x> <<def[entity_location]>.y> <<def[entity_location]>.z> {Riding:{id:WitherSkull,direction:[0.0,0.0,0.0]},CustomName:<def[line]>,CustomNameVisible:1,Invulnerable:1,Age:<def[age]>}"
+        }   
+    - ^flag server "Server_Displays.<<def[location]>.simple>:|:<<def[entity_location]>.find.entities[WitherSkull|Horse].within[1]>"
+    
+
+
+"Depreciated Close Display":
+    #removes a set of displays defined by a list of positions
+    type: procedure
+    definitions: location_list
+    script:
+    - foreach <def[location_list]> {
+        - define location "<<def[value]>.simple>"
+        - remove "<server.flag[Server_Displays.<def[location]>].as_list>"
+        - flag server "Server_Displays.<def[location]>:!"
+        }
+    
+
+"Depreciated Close Personal Display":
+    type: task
+    script:
+    - remove "<player.flag[display].as_list>"

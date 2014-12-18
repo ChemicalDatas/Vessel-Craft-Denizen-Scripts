@@ -1,0 +1,29 @@
+"ScriptOptions":
+    type: format
+    format: "Your options are: <gold><text>"
+    
+"Toggled":
+    type: format
+    format: "<red>TOGGLED: <dark_gray><text>"
+    
+
+"Debug":
+    type: format
+    format: "[<bold><red>DEBUG<reset>]: <blue><text>"
+    
+
+"Color Codes Announcment":
+    type: task
+    script:
+    - narrate "<black>&0 - Black        <dark_blue>&1 - Dark Blue       <dark_green>&2 - Dark Green"
+    - narrate "<dark_aqua>&3 - Dark Aqua  <dark_red>&4 - Dark Red        <dark_purple>&5 - Dark Purple"
+    - narrate "<gold>&6 - Gold         <gray>&7 - Grey              <dark_gray>&8 - Dark Gray"
+    - narrate "<blue>&9 - Blue         <green>&a - Green            <aqua>&b - Aqua"
+    - narrate "<red>&c - Red          <light_purple>&d - Light_Purple    <yellow>&e - Yellow"
+    - narrate "<white>&f - White         <gold>&l - <bold>Bold           <reset><gold>&n - <underline>Underline"
+    - narrate "<gold><italic>&o - Italic        <reset><gold>&k - <magic>Magic             <reset><gold>&m - <strikethrough>StrikeThrough"
+    - narrate "<reset><gold>&r - Reset"
+    
+"Formatted":
+    type: format
+    format: "<proc[Iconize].context[<text>]>"

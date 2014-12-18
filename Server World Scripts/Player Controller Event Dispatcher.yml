@@ -1,0 +1,426 @@
+#todo: set up the a temp yaml that gets forgotten at then end of a server restart 
+#to avoid writing large ammounts of data to the player saves file
+
+Controller Event Detection2:
+    # 3t is very fast, 5t is kinda slow so 4t is close....
+    sneak doubletap timeout:
+      d@5t
+    concentrate counter:
+      d@6t
+    focus counter:
+      d@10t
+    type: world
+    events:
+        #################################################
+        # Event catcher for double tapping sneak key    #
+        #################################################
+        on player starts sneaking:
+        - define key <player.name>.<script.name>.sneak_doubletap
+        - define duration "<script.yaml_keys[sneak doubletap timeout]>"
+        
+        - run "Write Timed Data"
+          def:++|%key%|<def[duration]>|temp
+          instantly
+        
+        - if <yaml[temp].read[<def[key]>]> < 2
+          queue
+          clear
+        
+        - define event_list li@
+        - define event_list
+          "<def[event_list].include[player doubletap sneak]>"
+          
+        - event <def[event_list]> 
+          context:player|<player>|level|<yaml[temp].read[<def[key]>]>
+        
+        
+        
+        #########################################################################################
+        # smart crouch jump                                                                     #
+        # Players using smartmoving auto uncrouch during a jump. This is to catch that          #
+        # Issues when standing on half blocks or partial solid blocks like doors, fences....    #
+        #########################################################################################
+        on player stops sneaking:
+        - define event_list li@
+        - define context li@
+        - wait 1t
+        - if <player.fall_distance.is[more].than[.01]>
+          && <player.fall_distance.is[less].than[.8]> {
+            - if !<player.location.sub[0,0.50,0].material.is_solid> 
+              define event_list 
+                "<def[event_list].include[player smart crouch jump]>"
+            }
+        - if <def[event_list].is_empty> 
+          queue 
+          clear
+        
+        - event <def[event_list]> 
+          context:<def[context]>
+        
+        
+        
+        #####################################################
+        # pass location and amount of times concentrated    #
+        # concentration event                               #
+        #####################################################
+        on player right clicks block:
+        - define duration 
+          "<script.yaml_keys[concentrate counter]>"
+          
+        - define action 
+          "timed concentrate counter"
+          
+        - define location 
+          <context.location>
+          
+        - define location_name 
+          <def[location].simple>
+          
+        - define key 
+          <player.name>.<def[action]>.<def[location_name]>
+        
+        - run "Write Timed Data" 
+          def:++|<def[key]>|<def[duration]>|temp
+          instantly
+          
+        - define event_list li@
+        - define event_list 
+          "<def[event_list].include[player concentrates|player concentrates on block|player concentrates on <def[location].material>]>"
+          
+          
+        - event <def[event_list]> 
+          context:location|<def[location]>|level|<yaml[temp].read[<def[key]>]>
+        
+
+        
+        #################################
+        # Entity concentration event    #
+        #################################
+        on player right clicks entity:
+        - define duration
+          "<script.yaml_keys[concentrate counter]>"
+          
+        - define action
+          "timed concentrate counter"
+          
+        - define entity
+          <context.entity>
+          
+        - define location
+          <def[entity].location>
+          
+        - define key
+          <player.name>.<script.name>.<def[action]>.<def[entity]>
+        
+        #########################################################################################
+        #write temp yaml data to the temp yaml file (the file auto resets every 6 hrs or so)    #
+        #########################################################################################
+        - run "Write Timed Data" 
+          def:++|<def[key]>|<def[duration]>|temp 
+          instantly
+          
+        - define event_list li@
+        - define event_list
+          "<def[event_list].include[player concentrates|player concentrates on entity|player concentrates on <def[entity].entity_type>]>"
+          
+        - event <def[event_list]> 
+          context:entity|<def[entity]>|level|<yaml[temp].read[<def[key]>]>|location|<def[location]>
+
+        
+        
+        
+        
+        ###############################################################################################################
+        #info: This dose not include when the player madly scrolls the wheel, as it only checks for -1, 8 or 1,-8....#
+        #info: This only checks a max distance of 50 blocks for entitys                                              #
+        #                                                                                                            #
+        # Making the event for the scroll focus event                                                                #
+        ##############################################################################################################
+        on player scrolls their hotbar:
+        - define event_list         li@
+        - define context_list       li@
+        - define location           <player.location.cursor_on.simple.as_location>
+        - define target             <player.target||<player.location.cursor_on.simple.as_location>>
+        
+        - define duration 
+          "<script.yaml_keys[focus counter]>"
+          
+        - define action
+          "timed focus counter"
+        
+        - define key
+          <script.name>.<def[action]>.<def[target]>
+        
+        #################################################################################################
+        #write temp yaml data to the temp yaml file (the file auto resets every 6 hrs or on server stop)#
+        #################################################################################################
+        - run "Write Timed Data" 
+          def:++|<def[key]>|<def[duration]>|temp
+          instantly
+        
+        - define event_list
+          "<def[event_list].include[player focus]>"
+        - define context_list
+          <def[context_list].include[level|<yaml[temp].read[<def[key]>]>|location|<def[location]>]>
+        
+        
+        #adding entity / block focus event
+        - if <def[target].is[==].to[<def[location]>]> {
+            - define event_list
+              "<def[event_list].include[player focuses on block|player focuses on <def[location].material>]>"
+            
+            } else {
+            
+            - define event_list
+              "<def[event_list].include[player focuses on entity|player focuses on <def[entity].entity_type>]>"
+            
+            - define context_list
+              <def[context_list].include[entity|<def[target]>]>
+            }
+        
+        - event <def[event_list]>
+          context:<def[context_list]>
+    
+
+
+
+
+Controller Event Detection:
+    type: world
+    events:
+        on player scrolls their hotbar:
+        - define event_list     li@
+        - define context_list   li@
+        - define indicator      <context.previous_slot.sub[<context.new_slot>]>
+        
+        ##############################################
+        #Setting scroll event for scrolling down / up#
+        ##############################################
+        - if <def[indicator].is[==].to[1]>
+          || <def[indicator].is[==].to[-8]>
+          define event_list 
+          "<def[event_list].include[player scrolls up]>"
+        
+        - if <def[indicator].is[==].to[-1]>
+          || <def[indicator].is[==].to[8]>
+          define event_list
+          "<def[event_list].include[player scrolls down]>"
+        
+        
+        - define context_list
+          "<def[context_list].include[previous_slot|<context.previous_slot>|new_slot|<context.new_slot>|indicator|<def[indicator]>]>"
+        
+        - event <def[event_list]>
+          context:<def[context_list]>
+        
+        
+        
+        #############################
+        # Sprint Click Catchers     #
+        #############################
+        on player right clicks:
+        - define event_list li@
+        - define context    li@
+        
+        - if <player.is_sprinting>
+          define event_list
+          "<def[event_list].include[player sprint right click]>"
+          
+        - if <player.is_sneaking>
+          define event_list
+          "<def[event_list].include[player sneak right click]>"
+          
+        - if <def[event_list].is_empty>
+          queue clear
+          
+        #Building a tuple of information for the context, escaped
+        - define context_element
+          <el@location|<context.location>.escaped>
+          
+        - define context 
+          <def[context].include[<def[context_element]>]>
+        
+        - event <def[event_list].unescaped> 
+          context:<def[context]>
+        
+        #############################
+        # Types of events for click #
+        #############################
+        on player left clicks:
+        - define event_list li@
+        - define context li@
+        - if <player.is_sprinting> 
+          define event_list
+          "<def[event_list].include[player sprint left click]>"
+          
+        - if <player.is_sneaking>
+          define event_list
+          "<def[event_list].include[player sneak left click]>"
+          
+        - if <def[event_list].is_empty>
+          queue clear
+         
+        - event <def[event_list]>
+          context:<def[context]>
+        
+
+        
+        #########################################
+        # player charge start (keep crouching)  #
+        #########################################
+        on player starts sneaking:
+        - wait 5t
+        
+        - if !<player.is_sneaking>
+          queue clear
+        
+        - define context    li@
+        - define event_list li@
+        - define event_list
+          "<def[event_list].include[player charge start]>"
+        
+        - event <def[event_list]>
+          context:<def[context]>
+        
+        
+        
+        
+        #########################
+        # Sudden Start Catchers #
+        #########################
+        on player stops sneaking:
+        - define event_list li@
+        - define context    li@
+        - wait 1t
+        - if <player.is_sprinting>
+          define event_list
+          "<def[event_list].include[player sudden start]>"
+          
+        - if <def[event_list].is_empty>
+          queue clear
+          
+        - event <def[event_list]>
+          context:<def[context]>
+        
+
+        on player starts sprinting:
+        
+        
+        #########################
+        # Sudden Stop Catcher   #
+        #########################
+        on player stops sprinting:
+        - define event_list li@
+        - define context li@
+        - wait 1t
+        - if <player.is_sneaking>
+          define event_list
+          "<def[event_list].include[player sudden stop]>"
+          
+        - if <def[event_list].is_empty> 
+          queue clear
+          
+        - event <def[event_list]>
+          context:<def[context]>
+        
+        
+        
+        
+        #################################
+        # Sprint / crouch Jump Catcher  #
+        #################################
+        on player jumps:
+        - define event_list li@
+        - define context li@
+        - if <player.is_sprinting>
+          define event_list
+          "<def[event_list].include[player sprint jump]>"
+        
+        
+        # Players with smart moving will not be able to get this event as smart moving uncrouches the player before the jump 
+        - if <player.is_sneaking>
+          define event_list
+          "<def[event_list].include[player crouch jump]>"
+          
+        - if <def[event_list].is_empty> 
+          queue clear
+          
+        - event <def[event_list]>
+          context:<def[context]>
+        
+        
+
+        
+        on player chats:
+        #chat activation 
+        
+        on player uses portal:
+        #- announce "players using portal"
+        #perhaps portal activation like sneaking into portal
+        #dashing into portal?
+        
+        on player clicks in inventory:
+        # can detect the item clicked
+        # can detect the action performed
+        
+        on player animates:
+        #- narrate "<yellow><player.name> <green>just did: <blue><context.animation> <green>animation."
+        # detects the type of animation
+        
+        on player right clicks material:
+        #can detect shift click too
+        on player left clicks material:
+        #can detect shift click too
+    
+###########################################################################################################################
+########################## CUSTOM PLAYER EVENT DETECTION ##################################################################
+###########################################################################################################################        
+
+#Custom Events Examples:
+    #type: world
+    #events:
+        #on player crouch jump:
+        #- announce "Player crouch jumped!"
+        #on player smart crouch jump:
+        #- announce "Player <gold> smart crouch jumped!"
+        #on player sprint jump:
+        #- announce "Player sprint jumped!"
+        #on player doubletap sneak:
+        #- announce "Player doubletap sneak lvl: <context.level>"
+        #on player sudden start:
+        #- announce "Player sudden start detected"
+        #on player sudden stop:
+        #- announce "player sudden stop detected"
+        #on player sprint right click:
+        #- announce "Player sprint right click"
+        #on player sprint left click:
+        #- announce "Player sprint left click"
+        #on player sneak right click:
+        #- announce "Player sneak right click"
+        #on player sneak left click:
+        #- announce "Player sneak left click"
+        
+        #The player focus event is similar to the player concentrate event.
+        #It counts the ammount of scrolling on the mouse wheel when pointed at a block or entity
+        #on player focus:
+        #on player focuses on entity:
+        #on player focuses on block:
+        #on player scrolls up:
+        #on player scrolls down:
+        #on player scrolls on item:
+        #on player scrolls on <item>>
+        
+        #on player concentrates:
+        #on player concentrates on entity:
+        #on player concentrates on <entity_type>:
+        #on player concentrates on block:
+        #on player concentrates on <material>:
+        
+        #on player concentrates:
+        #- announce "<player.name> concentration level: <blue><context.level>"
+        
+
+
+###########################################################################################################################
+###########################################################################################################################
+###########################################################################################################################

@@ -1,0 +1,108 @@
+#A set of scripts for the simulation of the mod Epic Glass.
+
+"Connected Blocks":
+    type: procedure
+    definitions: location|block_list
+    script:
+    - announce "<script.name> ~~~~~~~~~~~~~~~ Starting location search with: <def[location]> ~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    - announce "<script.name> ~~~~~~~~~~~~~~~ Block list is: <def[block_list].unescaped> ~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    - define glass_list li@m@glass|m@stained_glass
+    
+    #this is because the connected similar blocks dose not add the orgin to the list.
+    - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[location]>]>"
+    - define locations <proc[CSBL].context[<def[location]>|null|<def[glass_list].escaped>|<def[block_list]>|null]>
+    
+    - if <def[locations]> != null {
+        - foreach <def[locations].as_list> {
+            - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[value]>]>"
+            - define try_again <proc[CSBL].context[<def[value]>|<def[block_list]>]>
+            }
+        }
+    - determine <def[block_list].unescaped>
+
+
+"CSBL":
+    ############################################################################################################################
+    #                                                                                                                          #
+    # Connected Similar Block Locations                                                                                         #
+    # A script that returns the locations of all blocks touching a block. Optional Filters                                     #
+    # Blacklist has priority over the white_list. Any item in the blacklist will not allow the whitelist to add items to it.   #
+    #                                                                                                                           #
+    #                                                                                                                          #
+    # Direction is optional as it provides the orders the elements the list.                                                   #
+    # This is more powerful as you can specify a block search pattern....                                                      #
+    #                                                                                                                          #
+    # This is a double check to see of the blocks are on white list / black list for location and material.                    #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    # notice: This filters blocks by location                                                                               #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: procedure
+    definitions: location|mb_list|mw_list|lb_list|lw_list|direction
+    script:
+    #                    above, north, east, south, west, below
+    - define direction <def[direction].unescaped.as_list||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+    - foreach <def[direction]> {
+        - define locat <def[location].add[<def[value]>]>
+        - define mater <def[locat].material>
+        - if "<proc[Meets Black White List].context[<def[mater]>|<def[mb_list]>|<def[mw_list]>]>" {
+            - if "<proc[Meets Black White List].context[<def[locat]>|<def[lb_list]>|<def[lw_list]>]>" {
+                - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[locat]>]>"
+                }
+            }
+        }
+    - determine <def[block_list].unescaped||li@>
+
+
+"CSBl v2":
+    type: procedure
+    definitions: location|flag_name
+    script:
+    - define flag_name <def[flag_name]||temp_data.<util.random.duuid>>
+    - define connected_blocks <server.flag[<def[flag_name]>].as_list.escaped>
+    - define material_white li@m@glass
+    
+    - foreach "<proc[Connected Similar Block Locations].context[<def[location]>|null|<def[material_white]>|<def[connected_blocks]>|null]>" {
+        - flag server <def[flag_name]>:->:<def[value]>
+        }
+    
+    #I might need to add more checks for what the flag poping might return if its null.
+    - define next_block "<proc[Flag Pop Left].context[<def[flag_name]>]>"
+    - if <def[next_block]> != null {
+        - define try_again "<proc[Connected Similar Blocks v2].context[<def[next_block]>|<def[flag_name]>]>"
+        } 
+
+    - define blocks <server.flag[temp_data.<def[flag_name]>]>
+    - flag server <def[flag_name]>:!
+    - determine <def[blocks]>
+
+
+
+
+
+"Glass Break Event":
+    # Under npc base sets. Its a npc task but its a standalone task with only 1 command.
+    # Modifyblock Changes the air back into glass after a period of time.
+    # Neighbour Blocks dose have a material filter on it. But I just wanted to check 
+    # if the material has glass in the name. 
+    # So I don't need to check for 32 different kinds of items in the list.
+    type: task
+    definitions: location
+    script:
+    - define material <def[location].material>
+    - define id <def[material].id>
+    
+    - modifyblock <def[location]> m@air
+    - playsound <def[location]> sound:GLASS
+    - playeffect <def[location]> effect:iconcrack_<def[id]> qty:500
+    - run "Modifyblock" def:<def[location]>|<def[material]> delay:d@20s-1m
+    
+    - foreach "<proc[Neighbour Blocks].context[<def[location]>]>" {
+        - if <def[value].material.contains[glass]> {
+            - run "Glass Break Event" def:<def[value]> instantly
+            }
+        }
+
+

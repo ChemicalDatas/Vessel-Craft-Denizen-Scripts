@@ -1,0 +1,59 @@
+# Script that notifies a player with a sound when somone mentions thier name.
+
+Custom Player Kits:
+    noob:
+        group_requirements:
+        - dreamer
+        cooldown: d@1d
+    edit_tools:
+        cooldown: d@1d
+        group_requirements:
+        - dreamer
+        
+    script_tools:
+        cooldown: d@1d
+        group_requirements:
+        - dreamer
+        
+
+
+    
+    type: world
+    events:
+        on kit command:
+        - define message <context.message>
+
+
+    # the kit contents    
+    kit_noob:
+        i@iron_block:
+            amount:
+            - 1
+            name:
+            - Iron Will
+            - Cold Steel
+            - Paper Weight
+            - <player.name>'s Heart
+            lore:
+            - <player.names>
+            - A piece of <player.names> cold iron heart!
+        i@seeds:
+        i@pumpkin_seeds:
+        i@melon_seeds:
+        i@coal_block:
+        
+        i@darkoak_sapling:
+        i@oak_sapling:
+        i@acacia_sapling:
+        i@jungle_sapling:
+        i@birch_sapling:
+        i@spruce_sapling:
+        i@oak_sapling:
+        
+        i@bread:
+        i@cobblestone:
+        i@fishing_rod:
+        i@leather_helmet:
+        i@leather_chestplate:
+        i@leather_leggings:
+        i@leather_boots:

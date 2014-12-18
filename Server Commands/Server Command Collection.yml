@@ -1,0 +1,350 @@
+# A set of vesselcraft commands
+
+Commands:
+    ############################################################################################################################
+    # A set of server commands usable on a server. Some might be useful some might not be.                                     #
+    #                                                                                                                          #
+    #                                                                                                                          #
+    ############################################################################################################################
+    type: world
+    debug: false
+        
+    
+    ########################################################################################################################
+    #                                                                                                                      #
+    # Default Allowed groups for commands                                                                                  #
+    #                                                                                                                      #
+    ########################################################################################################################
+    constants:
+        ########################################################################################################################
+        #                                                                                                                      #
+        # Each "arg" is the replaceable text for each argument sent with the shortcuts command.                                #
+        #                                                                                                                      #
+        ########################################################################################################################
+        search: "he search p:arg t:arg"
+        say: "say arg"
+        express: "express arg"
+        colors: "colors"
+        allowed_groups:
+        - Owner
+        - Admin
+        - MasterBuilder
+        - Moderator
+        - Builder
+        
+        title: "[<blue>Vessel<gold>Craft<reset>]"
+    
+    
+    ########################################################################################################################
+    #                                                                                                                      #
+    # Default Messages                                                                                                     #
+    #                                                                                                                      #
+    ########################################################################################################################
+    message:
+        _permission denied: "<gold>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
+        facebook page: "https://www.facebook.com/VesselCraft"
+        server page: ""
+        
+        voting page: "http://minecraft-mp.com/server-s32672"
+        teamspeak ip: "vesselcraft.minecraftnoob.com"
+        teamspeak password: "noob"
+        teamspeak download: "http://www.teamspeak.com/?page=downloads"
+        
+        chat notify true:  "Chat Notifications <red>ON<dark_gray>. Chatting <player.name> will play a sound for you."
+        chat notify false: "Chat Notifications <red>OFF<dark_gray>. Chatting <player.name> will <red>not<dark_gray> play a sound for you."
+    
+        place notify true:  "Place Notifications <red>ON<dark_gray>. Placing Debug is true."
+        place notify false: "Place Notifications <red>OFF<dark_gray>. Placing Debug is false."
+    
+    
+    ########################################################################################################################
+    #                                                                                                                      #
+    # is permitted is the basic set for perms checking.                                                                    #
+    #                                                                                                                      #
+    ########################################################################################################################
+    is permitted:
+    - if !<context.server> {
+        - define groups <script.yaml_keys[allowed_groups]>
+        - if "!<proc[In Allowed Group].context[<def[groups].escaped>]>" {
+            - narrate format:Formatted "<script.yaml_key[message._permission denied]>"
+            - queue clear
+            }
+        }
+    
+    events:
+        on vc command:
+        ########################################################################################################################
+        #                                                                                                                      #
+        # A command shortener based upon the data in the scripts constants: shortcut                                           #
+        # Option to change later is the ammount of arguments passed with the command.                                          #
+        # Just change the first args.get[your number] to whatever you want.                                                    #
+        #                                                                                                                      #
+        ########################################################################################################################
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        
+        - define shortcut <context.args.get[1]>
+        - define args <context.args.get[2].to[<context.args.size>]>
+        - define input <script.yaml_keys[%shortcut%]>
+        - define input "<def[input].split[ ]>"
+        - define arg_index 1
+        - define new_input ""
+        
+        ########################################################################################################################
+        #                                                                                                                      #
+        # Rebuilding the command sent                                                                                          #
+        # If word = arg replace arg with the next value in the args sent with the command                                      #
+        # increment arg_index so to get next index                                                                             #
+        #                                                                                                                      #
+        ########################################################################################################################
+        - foreach <def[input]> {
+            - define next_arg <def[args].get[<def[arg_index]>]>
+            - if <def[value].contains[arg]> {
+                - define new_input "<def[new_input]> <def[value].replace[arg].with[<def[next_arg]>]>"
+                - define arg_index <def[arg_index].add[1]>
+                } else {
+                - define new_input "<def[new_input]> <def[new_value]>"
+                }
+            }
+        
+        #Just a filter from the null of a short command that's not there
+        - if <def[new_input]> != null || <def[new_input]> != "" execute as_op <def[new_input]>
+        
+        
+        on server_debug command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - if <server.has_flag[debug_output]> {
+            - narrate "[Server Debug] Toggled Console Output: <red>off" 
+            - flag server debug_output:!
+            } else {
+            - narrate "[Server Debug] Toggled Console Output: <red>on"
+            - flag server debug_output:true
+            }
+        
+        
+        on debug command:
+        - determine passively fulfilled
+        - flag server
+        - define toggle_true "Debug On"
+        - define toggle_false "Debug Off"
+        - run "Toggle Flag" "def:desires_debug|%toggle_true%|%toggle_false%|Toggled"
+        
+        
+        
+        on dnick command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        
+        - if <context.args.size.is[more].than[1]> {
+            - define player <context.args.get[1]>
+            - define player <server.match_player[<def[player]>]||none>
+            - if <def[player]> == none {
+                - narrate "could not find a matching player for <context.args.get[1]>"
+                - queue clear
+                }
+            - define name <context.args.get[2].as_string>
+            } else {
+            - define player <player>
+            - define name <context.args.as_string>
+            }
+        
+        - define name <proc[Iconize].context[<def[name]>]>
+        - run "Rename Player" def:<def[name]> as:<def[player]>
+        - narrate "<gray>Trying to change <reset><def[player].name>'s <gray>name to: <reset><def[name]><reset>."
+        
+        
+        
+        on colors command:
+        - determine passively fulfilled
+        - inject "Color Codes Announcment"
+        
+
+        on bossbar command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define args <context.args.escaped>
+        - define words <proc[Iconize].context[<def[args].escaped>]>
+        - define debug_output "<red>Announcing to server online players: <green><def[words]>"
+        - narrate format:Formatted <def[debug_output]>
+        
+        - run "Boss Bar" def:<def[words]>
+        
+        
+        
+        on teamspeak command:
+        - determine passively fulfilled
+        - narrate format:Formatted "<green><script.yaml_key[message.teamspeak ip]>"
+        - narrate format:Formatted "<password>: <green><script.yaml_key[message.teamspeak password]>"
+        
+        
+        
+        on vote command:
+        - determine passively fulfilled
+        - narrate format:Formatted "<green><script.yaml_key[message.voting page]>"
+        
+        
+        
+        on webpage command:
+        - determine passively fulfilled
+        - narrate format:Formatted "<green><script.yaml_key[message.server page]>"
+        - narrate format:Formatted "<green><script.yaml_key[message.facebook page]>"
+        
+        
+        
+        
+        #as well as general clean up
+        on timesync command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - if <server.has_flag[pause_time_sync]> {
+            - ^narrate "The world time is <green>now <reset>syncing with server time."
+            - ^flag server "pause_time_sync:!"
+            } else {
+            - ^narrate "The world time is <red>not <reset>syncing with server time." 
+            - ^flag server "pause_time_sync:true"
+            }
+        
+        
+        
+        on clearchat command:
+        - determine passively fulfilled
+        - run "Player Chat Clearing" def:19
+
+        
+        
+
+        
+        on placenotify command:
+        - determine passively fulfilled
+        - define toggle_true "<script.yaml_key[message.place notify true]>"
+        - define toggle_false "<script.yaml_key[message.place notify false]>"
+        - run "Toggle Flag" "def:place_notifications|%toggle_true%|%toggle_false%|Toggled"
+        
+        
+        
+        on chatnotify command:
+        - determine passively fulfilled
+        - define toggle_true "<script.yaml_key[message.chat notify true]>"
+        - define toggle_false "<script.yaml_key[message.chat notify false]>"
+        - run "Toggle Flag" "def:chat_notifications|%toggle_true%|%toggle_false%|Toggled"
+        
+        
+        
+        on signedit command:
+        # This command depends on the mod server sign handling
+        # This only sets up the options for the server to handle the player break sign event.
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        
+        - define line <context.parsed_args.get[1]>
+        - define text <context.parsed_args.get[2]>
+        - define is_int "Is int: <proc[Is Int].context[%line%]>"
+        - if "!<proc[Is Int].context[%line%]>" || %line% == null {
+            - narrate format:SAI "You did not specify a line to edit. That should be your 2nd argument."                           
+            - narrate format:SAI "<bold>ex: <reset><&dot><&bs><blue>signedit <yellow>1 <gray><&dq>This is your first line<&dq>"
+            - queue clear
+            }
+        - if %text% = null {
+            - define text "<reset>"
+            } else {
+            - define text <proc[Iconize].context[%text%]>
+            }
+            
+        - narrate format:Formatted "<gray>Ready to edit line<white>: <gold>%line% <gray>with: <reset>%text%"
+        - narrate format:Formatted "<gray>Please <underline>punch <gray>the <gold>sign(s) <gray>you want to change in <gold>10 <gray>seconds."
+        
+        - flag player "editing_sign:%line%|%text%" duration:10
+        
+        
+        
+        on display command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        
+        - define display "<context.args.get[1]>"
+        - define location <player.location.cursor_on[3]>
+        
+        - narrate "Summoning Display for you now."
+        - narrate "Please step back, as its anchor is there."
+        - narrate "Just chat to the display. It will change the display based on what you chat."
+        - execute as_op "npc create 'server display'"
+        - execute as_op "npc playerlist"
+        - invisible <player.selected_npc> toggle:true
+        - execute as_op "npc assign --set 'Nameplate Attractor'"
+##############################################################################################################################        
+        on player changes gamemode:
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
+        
+        on gms command:
+        - determine passively fulfilled
+        - adjust <player> gamemode:survival
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        
+        on gma command:
+        - determine passively fulfilled
+        - adjust <player> gamemode:adventure
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        
+        on gmc command:
+        - determine passively fulfilled
+        - adjust <player> gamemode:creative
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        
+        on fly command:
+        - determine passively fulfilled
+        - adjust <player> can_fly:true
+        - narrate "<script.yaml_keys[constants.title]> <yellow>You can now fly."
+        
+        on smite command:
+        - determine passively fulfilled
+        - strike <player.location.cursor_on[100]>
+        
+        on time command:
+        - determine passively fulfilled
+        - narrate "<script.yaml_keys[constants.title]> <yellow>The time is <player.world.time>t / <player.world.time.full>"
+        
+        on day command:
+        - determine passively fulfilled
+        - time 0t
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Set the time to <player.world.time> ticks."
+        
+        on sun command:
+        - determine passively fulfilled
+        - weather sunny
+        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>SUN"
+        on storm command:
+        - determine passively fulfilled
+        - weather storm
+        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>STORM"
+        on thunder command:
+        - determine passively fulfilled
+        - weather thunder
+        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>THUNDER"
+        
+        on world command:
+        - determine passively fulfilled
+        - define world <context.args.get[1]>
+        - if !<server.list_worlds.contains[<def[world].as_world>]> {
+            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]><&nl><green><def[world]><yellow> was not on that list."
+            - queue clear
+            }
+        - teleport <def[world].as_world.spawn_location>
+        - narrate "<script.yaml_keys[constants.title]> <yellow>Ok, sending you to <def[world]>"
+#   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

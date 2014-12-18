@@ -1,0 +1,113 @@
+# A Script to create yaml files.
+"Yaml Assign":
+    type: assignment
+    
+    interact scripts:
+    - 0 Writing Test
+
+    constants:
+        #The path in the Vessel Craft Minecraft Server/Player Files
+        full path: "../../../Player Files/<player.name>.yml"
+        path: "scripts/User Scripts/<player.name>/<player.name>_script.yml"
+        ext path: "Vessel Craft Minecraft Server/Player Files/<player.name>.yml"
+        id: "<player.name>script"
+        
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:chat state:true
+
+"Writing Test":
+    type: interact
+    requirements:
+        mode: none
+    steps:
+        'default':
+            click Trigger:
+                script:
+                - narrate format:ScriptOptions "NEW SCRIPT, LOAD, KEY (your key), VALUE (your value), WRITE , SAVE, "
+                - narrate format:ScriptOptions "VALUE TYPE (Toggle: list, single), SPLIT LIST (Toggle: true, false)"
+                
+            chat Trigger:
+                "New Yaml":
+                    trigger: "Lets create a /new script/."
+                    script:
+                    - define id "<s@Yaml Assign.constant[constants.id]>"
+                    - ^yaml create "id:<%id%>"
+                    - ^narrate "Script Created. Ready to write to it."
+                    
+                "Load Yaml":
+                    trigger: "Lets create /load/ a premade script."
+                    script:
+                    #Need to define and use the definition like this because of the args in the constant that need to be parsed first.
+                    - define path "<s@Yaml Assign.constant[constants.path]>"
+                    - define id "<s@Yaml Assign.constant[constants.id]>"
+                    
+                    - ^yaml "load:<%path%>" "id:<%id%>"
+                    - ^narrate "Script Loaded. Ready to write to it."
+                
+                "The Key Is":
+                    trigger: "The key is /REGEX:key.+/."
+                    script:
+                    - ^define key "<context.message.after[key ]>"
+                    - ^narrate "KEY: <def[key]>"
+                    - ^flag player SK:<def[key]>
+                    
+                "The Value Is":
+                    trigger: "I want to add /REGEX:value.+/ to the list."
+                    script:
+                    - ^define value "<context.message.after[value ]>"
+                    #- narrate "definition: <def[value]>"
+                    #- narrate "raw value: %value% "
+                    #- narrate "context: <context.message>"
+                    - if <player.flag[SVT]> = single {
+                        - ^flag player "SV:<%value%>"
+                        - ^narrate "VALUE: %value%"
+                        } else {
+                        - ^flag player "SV:->:<%value%>"
+                        - ^narrate "VALUE:->: %value%"
+                        }
+                    
+                "Script Options Split List":
+                    trigger: "Lets change how I write the data to the yaml. <blue>/Split List/."
+                    script:
+                    - if <player.flag[SLT]> != true {
+                        - flag player SLT:true
+                        } else {
+                        - flag player SLT:false
+                        }
+                    - ^chat "I changed the split list type to: <red><player.flag[SLT]>"
+                    
+                "Script Options Value Type":
+                    trigger: "I want to change the <blue>/Value Type/."
+                    script:
+                    - if <player.flag[SVT]> != single {
+                        - flag player SVT:single
+                        } else {
+                        - flag player SVT:list
+                        }
+                    - ^chat "I changed the value type to: <red><player.flag[SVT]>"
+                    
+                "Write to File":
+                    trigger: "/write/ to temp yml and clear my key value settings."
+                    script:
+                    - define id "<s@Yaml Assign.constant[constants.id]>"
+                    
+                    # Determine if the intended value is a single or list. Determines how its written to file.
+                    - if <player.flag[SLT]> = true {
+                        - yaml "write:<player.flag[SK]>" "value:<player.flag[SV].as_list>" split_list "id:<%id%>"
+                        - narrate "splitting list up"
+                        } else {
+                        - yaml "write:<player.flag[SK]>" "value:<player.flag[SV]>" "<id:%id%>"
+                    - ^narrate "Wrote: KEY: <player.flag[SK]> VALUE: <player.flag[SV]>"
+                    - ^flag player SV:!
+                    - ^flag player SK:!
+                    
+                "Save to Disk":
+                    trigger: "/save/ to file."
+                    script:
+                    #Need to define and use the definition like this because of the args in the constant that need to be parsed first.
+                    - define path "<s@Yaml Assign.constant[constants.full path]>"
+                    - define id "<s@Yaml Assign.constant[constants.id]>"
+                    - yaml "savefile:<%path%>" "id:<%id%>"
+                    - narrate "Wrote file to:<&nl> <%path%>"

@@ -1,0 +1,14 @@
+# Autosaves Npcs and Denizens States on every 15mins
+# Narrates to server
+
+Autosave:
+    type: world
+    debug: false
+    values:
+        #15mins
+        autosave_time: 900
+        
+    events:
+        on server start:
+        - run "Repeated Task Call" "def:Citizens Denizens Autosave|<script.yaml_key[values.autosave_time]>|Autosave" delay:20
+

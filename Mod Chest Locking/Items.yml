@@ -1,0 +1,116 @@
+Default Book Lock:
+    type: book
+    title: <player.name.display>'s Lock Book
+    author: <player.name.display>
+    text:
+    - <red>Players<&co>
+    - <red>Groups<&co>
+    - <red>Costs<&co>
+    - <red>Passwords<&co>
+    
+Book Lock:
+    type: item
+    material: book_and_quill
+    display name: <blue><magic>ii<blue>Configurable Lock<magic>ii
+    recipe:
+    - i@air|i@magic_redstone|i@air
+    - i@book_of_identfying|i@book_of_separation|i@book_of_denying
+    - i@air|i@magic_redstone|i@air
+    lore:
+    - <white>Configurable Lock for matching costs and identitys.
+    - <blue>players, groups, passwords, costs, denys
+    - ''
+    - <white>The first word of each page must contain the type of procedure the book will check
+    - <white>followed by a new_line (enter button)
+    - <blue>players
+    - <blue><player.name||No_player_to_speak_of>
+    - <blue><server.list_ops.random.name>
+    - <blue>(and so on)
+    - ''
+    - <white>The cost page must match a<&co> ditem, bukkit item or bukkit material.
+    - <blue>costs
+    - <blue>10-i@oak_planks
+    - <blue>10-cubes
+    - <blue>200-exp
+    - <blue>10-health
+    - ''
+    - <white>The groups page must look like this<&co>  (group must match a server permission group)
+    - <blue>groups
+    - <blue>dreamer
+    - <blue>admin
+    - <blue>masterbuilder
+    - ''
+    - <white>The passwords page should be like this
+    - <blue>passwords
+    - <blue>let me in
+    - <blue>12345==bad_pass
+    - <blue><server.list_ops.random.name> is awesome!
+    - ''
+    - <white>The pay to page must look like this<&co> (actual names, <red>not nicknames<white>)
+    - <white>All paid proceeds will be divided between all players listed here.
+    - <blue>pay to
+    - <blue><player.name||No_player_to_speak_of>
+    - <blue><server.list_ops.random.name>
+    - <blue>
+    - <blue>
+    
+    
+Coal Lock:
+    type: item
+    material: coal
+    display name: <black>Coal Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@coal_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    
+
+Redstone Lock:
+    type: item
+    material: redstone
+    display name: <red>Redstone Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@redstone_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    
+
+Iron Lock:
+    type: item
+    material: iron_ingot
+    display name: <gray>Iron Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@iron_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    
+
+Gold Lock:
+    type: item
+    material: gold_ingot
+    display name: <gold>Gold Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@gold_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+   
+
+Lapis Lock:
+    type: item
+    material: lapis_lazuli
+    display name: <dark_blue>Lapis Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@Lapis_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    
+
+Diamond Lock:
+    type: item
+    material: diamond
+    display name: <aqua>Diamond Lock
+    recipe:
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    - i@oak_planks|i@diamond_block|i@oak_planks
+    - i@oak_planks|i@oak_planks|i@oak_planks
+    

@@ -1,0 +1,123 @@
+# A Script to add yaml files with custom items in-game.
+"Scripting Manager":
+    type: assignment
+    
+    interact scripts:
+    - 0 Script Type Determination
+
+    
+    default constants:
+        script categorys: "NPC, SERVER, UTILITY, OBJECT"
+        npc categorys: "ASSIGNMENT, INTERACT, NAVIGATION, ACTION"
+        server categorys: "WORLD, COMBAT"
+        task categorys: "TASK, PROCEDURE, FORMAT"
+        object categorys: "ITEM, BOOK, ENTITY"
+        
+        main menu options: "Type, Name"
+    
+        #Npc Level Scripts
+        assignment options: "type, debug, interact scripts, default constants, actions"
+        #Assignment Subcategory
+        actions options: "see http://mcmonkey4eva.dyndns.org/acts for action list"
+        interact scripts options: ""
+        interact options: "type, debug, requirements, steps"
+        #interact subcategory
+        requirements options: "mode, list"
+        navigation options: "HAS NOT BEEN RELEASED YET"
+        action options: "HAS NOT BEEN RELEASED YET"
+        
+        #Server Level Scripts
+        world options: "type, debug, events"
+        #World subcategory
+        events options: "see http://mcmonkey4eva.dyndns.org/evts/ for events list"
+        combat options: "HAS NOT BEEN RELEASED YET"
+        
+        #Utiltiy Level Scripts
+        task options: "type, definitions, script"
+        procedure options: "type, definitions, script"
+        format options: "type, format"
+        
+        #Object Level Scripts
+        item options: "type, material, display name, lore, enchantments, color, recipie"
+        book options: "type, title, author, text"
+        entity options: "HAS NOT BEEN RELEASED YET"
+        
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:chat state:true
+        
+
+
+"Script Type Determination":
+    type: interact
+    requirements:
+        mode: none
+        list:
+        - op
+    steps:
+        'default':
+            click Trigger:
+                script:
+                - if <player.flag[Current Script Name]> != null && <player.flag[]>
+                - chat "This is the main menu. What script do you want to start?"
+                - narrate format:ScriptOptions "<cons:main menu options>"
+                
+            chat Trigger:
+                "Set Script Type":
+                    trigger: "/REGEX:/"
+                    script:
+                    - define script "Set Script <context.message>"
+                    - chat "Lets start at <context.message>"
+                    - flag player Current_Script_Step:<context.message>
+                    - zap %script%
+                
+        'Set Script Type':
+            click Trigger:
+                script:
+                    script:
+                    - flag player Current_Script_Type:<context.message>
+                    - zap "default"
+
+            chat Trigger:
+                'Select NPC Script Type':
+                    trigger: "I want to set the script type to <gold>NPC <white>type of <red>/REGEX:assignment|interact|navigation|action/."
+                    trigger: "I want to set the script type to <gold>NPC <white>type of <red>/REGEX:world|combat/."
+                    script:
+                    - flag player Current_Script_Type:<context.message>
+                    - zap "default"
+                    
+                'Select UTILITY Script Type':
+                    trigger: "I want to set the script type to <gold>NPC <white>type of <red>/REGEX:task|procedure|format/."
+                    script:
+                    - flag player Current_Script_Type:<context.message>
+                    - zap "default"
+                    
+                'Select OBJECT Script Type':
+                    trigger: "I want to set the script type to <gold>NPC <white>type of <red>/REGEX:item|book|entity/."
+                    script:
+                    - flag player Current_Script_Type:<context.message>
+                    - zap "default"
+                    
+        'Set Script Name':
+            click Trigger:
+                script:
+                - chat "Tell me the script name?"
+                - narrate "Just say a script name"
+                
+            chat Trigger:
+                'Get Script Name':
+                    trigger: "REGEX:.+"
+                    script:
+                    - flag player Current_Script_Name:<context.message>
+                    - chat "Do you want <context.message> as the script name?"
+                    - narrate "Your options are: <gold>YES, NO"
+                'Yes':
+                    trigger: "/Yes/."
+                    script:
+                    - chat "Alright."
+                'No':
+                    trigger: "/No/."
+                    script:
+                    - chat "Do you want <context.message> as the script name?"
+                

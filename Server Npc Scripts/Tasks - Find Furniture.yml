@@ -1,0 +1,61 @@
+#A set of procedures the return types of furniture locations.
+
+Find Utilities:
+    #
+    # Type of functions available include:
+    # sleep, sit, eat, drink, cook, harvest, brew, fish, farm, mine, smelt, smith, study, train
+    # warm up, cooldown, resource locate
+    #
+    #
+    type: procedure
+    definitions: function|range
+    script:
+    - define function <def[function]||none>
+    - define range <def[range]||<npc.navigator.range>>
+    - determine <def[utility_location]>
+
+
+Find Sitables:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Range is optional                                                                                                         #
+    # This procedure finds possible chairs... (stairs with a sign on them, I think doors, and beds too...)                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: range
+    script:
+    - define chair_ornament li@wall_sign|wooden_door|iron_door|trap_door
+    - define seats li@bed_block
+    - define range <def[range]||<npc.navigator.range>>
+    - define possibles <npc.location.find.blocks[26|53|67|108|109|136|128|134|135|136|156].within[<def[range]>]>
+    - foreach <def[possibles].as_list> {
+        - if "<proc[Location Available].context[<def[value]>]>" {
+            - define touching_blocks "<proc[Neighbour Blocks].context[<def[value]>||<def[chair_ornament].escaped>|]>"
+            - if !<def[touching_blocks].is_empty>                   define sitable "<proc[List Append Right].context[<def[sitable]||li@>|<def[value]>]>" 
+            - if <def[seats].contains[<def[value].material.name>]>  define sitable "<proc[List Append Right].context[<def[sitable]||li@>|<def[value]>]>"
+            }
+        }
+    - determine <def[sitable].unescaped.as_list||li@>
+    
+
+Find Sleepables:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Range is optional                                                                                                         #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: range
+    script:
+    - define range <def[range]||<npc.navigator.range>>
+    - define possibles <npc.location.find.blocks[26].within[<def[range]>]>
+    - foreach <def[possibles].as_list> {
+        - if "<proc[Location Available].context[<def[value]>]>" {
+            - define complete_bed "<proc[Neighbour Blocks].context[<def[value]>||m@bed_block|]>"
+            - if !<def[complete_bed].as_list.is_empty> define sleepable "<proc[List Append Right].context[<def[sleepable]||li@>|<def[value]>]>" 
+            }
+        }
+    - determine <def[sleepable].unescaped.as_list>
+
+

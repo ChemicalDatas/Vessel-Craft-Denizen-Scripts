@@ -1,0 +1,41 @@
+#Some basic formatting for signs.
+#
+
+Sign Handling:
+    type: world
+    debug: false
+    # This listens to players trying to change signs.
+    # This also listens to sign breaks and compares if somthing set a flag
+    # So that if a player is using the command ./signedit (line) (text)
+    # they just punch the signs and the sign changes its form.
+    # That command was last located in the server commands file
+    events:
+        on player breaks m@sign_post:
+        - if <player.has_flag[editing_sign]> {
+            - determine cancelled
+            }
+        
+        on player breaks m@wall_sign:
+        - if <player.has_flag[editing_sign]> {
+            - determine cancelled
+            }
+        
+        on player changes m@sign_post:
+        #Some selective escaping for special characters.
+        - define new <proc[Iconize].context[<context.new.escaped>]>
+        - determine <def[new].unescaped.as_string>
+        
+        on player changes m@wall_sign:
+        #Some selective escaping for special characters.
+        - define new <proc[Iconize].context[<context.new.escaped>]>
+        - determine <def[new].unescaped>
+            
+        on player animates ARM_SWING:
+        - ^define looking_at <player.location.cursor_on[4]>
+        - ^define block <def[looking_at].material>
+        - ^if <def[block]> = m@wall_sign || <def[block]> = m@sign_post {
+            - ^if <player.flag[editing_sign]> != null {
+                - run "Modify Sign Line" "def:<def[block].replace[m@]>|<def[looking_at]>|<player.flag[editing_sign]>"
+                }
+            }
+        

@@ -1,0 +1,708 @@
+#This is a set of tasks that are base to animating npcs.
+#This should only contain scripts that contain no queue. To be used by something that has or is a part of a queue.
+#Some of these automatically have the npc attached. 
+#Some of these are not general tasks for calling. They have npcs already attached or 
+#entity references already filled out.
+
+
+################################################################################################
+####################### Dynamic Sets ###########################################################
+################################################################################################
+
+DynamicExecute:
+    #Sister Command to _DynamicExecute. Required that entries be <escape:>'d first.
+    
+    #info: Got an idea for a work around with a separate command.
+    #narrate | yaml | 
+    type: task
+    definitions: command|args
+    script:
+    - execute as_npc
+      "ex <def[command]> <def[args].unescaped||>"
+    
+
+Event:
+    type: task
+    definitions: event_list|context_list
+    script:
+    - event
+      <def[event_list].unescaped>
+      context:<def[context_list].unescaped>
+    
+
+Action:
+    type: task
+    definitions: action_list|context_list
+    script:
+    - action
+      <def[action_list].unescaped>
+      <npc>
+      context:<def[context_list].unescaped>
+    
+
+################################################################################################
+####################### Constant Sets ##########################################################
+################################################################################################
+
+
+Set Constant:
+    type: task
+    definitions: name|value
+    script:
+    - execute as_npc
+      "npc select <npc.id>"
+      
+    - execute as_npc
+      "npc constant --set <def[name]> --value <def[value]>"
+    
+
+
+
+################################################################################################
+####################### Anchor Sets ############################################################
+################################################################################################
+
+Anchor:
+    #action can be
+    #   %add <def[location]>%
+    #   %remove%
+    #   assume
+    #   walkto
+    #   walknear
+    type: task
+    definitions: action|id|range
+    script:
+    - anchor <def[action]>
+      i:<def[id]>
+      r:<def[range]>
+    
+
+
+Walk Near Anchor:
+    #Id = Name of location to walk around
+    type: task
+    definitions: id
+    script:
+    - anchor walknear
+      i:<def[id]||curent_wander_location>
+      r:<npc.constant[range]||10>
+    
+
+################################################################################################
+####################### Delay Sets #############################################################
+################################################################################################
+
+Wait:
+    type: task
+    definitions: delay
+    script:
+    - wait <def[delay]||d@1s>
+
+Delay:
+    #This is iffy as this requires a queue id. It might work as intended, or might not.
+    type: task
+    definitions: delay
+    script:
+    - queue queue:<npc.id>_action_queue
+      delay:<def[delay]||d@1s>
+    
+
+Pause Queue:
+    #This pauses the queue.
+    #Generally used after a walk to command as something will need to resume the queue afterwards.
+    #The npc assignment contains an 'on complete navigation' action. That should resume the queue
+    #this has paused
+    type: task
+    script:
+    - define queue
+      <npc.id>_action_queue
+      
+    - if <queue.exists[<def[queue]>]>
+      queue
+      queue:<def[queue]>
+      pause
+      else
+      announce "
+      Queue did not exist to pause!"
+    
+    #- announce "Pausing <red>Queue  (resuming when a resume queue is called...)"
+
+
+Resume Queue:
+    #This resumes the queue. This should be used in some sort of action like 'on travel complete'
+    #As this should resume an Npc-action_queue.
+    type: task
+    script:
+    - define queue
+      <npc.id>_action_queue
+      
+    - if <queue.exists[<def[queue]>]>
+      queue
+      queue:<def[queue]>
+      resume 
+    #- announce "Resuming <green>Queue"
+
+
+
+################################################################################################
+####################### Animation Sets #########################################################
+################################################################################################
+
+Animate:
+    type: task
+    definitions: animation
+    script:
+    - animate <npc>
+      animation:<def[animation]>
+    
+Animate Chest:
+    type: task
+    definitions: location|open_close
+    script:
+    - animatechest <def[location]>
+      <def[open_close]||close>
+      sound:true
+      <server.list_online_players>
+
+Look:
+    type: task
+    definitions: location|time
+    script:
+    - look <npc>
+      <def[location]>
+      duration:<def[time]||d@2s>
+
+Animate Interact:
+    type: task
+    speed: 12t
+    script:
+    - animate <npc> animation:ARM_SWING
+    - animate <npc> animation:ARM_SWING
+    - animate <npc> animation:ARM_SWING
+    - animate <npc> animation:ARM_SWING
+
+################################################################################################
+####################### Movement Sets ###########################################################
+################################################################################################
+Walk Near:
+    #
+    # Difference in between this and wander nearby is that this uses a default location of the npc
+    # as a reference so if you keep using this your npc will end up some place you don't know.
+    #
+    type: task
+    definitions: location|speed|radius|height
+    script:
+    - define speed
+      <def[speed]||.67>
+      
+    - define radius
+      <def[radius]||10>
+    
+    - define height
+      <def[height]||2>
+    
+    - define location
+      <def[location]||<npc.location>>
+    
+    - define cuboid
+      cu@<def[location].add[%radius%,%height%,%radius%]>|<def[location].sub[%radius%,%height%,%radius%]>
+    
+    - define locations
+      <def[cuboid].get_spawnable_blocks>
+    
+    
+    - walk <npc> <def[locations].random> speed:<def[speed]> auto_range
+
+
+
+
+
+Walk To:
+    type: task
+    definitions: location|speed
+    script:
+    - walkto <def[location]>
+      speed:<def[speed]||.67>
+      auto_range
+
+
+
+__Walk To__:
+    type: task
+    script:
+    - walkto <npc.flag[Navigation_Target]>
+      speed:<npc.flag[navigation_speed]> 
+      auto_range
+
+
+Teleport:
+    type: task
+    definitions: location
+    script:
+    - teleport <npc>
+      <def[location]>
+
+
+
+
+Wander Nearby:
+    type: task
+    script:
+    - if !<npc.has_flag[curent_wander_location]>
+      flag npc curent_wander_location:<npc.location>
+      
+    - if !<npc.has_flag[wander_range]>
+      flag npc wander_range:10
+      
+    - if !<npc.has_flag[wander_range_height]>
+      flag npc wander_range_height:10
+      
+    - define location
+      <npc.flag[curent_wander_location]>
+      
+    - define range
+      <npc.flag[wander_range]>
+    
+    - define cuboid
+      cu@<def[location].add[%range%,2,%range%]>|<def[location].sub[%range%,2,%range%]>
+    
+    - define locations
+      <def[cuboid].get_spawnable_blocks>
+    
+    - walk <npc>
+      <def[locations].random.add[.5,0,-.5]>
+      speed:<npc.flag[walk_speed]||.67>
+      auto_range
+
+
+Set Wander Location:
+    type: task
+    script:
+    - flag npc
+      curent_wander_location:<npc.location>
+
+Arrived At Navigation Target:
+    type: task
+    script:
+    - flag npc
+      navigation_targets:!
+    
+Completed A Navigation Target:
+    type: task
+    script:
+    #Pop nav waypoints
+    - flag npc
+      nav_waypoints:<-:<>
+    
+
+################################################################################################
+####################### Feed Back Sets #########################################################
+################################################################################################
+
+Sound:
+    #volume and pitch optional.
+    type: task
+    definitions: sound|volume|pitch
+    script:
+    - playsound <npc.location>
+      sound:<def[sound]>
+      volume:<def[volume]|10>
+      pitch:<def[pitch]||1>
+    
+
+PlayEffect:
+    #Everything after effect is optional.
+    #data|visibility|qty|offset|targets|locations
+    type: task
+    definitions: location|effect|extra_args
+    script:
+    - playeffect <def[location]>
+      effect:<def[effect]>
+      <def[extra_args].unescaped||>
+
+
+#todo: optimise this so it looks more realistic
+Effect:
+    #Everything after effect is optional.
+    #data|visibility|qty|offset|targets|locations
+    type: task
+    definitions: effect|extra_args
+    script:
+    - playeffect <npc.location>
+      effect:<def[effect]>
+      <def[extra_args].unescaped||>
+
+
+Narrate:
+    #Takes a set of words to narrate
+    #and optionally a escaped format.
+    type: task
+    definitions: words|format
+    script:
+    - if <def[format].unescaped||none> == none
+      define format
+      ''
+      else
+      define format
+      format:<def[format]>
+    
+    - narrate <def[format]>
+      <def[words].unescaped>
+    
+
+Eat Effect:
+    #Yeah, this looks funny, and there's a lot of repeated code. But it flows smoothly when used. Good Enough.
+    type: task
+    definitions: item
+    script:
+    - define item_id
+      <def[item].id>
+      
+    - define effect
+      iconcrack_<def[item_id]>
+      
+    - repeat 5 {
+        - playsound <npc.location> sound:EAT volume:10 pitch:0
+        - playeffect <npc.location> effect:<def[effect]> qty:10
+        - wait d@3t
+        }
+    
+
+Drink Effect:
+    #Yeah, this looks funny, and there's a lot of repeated code. But it flows smoothly when used. Good Enough.
+    type: task
+    definitions: item
+    script:
+    - define item_id <def[item].id>
+    - define effect iconcrack_<def[item_id]>
+    - repeat 5 {
+        - playsound <npc.location> sound:DRINK volume:10 pitch:0
+        - playeffect <npc.location> effect:<def[effect]> qty:10
+        - wait d@3t
+        }
+    
+
+################################################################################################
+####################### Environment Changing Sets ##############################################
+################################################################################################
+
+Break:
+    #This is an denizen automated script
+    type: task
+    definitions: location
+    script:
+    - break <def[location]>
+    #The npc should have a npc task execute for on break
+    
+Pop Block:
+    #The first custom block breaking. 
+    type: task
+    definitions: location
+    script:
+    - modifyblock
+      <def[location]>
+      m@air
+    
+    - drop
+      <def[location].material.item>
+      <def[location]>
+
+
+Modifyblock:
+    type: task
+    definitions: location|block
+    script:
+    - modifyblock
+      <def[location]>
+      <def[block]>
+
+
+Switch:
+    #state can be on | off | toggle
+    type: task
+    definitions: location|state|duration
+    script:
+    - switch <def[location]>
+      state:<def[state]||toggle>
+      duration:<def[duration]>
+    
+
+
+################################################################################################
+####################### Npc State Sets #########################################################
+################################################################################################
+
+Engage:
+    type: task
+    definitions: time
+    script:
+    - engage <def[time]||d@10s>
+
+DisEngage:
+    type: task
+    script:
+    - disengage
+    
+
+Equip:
+    #This requires that all arguments be filled out. If 1 is missing it will equip air
+    #On the npc instead.
+    type: task
+    definitions: hand|head|chest|legs|boots
+    script:
+    - equip <npc>
+      hand:<def[hand]||i@air>
+      head:<def[head]||i@air>
+      chest:<def[chest]||i@air>
+      legs:<def[legs]||i@air>
+      boots:<def[boots]||i@air>
+    
+Equip Args:
+    type: task
+    definitions: args
+    script:
+    - equip <npc>
+      <def[args].unescaped>
+
+Equip Target Args:
+    type: task
+    definitions: target|args
+    script:
+    - equip <def[target]>
+      <def[args].unescaped>
+    
+
+Head:
+    type: task
+    definitions: skin
+    script:
+    - head <npc>
+      skin:<def[skin]||<p@chemical_datas>>
+
+Nameplate:
+    type: task
+    definitions: chat_color|text|targets
+    script:
+    - define targets
+      <def[targets]||<player>>
+    
+    - nameplate <def[chat_color]>
+      set:<def[text]>
+      target:<def[targets]>
+    
+
+Rename:
+    type: task
+    definitions: name|npc
+    script:
+    - rename <def[npc]||<npc>>
+      npc:<def[npc]>
+
+Change Skin:
+    type: task
+    definitions: skin_name
+    script:
+    - execute as_npc
+      "npc select <npc.id>"
+      
+    - execute as_npc
+      "npc skin <def[skin_name]||Chemical_Datas>"
+    
+
+
+Despawn:
+    type: task
+    definitions: npcs
+    script:
+    - despawn <def[npcs].unescaped.as_list||<npc>>
+    
+
+Spawn:
+    # Spawns an entity|s
+    type: procedure
+    definitions: entitys|location|target|persistent
+    script:
+    - if <def[persistent]||no> == no
+      define persistent ""
+      else
+      define persistent persistent
+      
+    - if <def[target]||none> == none
+      define target ""
+      else
+      define target target:<def[target]>
+      
+    - spawn <def[entitys].unescaped>
+      <def[location]>
+      <def[target]>
+      <def[persistent]>
+
+
+Remove:
+    # Removes an entity
+    type: procedure
+    definitions: entities
+    script:
+    - define entities <def[entities].unescaped.as_list||li@>
+    - if <def[entities].is_empty> queue clear
+    - define not_spawned_entities li@
+    - foreach <def[entities]> {
+        - if !<def[value].is_spawned> {
+            - announce "entity <def[value]> dosn't seem to be spawned..." to_console
+            - define not_spawned_entities <def[not_spawned_entities].include[<def[value]>]>
+            }
+        }
+    - remove <def[entities].exclude[<def[not_spawned_entities]>]>
+
+
+################################################################################################
+####################### Npc Magic Spells Set ###################################################
+################################################################################################
+
+Spell:
+    type: task
+    definitions: spell|args
+    script:
+    - execute as_npc 
+      "cast <def[spell]> <def[args].unescaped||>"
+
+
+
+
+
+
+
+
+################################################################################################
+####################### Listen Sets ############################################################
+################################################################################################
+
+#todo: Finish me. Needs a script framework to call when finished. This will make things easier to add to the npc queue. 
+#although it'd be neat to make npcs jump when another npc is killed.
+
+
+#With this it might be a good idea for npcs to create events. Events that alter the town little by little.
+#Also you could increase a npcs proximity entry and exit radius so that the npc listens to the player events. At night blacksmithing
+#makes noise so if the player triggers an listened event the npc wakes up. Good for security, guards, sleeping npcs.
+#This also would be useful for custom event handling that's coming out in a few days.
+
+
+
+
+"Listen":
+    #command: determines what to do with a listener
+    #   new: you generally don't enter 'new'. You skip it and go strait for the type of listener
+    #   cancel
+    #   finish
+    #
+    #type: is the type of listener to implement
+    #   kill
+    #   block
+    #   item
+    #   drop
+    #   travel
+    #
+    #requirement: is the amount 
+    type: task
+    definitions: command|type|requirement|script|id
+    script:
+    - if %script% == null {
+        - define script ""
+        } else {
+        - define script "script:%script%"
+        }
+        
+    - if %id% == null {
+        - define id ""
+        } else {
+        - define id "id:%id%"
+        }
+    
+    - define requirements "<def[requirements]||>"
+    - define type "<def[type]||>"
+    
+    
+    - if %command% == new define command ""
+    - if %command% == cancel define command "cancel"
+    - if %command% == finish define command "finish"
+    
+    - listen <def[command]> <def[type]> <def[requirements]> <def[script]> id:<def[id]>
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################
+####################### Interact Sets ##########################################################
+################################################################################################
+
+Entity Get Target Entity:
+    # Returns an entity from an  entitys point of view. Generally for interaction.
+    type: procedure
+    definitions: entity|distance
+    script:
+    - define distance <def[distance]||5>
+    - foreach <def[entity].location.find.entities.within[<def[distance]>]> {
+        - if <def[entity].location.facing[<def[value]>].degrees[2]> {
+            - if <def[entity].can_see[<def[value]>]> {
+                - look <def[entity]> <def[value].location>
+                - define target <def[value]>
+                }
+            }
+        }
+    - determine <def[target]||none>
+
+Inter React:
+    #Based on what the npc is looking at
+    # Creates a world event in which whatever should be listening to.
+
+    #todo: Add furnace changing to this
+    #todo: Move the definitions of the items out of the script into a configurable container
+    #todo: Create an listen
+    type: task
+    script:
+    - define target "<proc[Entity Get Target Entity].context[<npc>]>"
+    - if <def[target]> == none {
+        - define target <npc.location.cursor_on[5]>
+        - action "Interact" context:type|BLOCK|location|<def[target]>
+        } else {
+        - action "Interact" context:type|ENTITY|entity|<def[target]>
+        }
+    
+
+
+
+
+################################################################################################
+####################### World Sets #############################################################
+################################################################################################
+
+Drop:
+    type: task
+    definitions: entity_type|location|qty|speed
+    script:
+    - drop <def[entity_type]>
+      <def[location]>
+      qty:<def[qty]||1>
+      speed:<def[speed]||1>
+
+
+
+
+################################################################################################
+####################### Delay Sets #############################################################
+################################################################################################
+
+
+
+
+
+
+
