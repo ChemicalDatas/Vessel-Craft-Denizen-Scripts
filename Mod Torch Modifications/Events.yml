@@ -9,7 +9,7 @@ Torch Modifications:
     type: world
     events:
         on player damages entity:
-        - if !<player.item_in_hand> == i@torch queue clear
+        - if !<player.item_in_hand.simple> == i@torch queue clear
         - define rate "<script.yaml_keys[Success Rate]>"
         - define max "<script.yaml_keys[success max]>"
         - define min "<script.yaml_keys[success min]>"
@@ -21,7 +21,7 @@ Torch Modifications:
         on entity targets player:
         - if !<script.yaml_keys[affected_mobs].contains[<context.entity.name>]> queue clear
         - if !<context.reason.contains[closest_player]>                         queue clear
-        - if !<player.item_in_hand.contains[i@torch]>                           queue clear
+        - if !<player.item_in_hand.simple.is[===].to[i@torch]>                  queue clear
         - determine cancelled
         
         
@@ -35,7 +35,7 @@ Torch Modifications:
         
         on player holds item:
         - wait d@1t
-        - if <player.item_in_hand> == i@torch {
+        - if <player.item_in_hand.simple> == i@torch {
             - if <script.yaml_keys[show_other_players]>
               define to <server.list_online_players>
               else
@@ -79,6 +79,8 @@ Torch Modifications:
               d:d@1t
             }
         
+        
+        #Instead of a walk check use an infinite looping check that pauses ever second
         on player walks:
         - wait d@1t
         - if <player.item_in_hand> == i@torch {
