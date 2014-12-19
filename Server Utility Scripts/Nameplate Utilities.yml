@@ -393,11 +393,12 @@ Display Function:
         - define line <proc[Iconize].context[<def[value]>]>
         - execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
         - define skull <def[location].find.entities[wither_skull].within[1]>
-        - define display_entities <def[display_entities].include[<def[skull]>]>
+        - announce "<blue>Found <def[skull].size> skulls"
+        - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
         - define new_y <def[loop_index].mul[.25]>
         - define location <def[location].add[0,<def[new_y]>,0]>
         }
-    - determine <def[display_entities].escaped>
+    - determine <def[display_entities].deduplicate.escaped>
 
 tdm:
     type: task
