@@ -79,6 +79,8 @@ Torch Modifications:
               d:d@1t
             }
         
+        
+        #Instead of a walk check use an infinite looping check that pauses ever second
         on player walks:
         - wait d@1t
         - if <player.item_in_hand> == i@torch {
