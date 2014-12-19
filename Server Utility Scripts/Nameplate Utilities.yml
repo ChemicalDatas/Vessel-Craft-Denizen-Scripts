@@ -83,29 +83,6 @@ Display Defaults Events:
         # on player selects <option> in <context> menu:
 
 
-Line to Age:
-    #############################################################################################################################
-    #                                                                                                                           #
-    # Sub procedure for figuring out an entities nameplate distance (age) for each line.                                        #
-    # Returns a age value                                                                                                       #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: procedure
-    definitions: line_number
-    script:
-    - determine <def[line_number].mul[-7000]>
-    
-Height to Age:
-    #############################################################################################################################
-    #                                                                                                                           #
-    # Sub procedure for figuring out an entities nameplate distance (age) from the entity.                                      #
-    # Returns an age value.                                                                                                     #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: procedure
-    definitions: distance
-    script:
-    - determine <def[distance].mul[-30335].sub[50000]>
 
 Determine Max Possible Display Height:
     #############################################################################################################################
@@ -169,48 +146,12 @@ Determine Selection Index:
     definitions: location|range
     script:
     - if <def[range]> == null define range 10
-    - define target <def[location].add[0,60,0].find.entities[Wither_Skull].within[<def[range]>]>
-    - define num_entities 0
-    
-    #todo: add a display checking to see if the display is in the server flag display list.
-    - foreach <def[target]> {
-        - define num_entities <def[num_entities].add[1]>
-        - if <def[value].get_passenger.name> == EntityHorse {
-            - remove <def[value]>|<def[value].get_passenger>
-            }
-        }
-    - announce "<blue>Cleared <red><def[num_entities]> <blue>stray displays."
+    - define target <def[location].find.entities[Wither_Skull].within[<def[range]>]>
+    - remove <def[value]>
+    - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
 
-"Remove Display":
-    #############################################################################################################################
-    #                                                                                                                           #
-    # Stored by location
-    # 1st item in the display is the anchor
-    # All items else are entities
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: task
-    definitions: location
-    script:
-    - if <def[location]> == null define location "<proc[Find Nearby Display].context[<def[location]>]>"
-    - define entity_targets <server.flag[Server_Displays.<def[location].simple>].as_list>
-    - remove <def[entity_targets]>
-    - flag server Server_Displays.<def[location].simple>:!
 
-"Find Nearby Display":
-    type: procedure
-    definitions: location|range
-    script:
-    - if <def[range]> == null define range 10
-    - define target <def[location].add[0,60,0].find.entities[Wither_Skull|Horse].within[<def[range]>]>
-    - foreach <def[target]> {
-        - define saved_location <def[value].location.add[0,-60,0].simple>
-        - if <server.has_flag[Server_Displays.<def[saved_location]>]> {
-            - determine <def[value].location>
-            }
-        }
-
-"Display Base":
+Display Base:
     #############################################################################################################################
     #                                                                                                                           #
     # This is a procedure that creates a display. You have to capture the output of it so you can remove or store               #
@@ -225,7 +166,7 @@ Determine Selection Index:
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text|spawn_command|title
+    definitions: location|text_list|spawn_command|title
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
@@ -251,34 +192,25 @@ Determine Selection Index:
     - if <def[event_determination]> != none define text <def[event_determination]>
     
     
-    
     # The meat of the script
-    - define text <def[text].unescaped>
-    - define size <def[text].size>
-    - define height 60
-
-    - define base_age "<proc[Height to Age].context[<def[height]>]>"
-    - define word_index "<proc[Reverse Index In Range].context[<def[size]>]>"
-    - define entity_location "<def[location].add[0,<def[height]>,0]>"
-
-        #Add to stack on top of the starting line.
-        #Subtract to stack under the starting line.
-        #/summon WitherSkull ~ ~1 ~ {direction:[],CustomName:Wither_budum,CustomNameVisible:1}
-    - repeat <def[size]> {
-        - define line <def[text].get[<def[word_index].get[<def[value]>]>]>
-        - define line <proc[Iconize].context[<def[line]>]>
-        - define line_age "<proc[Line to Age].context[<def[value]>]>"
-        - define age <def[base_age].sub[<def[line_age]>]>
-        - execute as_server "summon EntityHorse <def[entity_location].x> <def[entity_location].y> <def[entity_location].z> {Riding:{id:WitherSkull,direction:[0.0,0.0,0.0]},CustomName:<def[line]>,CustomNameVisible:1,Invulnerable:1,Age:<def[age]>}"
+    - define display_entities li@
+    - define text_list <def[text_list].unescaped.as_list>
+    - foreach <def[text_list]> {
+        - define line <proc[Iconize].context[<def[value]>]>
+        - execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
+        - define skull <def[location].find.entities[wither_skull].within[1]>
+        - announce "<blue>Found <def[skull].size> skulls"
+        - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
+        - define new_y <def[loop_index].mul[.25]>
+        - define location <def[location].add[0,<def[new_y]>,0]>
         }
-    #any other ideas for events for this?
-    - define display_entities <def[entity_location].find.entities[Wither_Skull|Horse].within[0]>
-    - announce <def[display_entities]>
+    
+    
     #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
     #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
     
-    - determine <def[display_entities]>
+    - determine <def[display_entities].deduplicate.escaped>
     
 Display:
     #
@@ -374,60 +306,11 @@ Display Function If it Worked 650468716:
         - define index <def[size].sub[<def[loop_index]>]>
         - define line_age <def[index].mul[7000]>
         - define age <def[base_age].add[<def[line_age]>]>
-        #- execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
         #Optimal Display Function If Spawn Command Worked:
         - spawn e@wither_skull[velocity=0,0,0,<def[location].world.name>;custom_name=<def[line]>;custom_name_visibility=true] <def[location]> save:display_anchor
-        #- define display_entities <def[display_entities.include[<def[location].find.entities[e@Wither_Skull].within[1]>]>
         - define display_entities <def[display_entities.include[<entry[save:display_anchor].spawned_entities>]>
         }
     - determine <def[display_entities]>
     
-
-Display Function:
-    type: procedure
-    definitions: text_list|location
-    script:
-    - define display_entities li@
-    - define text_list <def[text_list].unescaped.as_list>
-    - foreach <def[text_list]> {
-        - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
-        - define skull <def[location].find.entities[wither_skull].within[1]>
-        - announce "<blue>Found <def[skull].size> skulls"
-        - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
-        - define new_y <def[loop_index].mul[.25]>
-        - define location <def[location].add[0,<def[new_y]>,0]>
-        }
-    - determine <def[display_entities].deduplicate.escaped>
-
-tdm:
-    type: task
-    definitions: text
-    script:
-    - define entity_list "<proc[Display Function].context[<def[text]>|<player.location.cursor_on[<util.random.int[2].to[15]>]>]>"
-    - wait 4
-    - announce "removing entitities: <def[entity_list].unescaped>"
-    - remove <def[entity_list].unescaped>
-
-
-tstr:
-    type: task
-    definitions: text
-    script:
-    - spawn e@wither_skull[velocity=0,0,0,<player.world>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0]> save:display_anchor
-    - announce "<entry[display_anchor].spawned_entities>"
-    - announce "e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0].simple>"
-
-tstspawn:
-    type: task
-    definitions: text
-    script:
-    - spawn e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name_visibility=true] <player.location.cursor_on[5]> save:horse
-    - announce "horce <entry[horse].spawned_entities>"
-    - wait d@10s
-    - announce "removing spawned horses"
-    - remove <entry[horse].spawned_entities>
-
-
 
 
