@@ -399,8 +399,20 @@ Commands:
         - give <def[item]>
             
 
-
-
+        #on powertool command:
+        #on killall command:
+        #list server entities excluding
+        #   entites with owners
+        #   players
+        #   itemframes
+        #   armor stands
+        #
+        #INcluding
+        #   items
+        #   mobs
+        #   friendly mobs
+        #   projectiles
+        #- define targets <player.location.find.entities[].within[]>
 
 
 
