@@ -46,8 +46,6 @@ Display Defaults Events:
         
         #keep all displays stored in a display list and check if  they have a removal method, 
         #   if not remove them maybe on shutdown or creation?
-    
-        
         on player opens context menu:
         - announce "opens context menu"
         on player opens title menu:
@@ -141,7 +139,7 @@ Determine Selection Index:
 ############################# Display Handlers ##########################################################################
 #########################################################################################################################
 
-"Remove Stray Display":
+Remove Stray Display:
     type: task
     definitions: location|range
     script:
@@ -174,19 +172,21 @@ Display Base:
         - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
         - queue clear
         }
-    - if <def[text]||none> == none {
+    - announce "text is<&co> <def[text_list]>"
+    - if <def[text_list]||none> == none {
         - define message "<script.name> requires that the text list not be null. (null dose not parse with <&sq>.size<&sq>)"
         - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
         - queue clear
         }
     
+    - announce "made it here after the text check"
     # If the type of entity spawning technique is not provided set to default
     - if <def[spawn_command]||none> == none  define spawn_command summon
     - if <def[title]||none>         == none  define title "Context Menu"
     
-    
+    - announce "made it here"
     #gives other scripts a say about whats displayed
-    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player>|text|<def[text]>|title|<def[title]>" save:Display
+    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player>|text|<def[text_list]>|title|<def[title]>" save:Display
     - define event_determination <entry[Display].determination>
     - if <def[event_determination]> == cancelled queue clear
     - if <def[event_determination]> != none define text <def[event_determination]>
@@ -204,12 +204,9 @@ Display Base:
         - define new_y <def[loop_index].mul[.25]>
         - define location <def[location].add[0,<def[new_y]>,0]>
         }
-    
-    
     #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
     #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
-    
     - determine <def[display_entities].deduplicate.escaped>
     
 Display:
@@ -221,9 +218,10 @@ Display:
     type: task
     definitions: location|text|display_time
     script:
-    - queue clear
-    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]||li@>"
-    - run Remove def:<def[display_entities].escaped> delay:<def[display_time]||d@2s>
+    - announce "trying to send <def[text]>"
+    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]>"
+    - announce "scheduling removal of <def[display_entities].unescaped.size> <def[display_entities].unescaped>"
+    - run Remove def:<def[display_entities]> delay:<def[display_time]||d@30t>
     
 
 Context Menu:
