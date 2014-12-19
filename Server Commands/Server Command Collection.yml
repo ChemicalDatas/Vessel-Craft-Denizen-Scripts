@@ -369,6 +369,7 @@ Commands:
             - queue clear
             }
         - narrate "<script.yaml_keys[constants.title]> <blue>Clearing <def[target].name.display||<def[target].name>><&sq>s inventory"
+        - narrate "<script.yaml_keys[constants.title]> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
         - inventory clear d:<def[target].inventory>
 
 
