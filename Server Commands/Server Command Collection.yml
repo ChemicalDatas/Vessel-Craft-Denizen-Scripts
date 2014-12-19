@@ -333,9 +333,11 @@ Commands:
         
         on world command:
         - determine passively fulfilled
-        - define world <context.args.get[1]>
+        - define world <context.args.get[1]||none>
         - if !<server.list_worlds.contains[<def[world].as_world>]> {
-            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]><&nl><green><def[world]><yellow> was not on that list."
+            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]>"
+            - if <def[world].is[!=].to[none]>
+              narrate "<green><def[world]><yellow> was not on that list."
             - queue clear
             }
         - teleport <def[world].as_world.spawn_location>
