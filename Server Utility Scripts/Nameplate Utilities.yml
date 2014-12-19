@@ -359,46 +359,73 @@ Context Menu Display Timeout:
 #####################################################################################
 #####################################################################################
 #Using the best options, if denizen wasnt buggy in how it spawns entities
-Test Display:
+Display Function If it Worked 650468716:
     type: procedure
     definitions: text_list|location
     script:
-    - define height 65
     - define base_age -1700000
     - define display_entities li@
     - define text_list <def[text_list].unescaped.as_list>
     - define size <def[text_list].size>
-    - define entity_location <def[location].add[0,<def[height]>,0]>
+    - define location <def[location].add[0,<def[height]>,0]>
 
     - foreach <def[text_list]> {
         - define line <proc[Iconize].context[<def[value]>]>
         - define index <def[size].sub[<def[loop_index]>]>
         - define line_age <def[index].mul[7000]>
         - define age <def[base_age].add[<def[line_age]>]>
-        
-        - spawn e@wither_skull[velocity=0,0,0,<def[entity_location].world.name>;custom_name=<def[line]>;custom_name_visibility=true] <def[entity_location]> save:display_anchor
-        - define display_entities <def[display_entities].include[<entry[display_anchor].spawned_entities>]>
+        #- execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
+        #Optimal Display Function If Spawn Command Worked:
+        - spawn e@wither_skull[velocity=0,0,0,<def[location].world.name>;custom_name=<def[line]>;custom_name_visibility=true] <def[location]> save:display_anchor
+        #- define display_entities <def[display_entities.include[<def[location].find.entities[e@Wither_Skull].within[1]>]>
+        - define display_entities <def[display_entities.include[<entry[save:display_anchor].spawned_entities>]>
         }
     - determine <def[display_entities]>
+    
+
+Display Function:
+    type: procedure
+    definitions: text_list|location
+    script:
+    - define display_entities li@
+    - define text_list <def[text_list].unescaped.as_list>
+    - foreach <def[text_list]> {
+        - define line <proc[Iconize].context[<def[value]>]>
+        - execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
+        - define skull <def[location].find.entities[wither_skull].within[1]>
+        - define display_entities <def[display_entities].include[<def[skull]>]>
+        - define new_y <def[loop_index].mul[.25]>
+        - define location <def[location].add[0,<def[new_y]>,0]>
+        }
+    - determine <def[display_entities].escaped>
 
 tdm:
     type: task
     definitions: text
     script:
-    - define entity_list "<proc[test display].context[<def[text]>|<player.location>]>"
-    - wait 10
+    - define entity_list "<proc[Display Function].context[<def[text]>|<player.location.cursor_on[<util.random.int[2].to[15]>]>]>"
+    - wait 4
     - announce "removing entitities: <def[entity_list].unescaped>"
-    - remove <def[entity_list]>
+    - remove <def[entity_list].unescaped>
 
 
 tstr:
     type: task
     definitions: text
     script:
-    - spawn e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0]> save:display_anchor
+    - spawn e@wither_skull[velocity=0,0,0,<player.world>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0]> save:display_anchor
     - announce "<entry[display_anchor].spawned_entities>"
+    - announce "e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0].simple>"
 
-
+tstspawn:
+    type: task
+    definitions: text
+    script:
+    - spawn e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name_visibility=true] <player.location.cursor_on[5]> save:horse
+    - announce "horce <entry[horse].spawned_entities>"
+    - wait d@10s
+    - announce "removing spawned horses"
+    - remove <entry[horse].spawned_entities>
 
 
 
