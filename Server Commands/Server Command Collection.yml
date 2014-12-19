@@ -278,26 +278,31 @@ Commands:
         
         on gms command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - adjust <player> gamemode:survival
         - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on gma command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - adjust <player> gamemode:adventure
         - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on gmc command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - adjust <player> gamemode:creative
         - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on fly command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - adjust <player> can_fly:true
         - narrate "<script.yaml_keys[constants.title]> <yellow>You can now fly."
         
         on smite command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - strike <player.location.cursor_on[100]>
         
         on time command:
@@ -306,39 +311,66 @@ Commands:
         
         on day command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - time 0t
         - narrate "<script.yaml_keys[constants.title]> <yellow>Set the time to <player.world.time> ticks."
         
         on sun command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - weather sunny
         - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>SUN"
         on storm command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - weather storm
         - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>STORM"
         on thunder command:
         - determine passively fulfilled
+        - inject locally "is permitted"
         - weather thunder
         - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>THUNDER"
         
         on world command:
         - determine passively fulfilled
-        - define world <context.args.get[1]>
+        - define world <context.args.get[1]||none>
         - if !<server.list_worlds.contains[<def[world].as_world>]> {
-            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]><&nl><green><def[world]><yellow> was not on that list."
+            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]>"
+            - if <def[world].is[!=].to[none]>
+              narrate "<green><def[world]><yellow> was not on that list."
             - queue clear
             }
         - teleport <def[world].as_world.spawn_location>
         - narrate "<script.yaml_keys[constants.title]> <yellow>Ok, sending you to <def[world]>"
-#   
+        
+        on i command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].max_stack>>]
+        - define item <def[item].as_item||Not_An_Item>
+        - if <def[item].type||Not_An_Item> != "Item"  {
+            - narrate "<script.yaml_keys[constants.title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
+            - queue clear
+            }
+        - narrate "<script.yaml_keys[constants.title]> <blue>Giving you <def[item].formatted>"
+        - give <def[item]>
 
 
-
-
-
-
-
+ 
+        on ci command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define target <player||null>
+        - if !<context.args.is_empty> {
+            define target <server.match_player[<context.args.get[1]>]>
+        - if <def[target]> == null {
+            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <context.args.get[1]>"
+            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./ci [player]"
+            - queue clear
+            }
+        - narrate "<script.yaml_keys[constants.title]> <blue>Clearing <def[target].name.display||<def[target].name>><&sq>s inventory"
+        - narrate "<script.yaml_keys[constants.title]> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
+        - inventory clear d:<def[target].inventory>
 
 
 
