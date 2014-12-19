@@ -364,7 +364,7 @@ Commands:
         - if !<context.args.is_empty> {
             define target <server.match_player[<context.args.get[1]>]>
         - if <def[target]> == null {
-            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <context.args.get[1]>"
+            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
             - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./ci [player]"
             - queue clear
             }
@@ -373,7 +373,35 @@ Commands:
         - inventory clear d:<def[target].inventory>
 
 
+        on give command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - if <context.args.is_empty>
+          || <context.args.get[1]||no_player_specified> == "no_player_specified"
+          || <context.args.get[2].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
+            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./give (player) (item) [ammount] [data]"
+            - queue clear
+            }
+        
+        
+        - define target <server.match_player[<context.args.get[1]>>]>
+        - if <context.args.get[]>
+        - narrate "<script.yaml_keys[constants.title]> <red>You need to specify a player!"
+        - define target <server.match_player[<context.args.get[1]>]>
+        - if <def[target]> == null {
+            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
+            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./give (player) (item) [ammount] [data]"
+            - queue clear
+            }
 
+        - define item <context.args.get[2]>[quantity=<context.args.get[2]||<context.args.get[1].max_stack>>]
+        - define item <def[item].as_item||Not_An_Item>
+        - if <def[item].type||Not_An_Item> != "Item"  {
+            - narrate "<script.yaml_keys[constants.title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
+            - queue clear
+            }
+        - narrate "<script.yaml_keys[constants.title]> <blue>Giving you <def[item].formatted> <def[item]>"
+        - give <def[item]>
 
 
 
