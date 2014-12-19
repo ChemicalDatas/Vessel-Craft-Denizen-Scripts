@@ -347,8 +347,6 @@ Commands:
         - determine passively fulfilled
         - inject locally "is permitted"
         - define item <context.args.get[1]>[quantity=<context.args.get[2]||64>]
-        - announce "item: <def[item]>"
-        - announce "item: <def[item].type>"
         - define item <def[item].as_item||Not_An_Item>
         - if <def[item].type||Not_An_Item> != "Item"  {
             - narrate "<script.yaml_keys[constants.title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
@@ -357,6 +355,21 @@ Commands:
         - narrate "<script.yaml_keys[constants.title]> <blue>Giving you some <def[item].formatted>"
         - give <def[item]>
 
+
+ 
+        on ci command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define target <player||null>
+        - if !<context.args.is_empty> {
+            define target <server.match_player[<context.args.get[1]>]>
+        - if <def[target]> == null {
+            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <context.args.get[1]>"
+            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./ci [player]"
+            - queue clear
+            }
+        - narrate "<script.yaml_keys[constants.title]> <blue>Clearing <def[target].name.display||<def[target].name>><&sq>s inventory"
+        - inventory clear d:<def[target].inventory>
 
 
 
