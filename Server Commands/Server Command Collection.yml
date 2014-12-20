@@ -12,27 +12,21 @@ Commands:
     
     ########################################################################################################################
     #                                                                                                                      #
-    # Default Allowed groups for commands                                                                                  #
+    # Each "arg" is the replaceable text for each argument sent with the shortcuts command.                                #
     #                                                                                                                      #
     ########################################################################################################################
-    constants:
-        ########################################################################################################################
-        #                                                                                                                      #
-        # Each "arg" is the replaceable text for each argument sent with the shortcuts command.                                #
-        #                                                                                                                      #
-        ########################################################################################################################
-        search: "he search p:arg t:arg"
-        say: "say arg"
-        express: "express arg"
-        colors: "colors"
-        allowed_groups:
-        - Owner
-        - Admin
-        - MasterBuilder
-        - Moderator
-        - Builder
-        
-        title: "[<blue>Vessel<gold>Craft<reset>]"
+    search: "he search p:arg t:arg"
+    say: "say arg"
+    express: "express arg"
+    colors: "colors"
+    allowed_groups:
+    - Owner
+    - Admin
+    - MasterBuilder
+    - Moderator
+    - Builder
+    
+    title: "[<blue>Vessel<gold>Craft<reset>]"
     
     
     ########################################################################################################################
@@ -258,41 +252,58 @@ Commands:
         
         
         
+        #on display command:
+        #- determine passively fulfilled
+        #- inject locally "is permitted"
+        
+        #- define display "<context.args.get[1]>"
+        #- define location <player.location.cursor_on[3]>
+        
+        #- narrate "Summoning Display for you now."
+        #- narrate "Please step back, as its anchor is there."
+        #- narrate "Just chat to the display. It will change the display based on what you chat."
+        #- execute as_op "npc create 'server display'"
+        #- execute as_op "npc playerlist"
+        #- invisible <player.selected_npc> toggle:true
+        #- execute as_op "npc assign --set 'Nameplate Attractor'"
+        
         on display command:
         - determine passively fulfilled
+        - if <context.server> narrate "<script.yaml_keys[title]> <blue>Must be used ingame. Sorry."
         - inject locally "is permitted"
+        - if <context.args.is_empty> 
+          || <context.args.get[2].is[==].to[null]> {
+            - narrate "<script.yaml_keys[title]> <blue>Usage is<&co> <yellow>./display (shop.swords sign.creative ..ect) (text)"
+            - queue clear
+            }
+        - define flag <context.args.get[1]>
+        - define location <player.location.above>
+        - define text <parse:<context.args.get[2]>>
+        - run "Server Display" def:<def[flag]>|<def[location]>|<def[text].escaped>
         
-        - define display "<context.args.get[1]>"
-        - define location <player.location.cursor_on[3]>
         
-        - narrate "Summoning Display for you now."
-        - narrate "Please step back, as its anchor is there."
-        - narrate "Just chat to the display. It will change the display based on what you chat."
-        - execute as_op "npc create 'server display'"
-        - execute as_op "npc playerlist"
-        - invisible <player.selected_npc> toggle:true
-        - execute as_op "npc assign --set 'Nameplate Attractor'"
+        
 ##############################################################################################################################        
         on player changes gamemode:
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
+        - narrate "<script.yaml_keys[title]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
         
         on gms command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - adjust <player> gamemode:survival
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        - narrate "<script.yaml_keys[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on gma command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - adjust <player> gamemode:adventure
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        - narrate "<script.yaml_keys[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on gmc command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - adjust <player> gamemode:creative
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
+        - narrate "<script.yaml_keys[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
         
         on fly command:
         - determine passively fulfilled
@@ -300,12 +311,11 @@ Commands:
         - if <player.has_flag[can_fly]> {
             - adjust <player> can_fly:false
             - flag player can_fly:!
-            
-            - narrate "<script.yaml_keys[constants.title]> <yellow>Hope your on the <red>ground."
+            - narrate "<script.yaml_keys[title]> <yellow>Hope your on the <red>ground."
             } else {
             - adjust <player> can_fly:true
             - flag player can_fly
-            - narrate "<script.yaml_keys[constants.title]> <yellow>You can now <blue>fly!"
+            - narrate "<script.yaml_keys[title]> <yellow>You can now <blue>fly!"
             }
         
         on smite command:
@@ -315,41 +325,41 @@ Commands:
         
         on time command:
         - determine passively fulfilled
-        - narrate "<script.yaml_keys[constants.title]> <yellow>The time is <player.world.time>t / <player.world.time.full>"
+        - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time>t / <player.world.time.full>"
         
         on day command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - time 0t
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Set the time to <player.world.time> ticks."
+        - narrate "<script.yaml_keys[title]> <yellow>Set the time to <player.world.time> ticks."
         
         on sun command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - weather sunny
-        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>SUN"
+        - narrate "<script.yaml_keys[title]> <yellow>The weather was set to <red>SUN"
         on storm command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - weather storm
-        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>STORM"
+        - narrate "<script.yaml_keys[title]> <yellow>The weather was set to <red>STORM"
         on thunder command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - weather thunder
-        - narrate "<script.yaml_keys[constants.title]> <yellow>The weather was set to <red>THUNDER"
+        - narrate "<script.yaml_keys[title]> <yellow>The weather was set to <red>THUNDER"
         
         on world command:
         - determine passively fulfilled
         - define world <context.args.get[1]||none>
         - if !<server.list_worlds.contains[<def[world].as_world>]> {
-            - narrate "<script.yaml_keys[constants.title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]>"
+            - narrate "<script.yaml_keys[title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]>"
             - if <def[world].is[!=].to[none]>
               narrate "<green><def[world]><yellow> was not on that list."
             - queue clear
             }
         - teleport <def[world].as_world.spawn_location>
-        - narrate "<script.yaml_keys[constants.title]> <yellow>Ok, sending you to <def[world]>"
+        - narrate "<script.yaml_keys[title]> <yellow>Ok, sending you to <def[world]>"
         
         on i command:
         - determine passively fulfilled
@@ -357,10 +367,10 @@ Commands:
         - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].max_stack>>]
         - define item <def[item].as_item||Not_An_Item>
         - if <def[item].type||Not_An_Item> != "Item"  {
-            - narrate "<script.yaml_keys[constants.title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
+            - narrate "<script.yaml_keys[title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
             - queue clear
             }
-        - narrate "<script.yaml_keys[constants.title]> <blue>Giving you <def[item].formatted>"
+        - narrate "<script.yaml_keys[title]> <blue>Giving you <def[item].formatted>"
         - give <def[item]>
 
 
@@ -372,12 +382,12 @@ Commands:
         - if !<context.args.is_empty>
             define target <server.match_player[<context.args.get[1]>]>
         - if <def[target]> == null {
-            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
-            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./ci [player]"
+            - narrate "<script.yaml_keys[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
+            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> ./ci [player]"
             - queue clear
             }
-        - narrate "<script.yaml_keys[constants.title]> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
-        - narrate "<script.yaml_keys[constants.title]> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
+        - narrate "<script.yaml_keys[title]> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
+        - narrate "<script.yaml_keys[title]> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
         - inventory clear d:<def[target].inventory>
 
 
@@ -387,32 +397,58 @@ Commands:
         - if <context.args.is_empty>
           || <context.args.get[1]||no_player_specified> == "no_player_specified"
           || <context.args.get[2].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
-            - narrate "<script.yaml_keys[constants.title]> <blue>Your input<&co> <yellow>./give <context.args.get[1]||NO_Player> <context.args.get[2]||NO_ITEM> <context.args.get[3]||NO_AMMOUNT_SPECIFIED>"
-            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
+            - narrate "<script.yaml_keys[title]> <blue>Your input<&co> <yellow>./give <context.args.get[1]||NO_Player> <context.args.get[2]||NO_ITEM> <context.args.get[3]||NO_AMMOUNT_SPECIFIED>"
+            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
             - queue clear
             }
         
         - define target <server.match_player[<context.args.get[1]>]>
         - if <def[target]> == null {
-            - narrate "<script.yaml_keys[constants.title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
-            - narrate "<script.yaml_keys[constants.title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
+            - narrate "<script.yaml_keys[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
+            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
             - queue clear
             }
 
         - define item i@<context.args.get[2]>[quantity=<context.args.get[3]||1>]
         - define item <def[item].as_item||Not_An_Item>
         #todo: when mcmonkey fixes item tags with .formatted (must have a [quantity=#]) specifier, beautify this
-        - narrate "<script.yaml_keys[constants.title]> <blue>Giving <red><def[target].name.display||<def[target].name>> <yellow><context.args.get[3]||1> <def[item].formatted||<def[item].simple>>" targets:<player>
-        - narrate "<script.yaml_keys[constants.title]> <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>" targets:<def[target]>
+        - narrate "<script.yaml_keys[title]> <blue>Giving <red><def[target].name.display||<def[target].name>> <yellow><context.args.get[3]||1> <def[item].formatted||<def[item].simple>>" targets:<player>
+        - narrate "<script.yaml_keys[title]> <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>" targets:<def[target]>
         - give <def[item]>
-            
-        #on hurt command:
+        
+        on leap command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define target <player||null>
+        - define strength <context.args.get[2]||1>
+        - if !<context.args.is_empty>
+            define target <server.match_player[<context.args.get[1]||null>]>
+        - if <def[target]> == null {
+            - narrate "<script.yaml_keys[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
+            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> ./leap (player)"
+            - queue clear
+            }
+        - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+         
+         
+#        on hurt command:
+#        - determine passively fulfilled
+#        - inject locally "is permitted"
+#        - if <context.args.is_empty>
+#          || <context.args.get[1]||no_player_specified> == "no_player_specified"
+#          || <context.args.get[2].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
+#            - narrate "<script.yaml_keys[title]> <blue>Your input<&co> <yellow>./give <context.args.get[1]||NO_Player> <context.args.get[2]||NO_ITEM> <context.args.get[3]||NO_AMMOUNT_SPECIFIED>"
+#            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
+#            - queue clear
+#            }
+        
         #
         #on heal command:
-        #also heal statuses
-        #boost saturation
-        #boost food
+        #   also heal statuses
+        #   boost saturation
+        #   boost food
         #on powertool command:
+        #
         #on killall command:
         #list server entities excluding
         #   entites with owners

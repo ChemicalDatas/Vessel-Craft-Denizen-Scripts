@@ -24,6 +24,6 @@
     - narrate "<gold><italic>&o - Italic        <reset><gold>&k - <magic>Magic             <reset><gold>&m - <strikethrough>StrikeThrough"
     - narrate "<reset><gold>&r - Reset"
     
-"Formatted":
+Formatted:
     type: format
     format: "<proc[Iconize].context[<text>]>"
