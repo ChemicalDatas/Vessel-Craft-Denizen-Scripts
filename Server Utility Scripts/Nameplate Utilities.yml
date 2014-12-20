@@ -215,9 +215,26 @@ Display:
     definitions: location|text|display_time
     script:
     - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]>"
-    - announce "scheduling removal of <def[display_entities].unescaped.size> <def[display_entities].unescaped>"
     - run Remove def:<def[display_entities]> delay:<def[display_time]||d@30t>
     
+
+Server Display:
+    type: task
+    definitions: flag|location|text
+    script:
+    - define text <proc[iconize].context[<def[text]>]>
+    #- define text <def[flag]>|<def[text]>
+    - define text <def[text].escaped>
+    - if <server.has_flag[<def[flag]>]> {
+        - announce "<blue>E-list <server.flag[<def[flag]>].as_list.space_separated>"
+        - announce "<blue>E-list <server.flag[<def[flag]>].as_list.space_separated>"
+        - announce "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
+        - remove <server.flag[<def[flag]>].as_list>
+        - flag server <def[flag]>:!
+        }
+    - flag server "<def[flag]>:|:<proc[Display Base].context[<def[location]>|<def[text]>].unescaped>"
+
+
 
 Context Menu:
     type: task

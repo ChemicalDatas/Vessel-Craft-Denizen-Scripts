@@ -252,20 +252,35 @@ Commands:
         
         
         
+        #on display command:
+        #- determine passively fulfilled
+        #- inject locally "is permitted"
+        
+        #- define display "<context.args.get[1]>"
+        #- define location <player.location.cursor_on[3]>
+        
+        #- narrate "Summoning Display for you now."
+        #- narrate "Please step back, as its anchor is there."
+        #- narrate "Just chat to the display. It will change the display based on what you chat."
+        #- execute as_op "npc create 'server display'"
+        #- execute as_op "npc playerlist"
+        #- invisible <player.selected_npc> toggle:true
+        #- execute as_op "npc assign --set 'Nameplate Attractor'"
+        
         on display command:
         - determine passively fulfilled
+        - if <context.server> narrate "<script.yaml_keys[title]> <blue>Must be used ingame. Sorry."
         - inject locally "is permitted"
+        - if <context.args.is_empty> 
+          || <context.args.get[2].is[==].to[null]> {
+            - narrate "<script.yaml_keys[title]> <blue>Usage is<&co> <yellow>./display (shop.swords sign.creative ..ect) (text)"
+            - queue clear
+            }
+        - define flag <context.args.get[1]>
+        - define location <player.location.above>
+        - define text <parse:<context.args.get[2]>>
+        - run "Server Display" def:<def[flag]>|<def[location]>|<def[text].escaped>
         
-        - define display "<context.args.get[1]>"
-        - define location <player.location.cursor_on[3]>
-        
-        - narrate "Summoning Display for you now."
-        - narrate "Please step back, as its anchor is there."
-        - narrate "Just chat to the display. It will change the display based on what you chat."
-        - execute as_op "npc create 'server display'"
-        - execute as_op "npc playerlist"
-        - invisible <player.selected_npc> toggle:true
-        - execute as_op "npc assign --set 'Nameplate Attractor'"
         
         
 ##############################################################################################################################        
