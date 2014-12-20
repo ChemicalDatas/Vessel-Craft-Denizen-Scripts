@@ -63,8 +63,12 @@ Nameplate Attractor:
 
         on chat:
         - if !"<proc[Player is Owner]>" queue clear
+        - remove <npc.flag[display_entities]>
+        
         - chat "<blue>Creating Display<reset>: '<context.message>'"
-        - run "Attractor Spawn Display" "def:<context.message>"
+        - define entries "<proc[Display Base].context[<npc.eye_location>|<context.message.escaped>]>"
+        - flag npc display_entities:<def[entries]>
+        - announce "<npc.flag[display_entities].size>"
         
         on begin navigation:
         - chat "Your display started navigation" no_target
