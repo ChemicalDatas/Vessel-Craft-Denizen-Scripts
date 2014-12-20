@@ -266,6 +266,8 @@ Commands:
         - execute as_op "npc playerlist"
         - invisible <player.selected_npc> toggle:true
         - execute as_op "npc assign --set 'Nameplate Attractor'"
+        
+        
 ##############################################################################################################################        
         on player changes gamemode:
         - narrate "<script.yaml_keys[title]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
@@ -427,10 +429,11 @@ Commands:
         
         #
         #on heal command:
-        #also heal statuses
-        #boost saturation
-        #boost food
+        #   also heal statuses
+        #   boost saturation
+        #   boost food
         #on powertool command:
+        #
         #on killall command:
         #list server entities excluding
         #   entites with owners
