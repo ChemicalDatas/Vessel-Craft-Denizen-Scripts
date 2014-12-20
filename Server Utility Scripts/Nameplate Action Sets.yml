@@ -63,12 +63,13 @@ Nameplate Attractor:
 
         on chat:
         - if !"<proc[Player is Owner]>" queue clear
-        - remove <npc.flag[display_entities]>
+        - define e_list <npc.flag[display_entities].as_list||li@>
+        - chat "Trying to remove<&co> <def[e_list].parse[custom_name]||<def[e_list].parse[name]||<def[e_list].size> name plates>>" no_target
+        - remove <def[e_list]>
+        - flag npc display_entities:!
         
-        - chat "<blue>Creating Display<reset>: '<context.message>'"
-        - define entries "<proc[Display Base].context[<npc.eye_location>|<context.message.escaped>]>"
-        - flag npc display_entities:<def[entries]>
-        - announce "<npc.flag[display_entities].size>"
+        - chat "<gray>Creating Display<reset>: '<context.message>'"
+        - flag npc "display_entities:|:<proc[Display Base].context[<npc.location.above>|<context.message.escaped>].unescaped>"
         
         on begin navigation:
         - chat "Your display started navigation" no_target
