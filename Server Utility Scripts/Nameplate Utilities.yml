@@ -210,7 +210,7 @@ Determine Selection Index:
             }
         }
 
-"Display Base":
+Display Base:
     #############################################################################################################################
     #                                                                                                                           #
     # This is a procedure that creates a display. You have to capture the output of it so you can remove or store               #
@@ -225,8 +225,9 @@ Determine Selection Index:
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text|spawn_command|title
+    definitions: location|text|title
     script:
+    - announce "<script.name> recieved <def[text]>"
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
         - define message "<script.name> requires that a location is not null."
@@ -240,7 +241,6 @@ Determine Selection Index:
         }
     
     # If the type of entity spawning technique is not provided set to default
-    - if <def[spawn_command]||none> == none  define spawn_command summon
     - if <def[title]||none>         == none  define title "Context Menu"
     
     
@@ -296,30 +296,31 @@ Display:
 
 Context Menu:
     type: task
+    speed: d@0t
     definitions: option_list|script_list|argument_list|context|title|time_out
     script:
-    - queue clear
-    - define events
+    - announce "<gold>~~~~~ContextMenu!~~~~~~~"
+    - ^define events "
         player opens context menu|
         player opens title menu|
         player opens <def[context]> menu|
-        player opens <def[title]> menu| 
-        <player> opens context menu|
-        <player> opens title menu|
-        <player> opens <def[context]> menu|
-        <player> opens <def[title]> menu
+        player opens <def[title]> menu"
     
-    - define context
+    - ^define context "
         context<&co>
         options     |<def[option_list]>|
         scripts     |<def[script_list]>|
         arguments   |<def[argument_list]>|
         context     |<def[context]>|
         title       |<def[title]>|
-        timeout     |<def[time_out]>
-    
-    - event <def[events]> <def[context]> save:context_readjust
+        timeout     |<def[time_out]>"
+    - ^event <def[events]> <def[context]> save:context_readjust
     - if <entry[context_readjust].determination> == cancelled queue clear
+    - announce "ContextMenu Ended Firing Custom Events!"
+    
+    - announce "<script.name> options_list <def[option_list].unescaped>"
+    - announce "<script.name> script_list <def[script_list].unescaped>"
+    - announce "<script.name> argument_list <def[argument_list].unescaped>"
     
     - ^define time_out <def[time_out]||d@10s>
     - ^define options <def[option_list].unescaped>
@@ -328,18 +329,24 @@ Context Menu:
     - ^define num_options <def[options].size>
     
     - define display_location "<proc[Entity Display Location].context[<player>]>"
+    - announce "Display location<&co> <def[display_location].simple>"
+    
     - define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
-    - ^announce <def[displays_list]>
-    - run "Context Menu Display Timeout" def:<def[displays_list].escaped> delay:<def[time_out]> id:<player>_display_timeout
+    - ^announce "Displays List for <green><def[title]><&co>  <blue><def[displays_list]>"
+    - run "Context Menu Display Timeout" def:<def[displays_list]> delay:<def[time_out]> id:<player.name>_display_timeout
     - queue pause
-    - ^queue queue:<player>_display_timeout stop
+    
+    - announce "Checking for timeout queue... exists? <queue.exists[<player.name>_display_timeout]>"
+    - ^queue queue:q@<player.name>_display_timeout stop
+    - announce "queue exists now? <queue.exists[<player.name>_display_timeout]>"
+    
     - ^remove <def[displays_list]>
     - define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
     
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
     - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
     - run <def[script]> def:<def[arguments]> instantly
-    #- ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
 
 
 Context Menu Display Timeout:
@@ -353,7 +360,7 @@ Context Menu Display Timeout:
     #- announce "<player.name><&sq>s menu timed out."
     #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
     - remove <def[displays].unescaped>
-    - queue queue:<player>_context_menu stop
+    - queue queue:q@<player.name>_context_menu stop
 
     
 #####################################################################################
@@ -380,26 +387,6 @@ Test Display:
         - define display_entities <def[display_entities].include[<entry[display_anchor].spawned_entities>]>
         }
     - determine <def[display_entities]>
-
-tdm:
-    type: task
-    definitions: text
-    script:
-    - define entity_list "<proc[test display].context[<def[text]>|<player.location>]>"
-    - wait 10
-    - announce "removing entitities: <def[entity_list].unescaped>"
-    - remove <def[entity_list]>
-
-
-tstr:
-    type: task
-    definitions: text
-    script:
-    - spawn e@wither_skull[velocity=0,0,0,<player.world.name>;custom_name=%text%;custom_name_visibility=true] <player.location.add[0,3,0]> save:display_anchor
-    - announce "<entry[display_anchor].spawned_entities>"
-
-
-
 
 
 
