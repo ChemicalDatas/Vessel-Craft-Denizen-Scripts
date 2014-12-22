@@ -635,6 +635,7 @@ __Return__:
     definitions: script|path
     script:
     - define return none
+    - announce "Script<&co> <def[script]> path<&co> <def[path]>"
     - inject <def[script]> path:<def[path]>
     
 

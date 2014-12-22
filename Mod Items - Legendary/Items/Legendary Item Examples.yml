@@ -117,49 +117,50 @@ testitem:
     type: item
     material: i@diamond_sword,<player.chat_history[1]>
     
+ClassItemDatabase:
+    type: task
+    script:
+    - define noob noob
+    
+    Class3SeriesWeapon:
+        series_list:
+        - define list "li@Wolf Run|Imperial Guard|Elemental Fire|Elemental Ice"
+        - determine <def[list].random>
+        spells:
+            #Frequency that it even gets a spell
+            #the values for the value... are checks, goes through each item in the list checking for a value
+            frequency:
+            - determine <proc[Threshold Random Success].context[1|10]>
+            fireball:
+            - determine <proc[Threshold Random Success].context[5|10]>
+            volley:
+            - determine <proc[Threshold Random Success].context[5|10]>
+        materials:
+        - define list li@i@wood_sword|i@stone_sword|i@gold_sword|i@iron_sword|i@diamond_sword
+        - determine <def[list].random>
+        
+    
+    
 
 Class3SeriesWeapon:
     type: item
-    LinkAnchorId:
-    - run "Create New Class Series Entry" def:<script>
-    - determine <proc[CSeriesHelper]>
-    
-    Class:
-    #Get from database for circumstance to determine the class of the item
-    - mage
-    - archer
-    
-    Materials:
-    #Get from database for circumstance to determine the material of the item
-    - define list li@i@wood_sword|i@stone_sword|i@gold_sword|i@iron_sword|i@diamond_sword
-    - 
-    - 
-    - 
-    - determine <def[material]>
-    
-    material: <proc[__Return__].context[ClassSeriesWeapon|Materials]>
+    material: <proc[__Return__].context[ClassItemDatabase|Class3SeriesWeapon.materials]>
     display name: A <blue>Unknown_Material_Modifier Unknown_Material <reset>of <blue>Unknown_Class<&sq>s Unknown_Bonus
     lore:
     - <blue>Experience: 0 / 100
+    - <gray>Level: 1
+    - ''
     - <blue>Charge: 0 / 3
+    - <blue>Damage: 10 / 100
+    - <blue>Damage Bonus: + 10<&pc>
     - ''
     - <blue>????
     - <blue>????
     - <yellow>????
     - ''
     - ''
-    - <italic><light_purple>class series<&co> <red><script.yaml_keys[Class]>
-    - <yellow>MagicAnchorId<&co> <proc[__Return__].context[GetClass3SeriesID|LinkAnchorId]>
-
-CSeriesHelper:
-    #
-    #Returns the unique id for the item. This also 
-    #Gets the required information from the database
-    #
-    type: procedure
-    
-    script:
-    
+    - <italic><light_purple>class series: <red><script.yaml_keys[series_list].random>
+    - <yellow>MagicAnchorId: <proc[__Return__].context[GetClass3SeriesID|LinkAnchorId]>
 
 
 

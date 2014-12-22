@@ -1,0 +1,38 @@
+#A set of scripts designed to enable Exotic and Legendary Items
+#When an event happens it tries to find the specified path on the scripted item.
+#
+
+
+Item on Head Script Event Injector:
+    type: world
+    events:
+        on player damages entity:
+        - define path "on player damages entity"
+        - inject locally path:Injector
+        
+        on player steps on block:
+        - define path "on player steps on block"
+        - inject locally path:Injector
+
+        on player chats:
+        - define path "on player chats"
+        - inject locally path:Injector
+        
+        on player clicks block:
+        - define path "on player clicks block"
+        - inject locally path:Injector
+        
+        on player picks up item:
+        - define path "on player picks up item"
+        - inject locally path:Injector
+        
+        on player changes xp:
+        - define path "on player changes xp"
+        - inject locally path:Injector
+    
+    Injector:
+    - define script <player.equipment.helmet.scriptname.as_script||true>
+    - if <def[script]> queue clear
+    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - inject <def[script]> path:<def[path]>
+
