@@ -228,13 +228,13 @@ Context Menu:
     type: task
     definitions: option_list|script_list|argument_list|context|title|time_out
     script:
-    - define events "
+    - ^define events "
         player opens context menu|
         player opens title menu|
         player opens <def[context]> menu|
         player opens <def[title]> menu"
     
-    - define context "
+    - ^define context "
         context<&co>
         options     |<def[option_list]>|
         scripts     |<def[script_list]>|
@@ -243,9 +243,12 @@ Context Menu:
         title       |<def[title]>|
         timeout     |<def[time_out]>"
     
-    - event <def[events]> <def[context]> save:context_readjust
-    - if <entry[context_readjust].determination> == cancelled queue clear
-    - announce "<blue>After firing custom events."
+    - ^announce "<blue>Custom event<&co> <reset>"
+    - ^announce "<yellow>events<&co> <def[events]>"
+    - ^announce "<yellow>context<&co> <def[context]>"
+    - ^event <def[events]> <def[context]> save:context_readjust
+    - ^if <entry[context_readjust].determination> == cancelled queue clear
+    - ^announce "<blue>After firing custom events."
     
     - ^define time_out <def[time_out]||d@10s>
     - ^define options <def[option_list].unescaped>
@@ -253,14 +256,15 @@ Context Menu:
     - ^define argument_list <def[argument_list].unescaped>
     - ^define num_options <def[options].size>
     
-    - define display_location "<proc[Entity Display Location].context[<player>]>"
-    - define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
-    - ^announce <def[displays_list]>
-    - run "Context Menu Display Timeout" def:<def[displays_list].escaped> delay:<def[time_out]> id:<player.name>_display_timeout
+    - ^define display_location "<proc[Entity Display Location].context[<player>]>"
+    - ^define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
+    - ^announce "display list<&co> <def[displays_list].unescaped>"
+    - run "Context Menu Display Timeout" def:<def[displays_list]> delay:<def[time_out]> id:<player.name>_display_timeout
     - queue pause
-    - ^queue queue:<player.name>_display_timeout stop
+    - ^announce "queue is unpaused..."
+    - queue queue:q@<player.name>_display_timeout stop
     - ^remove <def[displays_list].unescaped>
-    - define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
+    - ^define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
     
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
     - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
@@ -279,7 +283,8 @@ Context Menu Display Timeout:
     #- announce "<player.name><&sq>s menu timed out."
     #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
     - remove <def[displays].unescaped>
-    - queue queue:<player.name>_context_menu stop
+    - queue queue:q@<player.name>_context_menu stop
+    - announce "context menu timed out!"
 
     
 #####################################################################################
