@@ -245,6 +245,7 @@ Context Menu:
     
     - event <def[events]> <def[context]> save:context_readjust
     - if <entry[context_readjust].determination> == cancelled queue clear
+    - announce "<blue>After firing custom events."
     
     - ^define time_out <def[time_out]||d@10s>
     - ^define options <def[option_list].unescaped>
@@ -255,16 +256,16 @@ Context Menu:
     - define display_location "<proc[Entity Display Location].context[<player>]>"
     - define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
     - ^announce <def[displays_list]>
-    - run "Context Menu Display Timeout" def:<def[displays_list].escaped> delay:<def[time_out]> id:<player>_display_timeout
+    - run "Context Menu Display Timeout" def:<def[displays_list].escaped> delay:<def[time_out]> id:<player.name>_display_timeout
     - queue pause
-    - ^queue queue:<player>_display_timeout stop
+    - ^queue queue:<player.name>_display_timeout stop
     - ^remove <def[displays_list].unescaped>
     - define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
     
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
     - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
     - run <def[script]> def:<def[arguments]> instantly
-    #- ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
 
 
 Context Menu Display Timeout:
@@ -278,7 +279,7 @@ Context Menu Display Timeout:
     #- announce "<player.name><&sq>s menu timed out."
     #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
     - remove <def[displays].unescaped>
-    - queue queue:<player>_context_menu stop
+    - queue queue:<player.name>_context_menu stop
 
     
 #####################################################################################

@@ -4,12 +4,14 @@ Block Interact Display Triggers:
     events:
         on player animates ARM_SWING:
         #todo: maybe perform a facing check too
-        - if <queue.exists[<player>_context_menu]> {
-            - queue queue:<player>_context_menu resume
+        - if <queue.exists[<player.name>_context_menu]> {
+            - queue queue:<player.name>_context_menu resume
             }
         
         on player right clicks block:
-        - if <queue.exists[<player>_context_menu]> {
+        - announce ""
+        - announce "<red>On click context check"
+        - if <queue.exists[<player.name>_context_menu]> {
             - queue clear
             }
         
@@ -19,7 +21,7 @@ Block Interact Display Triggers:
             - define argument_list  "<escape:li@<escape:li@<context.location.material>|SAI>|<escape:li@Nothing to search for yet...> >"
             - define title "options"
             - define context "Block Interact"
-            - run "Context Menu" "def:<def[options_list]>|<def[script_list]>|<def[argument_list]>|<def[context]>|<def[title]>|d@20s" id:<player>_context_menu
+            - run "Context Menu" "def:<def[options_list]>|<def[script_list]>|<def[argument_list]>|<def[context]>|<def[title]>|d@20s" id:<player.name>_context_menu instantly
             }
         
         # on player damages block:
