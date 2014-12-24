@@ -1,6 +1,6 @@
 Torch Modifications:
     affected_mobs: wolf|spider|cavespider|witch
-    luminesicent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket|i@jack_o_lantern|i@glowstone_dust
+    luminescent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket|i@jack_o_lantern|i@glowstone_dust
     success rate: 6|10
     success max: 10
     success min: 6
@@ -36,7 +36,7 @@ Item Light Update:
     definitions: script
     script:
     - wait d@1t
-    - while <def[script].yaml_keys[luminesicent_items].contains[<player.item_in_hand.simple>]> {
+    - while <def[script].yaml_keys[luminescent_items].contains[<player.item_in_hand.simple>]> {
         
         - wait <def[script].yaml_keys[light_time_update]>
         
