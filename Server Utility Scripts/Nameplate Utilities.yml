@@ -228,7 +228,6 @@ Context Menu:
     type: task
     definitions: option_list|script_list|argument_list|context|title|time_out
     script:
-    - queue clear
     - define events "
         player opens context menu|
         player opens title menu|
@@ -285,7 +284,7 @@ Context Menu Display Timeout:
 #####################################################################################
 #####################################################################################
 #Using the best options, if denizen wasnt buggy in how it spawns entities
-Display Function If it Worked 650468716:
+Display Function if command spawn worked for spawning wither entities:
     type: procedure
     definitions: text_list|location
     script:
