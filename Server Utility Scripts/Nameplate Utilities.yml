@@ -321,6 +321,3 @@ Display Function If it Worked 650468716:
         - define display_entities <def[display_entities.include[<entry[save:display_anchor].spawned_entities>]>
         }
     - determine <def[display_entities]>
-    
-
-
