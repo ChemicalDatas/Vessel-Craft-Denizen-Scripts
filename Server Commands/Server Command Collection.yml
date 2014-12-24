@@ -437,6 +437,15 @@ Commands:
         - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
          
          
+         on ping command:
+         - random 5
+         - narrate "<red>Pong"
+         - narrate "<blue>Pong"
+         - narrate "<green>Pong"
+         - narrate "<yellow>Pong"
+         - narrate "<light_purple>Pong"
+         
+         
 #        on hurt command:
 #        - determine passively fulfilled
 #        - inject locally "is permitted"
