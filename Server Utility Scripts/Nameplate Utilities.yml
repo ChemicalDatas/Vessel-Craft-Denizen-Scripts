@@ -55,11 +55,6 @@ Display Defaults Events:
         #- announce "opens named context: <context.context> menu"
         #on player opens <title> menu:
         #- announce "opens named title: <context.title> menu"
-        # on <player> opens context menu:
-        # on <player> opens title menu:
-        # on <player> opens <context> menu:
-        # on <player> opens <title> menu:
-        
         
         # on player selects option in context menu:
         # on player selects option in title menu:
@@ -70,12 +65,6 @@ Display Defaults Events:
         # on player selects <option> in title menu:
         # on player selects <option> in <context> menu:
         # on player selects <option> in <title> menu:
-        
-        
-        # on <player> selects option in context menu:
-        # on <player> selects option in <title> menu:
-        # on <player> selects <option> in title menu:
-        # on <player> selects <option> in context menu:
         
         # on player selects <option> in context menu:
         # on player selects <option> in <context> menu:
@@ -106,7 +95,7 @@ Update Display Line:
     definitions: line|text
     script:
     - define <def[nameplate]> <>
-    - execute as_npc "npc select <<def[nameplate]>.id>"
+    - execute as_npc "npc select <def[nameplate].id>"
     - execute as_npc "npc rename <def[text]>"
     
     - adjust <def[entity]> custom_name:<def[new_text]>
@@ -164,7 +153,7 @@ Display Base:
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text_list|spawn_command|title
+    definitions: location|text_list|title
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
@@ -179,7 +168,6 @@ Display Base:
         }
     
     # If the type of entity spawning technique is not provided set to default
-    - if <def[spawn_command]||none> == none  define spawn_command summon
     - if <def[title]||none>         == none  define title "Context Menu"
     
     #gives other scripts a say about whats displayed
