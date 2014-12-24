@@ -234,10 +234,6 @@ Context Menu:
         player opens title menu|
         player opens <def[context]> menu|
         player opens <def[title]> menu|
-        <player> opens context menu|
-        <player> opens title menu|
-        <player> opens <def[context]> menu|
-        <player> opens <def[title]> menu
     
     - define context
         context<&co>
