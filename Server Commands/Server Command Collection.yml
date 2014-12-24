@@ -325,12 +325,18 @@ Commands:
         
         on time command:
         - determine passively fulfilled
-        - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time>t / <player.world.time.full>"
+        - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time> ticks"
         
         on day command:
         - determine passively fulfilled
         - inject locally "is permitted"
         - time 0t
+        - narrate "<script.yaml_keys[title]> <yellow>Set the time to <player.world.time> ticks."
+        
+        on night command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - time 18000t
         - narrate "<script.yaml_keys[title]> <yellow>Set the time to <player.world.time> ticks."
         
         on sun command:
