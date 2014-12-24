@@ -1,6 +1,6 @@
 Torch Modifications:
     affected_mobs: wolf|spider|cavespider|witch
-    luminesicent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket
+    luminesicent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket|i@jack_o_lantern|i@glowstone_dust
     success rate: 6|10
     success max: 10
     success min: 6
