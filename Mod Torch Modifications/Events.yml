@@ -1,11 +1,11 @@
 Torch Modifications:
     affected_mobs: wolf|spider|cavespider|witch
-    
+    luminesicent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket
     success rate: 6|10
     success max: 10
     success min: 6
     duration: d@2s-15s
-    light_time_update: d@5t
+    light_time_update: d@12t
     
     type: world
     events:
@@ -27,35 +27,50 @@ Torch Modifications:
         
         
         on player holds item:
-        - while <player.item_in_hand.simple.is[==].to[i@torch]> {
-            - wait <script.yaml_keys[light_time_update]>
-            
-            - define key
-              <script.name>.last_light_location
-              
-            - define old_loc
-              <player.flag[<def[key]>]||<player.location>>
-              
-            - define loc
-              <player.location.add[0,3,0].simple.as_location>
-              
-            - showfake m@ender_portal
-              <def[loc]>
-              d:d@10m
-              
-            - showfake m@air
-              <def[old_loc]>
-              d:d@1t
-              
-            - flag <player>
-              <def[key]>:<def[loc]>
-              duration:d@10m
-            
-            }
-            
-        - showfake
-          m@air
+        - define name <player.name>_light_update_queue
+        - if <queue.exists[<def[name]>]> queue clear
+        - run "Item Light Update" def:<script> id:<def[name]>
+        
+Item Light Update:
+    type: task
+    definitions: script
+    script:
+    - wait d@1t
+    - while <def[script].yaml_keys[luminesicent_items].contains[<player.item_in_hand.simple>]> {
+        
+        - wait <def[script].yaml_keys[light_time_update]>
+        
+        - define key
+          <def[script].name>.last_light_location
+          
+        - define loc
           <player.location.add[0,3,0].simple.as_location>
+        
+        #todo: Im tired rethink the fallback to the players flag this might be correct. It will throw errors if theres no fallback
+        #Im not sure what default to set it to for it to be correct
+        #If the player has stayed still (dont need to reupdate the lightning)
+        - if <def[loc]> == <player.flag[<def[key]>]||Player_Has_A_Null_Last_Location>
+          while next
+        
+        - showfake m@air
+          <player.flag[<def[key]>]>
           d:d@1t
         
+        - showfake m@ender_portal
+          <def[loc]>
+          d:d@1m
         
+        #Duration along the lines of bieng out of range of acceptable update
+        #Just to avoid lighting bugs when the player is moving fast and switches items
+        - flag <player>
+          <def[key]>:<def[loc]>
+          duration:d@10s
+        }
+    
+    - showfake
+      m@air
+      <player.flag[<def[key]>]||<player.location.add[0,3,0].simple.as_location>>
+      d:d@1t
+        
+    - flag <player>
+      <def[key]>:!
