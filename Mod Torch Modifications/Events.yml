@@ -46,7 +46,6 @@ Item Light Update:
         - define loc
           <player.location.add[0,3,0].simple.as_location>
         
-        #todo: Im tired rethink the fallback to the players flag this might be correct. It will throw errors if theres no fallback
         #Im not sure what default to set it to for it to be correct
         #If the player has stayed still (dont need to reupdate the lightning)
         - if <def[loc]> == <player.flag[<def[key]>]||Player_Has_A_Null_Last_Location>
@@ -60,7 +59,8 @@ Item Light Update:
           <def[loc]>
           d:d@1m
         
-        #Duration along the lines of bieng out of range of acceptable update
+        #Flag clears so when the next check if the player has moved (the flag contains last light location), 
+        #if thats null redo the lightning
         #Just to avoid lighting bugs when the player is moving fast and switches items
         - flag <player>
           <def[key]>:<def[loc]>
