@@ -229,20 +229,20 @@ Context Menu:
     definitions: option_list|script_list|argument_list|context|title|time_out
     script:
     - queue clear
-    - define events
+    - define events "
         player opens context menu|
         player opens title menu|
         player opens <def[context]> menu|
-        player opens <def[title]> menu|
+        player opens <def[title]> menu"
     
-    - define context
+    - define context "
         context<&co>
         options     |<def[option_list]>|
         scripts     |<def[script_list]>|
         arguments   |<def[argument_list]>|
         context     |<def[context]>|
         title       |<def[title]>|
-        timeout     |<def[time_out]>
+        timeout     |<def[time_out]>"
     
     - event <def[events]> <def[context]> save:context_readjust
     - if <entry[context_readjust].determination> == cancelled queue clear
