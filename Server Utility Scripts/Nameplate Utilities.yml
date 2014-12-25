@@ -203,7 +203,8 @@ Display:
     definitions: location|text|display_time
     script:
     - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]>"
-    - run Remove def:<def[display_entities].unescaped> delay:<def[display_time]||d@30t>
+    - wait <def[display_time]||d@30t>
+    - remove <def[display_entities].unescaped>
     
 
 Server Display:
@@ -214,8 +215,6 @@ Server Display:
     #- define text <def[flag]>|<def[text]>
     - define text <def[text].escaped>
     - if <server.has_flag[<def[flag]>]> {
-        - announce "<blue>E-list <server.flag[<def[flag]>].as_list.space_separated>"
-        - announce "<blue>E-list <server.flag[<def[flag]>].as_list.space_separated>"
         - announce "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
         - remove <server.flag[<def[flag]>].as_list>
         - flag server <def[flag]>:!
@@ -243,12 +242,8 @@ Context Menu:
         title       |<def[title]>|
         timeout     |<def[time_out]>"
     
-    - ^announce "<blue>Custom event<&co> <reset>"
-    - ^announce "<yellow>events<&co> <def[events]>"
-    - ^announce "<yellow>context<&co> <def[context]>"
     - ^event <def[events]> <def[context]> save:context_readjust
     - ^if <entry[context_readjust].determination> == cancelled queue clear
-    - ^announce "<blue>After firing custom events."
     
     - ^define time_out <def[time_out]||d@10s>
     - ^define options <def[option_list].unescaped>
@@ -258,10 +253,8 @@ Context Menu:
     
     - ^define display_location "<proc[Entity Display Location].context[<player>]>"
     - ^define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]>"
-    - ^announce "display list<&co> <def[displays_list].unescaped>"
     - run "Context Menu Display Timeout" def:<def[displays_list]> delay:<def[time_out]> id:<player.name>_display_timeout
     - queue pause
-    - ^announce "queue is unpaused..."
     - queue queue:q@<player.name>_display_timeout stop
     - ^remove <def[displays_list].unescaped>
     - ^define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
