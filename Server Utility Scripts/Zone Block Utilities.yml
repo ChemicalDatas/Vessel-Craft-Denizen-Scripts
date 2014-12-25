@@ -253,38 +253,18 @@ Entity Display Location:
     # Used is display scripts to place a display right in front of the entity.
     # todo: rewrite this so that it takes a players vector to get a smoother side to side transition
     # 
-    offset directions:
-        north:      0,0,-1
-        north east: 1,0,-1
-        east:       1,0,0
-        south east: 1,0,1
-        south:      0,0,1
-        south west: -1,0,1
-        west:       -1,0,0
-        north west: -1,0,-1
+    north:      0,0,-1
+    north east: 1,0,-1
+    east:       1,0,0
+    south east: 1,0,1
+    south:      0,0,1
+    south west: -1,0,1
+    west:       -1,0,0
+    north west: -1,0,-1
     type: procedure
     definitions: entity|vertical
     script:
-    - define yaw <def[entity].location.yaw>
-    - if "<proc[Is Between Numbers].context[157.5|<def[yaw]>|202.5]>" {
-        - define offset "<script.yaml_keys[offset directions.north]>"
-        } else if "<proc[Is Between Numbers].context[202.5|<def[yaw]>|247.5]>" {
-        - define offset "<script.yaml_keys[offset directions.north east]>"
-        } else if "<proc[Is Between Numbers].context[247.5|<def[yaw]>|292.5]>" {
-        - define offset "<script.yaml_keys[offset directions.east]>"
-        } else if "<proc[Is Between Numbers].context[292.5|<def[yaw]>|337.5]>" {
-        - define offset "<script.yaml_keys[offset directions.south east]>"
-        } else if "<proc[Is Between Numbers].context[337.5|<def[yaw]>|360]>" {
-        - define offset "<script.yaml_keys[offset directions.south]>"
-        } else if "<proc[Is Between Numbers].context[0|<def[yaw]>|22.5]>" {
-        - define offset "<script.yaml_keys[offset directions.south]>"
-        } else if "<proc[Is Between Numbers].context[22.5|<def[yaw]>|67.5]>" {
-        - define offset "<script.yaml_keys[offset directions.south west]>"
-        } else if "<proc[Is Between Numbers].context[67.5|<def[yaw]>|112.5]>" {
-        - define offset "<script.yaml_keys[offset directions.west]>"
-        } else if "<proc[Is Between Numbers].context[112.5|<def[yaw]>|157.5]>" {
-        - define offset "<script.yaml_keys[offset directions.north west]>"
-        }
+    - define offset <script.yaml_keys[<def[entity].location.direction>]>
     - if <def[vertical].exists> {
         - define pitch <def[entity].location.pitch>
         - define y_offset <def[pitch].mul[-1].div[30]>
@@ -292,7 +272,7 @@ Entity Display Location:
         - define location <def[location].eye_location[0,<def[y_offset]>,0]>
         }
     - define location <def[entity].eye_location.add[<def[offset]>]>
-    - determine <def[location]>
+    - determine <def[location].sub[0,1,0]>
     
 
 Beacon Location:
