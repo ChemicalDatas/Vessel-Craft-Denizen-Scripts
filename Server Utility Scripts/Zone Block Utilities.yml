@@ -304,7 +304,7 @@ Beacon Location:
     - define locations li@
     - while <def[current_point].is[!=].to[<def[location]>]> {
         - if !<def[current_point].material.is_transparent> {
-            - define locations "<proc[list Append Right].context[<def[locations]>|<def[current_point]>]>"
+            - define locations <def[locations].include[<def[current_point]>]>
             }
         - define current_point <def[current_point].sub[0,1,0]>
         }
