@@ -272,7 +272,7 @@ Entity Display Location:
         - define location <def[location].eye_location[0,<def[y_offset]>,0]>
         }
     - define location <def[entity].eye_location.add[<def[offset]>]>
-    - determine <def[location].sub[0,1,0]>
+    - determine <def[location].sub[0,.60,0]>
     
 
 Beacon Location:
