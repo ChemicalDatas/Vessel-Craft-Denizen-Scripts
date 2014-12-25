@@ -217,9 +217,10 @@ Get Location Property:
     type: procedure
     definitions: location|property
     script:
-    - foreach <def[location].cuboids> {
+    - define property_list li@
+    - foreach <def[location].cuboids||li@> {
         - define property "<proc[Get Cuboid Property].context[<def[value]>|<def[property]>]>"
-        - define property_list "<proc[List Append Right].context[<def[property_list]||li@>|<def[property]>]>"
+        - define property_list "<proc[List Append Right].context[<def[property_list]>|<def[property]>]>"
         }
     - determine <def[property_list].unescaped>
 
@@ -253,17 +254,18 @@ Entity Display Location:
     # Used is display scripts to place a display right in front of the entity.
     # todo: rewrite this so that it takes a players vector to get a smoother side to side transition
     # 
-    north:      0,0,-1
-    north east: 1,0,-1
-    east:       1,0,0
-    south east: 1,0,1
-    south:      0,0,1
-    south west: -1,0,1
-    west:       -1,0,0
-    north west: -1,0,-1
+    north:      0,0,-1.5
+    northeast: 1.5,0,-1.5
+    east:       1.5,0,0
+    southeast: 1.5,0,1.5
+    south:      0,0,1.5
+    southwest: -1.5,0,1.5
+    west:       -1.5,0,0
+    northwest: -1.5,0,-1.5
     type: procedure
     definitions: entity|vertical
     script:
+    - narrate <def[entity].location.direction>
     - define offset <script.yaml_keys[<def[entity].location.direction>]>
     - if <def[vertical].exists> {
         - define pitch <def[entity].location.pitch>
