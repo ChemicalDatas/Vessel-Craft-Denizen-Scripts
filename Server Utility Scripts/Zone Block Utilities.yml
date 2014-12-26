@@ -251,7 +251,12 @@ Get Cuboid Property from database:
     - if !<yaml[cuboid_data].contains[properties]> determine <def[property_list]>
     - determine <def[property_list].include[<yaml[cuboid_data].read[properties.<def[property]>]>]>
 
-
+Set Cuboid Property:
+    type: task
+    definitions: cuboid|property|value
+    script:
+    #Not sure wether to unescape the cuboid or just leave it
+    - yaml id:cuboid_data set <def[cuboid]>.<def[property]>:|:<def[value].unescaped>
 
 Entity Display Location:
     #
