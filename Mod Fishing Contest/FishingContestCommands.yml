@@ -11,27 +11,31 @@
 "Fishing Contest":
     type: world
     events:
+        #not much sense here, just starts fishing is better
         on player fishes while fishing:
         - if !<server.has_flag[fishing_contest.active]>
           announce "<magic>ii<gold><player.name> <red>has started fishing! <gold>Maybe youd like to compete? <green> Just start fishing to join."
-        - if <server.has_flag[]>
-        - flag server fishing_contest.participant:|:<player>
-        - flag server fishing_contest.scores.<player>:0
-        - announce "<blue>Starting to fish"
+        
+        - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]> {
+            - flag server fishing_contest.participant:|:<player>
+            - flag server fishing_contest.scores.<player>:0
+            - announce "<player.name> has started fishing!"
+            }
+        
+        - if <server.flag[fishing_contest.participants].as_list.size.is[or_more].than[1]> {
+            - if !<server.has_flag[fishing_contest.active]>
+              flag server fishing_contest.active duration:d@10m
+            }
+        
         
         on player fishes while caught_fish:
         - announce "<gold><player.name> <reset>caught a <light_purple><context.item.name>!"
         - flag server fishing_contest.scores.<player>:++
         
         on player fishes while failed_attempt:
-        - announce "<red>Failed attempt"
+        - narrate "<red>Failed attempt"
         
-        on player fishes:
-        - announce ""
-        - announce "hook. <context.hook>"
-        - announce "state. <context.state>"
-        - announce "entity name <context.entity>"
-        - announce "item. <context.item>"
+        
         
         
         on fishingcontest command:
@@ -47,7 +51,14 @@
         - if <def[command]> = start inject locally "Start Contest"
         - if <def[command]> = stop  inject locally "Stop Contest"
         - if <def[command]> = win   inject locally "Winner of Contest"
-        
+    
+    Contest Reset:
+    - flag server fishing_contest.active:!
+    - flag server fishing_contest.participants:!
+    - flag server fishing_contest.scores:!
+    
+    
+    
     Join Contest:
     - announce "<player.name> has joined the fishing contest!"
     - announce "<&sq>/<red>fishingcontest join<white><&sq> to join in the game!"
