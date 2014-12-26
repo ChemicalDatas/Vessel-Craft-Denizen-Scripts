@@ -218,9 +218,9 @@ Get Location Property:
     definitions: location|property
     script:
     - define property_list li@
-    - foreach <def[location].cuboids||li@> {
+    - foreach <def[location].cuboids> {
         - define property "<proc[Get Cuboid Property].context[<def[value]>|<def[property]>]>"
-        - define property_list "<proc[List Append Right].context[<def[property_list]>|<def[property]>]>"
+        - define property_list <def[property_list].include[<def[property]>]>
         }
     - determine <def[property_list].unescaped>
 
@@ -234,7 +234,7 @@ Get Cuboid Property:
     type: procedure
     definitions: cuboid|property
     script:
-    - define p_list "<def[cuboid].split[ ]>"
+    - define p_list "<def[cuboid].split[ ]||li@>"
     - if <def[property]> == null || <def[property]> == '' {
         - determine <def[p_list]>
         }
@@ -243,7 +243,13 @@ Get Cuboid Property:
     - define index <def[entries].find[<def[property]>]>
     - determine <def[values].get[<def[index]>]>
 
-
+Get Cuboid Property from database:
+    type: procedure
+    definitions: cuboid|property
+    script:
+    - define property_list li@
+    - if !<yaml[cuboid_data].contains[properties]> determine <def[property_list]>
+    - determine <def[property_list].include[<yaml[cuboid_data].read[properties.<def[property]>]>]>
 
 
 
@@ -265,7 +271,6 @@ Entity Display Location:
     type: procedure
     definitions: entity|vertical
     script:
-    - narrate <def[entity].location.direction>
     - define offset <script.yaml_keys[<def[entity].location.direction>]>
     - if <def[vertical].exists> {
         - define pitch <def[entity].location.pitch>
