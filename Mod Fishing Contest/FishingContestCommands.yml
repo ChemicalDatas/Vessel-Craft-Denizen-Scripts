@@ -11,9 +11,29 @@
 "Fishing Contest":
     type: world
     events:
-    #Join
-    #Leave
-    #Start
+        on player fishes while fishing:
+        - if !<server.has_flag[fishing_contest.active]>
+          announce "<magic>ii<gold><player.name> <red>has started fishing! <gold>Maybe youd like to compete? <green> Just start fishing to join."
+        - if <server.has_flag[]>
+        - flag server fishing_contest.participant:|:<player>
+        - flag server fishing_contest.scores.<player>:0
+        - announce "<blue>Starting to fish"
+        
+        on player fishes while caught_fish:
+        - announce "<gold><player.name> <reset>caught a <light_purple><context.item.name>!"
+        - flag server fishing_contest.scores.<player>:++
+        
+        on player fishes while failed_attempt:
+        - announce "<red>Failed attempt"
+        
+        on player fishes:
+        - announce ""
+        - announce "hook. <context.hook>"
+        - announce "state. <context.state>"
+        - announce "entity name <context.entity>"
+        - announce "item. <context.item>"
+        
+        
         on fishingcontest command:
         - determine passively fulfilled
         - define command <context.parsed_args.get[1]>
@@ -22,39 +42,29 @@
         - execute as_server "scoreboard objectives setdisplay sidebar fishing"
         
         
-        - if <def[command]> = join inject "Join Contest"
-        - if <def[command]> = leave inject "Leave Contest"
-        - if <def[command]> = start inject "Start Contest"
-        - if <def[command]> = stop inject "Stop Contest"
-        - if <def[command]> = win inject "Winner of Contest"
+        - if <def[command]> = join  inject locally "Join Contest"
+        - if <def[command]> = leave inject locally "Leave Contest"
+        - if <def[command]> = start inject locally "Start Contest"
+        - if <def[command]> = stop  inject locally "Stop Contest"
+        - if <def[command]> = win   inject locally "Winner of Contest"
         
-"Join Contest":
-    type: task
-    script:
+    Join Contest:
     - announce "<player.name> has joined the fishing contest!"
     - announce "<&sq>/<red>fishingcontest join<white><&sq> to join in the game!"
     - execute as_server "scoreboard player add <player.name> fishing 0"
 
-"Leave Contest":
-    type: task
-    script:
+    Leave Contest:
     - announce "<player.name> has left the fishing contest"
     - execute as_server "scoreboard player reset <player.name>"
 
-"Start Contest":
-    type: task
-    script:
+    Start Contest:
     - announce "Starting Fishing Contest to 10 Fish!"
  
-"Stop Contest":
-    type: task
-    script:
+    Stop Contest:
     - announce "Stopping fishing contest"
     - execute as_server "scoreboard objectives remove fishing"
 
     
-"Winner of Contest":
-    type: task
-    script:
+    Winner of Contest:
     - announce "<def[winner]> has won the fishing contest!"
     - announce "<&sq>/<red>fishingcontest stop<&sq> to reset the board and scores."
