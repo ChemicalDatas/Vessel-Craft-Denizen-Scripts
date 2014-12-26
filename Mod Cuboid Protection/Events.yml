@@ -11,10 +11,10 @@ Cuboid Protection Event:
         
         #This checks whether the player already has a display open from spamming the click button on other locations.
         #This just exits before running the rest of the display script
-        - define q_ID <display_queue_<player.name>>
+        - define q_ID display_queue_<player.name>
         - if <queue.exists[<def[q_ID]>]> {
-            - announce queue_exists
-            - define size <<def[q_ID]>.size>
+            - announce "queue_exists <def[q_ID].as_queue.size>"
+            - define size <def[q_ID].as_queue.size>
             - define max_displays <script.yaml_keys[player_max_display_queue]>
             - if <def[size].is[more].than[<def[max_displays]>]> determine cancelled
             }
