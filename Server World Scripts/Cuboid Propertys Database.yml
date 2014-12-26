@@ -1,0 +1,9 @@
+#Loads and saves the cuboid properties database on start and end
+On server start cuboid property database loading:
+    type: world
+    events:
+        on server start:
+        - run "Yaml Load" def:Cuboid_Database.yml|cuboid_data
+        
+        on stop command:
+        - run "Yaml Save" def:Cuboid_Database.yml|cuboid_data
