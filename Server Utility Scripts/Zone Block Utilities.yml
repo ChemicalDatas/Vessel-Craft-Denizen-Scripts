@@ -263,7 +263,6 @@ Entity Display Location:
     # This is a script that returns the block in front of the entity and
     # in the general height of what the entity is looking at...
     # Used is display scripts to place a display right in front of the entity.
-    # todo: rewrite this so that it takes a players vector to get a smoother side to side transition
     # 
     north:      0,0,-1.5
     northeast: 1.5,0,-1.5
