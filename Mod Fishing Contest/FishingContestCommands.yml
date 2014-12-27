@@ -8,74 +8,49 @@
 # (announce (anyone with a score equal to 1) Wins the fishing Contest!)
 
 
-"Fishing Contest":
+Fishing Contest:
     type: world
     events:
-        #not much sense here, just starts fishing is better
+        on server start:
+        - run "Clear Fishing Contest Objectives and Flags" delay:d@30s
+        
+        
+        #fishes while fishing? Just starts fishing is better
         on player fishes while fishing:
-        - if !<server.has_flag[fishing_contest.active]>
-          announce "<magic>ii<gold><player.name> <red>has started fishing! <gold>Maybe youd like to compete? <green> Just start fishing to join."
-        
+        - if !<script.cooled_down[<player>]> queue clear
         - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]> {
-            - flag server fishing_contest.participant:|:<player>
+            - scoreboard add viewers:<player> lines: id:fishing_contest_score objective:fishing_contest score:0
+            - flag server fishing_contest.participants:|:<player>
             - flag server fishing_contest.scores.<player>:0
-            - announce "<player.name> has started fishing!"
+            - announce "<magic>ii<gold><player.name> <red>is fishing! <gold>Maybe youd like to compete?"
+            - announce "<magic>ii<light_purple><italic>~~~Just start fishing to join~~~"
             }
         
-        - if <server.flag[fishing_contest.participants].as_list.size.is[or_more].than[1]> {
-            - if !<server.has_flag[fishing_contest.active]>
-              flag server fishing_contest.active duration:d@10m
+        - if !<server.flag[fishing_contest.participants].as_list.size.is[more].than[1]> {
+            - if !<server.has_flag[fishing_contest.active]> {
+                - announce "<magic>ii<gold>Fishing contest has <italic><underline><light_purple>COMMENCED!"
+                - flag server fishing_contest.active duration:d@10m
+                }
             }
-        
         
         on player fishes while caught_fish:
-        - announce "<gold><player.name> <reset>caught a <light_purple><context.item.name>!"
-        - flag server fishing_contest.scores.<player>:++
-        
-        on player fishes while failed_attempt:
-        - narrate "<red>Failed attempt"
-        
-        
-        
+        - if <server.has_flag[fishing_contest.active]>
+          && <server.flag[fishing_contest.participants].as_list.contains[<player>]> {
+            - announce "<magic>ii<gold><player.name> <reset>caught a <light_purple><context.item.formatted>!"
+            - flag server fishing_contest.scores.<player>:++
+            }
         
         on fishingcontest command:
         - determine passively fulfilled
         - define command <context.parsed_args.get[1]>
-        - define winner <context.parsed_args.get[2]>
         - execute as_server "scoreboard objectives add fishing stat.fishCaught Fishing_Contest"
         - execute as_server "scoreboard objectives setdisplay sidebar fishing"
-        
-        
-        - if <def[command]> = join  inject locally "Join Contest"
-        - if <def[command]> = leave inject locally "Leave Contest"
-        - if <def[command]> = start inject locally "Start Contest"
-        - if <def[command]> = stop  inject locally "Stop Contest"
-        - if <def[command]> = win   inject locally "Winner of Contest"
-    
-    Contest Reset:
+
+Clear Fishing Contest Objectives and Flags:
+    type: task
+    script:
     - flag server fishing_contest.active:!
     - flag server fishing_contest.participants:!
     - flag server fishing_contest.scores:!
+    - scoreboard remove obj:fishing
     
-    
-    
-    Join Contest:
-    - announce "<player.name> has joined the fishing contest!"
-    - announce "<&sq>/<red>fishingcontest join<white><&sq> to join in the game!"
-    - execute as_server "scoreboard player add <player.name> fishing 0"
-
-    Leave Contest:
-    - announce "<player.name> has left the fishing contest"
-    - execute as_server "scoreboard player reset <player.name>"
-
-    Start Contest:
-    - announce "Starting Fishing Contest to 10 Fish!"
- 
-    Stop Contest:
-    - announce "Stopping fishing contest"
-    - execute as_server "scoreboard objectives remove fishing"
-
-    
-    Winner of Contest:
-    - announce "<def[winner]> has won the fishing contest!"
-    - announce "<&sq>/<red>fishingcontest stop<&sq> to reset the board and scores."
