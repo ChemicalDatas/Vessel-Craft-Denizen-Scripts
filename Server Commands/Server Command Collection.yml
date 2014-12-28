@@ -417,12 +417,10 @@ Commands:
             - queue clear
             }
 
-        - define item i@<context.args.get[2]>[quantity=<context.args.get[3]||1>]
-        - define item <def[item].as_item||Not_An_Item>
-        #todo: when mcmonkey fixes item tags with .formatted (must have a [quantity=#]) specifier, beautify this
-        - narrate "<script.yaml_keys[title]> <blue>Giving <red><def[target].name.display||<def[target].name>> <yellow><context.args.get[3]||1> <def[item].formatted||<def[item].simple>>" targets:<player>
-        - narrate "<script.yaml_keys[title]> <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>" targets:<def[target]>
-        - give <def[item]> to:<def[target].inventory>
+        - define item <context.args.get[2].as_item||Not_An_Item>
+        - narrate "<script.yaml_keys[title]> <blue>Giving <red><def[target].name.display||<def[target].name>> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><context.args.get[3]||1>"  targets:<player>
+        - narrate "<script.yaml_keys[title]> <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>"            targets:<def[target]>
+        - give <def[item]> to:<def[target].inventory> qty:<context.args.get[3]||1>
         
         on leap command:
         - determine passively fulfilled
