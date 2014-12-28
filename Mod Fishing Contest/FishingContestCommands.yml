@@ -10,6 +10,7 @@
 
 Fishing Contest:
     type: world
+    fishing_contest_availability_announcement: d@3m-10m
     events:
         on server start:
         - run "Clear Fishing Contest Objectives and Flags" delay:d@30s
@@ -18,18 +19,21 @@ Fishing Contest:
         #fishes while fishing? Just starts fishing is better
         on player fishes while fishing:
         - if !<script.cooled_down[<player>]> queue clear
-        - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]> {
-            - scoreboard add viewers:<player> lines: id:fishing_contest_score objective:fishing_contest score:0
-            - flag server fishing_contest.participants:|:<player>
-            - flag server fishing_contest.scores.<player>:0
+        - if !<server.has_flag[fishing_contest.announced_contest_available]> {
             - announce "<magic>ii<gold><player.name> <red>is fishing! <gold>Maybe youd like to compete?"
             - announce "<magic>ii<light_purple><italic>~~~Just start fishing to join~~~"
+            - flag server fishing_contest.announced_contest_available   duration:d@3m-10m
+            }
+        - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]> {
+            - scoreboard add viewers:<player> lines: id:fishing_contest_score objective:fishing_contest score:0
+            - flag server fishing_contest.participants:|:<player>       duration:10m
+            - flag server fishing_contest.scores.<player>:0             duration:10m
             }
         
-        - if !<server.flag[fishing_contest.participants].as_list.size.is[more].than[1]> {
+        - if <server.flag[fishing_contest.participants].as_list.size.is[more].than[1]> {
             - if !<server.has_flag[fishing_contest.active]> {
                 - announce "<magic>ii<gold>Fishing contest has <italic><underline><light_purple>COMMENCED!"
-                - flag server fishing_contest.active duration:d@10m
+                - flag server fishing_contest.active                    duration:d@10m
                 }
             }
         
@@ -37,7 +41,7 @@ Fishing Contest:
         - if <server.has_flag[fishing_contest.active]>
           && <server.flag[fishing_contest.participants].as_list.contains[<player>]> {
             - announce "<magic>ii<gold><player.name> <reset>caught a <light_purple><context.item.formatted>!"
-            - flag server fishing_contest.scores.<player>:++
+            - flag server fishing_contest.scores.<player>:++            duration:10m
             }
         
         on fishingcontest command:
