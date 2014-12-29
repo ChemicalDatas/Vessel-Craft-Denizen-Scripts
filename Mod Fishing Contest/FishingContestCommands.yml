@@ -8,53 +8,75 @@
 # (announce (anyone with a score equal to 1) Wins the fishing Contest!)
 
 
-Fishing Contest:
+Fishing_Contest:
     type: world
+    
+    #The announcement cooldown when a players starts fishing
     fishing_contest_availability_announcement: d@3m-10m
+    #The cooldown to start another contest
+    fishing_contest_win_cooldown: d@2m-4m
+    #A hard reset of the contest if all players stop fishing
+    fishing_contest_timeout: d@1h
+    #if players stop fishing in the middle, this will reset the scores to 0 after the duration ends.
+    fishing_contest_data_timeout: d@20m
+    fishing_contest_score_to: <util.random.int[5].to[10]>
+    
     events:
         on server start:
-        - run "Clear Fishing Contest Objectives and Flags" delay:d@30s
+        - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
         
-        
-        #fishes while fishing? Just starts fishing is better
+        #fishes while fishing? Just casts a fishing rod is a better name...
         on player fishes while fishing:
-        - if !<script.cooled_down[<player>]> queue clear
-        - if !<server.has_flag[fishing_contest.announced_contest_available]> {
+        - if <server.has_flag[<script.name>.cooldown]> queue clear
+        - if !<server.has_flag[<script.name>.announced_contest_available]> {
             - announce "<magic>ii<gold><player.name> <red>is fishing! <gold>Maybe youd like to compete?"
             - announce "<magic>ii<light_purple><italic>~~~Just start fishing to join~~~"
-            - flag server fishing_contest.announced_contest_available   duration:d@3m-10m
-            }
-        - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]> {
-            - scoreboard add viewers:<player> lines: id:fishing_contest_score objective:fishing_contest score:0
-            - flag server fishing_contest.participants:|:<player>       duration:10m
-            - flag server fishing_contest.scores.<player>:0             duration:10m
+            - flag server <script.name>.announced_contest_available   duration:<script.yaml_keys[fishing_contest_availability_announcement]>
             }
         
-        - if <server.flag[fishing_contest.participants].as_list.size.is[more].than[1]> {
-            - if !<server.has_flag[fishing_contest.active]> {
+        - if !<server.flag[fishing_contest.participants].as_list.contains[<player>]||false> {
+            - scoreboard add id:<script.name> objective:<script.name> lines:<player.name> score:0
+            - flag server <script.name>.participants:|:<player>     duration:<script.yaml_keys[fishing_contest_data_timeout]>
+            - flag server <script.name>.scores.<player>:0           duration:<script.yaml_keys[fishing_contest_data_timeout]>
+            }
+        
+        - if <server.flag[<script.name>.participants].as_list.size.is[more].than[1]> {
+            - if !<server.has_flag[<script.name>.active]> {
+                - flag server <script.name>.active duration:<script.yaml_keys[fishing_contest_timeout]>
+                - flag server <script.name>.fishing_to:<script.yaml_keys[fishing_contest_score_to]>
                 - announce "<magic>ii<gold>Fishing contest has <italic><underline><light_purple>COMMENCED!"
-                - flag server fishing_contest.active                    duration:d@10m
+                - announce "<magic>ii<blue>Winning score <blue>has been set to<&co> <italic><underline><light_purple><server.flag[<script.name>.fishing_to]>"
                 }
             }
+        - scoreboard id:<script.name> objective:<script.name> viewers:<server.flag[<script.name>.participants].as_list>
         
         on player fishes while caught_fish:
-        - if <server.has_flag[fishing_contest.active]>
-          && <server.flag[fishing_contest.participants].as_list.contains[<player>]> {
-            - announce "<magic>ii<gold><player.name> <reset>caught a <light_purple><context.item.formatted>!"
-            - flag server fishing_contest.scores.<player>:++            duration:10m
+        #update scoreboard
+        - if <server.has_flag[<script.name>.active]>
+          && <server.flag[<script.name>.participants].as_list.contains[<player>]> {
+            - announce "<magic>ii<gold><player.name> <reset>caught <light_purple><context.item.formatted||<context.item||I have no clue>>!"
+            - flag server <script.name>.scores.<player>:++
+            - scoreboard id:<script.name> objective:<script.name> lines:<player.name> score:<server.flag[<script.name>.scores.<player>].as_int>
+            }
+        #Endgame functions when a player has a special score!
+        #junk acheievements?
+        - if <server.flag[<script.name>.scores.<player>].is[or_more].than[<server.flag[<script.name>.fishing_to]>]> {
+            - announce "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish caught and won the contest!"
+            - flag server <script.name>.cooldown duration:<script.yaml_keys[fishing_contest_win_cooldown]>
+            - announce "<gray>Please wait while we restock your local fishing holes to start another contest."
+            - run "Clear Fishing Contest Objectives and Flags"
             }
         
-        on fishingcontest command:
-        - determine passively fulfilled
-        - define command <context.parsed_args.get[1]>
-        - execute as_server "scoreboard objectives add fishing stat.fishCaught Fishing_Contest"
-        - execute as_server "scoreboard objectives setdisplay sidebar fishing"
 
 Clear Fishing Contest Objectives and Flags:
     type: task
+    definitions: script
     script:
-    - flag server fishing_contest.active:!
-    - flag server fishing_contest.participants:!
-    - flag server fishing_contest.scores:!
-    - scoreboard remove obj:fishing
+    - scoreboard remove id:<def[script].name>
+    - scoreboard remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>
+    - flag server <def[script].name>.active:!
+    - flag server <def[script].name>.participants:!
+    - flag server <def[script].name>.scores:!
+    - flag server <def[script].name>.active:!
+    - flag server <def[script].name>.fishing_to:!
     
