@@ -1,13 +1,3 @@
-# ~!Setup Required!~
-# This requires a command block setup in a loaded chunk connected to a running clock:
-# testfor @a[score_fishing_min=1] 
-# (testing for everyone for a min. score of 1 (whatever you want the winning score to be))
-
-# There needs to be a comparator running off the first command block that runs another commandblock containing:
-# say @a[score_fishing_min=1] Wins the fishing Contest!
-# (announce (anyone with a score equal to 1) Wins the fishing Contest!)
-
-
 Fishing_Contest:
     type: world
     
@@ -20,8 +10,12 @@ Fishing_Contest:
     #if players stop fishing in the middle, this will reset the scores to 0 after the duration ends.
     fishing_contest_data_timeout: d@20m
     fishing_contest_score_to: <util.random.int[5].to[10]>
+    fishing_contest_objective: "<gold><magic><gold>Fishing <light_purple>Contest"
     
     events:
+        on server stop:
+        - run "Clear Fishing Contest Objectives and Flags" def:<script>
+        
         on server start:
         - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
         
@@ -43,9 +37,9 @@ Fishing_Contest:
         - if <server.flag[<script.name>.participants].as_list.size.is[more].than[1]> {
             - if !<server.has_flag[<script.name>.active]> {
                 - flag server <script.name>.active duration:<script.yaml_keys[fishing_contest_timeout]>
-                - flag server <script.name>.fishing_to:<script.yaml_keys[fishing_contest_score_to]>
+                - flag server <script.name>.wining_score:<script.yaml_keys[fishing_contest_score_to]>
                 - announce "<magic>ii<gold>Fishing contest has <italic><underline><light_purple>COMMENCED!"
-                - announce "<magic>ii<blue>Winning score <blue>has been set to<&co> <italic><underline><light_purple><server.flag[<script.name>.fishing_to]>"
+                - announce "<magic>ii<blue>Winning score <blue>has been set to<&co> <italic><underline><light_purple><server.flag[<script.name>.wining_score]>"
                 }
             }
         - scoreboard id:<script.name> objective:<script.name> viewers:<server.flag[<script.name>.participants].as_list>
@@ -60,11 +54,11 @@ Fishing_Contest:
             }
         #Endgame functions when a player has a special score!
         #junk acheievements?
-        - if <server.flag[<script.name>.scores.<player>].is[or_more].than[<server.flag[<script.name>.fishing_to]>]> {
-            - announce "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish caught and won the contest!"
+        - if <server.flag[<script.name>.scores.<player>].is[or_more].than[<server.flag[<script.name>.wining_score]>]> {
+            - announce "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish and won the contest!"
+            - announce "<gray>Please wait <script.yaml_keys[fishing_contest_win_cooldown].formatted> while we restock your local fishing holes to start another contest."
+            - run "Clear Fishing Contest Objectives and Flags" def:<script>
             - flag server <script.name>.cooldown duration:<script.yaml_keys[fishing_contest_win_cooldown]>
-            - announce "<gray>Please wait while we restock your local fishing holes to start another contest."
-            - run "Clear Fishing Contest Objectives and Flags"
             }
         
 
@@ -77,6 +71,5 @@ Clear Fishing Contest Objectives and Flags:
     - flag server <def[script].name>.active:!
     - flag server <def[script].name>.participants:!
     - flag server <def[script].name>.scores:!
-    - flag server <def[script].name>.active:!
-    - flag server <def[script].name>.fishing_to:!
+    - flag server <def[script].name>.wining_score:!
     
