@@ -343,12 +343,11 @@ Narrate:
       define format
       ''
       else
-      define format
-      format:<def[format]>
+      define format format<&co><def[format]>
     
-    - narrate <def[format]>
-      <def[words].unescaped>
-    
+    - narrate <def[words].unescaped>
+      <def[format]>
+      
 
 Eat Effect:
     #Yeah, this looks funny, and there's a lot of repeated code. But it flows smoothly when used. Good Enough.
@@ -699,8 +698,6 @@ Drop:
 ################################################################################################
 ####################### Delay Sets #############################################################
 ################################################################################################
-
-
 
 
 
