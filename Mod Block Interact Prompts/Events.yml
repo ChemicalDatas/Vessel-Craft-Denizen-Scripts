@@ -9,10 +9,8 @@ Block Interact Display Triggers:
             }
         
         on player right clicks block:
-        - announce ""
-        - announce "<red>On click context check"
         - if <queue.exists[<player.name>_context_menu]> {
-            - announce "Queue existed!"
+            - narrate "<gray>You already have a menu open."
             - queue clear
             }
         
