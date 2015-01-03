@@ -13,9 +13,6 @@ Fishing_Contest:
     fishing_contest_objective: "<gold><magic><gold>Fishing <light_purple>Contest"
     
     events:
-        on server stop:
-        - run "Clear Fishing Contest Objectives and Flags" def:<script>
-        
         on server start:
         - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
         
