@@ -262,7 +262,7 @@ Context Menu:
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
     - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
     - run <def[script]> def:<def[arguments]> instantly
-    - ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    #- ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
 
 
 Context Menu Display Timeout:
