@@ -204,7 +204,7 @@ Build Connected Block List:
     - define block_list
       li@
     
-    - foreach "<proc[Neighbour Blocks].context[<def[location]>|null|<def[block_type]>]>" {
+    - foreach "<proc[Neighbour Blocks].context[<def[location]>||<def[block_type]>]>" {
         - define block_list
           <def[block_list].include[<def[value]>]>
         }
