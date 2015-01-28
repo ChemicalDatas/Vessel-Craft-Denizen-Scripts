@@ -26,7 +26,7 @@
     
 
 
-"Cube Surrounding":
+Cube Surrounding:
     ############################################################################################################################
     #                                                                                                                          #
     #                                                                                                                          #
@@ -38,7 +38,7 @@
     - define outset <def[outset]||1>
     - determine <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
     
-"Outset Cuboid":
+Outset Cuboid:
     ############################################################################################################################
     #                                                                                                                          #
     #                                                                                                                          #
@@ -145,8 +145,6 @@ Neighbour Blocks:
         - define mater <def[locat].material.name>
         - announce "<blue>material: <def[mater]>"
         - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>" {
-            - announce "Checking <def[locat].simple>"
-            - announce "met black white list"
             - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[locat]>]>"
             }
         }
