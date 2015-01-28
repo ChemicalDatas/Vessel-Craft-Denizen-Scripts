@@ -1,4 +1,12 @@
 
+Seasons:
+    type: procedure
+    definitions: entity
+    script:
+    - if <def[entity]>
+    - execute as_npc "season season" save:season
+    - determine <entry[season].output>
+
 Hawkeye:
     type: procedure
     definitions: location|player|event
@@ -6,8 +14,8 @@ Hawkeye:
     -
     - determine ""
 
-Essentials:
+Essentials Garbage Collect:
     type: procedure
     script:
     - execute as_server "gc" save:output
-    - determine ""
+    - determine <entry[output].output>
