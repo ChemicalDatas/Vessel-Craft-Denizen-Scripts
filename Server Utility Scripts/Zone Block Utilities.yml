@@ -169,24 +169,27 @@ Neighbour Blocks:
     type: procedure
     definitions: location|black_list|white_list|direction
     script:
-    #                                                      above, north, east, south, west, below
+    #                               above, north, east, south, west, below
     - define direction
-      <def[direction].unescaped||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+      <def[direction].unescaped.as_list||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+    
+    - define black_list
+      <def[black_list].unescaped.as_list||li@>
+    
+    - define white_list
+      <def[white_list].unescaped.as_list||li@>
     
     - define block_list
       li@
-    
-    - foreach <def[direction].as_list> {
-        - define locat
-          <def[location].add[<def[value]>]>
-        
-        - define mater
-          <def[locat].material.name>
-        
-        - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>"
-          define block_list
-          <def[block_list].include[<def[locat]>]>
-        
+
+    - foreach <def[direction]> {
+        - define locat <def[location].add[<def[value]>]>
+        - define mater <def[locat].material>
+        - if <def[black_list].contains[<def[mater]>]> foreach next
+        - if !<def[white_list].is_empty>
+          && !<def[white_list].contains[<def[mater]>]> foreach next
+          
+        - define block_list <def[block_list].include[<def[location].add[<def[value]>]>]>
         }
     - determine <def[block_list].unescaped||li@>
 
