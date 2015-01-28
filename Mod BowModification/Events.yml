@@ -50,13 +50,10 @@ Player Bow Handling:
         #determine
         #  cancelled, <projectile>
         on entity shoots bow:
-        -
         
         on <entity> shoots <item>:
-        -
         
         on entity shoots block:
-        -
         
         on entity damaged by arrow:
         - If <context.projectile.location.y> >= <context.entity.eye_location.y.sub[-0.05]> && <context.projectile.location.y> <= <context.entity.eye_location.y.add[0.70]> {
@@ -74,13 +71,10 @@ Player Bow Handling:
 #Special Abilities: Lightning, Razor, Piercing, Explosive, Compression, Poison, Slow, Net, Fire, Doombringer
 
         on entity shoots <material> (with <projectile>):
-        -
         
         on <entity> shoots block:
-        -
         
         on <entity> shoots <material> (with <projectile>):
-        -
         
  ###############################################################################   
  #Breaking glass, ice, crumbling blocks with tools / weapons
