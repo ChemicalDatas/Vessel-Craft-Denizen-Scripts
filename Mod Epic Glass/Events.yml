@@ -1,17 +1,18 @@
-"Glass Target Event Listener":
+Glass Target Event Listener:
     type: world
     events:
-        on entity shoots block:
-        - if <context.location.material.contains[glass]> {
-            - announce "<script.name> has been activated for event: on entity shoots block"
-            - run "Glass Break Event" def:<context.location> instantly
-            }
         on projectile hits m@glass:
         - announce "<script.name> has been activated for <context.location.material>"
+        - run "Glass Break Event" def:<context.location> instantly
         
-        on projectile hits block:
-        - if <context.location.material.contains[glass]> {
-            - announce "<script.name> has been activated for event: on projectile hits block"
-            - run "Glass Break Event" def:<context.location> instantly
-            }
-        
+#        on entity shoots block:
+#        - if <context.location.material.contains[glass]> {
+#            - announce "<script.name> has been activated for event<&co> on entity shoots block"
+#            - run "Glass Break Event" def:<context.location> instantly
+#            }
+#
+#        on projectile hits block:
+#        - if <context.location.material.contains[glass]> {
+#            - announce "<script.name> has been activated for event: on projectile hits block"
+#            - run "Glass Break Event" def:<context.location> instantly
+#            }

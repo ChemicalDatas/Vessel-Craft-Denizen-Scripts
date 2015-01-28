@@ -82,27 +82,62 @@
 
 
 
-"Glass Break Event":
+Glass Break Event:
     # Under npc base sets. Its a npc task but its a standalone task with only 1 command.
     # Modifyblock Changes the air back into glass after a period of time.
     # Neighbour Blocks dose have a material filter on it. But I just wanted to check 
     # if the material has glass in the name. 
     # So I don't need to check for 32 different kinds of items in the list.
+    #
+    # Sets the glass to air
+    # Then gets a list of connected glass blocks
+    # starts breaking those recursively
     type: task
-    definitions: location
+    definitions: location_list|delay|iteration_number|material
+    speed: d@1t
     script:
-    - define material <def[location].material>
-    - define id <def[material].id>
+    - define location_list
+      <def[location_list].unescaped.as_list>
     
-    - modifyblock <def[location]> m@air
-    - playsound <def[location]> sound:GLASS
-    - playeffect <def[location]> effect:iconcrack_<def[id]> qty:500
-    - run "Modifyblock" def:<def[location]>|<def[material]> delay:d@20s-1m
     
-    - foreach "<proc[Neighbour Blocks].context[<def[location]>]>" {
-        - if <def[value].material.contains[glass]> {
-            - run "Glass Break Event" def:<def[value]> instantly
+    - if <def[location_list].is_empty>
+      queue clear
+    
+    - define iteration_number
+      <def[iteration_number]||1>
+    
+    - if <def[iteration_number].is[or_more].than[5]>
+      queue clear
+    
+    - define material
+      <def[material]||m@glass>
+    
+    - define delay
+      <def[delay]||d@30s>
+    
+    - modifyblock <def[location_list]>
+      m@air
+    
+    - playsound <def[location_list]>
+      sound:GLASS
+    
+    #plays the first block on the lists id break
+    - playeffect <def[location_list]>
+      effect:iconcrack_<def[material].id>
+      qty:10
+    
+    - run Modifyblock def:<def[location_list].escaped>|<def[material]> delay:<def[delay]>
+    
+    - define next_break_list
+      li@
+    
+    - foreach <def[location_list]> {
+        - foreach "<proc[Neighbour Blocks].context[<def[value]>||<def[material]>|]>" {
+            - define next_break_list <def[next_break_list].include[<def[value]>]>
             }
         }
+    
+    - run "Glass Break Event"
+      def:<def[next_break_list].deduplicate.escaped>|<def[delay]>|<def[iteration_number].add[1]>|<def[material]>
 
 
