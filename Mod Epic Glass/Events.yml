@@ -7,7 +7,7 @@
             - run "Glass Break Event" def:<context.location> instantly
             }
         on projectile hits m@glass:
-        - announce "<script.name> has been activated for <context.material>"
+        - announce "<script.name> has been activated for <context.location.material>"
         
         on projectile hits block:
         - if <context.location.material.contains[glass]> {
