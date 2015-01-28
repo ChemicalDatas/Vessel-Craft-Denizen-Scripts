@@ -596,22 +596,6 @@ In Allowed Group:
     - determine false
     
 
-"Definition":
-    type: procedure
-    definitions: definition_name
-    script:
-    - determine %definition_name%
-    
-
-Announce Arguments Passed:
-    #Injected script to announce all the args passed to a script
-    type: task
-    script:
-    - announce ""
-    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
-    - foreach <queue.definitions> {
-        - announce "<blue><bold>%value%: <reset><def[%value%]>"
-        }
 
 
 # todo: turn this into a task
@@ -628,13 +612,13 @@ Announce Arguments Passed:
 #
 __Return__:
     #
-    # Gets code from a script
-    # Expects a definition to defined in code called return. Returns that.
+    # Executes code from a script container, This will None unless the code determines the return
     #
     type: procedure
     definitions: script|path
     script:
-    - define return none
+    - define return None
     - inject <def[script]> path:<def[path]>
+    - determine <def[return]>
     
 

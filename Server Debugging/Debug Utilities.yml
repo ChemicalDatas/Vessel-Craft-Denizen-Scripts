@@ -127,3 +127,14 @@
     
     - yaml unload id:UT
 
+
+Announce Arguments Passed:
+    #Injected script to announce all the args passed to a script
+    type: task
+    script:
+    - announce ""
+    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
+    - foreach <queue.definitions> {
+        - announce "<blue><bold>%value%: <reset><def[%value%]>"
+        }
+
