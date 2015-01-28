@@ -18,12 +18,19 @@ Block Line:
     type: procedure
     definitions: entity|distance
     script:
-    - define list li@
+    - define list
+      li@
+    
     - repeat <def[distance]> {
-        - define block <def[entity].location.cursor_on[<def[value]>]>
-        - define list <def[list].include[<def[block]>]>
+        - define block
+          <def[entity].location.cursor_on[<def[value]>]>
+        
+        - define list
+          <def[list].include[<def[block]>]>
         }
-    - determine <def[list].unescaped>
+    
+    - determine
+      <def[list].unescaped>
     
 
 
@@ -36,7 +43,9 @@ Cube Surrounding:
     type: procedure
     definitions: entity|outset
     script:
-    - define outset <def[outset]||1>
+    - define outset
+      <def[outset]||1>
+    
     - determine <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
     
 Outset Cuboid:
@@ -48,11 +57,14 @@ Outset Cuboid:
     type: procedure
     definitions: cuboid|outset
     script:
-    - define outset <def[outset]||1>
-    - determine <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
+    - define outset
+      <def[outset]||1>
+    
+    - determine
+      <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
 
 
-"Cube Surrounding Location":
+Cube Surrounding Location:
     ############################################################################################################################
     #                                                                                                                          #
     #                                                                                                                          #
@@ -61,8 +73,11 @@ Outset Cuboid:
     type: procedure
     definitions: location|outset
     script:
-    - define outset <def[outset]||1>
-    - determine "<def[location].sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[location].add[<def[outset]>,<def[outset]>,<def[outset]>]>"
+    - define outset
+      <def[outset]||1>
+    
+    - determine
+      <def[location].sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[location].add[<def[outset]>,<def[outset]>,<def[outset]>]>
 
 
 Spawnable Locations In Cuboid:
@@ -74,16 +89,25 @@ Spawnable Locations In Cuboid:
     type: procedure
     definitions: cuboid|white_list|black_list
     script:
-    - define white_list <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks>
-    - define black_list <def[black_list].unescaped.as_list||li@>
-    - define target_locations li@
-    - define spawnable_locations <def[cuboid].unescaped.get_spawnable_blocks>
+    - define white_list
+      <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks>
+    
+    - define black_list
+      <def[black_list].unescaped.as_list||li@>
+    
+    - define target_locations
+      li@
+    
+    - define spawnable_locations
+      <def[cuboid].unescaped.get_spawnable_blocks>
+    
     - foreach <def[spawnable_locations]> {
-        - if "<proc[Meets Black White List].context[<def[value]>|<def[black_list]>|<def[white_list]>]>" {
-            - define target_locations <def[target_locations].include[<def[value]>]>
-            }
+        - if "<proc[Meets Black White List].context[<def[value]>|<def[black_list]>|<def[white_list]>]>"
+          define target_locations <def[target_locations].include[<def[value]>]>
+        
         }
-    - determine <def[target_locations].unescaped>
+    - determine
+      <def[target_locations].unescaped>
 
 Random Location Around Point:
     #############################################################################################################################
@@ -116,9 +140,14 @@ Random Location Around Point:
     type: task
     definitions: location|range|white_list|black_list|number_locations
     script:
-    - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|<def[range]||10>].escaped>"
-    - define locations "<proc[Spawnable Locations In Cuboid].context[<def[cuboid]>|<def[white_list]||li@>|<def[black_list]||li@>]>"
-    - determine <def[locations].random[<def[number_locations]||1>]>
+    - define cuboid
+      "<proc[Cube Surrounding Location].context[<def[location]>|<def[range]||10>].escaped>"
+    
+    - define locations
+      "<proc[Spawnable Locations In Cuboid].context[<def[cuboid]>|<def[white_list]||li@>|<def[black_list]||li@>]>"
+    
+    - determine
+      <def[locations].random[<def[number_locations]||1>]>
     
 
 
@@ -141,32 +170,44 @@ Neighbour Blocks:
     definitions: location|black_list|white_list|direction
     script:
     #                                                      above, north, east, south, west, below
-    - define direction <def[direction].unescaped||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
-    - define block_list li@
+    - define direction
+      <def[direction].unescaped||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+    
+    - define block_list
+      li@
+    
     - foreach <def[direction].as_list> {
-        - define locat <def[location].add[<def[value]>]>
-        - define mater <def[locat].material.name>
-        - announce "<blue>material: <def[mater]>"
-        - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>" {
-            - define block_list <def[block_list].include[<def[locat]>]>
-            }
+        - define locat
+          <def[location].add[<def[value]>]>
+        
+        - define mater
+          <def[locat].material.name>
+        
+        - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>"
+          define block_list
+          <def[block_list].include[<def[locat]>]>
+        
         }
     - determine <def[block_list].unescaped||li@>
 
 
 
 #todo: finishme
-"Build Connected Block List":
+Build Connected Block List:
     # A form of a 3d version of the 4 way flood fill algorithm
     type: procedure
     definitions: location|block_type
     script:
-    - define block_list li@
-    - foreach "<proc[Neighbour Blocks].context[<def[location]>|null|<def[block_type]>]>" {
-        - define block_list <def[block_list].include[<def[value]>]>
-        }
-    - determine <def[block_list]>
+    - define block_list
+      li@
     
+    - foreach "<proc[Neighbour Blocks].context[<def[location]>|null|<def[block_type]>]>" {
+        - define block_list
+          <def[block_list].include[<def[value]>]>
+        }
+    
+    - determine
+      <def[block_list]>
 
 
 
@@ -175,9 +216,16 @@ Entity Get Target Block:
     type: procedure
     definitions: entity|distance
     script:
-    - if <def[distance]> == null define distance 5
-    - define target <def[entity].location.cursor_on[5]>
-    - determine material <def[target].material>
+    - if <def[distance]> == null
+      || <def[distance]> == ""
+      || !<def[distance].exists>
+      define distance 5
+    
+    - define target
+      <def[entity].location.cursor_on[5]>
+    
+    - determine material
+      <def[target].material>
 
 
 
@@ -202,7 +250,9 @@ Location Has Property:
     type: procedure
     definitions: location|property_name
     script:
-    - define property "<proc[Get Location Property].context[<def[location]>|<def[property_name]>]||none>"
+    - define property
+      "<proc[Get Location Property].context[<def[location]>|<def[property_name]>]||none>"
+    
     - if <def[property]||none> != none {
         - determine true
         } else {
@@ -220,11 +270,17 @@ Get Location Property:
     type: procedure
     definitions: location|property
     script:
-    - define property_list li@
+    - define property_list
+      li@
+    
     - foreach <def[location].cuboids> {
-        - define property "<proc[Get Cuboid Property].context[<def[value]>|<def[property]>]>"
-        - define property_list <def[property_list].include[<def[property]>]>
+        - define property
+          "<proc[Get Cuboid Property].context[<def[value]>|<def[property]>]>"
+        
+        - define property_list
+          <def[property_list].include[<def[property]>]>
         }
+    
     - determine <def[property_list].unescaped>
 
 
@@ -237,22 +293,38 @@ Get Cuboid Property:
     type: procedure
     definitions: cuboid|property
     script:
-    - define p_list "<def[cuboid].split[ ]||li@>"
-    - if <def[property]> == null || <def[property]> == '' {
-        - determine <def[p_list]>
-        }
-    - define entries <def[p_list].get_sub_items[1].split_by[-]>
-    - define values <def[p_list].get_sub_items[2].split_by[-]>
-    - define index <def[entries].find[<def[property]>]>
-    - determine <def[values].get[<def[index]>]>
+    - define p_list
+     "<def[cuboid].split[ ]||li@>"
+    
+    - if <def[property]> == null
+      || <def[property]> == ''
+      determine <def[p_list]>
+    
+    - define entries
+      <def[p_list].get_sub_items[1].split_by[-]>
+    
+    - define values
+      <def[p_list].get_sub_items[2].split_by[-]>
+    
+    - define index
+      <def[entries].find[<def[property]>]>
+    
+    - determine
+      <def[values].get[<def[index]>]>
 
 Get Cuboid Property from database:
     type: procedure
     definitions: cuboid|property
     script:
-    - define property_list li@
-    - if !<yaml[cuboid_data].contains[properties]> determine <def[property_list]>
-    - determine <def[property_list].include[<yaml[cuboid_data].read[properties.<def[property]>]>]>
+    - define property_list
+      li@
+    
+    - if !<yaml[cuboid_data].contains[properties]>
+      determine <def[property_list]>
+    
+    - determine
+      <def[property_list].include[<yaml[cuboid_data].read[properties.<def[property]>]>]>
+
 
 Set Cuboid Property:
     type: task
@@ -260,6 +332,7 @@ Set Cuboid Property:
     script:
     #Not sure wether to unescape the cuboid or just leave it
     - yaml id:cuboid_data set <def[cuboid]>.<def[property]>:|:<def[value].unescaped>
+
 
 Entity Display Location:
     #
@@ -278,36 +351,73 @@ Entity Display Location:
     type: procedure
     definitions: entity|vertical
     script:
-    - define offset <script.yaml_keys[<def[entity].location.direction>]>
+    - define offset
+      <script.yaml_keys[<def[entity].location.direction>]>
+    
     - if <def[vertical].exists> {
-        - define pitch <def[entity].location.pitch>
-        - define y_offset <def[pitch].mul[-1].div[30]>
-        - if <def[y_offset].is[less].than[-1]> define y_offset -1
-        - define location <def[location].eye_location[0,<def[y_offset]>,0]>
+        - define pitch
+          <def[entity].location.pitch>
+        
+        - define y_offset
+          <def[pitch].mul[-1].div[30]>
+        
+        - if <def[y_offset].is[less].than[-1]>
+          define y_offset -1
+        
+        - define location
+          <def[location].eye_location[0,<def[y_offset]>,0]>
         }
-    - define location <def[entity].eye_location.add[<def[offset]>]>
-    - determine <def[location].sub[0,.9,0]>
+    - define location
+      <def[entity].eye_location.add[<def[offset]>]>
+    
+    - determine
+      <def[location].sub[0,.9,0]>
     
 
 Beacon Location:
     type: task
     definitions: location|player_list|duration
     script:
-    - define location <def[location].as_location.simple.as_location>
-    - define current_point <def[location].highest>
-    - define locations li@
+    - define location
+      <def[location].as_location.simple.as_location>
+    
+    - define current_point
+      <def[location].highest>
+    
+    - define locations
+      li@
+    
     - while <def[current_point].is[!=].to[<def[location]>]> {
-        - if !<def[current_point].material.is_transparent> {
-            - define locations <def[locations].include[<def[current_point]>]>
-            }
-        - define current_point <def[current_point].sub[0,1,0]>
+        - if !<def[current_point].material.is_transparent>
+          define locations <def[locations].include[<def[current_point]>]>
+        
+        - define current_point
+          <def[current_point].sub[0,1,0]>
         }
-    - define beacon_base cu@<def[location].add[-1,-2,-1]>|<def[location].add[1,-2,1]>
-    - define targets <def[player_list].unescaped||<player>>
-    - define duration <def[duration]||d@20s>
-    - showfake m@glass <def[locations].unescaped>           to:<def[targets]> d:<def[duration]>
-    - showfake m@beacon <def[location].below>               to:<def[targets]> d:<def[duration]>
-    - showfake m@iron_block <def[beacon_base].get_blocks>   to:<def[targets]> d:<def[duration]>
+    
+    - define beacon_base
+      cu@<def[location].add[-1,-2,-1]>|<def[location].add[1,-2,1]>
+    
+    - define targets
+      <def[player_list].unescaped||<player>>
+    
+    - define duration
+      <def[duration]||d@20s>
+    
+    - showfake m@glass
+      <def[locations].unescaped>
+      to:<def[targets]>
+      d:<def[duration]>
+    
+    - showfake m@beacon
+      <def[location].below>
+      to:<def[targets]>
+      d:<def[duration]>
+    
+    - showfake m@iron_block
+      <def[beacon_base].get_blocks>
+      to:<def[targets]>
+      d:<def[duration]>
     
 
 
