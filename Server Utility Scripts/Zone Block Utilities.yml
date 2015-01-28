@@ -8,7 +8,7 @@
 ################################################################################################################################
     
     
-"Block Line":
+Block Line:
     ############################################################################################################################
     #                                                                                                                          #
     # Returns a list of block that the line of sight of the entity encompasses                                                 #
@@ -18,9 +18,10 @@
     type: procedure
     definitions: entity|distance
     script:
+    - define list li@
     - repeat <def[distance]> {
         - define block <def[entity].location.cursor_on[<def[value]>]>
-        - define list "<proc[List Append Right].context[<def[list]||li@>|<def[block]>]>"
+        - define list <def[list].include[<def[block]>]>
         }
     - determine <def[list].unescaped>
     
@@ -75,10 +76,11 @@ Spawnable Locations In Cuboid:
     script:
     - define white_list <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks>
     - define black_list <def[black_list].unescaped.as_list||li@>
+    - define target_locations li@
     - define spawnable_locations <def[cuboid].unescaped.get_spawnable_blocks>
     - foreach <def[spawnable_locations]> {
         - if "<proc[Meets Black White List].context[<def[value]>|<def[black_list]>|<def[white_list]>]>" {
-            - define target_locations "<proc[List Append Right].context[<def[target_locations]||li@>|<def[value]>]>"
+            - define target_locations <def[target_locations].include[<def[value]>]>
             }
         }
     - determine <def[target_locations].unescaped>
@@ -140,12 +142,13 @@ Neighbour Blocks:
     script:
     #                                                      above, north, east, south, west, below
     - define direction <def[direction].unescaped||li@0,1,0|0,0,-1|1,0,0|0,0,1|-1,0,0|0,-1,0>
+    - define block_list li@
     - foreach <def[direction].as_list> {
         - define locat <def[location].add[<def[value]>]>
         - define mater <def[locat].material.name>
         - announce "<blue>material: <def[mater]>"
         - if "<proc[Meets Black White List].context[<def[mater]>|<def[black_list]||li@>|<def[white_list]||li@>]>" {
-            - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[locat]>]>"
+            - define block_list <def[block_list].include[<def[locat]>]>
             }
         }
     - determine <def[block_list].unescaped||li@>
@@ -158,9 +161,11 @@ Neighbour Blocks:
     type: procedure
     definitions: location|block_type
     script:
+    - define block_list li@
     - foreach "<proc[Neighbour Blocks].context[<def[location]>|null|<def[block_type]>]>" {
-        - define block_list "<proc[List Append Right].context[<def[block_list]||li@>|<def[value]>]>"
+        - define block_list <def[block_list].include[<def[value]>]>
         }
+    - determine <def[block_list]>
     
 
 
