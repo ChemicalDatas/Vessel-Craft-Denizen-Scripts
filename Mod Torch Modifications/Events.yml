@@ -36,12 +36,13 @@ Item Light Update:
     definitions: script
     script:
     - wait d@1t
+    
+    - define key
+      <def[script].name>.last_light_location
+    
     - while <def[script].yaml_keys[luminescent_items].contains[<player.item_in_hand.simple>]> {
         
         - wait <def[script].yaml_keys[light_time_update]>
-        
-        - define key
-          <def[script].name>.last_light_location
           
         - define loc
           <player.location.add[0,3,0].simple.as_location>
