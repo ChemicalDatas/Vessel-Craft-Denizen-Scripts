@@ -197,14 +197,13 @@ Neighbour Blocks:
 
 #todo: finishme
 Build Connected Block List:
-    # A form of a 3d version of the 4 way flood fill algorithm
     type: procedure
-    definitions: location|block_type
+    definitions: location|material_list
     script:
     - define block_list
       li@
     
-    - foreach "<proc[Neighbour Blocks].context[<def[location]>||<def[block_type]>]>" {
+    - foreach "<proc[Neighbour Blocks].context[<def[location]>||<def[material_list]>]>" {
         - define block_list
           <def[block_list].include[<def[value]>]>
         }
@@ -213,22 +212,6 @@ Build Connected Block List:
       <def[block_list]>
 
 
-
-
-Entity Get Target Block:
-    type: procedure
-    definitions: entity|distance
-    script:
-    - if <def[distance]> == null
-      || <def[distance]> == ""
-      || !<def[distance].exists>
-      define distance 5
-    
-    - define target
-      <def[entity].location.cursor_on[5]>
-    
-    - determine material
-      <def[target].material>
 
 
 
