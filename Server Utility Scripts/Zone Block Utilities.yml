@@ -191,11 +191,11 @@ Neighbour Blocks:
           
         - define block_list <def[block_list].include[<def[location].add[<def[value]>]>]>
         }
-    - determine <def[block_list].unescaped||li@>
+    - determine <def[block_list]||li@>
 
 
 
-#todo: finishme
+
 Build Connected Block List:
     type: procedure
     definitions: location|material_list
@@ -203,18 +203,36 @@ Build Connected Block List:
     - define block_list
       li@
     
-    - foreach "<proc[Neighbour Blocks].context[<def[location]>||<def[material_list]>]>" {
-        - define block_list
-          <def[block_list].include[<def[value]>]>
-        }
+    - define next_examination_targets <def[location].as_list>
+    
+    - inject "Recursive Material Search"
     
     - determine
       <def[block_list]>
 
 
-
-
-
+Recursive Material Search:
+    #
+    # Injected Script
+    # Requires predefinitions to be already in the container
+    #   #interation limit
+    #   #block_list
+    #   #next_examination_targets
+    type: task
+    script:
+    - define new_exam_targets li@
+    - foreach <def[next_examination_targets]> {
+        - define location <def[value]>
+        - foreach "<proc[Neighbour Blocks].context[<def[location]>||<def[material_list]>|]>" {
+            - if !<def[block_list].contains[<def[value]>]> {
+                - define block_list <def[block_list].include[<def[value]>]>
+                - define new_exam_targets <def[new_exam_targets].include[<def[value]>]>
+                }
+            }
+        }
+    - define next_examination_targets <def[new_exam_targets]>
+    - if !<def[next_examination_targets].is_empty>
+      inject "Recursive Material Search"
 
 
     ############################################################################################################################
