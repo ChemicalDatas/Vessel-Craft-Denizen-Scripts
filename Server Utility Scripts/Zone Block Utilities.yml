@@ -198,10 +198,17 @@ Neighbour Blocks:
 
 Build Connected Block List:
     type: procedure
-    definitions: location|material_list
+    definitions: location|material_list|iteration_limit
     script:
     - define block_list
       li@
+    
+    # denizen is an intrepreted language, using strings as its base compuation object
+    # its slow especialy when processing a list of 200+ blocks, it will freeze your server...
+    - define iteration_limit
+      <def[iteration_limit]||10>
+    
+    - define iteration 1
     
     - define next_examination_targets <def[location].as_list>
     
@@ -230,9 +237,18 @@ Recursive Material Search:
                 }
             }
         }
-    - define next_examination_targets <def[new_exam_targets]>
-    - if !<def[next_examination_targets].is_empty>
-      inject "Recursive Material Search"
+    - define next_examination_targets
+      <def[new_exam_targets]>
+    
+    - define iteration
+      <def[iteration].add[1]>
+    
+    # Cant just queue clear as this is injected
+    # Dont inject again, just return what ever is there. Dont get more for us.
+    - if !<def[iteration].is[or_more].than[<def[iteration_limit]>]> {
+        - if !<def[next_examination_targets].is_empty>
+          inject "Recursive Material Search"
+        }
 
 
     ############################################################################################################################
