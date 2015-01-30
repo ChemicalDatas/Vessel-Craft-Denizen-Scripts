@@ -4,8 +4,8 @@
 
 breakable Listener:
     type: world
-    database_path: script_database\broken_glass.yml
-    database_id: broken_blocks
+    database_path: script_database\griefed_blocks.yml
+    database_id: griefed_blocks
     restore_delay: d@1m
     recursion_limit: 20
     dump_breakable_delay: d@10s
@@ -14,7 +14,7 @@ breakable Listener:
     auto_restore_on_start_delay: d@1m
     breakable_list: m@glass|
                     m@glass_pane|
-                m@ice|m@packed_ice
+                    m@ice|m@packed_ice
     events:
 #        on projectile hits m@glass:
 #        - announce "<script.name> has been activated for <context.location.material>"
