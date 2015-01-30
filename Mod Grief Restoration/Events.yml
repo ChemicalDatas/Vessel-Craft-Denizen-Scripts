@@ -1,0 +1,235 @@
+#First step into creating a mod that replaces blocks
+# A form of griefprevention that allows players to grief but restores the griefed items
+# 
+
+breakable Listener:
+    type: world
+    database_path: script_database\broken_glass.yml
+    database_id: broken_blocks
+    restore_delay: d@1m
+    recursion_limit: 20
+    dump_breakable_delay: d@10s
+    
+    #because this will auto load chunks and reset the breakables back
+    auto_restore_on_start_delay: d@1m
+    breakable_list: m@glass|
+                    m@glass_pane|
+                m@ice|m@packed_ice
+    events:
+#        on projectile hits m@glass:
+#        - announce "<script.name> has been activated for <context.location.material>"
+#        - run "breakable Break Event" def:<context.location> instantly
+#        
+#        on entity shoots block:
+#        - if <context.location.material.contains[breakable]> {
+#            - announce "<script.name> has been activated for event<&co> on entity shoots block"
+#            - run "breakable Break Event" def:<context.location> instantly
+#            }
+
+        on request breakable hardsave:
+        - define queue_id request_breakable_save
+        - if !<queue.exists[<def[queue_id]>]>
+          run "Yaml Save"
+          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+          id:<def[queue_id]>
+          delay:<script.yaml_keys[dump_breakable_delay]>
+        
+        
+        on server start:
+        - run "Yaml Load"
+          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+        
+        - run "Auto breakable Restore"
+          def:<script.yaml_keys[database_id]>
+          delay:<script.yaml_keys[auto_restore_on_start_delay]>
+        
+        on server stop:
+        - run "Yaml Save"
+          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+        
+        on projectile hits block:
+        - define materials
+          <script.yaml_keys[breakable_list].as_list>
+            
+        - define location
+          <context.location>
+          
+        - if <def[materials].contains[<def[location].material>]> {
+            - define path
+              broken_block_sets.<util.random.duuid>
+            
+            - define recur_limit
+              <script.yaml_keys[recursion_limit]>
+            
+            - define target_blocks
+              "<proc[Build Connected Block List].context[<def[location]>|<def[materials].escaped>|<def[recur_limit]>]>"
+            
+            - if <def[target_blocks].is_empty> {
+                - announce "target blocks was empty..."
+                - announce "target <context.location.simple> <context.location.material>"
+                - queue clear
+                }
+            
+            - define yaml_id
+              <script.yaml_keys[database_id]>
+            
+            - define delay
+              <script.yaml_keys[restore_delay]>
+            
+            #Just need the return of save breakable, the path its generated
+            #as if theres issues, like if the server crashed before the breakable restarts,
+            #This should just auto restore the breakable on server restart.
+#            - run "Save breakable"
+#              def:<def[yaml_id]>|<def[target_blocks].escaped>
+#              save:queue_with_path_name
+            - run "Save breakable" def:<def[yaml_id]>|<def[target_blocks].escaped>|<def[path]>
+            
+            - run "Break breakable" def:<def[target_blocks].escaped>
+            
+#            - run "Restore breakable"
+#              def:<def[yaml_id]>||<entry[queue_with_path_name].created_queue>
+#              delay:<def[delay]>
+            - run "Restore breakable" def:<def[yaml_id]>|<def[path]> delay:<def[delay]>
+            
+            }
+        
+    
+Break breakable:
+    type: task
+    definitions: block_list
+    script:
+    - foreach <def[block_list].unescaped.as_list> {
+        - playsound <def[value]> sound:breakable
+        - playeffect <def[value]> effect:iconcrack_<def[value].material.id> qty:5
+        }
+    
+    - modifyblock <def[block_list].unescaped>
+      m@air
+      delayed
+    
+    
+#after mcmonkey fixes tasks bieng able to determine then get a determination from a queue
+#replace the need for providing a path
+Save breakable:
+    type: task
+    definitions: yaml_id|locations|path
+    script:
+    - define locations <def[locations].unescaped>
+    
+    - define locations_materials
+      <def[locations].parse[material]>
+    
+    - if !<def[path].exists>
+        || <def[path]>      == ""
+        || <def[path]>      == null {
+        - announce "<script.name> Failed to provide a path <def[path]>" to_console
+        - queue clear
+        }
+    #- define path
+    #  broken_block_sets.<util.random.duuid>
+    
+    #List of locations that were modified
+    - yaml id:<def[yaml_id]>
+      set
+      <def[path]>.locations:|:<def[locations]>
+    
+    #List of materials that corespond indexwise to the locations that were modified
+    - yaml id:<def[yaml_id]>
+      set
+      <def[path]>.materials:|:<def[locations_materials]>
+    
+    - event "Request Breakable HardSave"
+    
+    
+Restore breakable:
+    #
+    # Task id is the task that generated the path id for this script
+    # Get the determination from the task id to get 
+    type: task
+    definitions: yaml_id|path|task_id
+    script:
+    - if !<yaml.list.contains[<def[yaml_id]>]> {
+        - announce "<script.name> will not load a yaml_id thats not loaded. ID<&co> <def[yaml_id]||>" to_console
+        - queue clear
+        }
+    
+    #get a definition from the task id called path
+    #This contains queue.definition[def] code thats currently bugged out through the api
+    - define path
+      <def[path]||<def[task_id].definition[path]>>
+    
+    #Its possible that another script... (debugging) erased the yaml path for these... like if a restart
+    # was initiated and this script was still active in memory.
+    - if !<yaml[<def[yaml_id]>].contains[<def[path]>]> {
+        - announce "<script.name> could not find the path in <def[yaml_id]>. PATH<&co> <def[path]||>" to_console
+        - if !<yaml[<def[yaml_id]>].contains[<def[path]>.materials]> {
+            - announce "<script.name> could not find the path for the materials. PATH<&co> <def[path]||<&lb>PATH<&rb>>.materials" to_console
+            }
+        - queue clear
+        }
+    
+    - define location_list
+      <yaml[<def[yaml_id]>].read[<def[path]>.locations]>
+    
+    - define material_list
+      <yaml[<def[yaml_id]>].read[<def[path]>.materials]>
+    
+    #- announce
+    #  "<script.name> Restoring Broken Blocks. Set ID<&co> <def[yaml_id]> <def[path]>"
+    #  to_console
+    
+    #- announce "<script.name> location list<&co> <def[location_list]>"
+    
+    #Need a foreach because modifyblock dose not handle materials lists in order
+    - foreach <def[location_list]> {
+        - define target_chunk <def[value].get_chunk>
+        - if !<def[target_chunk].is_loaded> {
+            - adjust <def[target_chunk]> load
+            }
+        - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
+        - adjust <def[target_chunk]> unload_safely
+        }
+    
+    #resets all sub-nodes as well
+    - yaml id:<def[yaml_id]> set <def[path]>:!
+
+Auto breakable Restore:
+    type: task
+    definitions: yaml_id
+    script:
+    - if <def[yaml_id]||none> == none
+      || !<yaml.list.contains[<def[yaml_id]||none>]> {
+        - announce "<script.name><&co> Did not recieve any valid yaml_id<&co> <def[yaml_id]||NO YAML_ID PASSED>"
+        - queue clear
+        }
+    
+    - define yaml_path_list
+      <yaml[<def[yaml_id]>].list_keys[broken_block_sets]||li@>
+    
+    - if <def[yaml_path_list].is_empty> {
+        - announce "<script.name> There was no path in the yaml <def[yaml_id]> because its empty. The tag failed anyways." to_console
+        - queue clear
+        }
+    
+    - foreach <def[yaml_path_list]> {
+        - define path broken_block_sets.<def[value]>
+        
+        - define location_list <yaml[<def[yaml_id]>].read[<def[path]>.locations]>
+        
+        - define material_list <yaml[<def[yaml_id]>].read[<def[path]>.materials]>
+        
+        - foreach <def[location_list]> {
+            - define target_chunk <def[value].get_chunk>
+            - if !<def[target_chunk].is_loaded> {
+                - adjust <def[target_chunk]> load
+                }
+            - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
+            - adjust <def[target_chunk]> unload_safely
+            }
+        
+        - yaml id:<def[yaml_id]> set <def[path]>:!
+        }
+    
+    - event "Request Breakable HardSave"
+    
+    

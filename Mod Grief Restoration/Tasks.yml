@@ -131,6 +131,8 @@ Glass Break Event:
     - define next_break_list
       li@
     
+    
+    
     - foreach <def[location_list]> {
         - foreach "<proc[Neighbour Blocks].context[<def[value]>||<def[material]>|]>" {
             - define next_break_list <def[next_break_list].include[<def[value]>]>
