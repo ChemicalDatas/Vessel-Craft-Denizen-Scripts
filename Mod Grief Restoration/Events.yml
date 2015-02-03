@@ -11,6 +11,7 @@ breakable Listener:
     dump_breakable_delay: d@10s
     
     #because this will auto load chunks and reset the breakables back
+    load_write_save_delay: d@1s
     auto_restore_on_start_delay: d@1m
     breakable_list: m@glass|
                     m@glass_pane|
@@ -223,7 +224,9 @@ Auto breakable Restore:
             - if !<def[target_chunk].is_loaded> {
                 - adjust <def[target_chunk]> load
                 }
+            - wait <script.yaml_keys[load_write_save_delay]>
             - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
+            - wait <script.yaml_keys[load_write_save_delay]>
             - adjust <def[target_chunk]> unload_safely
             }
         
