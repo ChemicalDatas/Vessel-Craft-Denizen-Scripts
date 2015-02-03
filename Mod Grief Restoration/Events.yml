@@ -13,20 +13,48 @@ breakable Listener:
     #because this will auto load chunks and reset the breakables back
     load_write_save_delay: d@1s
     auto_restore_on_start_delay: d@1m
-    breakable_list: m@glass|
-                    m@glass_pane|
-                    m@ice|m@packed_ice
+    breakable_list:
+    - m@glass
+    - m@white_stained_glass
+    - m@oarnge_stained_glass
+    - m@magenta_stained_glass
+    - m@light_blue_stained_glass
+    - m@yellow_stained_glass
+    - m@lime_stained_glass
+    - m@pink_stained_glass
+    - m@gray_stained_glass
+    - m@light_gray_stained_glass
+    - m@cyan_stained_glass
+    - m@purple_stained_glass
+    - m@blue_stained_glass
+    - m@brown_stained_glass
+    - m@green_stained_glass
+    - m@red_stained_glass
+    - m@black_stained_glass
+    - m@glass_pane
+    - m@white_stained_glass_pane
+    - m@orange_stained_glass_pane
+    - m@magenta_stained_glass_pane
+    - m@light_blue_stained_glass_pane
+    - m@yellow_stained_glass_pane
+    - m@lime_stained_glass_pane
+    - m@pink_stained_glass_pane
+    - m@gray_stained_glass_pane
+    - m@light_gray_stained_glass_pane
+    - m@cyan_stained_glass_pane
+    - m@purple_stained_glass_pane
+    - m@blue_stained_glass_pane
+    - m@brown_stained_glass_pane
+    - m@green_stained_glass_pane
+    - m@red_stained_glass_pane
+    - m@black_stained_glass_pane
+    - m@ice
+    - m@packed_ice
+    - m@glowstone
+    - m@sea_lantern
+    
+    
     events:
-#        on projectile hits m@glass:
-#        - announce "<script.name> has been activated for <context.location.material>"
-#        - run "breakable Break Event" def:<context.location> instantly
-#        
-#        on entity shoots block:
-#        - if <context.location.material.contains[breakable]> {
-#            - announce "<script.name> has been activated for event<&co> on entity shoots block"
-#            - run "breakable Break Event" def:<context.location> instantly
-#            }
-
         on request breakable hardsave:
         - define queue_id request_breakable_save
         - if !<queue.exists[<def[queue_id]>]>
@@ -35,65 +63,74 @@ breakable Listener:
           id:<def[queue_id]>
           delay:<script.yaml_keys[dump_breakable_delay]>
         
-        
         on server start:
         - run "Yaml Load"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
         - run "Auto breakable Restore"
           def:<script.yaml_keys[database_id]>
-          delay:<script.yaml_keys[auto_restore_on_start_delay]>
+          delay:<script.yaml_keys[auto_restore_on_start_delay]>|<script.yaml_keys[load_write_save_delay]>
         
         on server stop:
         - run "Yaml Save"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
+
+        
+        #this is bugged as denizen returns some block thats 5 blocks away from the actual block hit...
         on projectile hits block:
-        - define materials
-          <script.yaml_keys[breakable_list].as_list>
-            
-        - define location
+        - define target_offsets li@0,0,0|1,0,0|-1,0,0|0,1,0|0,-1,0|0,0,1|0,0,-1
+        
+        - define locations
+          li@
+        
+        - define origin
           <context.location>
-          
-        - if <def[materials].contains[<def[location].material>]> {
-            - define path
-              broken_block_sets.<util.random.duuid>
-            
-            - define recur_limit
-              <script.yaml_keys[recursion_limit]>
-            
-            - define target_blocks
-              "<proc[Build Connected Block List].context[<def[location]>|<def[materials].escaped>|<def[recur_limit]>]>"
-            
-            - if <def[target_blocks].is_empty> {
-                - announce "target blocks was empty..."
-                - announce "target <context.location.simple> <context.location.material>"
-                - queue clear
-                }
-            
-            - define yaml_id
-              <script.yaml_keys[database_id]>
-            
-            - define delay
-              <script.yaml_keys[restore_delay]>
-            
-            #Just need the return of save breakable, the path its generated
-            #as if theres issues, like if the server crashed before the breakable restarts,
-            #This should just auto restore the breakable on server restart.
-#            - run "Save breakable"
-#              def:<def[yaml_id]>|<def[target_blocks].escaped>
-#              save:queue_with_path_name
-            - run "Save breakable" def:<def[yaml_id]>|<def[target_blocks].escaped>|<def[path]>
-            
-            - run "Break breakable" def:<def[target_blocks].escaped>
-            
-#            - run "Restore breakable"
-#              def:<def[yaml_id]>||<entry[queue_with_path_name].created_queue>
-#              delay:<def[delay]>
-            - run "Restore breakable" def:<def[yaml_id]>|<def[path]> delay:<def[delay]>
-            
+        
+        #- playeffect <def[origin]> effect:ender_signal qty:2
+        #- showfake <def[origin]> m@glowstone
+        
+        - foreach <def[target_offsets]> {
+            - define locations <def[locations].include[<def[origin].add[<def[value]>]>]>
+            #- narrate "local materials<&co> <def[origin].add[<def[value]>].material>"
             }
         
+        - inject locally
+          path:script_meat
+        
+    
+    script_meat:        
+    - define materials
+      <script.yaml_keys[breakable_list].as_list>
+    
+    - narrate "<blue>projectile hits blocks"
+    
+    - define path
+      broken_block_sets.<util.random.duuid>
+    
+    - define recur_limit
+      <script.yaml_keys[recursion_limit]>
+    
+    - define target_blocks
+      "<proc[Build Connected Block List].context[<def[locations].escaped>|<def[materials].escaped>|<def[recur_limit]>]>"
+    
+    - if <def[target_blocks].is_empty> {
+        - narrate "target blocks were empty!"
+        - queue clear
+        }
+    
+    - define yaml_id
+      <script.yaml_keys[database_id]>
+    
+    - define delay
+      <script.yaml_keys[restore_delay]>
+    
+    
+    - run "Save breakable" def:<def[yaml_id]>|<def[target_blocks].escaped>|<def[path]>
+    
+    - run "Break breakable" def:<def[target_blocks].escaped>
+    
+    - run "Restore breakable" def:<def[yaml_id]>|<def[path]> delay:<def[delay]>
     
 Break breakable:
     type: task
@@ -196,7 +233,7 @@ Restore breakable:
 
 Auto breakable Restore:
     type: task
-    definitions: yaml_id
+    definitions: yaml_id|write_delay
     script:
     - if <def[yaml_id]||none> == none
       || !<yaml.list.contains[<def[yaml_id]||none>]> {
@@ -212,6 +249,9 @@ Auto breakable Restore:
         - queue clear
         }
     
+    - define delay
+      <def[write_delay]||d@1s>
+    
     - foreach <def[yaml_path_list]> {
         - define path broken_block_sets.<def[value]>
         
@@ -224,9 +264,9 @@ Auto breakable Restore:
             - if !<def[target_chunk].is_loaded> {
                 - adjust <def[target_chunk]> load
                 }
-            - wait <script.yaml_keys[load_write_save_delay]>
+            - wait <def[delay]>
             - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
-            - wait <script.yaml_keys[load_write_save_delay]>
+            - wait <def[delay]>
             - adjust <def[target_chunk]> unload_safely
             }
         
