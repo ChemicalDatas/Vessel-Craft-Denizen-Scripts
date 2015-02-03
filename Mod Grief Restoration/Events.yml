@@ -75,7 +75,28 @@ breakable Listener:
         - run "Yaml Save"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
-
+        
+        on player stops sprinting:
+        - define locations <player.location.add[<player.location.direction.vector>].above>
+        
+        - inject locally
+          path:script_meat
+        
+        - hurt 2
+        
+        
+        on entity damaged by fall:
+        - narrate "yeah you fell"
+        
+        - define locations
+          <context.entity.location.below>
+        
+        - inject locally
+          path:script_meat
+        
+        
+        
+        
         
         #this is bugged as denizen returns some block thats 5 blocks away from the actual block hit...
         on projectile hits block:
