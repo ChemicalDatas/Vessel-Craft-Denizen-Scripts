@@ -9,12 +9,14 @@ On Join Player Management:
     script_cooldown: d@10t
     events:
         on server start:
-        #- if <server.list_script.contains[<script>]>
-        - announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
+        - if <server.list_scripts.contains[<script>]>
+          announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
+          else
+          announce "<script.yaml_keys[mod_title]> failed to load <script>... Thats why this is not completly saying this to you...." to_console
         
         
         on player joins:
-        - adjust <player> gamemode:survival
+        - adjust <player> gamemode:adventure
         - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
         - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
@@ -44,19 +46,18 @@ On Join Player Management:
         
         
         
-        on command in spawn_lockdown:
-        - if <context.server> queue clear
+        on command:
         - inject locally "path:eligible for password protection"
         - inject locally "path:command password check"
         
-        on set_spawn_lockdown:
+        on set_spawn_lockdown command:
         - determine passively fulfilled
         - if <player.selected_region||true> {
             - narrate "You need to select a region first for setting the lockdown region for login commands"
             - queue clear
             }
         - note <player.selected_region> as:spawn_lockdown
-        - narrate "Set <blue<player.selected_region><reset> as the command lockdown area."
+        - narrate "Set <blue><player.selected_region><reset> as the command lockdown area."
         
         on login command:
         - determine passively fulfilled
@@ -75,10 +76,11 @@ On Join Player Management:
         - determine passively fulfilled
         - define args <context.args.escaped>
         - flag <player> AccountProtection.Password:<def[args]>
+        - narrate "<script.yaml_keys[mod_title]> <blue>You've set your password to <def[args].space_separated> <player.name.display||<player.name>>"
     
     
     
-    #Allows script to continue is theres no protections involved.
+    #Allows script to continue if theres no protections involved.
     eligible for password protection:
     - cooldown <script.yaml_keys[script_cooldown]> s:<script.name>
     - if <player.has_flag[AccountProtection.EnteredPassword]>
@@ -89,6 +91,7 @@ On Join Player Management:
     
     
     
+    #Allows script to continue if theres no protections involved.
     command password check:
     - if !<player.has_flag[AccountProtection.Password]> {
         - narrate "<script.yaml_keys[mod_title]>
@@ -102,6 +105,7 @@ On Join Player Management:
         }
 
 
+    #Allows script to continue if theres no protections involved.
     action password check:
     - cooldown <script.yaml_keys[script_cooldown]> s:<script.name>
     - if !<player.has_flag[AccountProtection.Password]> {
