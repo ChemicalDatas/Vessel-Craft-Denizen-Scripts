@@ -68,8 +68,8 @@ breakable Listener:
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
         - run "Auto breakable Restore"
-          def:<script.yaml_keys[database_id]>
-          delay:<script.yaml_keys[auto_restore_on_start_delay]>|<script.yaml_keys[load_write_save_delay]>
+          def:<script.yaml_keys[database_id]>|<script.yaml_keys[load_write_save_delay]>
+          delay:<script.yaml_keys[auto_restore_on_start_delay]>
         
         on server stop:
         - run "Yaml Save"
@@ -86,14 +86,13 @@ breakable Listener:
         
         
         on entity damaged by fall:
-        - narrate "yeah you fell"
-        
         - define locations
           <context.entity.location.below>
         
         - inject locally
           path:script_meat
         
+        - determine cancelled
         
         
         
@@ -293,6 +292,8 @@ Auto breakable Restore:
         
         - yaml id:<def[yaml_id]> set <def[path]>:!
         }
+    
+    - announce "<script.name> Finished restoring the previously broken glass from the .yml file." to_console
     
     - event "Request Breakable HardSave"
     
