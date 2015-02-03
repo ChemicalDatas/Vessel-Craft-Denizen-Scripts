@@ -210,7 +210,7 @@ Build Connected Block List:
     
     - define iteration 1
     
-    - define next_examination_targets <def[locations_list].as_list>
+    - define next_examination_targets <def[locations_list].unescaped.as_list>
     
     - inject "Recursive Material Search"
     
