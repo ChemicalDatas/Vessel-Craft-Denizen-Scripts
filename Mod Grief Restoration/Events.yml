@@ -76,6 +76,9 @@ breakable Listener:
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
         
+        
+        
+        
         on player stops sprinting:
         - define locations <player.location.add[<player.location.direction.vector>].above>
         
@@ -83,7 +86,6 @@ breakable Listener:
           path:script_meat
         
         - hurt 2
-        
         
         on entity damaged by fall:
         - define locations
@@ -93,9 +95,6 @@ breakable Listener:
           path:script_meat
         
         - determine cancelled
-        
-        
-        
         
         #this is bugged as denizen returns some block thats 5 blocks away from the actual block hit...
         on projectile hits block:
@@ -238,16 +237,21 @@ Restore breakable:
     
     #- announce "<script.name> location list<&co> <def[location_list]>"
     
+    - define loaded_chunks
+      li@
+    
     #Need a foreach because modifyblock dose not handle materials lists in order
     - foreach <def[location_list]> {
         - define target_chunk <def[value].get_chunk>
         - if !<def[target_chunk].is_loaded> {
             - adjust <def[target_chunk]> load
+            - define loaded_chunks <def[loaded_chunks].include[<def[target_chunk]>]>
+            - wait <def[delay]>
             }
         - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
-        - adjust <def[target_chunk]> unload_safely
         }
     
+    - adjust <def[loaded_chunks]> unload_safely
     #resets all sub-nodes as well
     - yaml id:<def[yaml_id]> set <def[path]>:!
 
@@ -272,6 +276,9 @@ Auto breakable Restore:
     - define delay
       <def[write_delay]||d@1s>
     
+    - define loaded_chunks
+      li@
+    
     - foreach <def[yaml_path_list]> {
         - define path broken_block_sets.<def[value]>
         
@@ -283,18 +290,18 @@ Auto breakable Restore:
             - define target_chunk <def[value].get_chunk>
             - if !<def[target_chunk].is_loaded> {
                 - adjust <def[target_chunk]> load
+                - define loaded_chunks <def[loaded_chunks].include[<def[target_chunk]>]>
+                - wait <def[delay]>
                 }
-            - wait <def[delay]>
             - modifyblock <def[value]> <def[material_list].get[<def[loop_index]>]>
-            - wait <def[delay]>
-            - adjust <def[target_chunk]> unload_safely
             }
         
+        - wait <def[delay]>
+        - adjust <def[loaded_chunks]> unload_safely
         - yaml id:<def[yaml_id]> set <def[path]>:!
         }
     
     - announce "<script.name> Finished restoring the previously broken glass from the .yml file." to_console
-    
     - event "Request Breakable HardSave"
     
     
