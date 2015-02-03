@@ -450,10 +450,23 @@ Commands:
         - narrate "<yellow>Pong"
         - narrate "<light_purple>Pong"
          
+        on speed command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - define speed <context.args.get[1].div[5]||.2>
+        - if <player.is_flying> {
+           - adjust <player> fly_speed:<def[speed]>
+           - narrate "<script.yaml_keys[title]> <blue>Set your flying speed to<&co> <yellow><def[speed].mul[5]>"
+           } else {
+           - adjust <player> walk_speed:<def[speed]>
+           - narrate "<script.yaml_keys[title]> <blue>Set your walking speed to<&co> <yellow><def[speed].mul[5]>"
+           }
+        
          
+
 #        on hurt command:
 #        - determine passively fulfilled
-#        - inject locally "is permitted"
+#        - inject locally "is permitted"/lo
 #        - if <context.args.is_empty>
 #          || <context.args.get[1]||no_player_specified> == "no_player_specified"
 #          || <context.args.get[2].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
