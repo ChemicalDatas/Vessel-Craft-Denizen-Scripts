@@ -122,7 +122,7 @@ breakable Listener:
     - define materials
       <script.yaml_keys[breakable_list].as_list>
     
-    - narrate "<blue>projectile hits blocks"
+    #- narrate "<blue>projectile hits blocks"
     
     - define path
       broken_block_sets.<util.random.duuid>
@@ -134,7 +134,7 @@ breakable Listener:
       "<proc[Build Connected Block List].context[<def[locations].escaped>|<def[materials].escaped>|<def[recur_limit]>]>"
     
     - if <def[target_blocks].is_empty> {
-        - narrate "target blocks were empty!"
+        #- narrate "target blocks were empty!"
         - queue clear
         }
     
