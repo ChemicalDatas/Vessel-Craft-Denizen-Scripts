@@ -1,7 +1,4 @@
 #A set of procedures designed to manipulate nameplates
-#A display is classified as a list of entities with custom name plates
-#A displays 'anchor' is the wither skull to which the entities are attached to
-
 #todo: Use math to figure out what option the player is really looking at to make a better feel.
 
 
@@ -156,7 +153,7 @@ Display Base:
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text_list|title|persistant
+    definitions: location|text_list|title|Marker|Invulnerable
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
@@ -169,15 +166,6 @@ Display Base:
         - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
         - queue clear
         }
-    
-    #Just checking for these values to set persistance to false
-    - if <def[persistant]> == 0
-      || <def[persistant]> == false
-      || <def[persistant]> == null
-      || <def[persistant]> == ""
-      define persistant 0
-      else
-      define persistant 1
     
     # If the type of entity spawning technique is not provided set to default
     - if <def[title]||none> == none  define title "Context Menu"
@@ -194,7 +182,7 @@ Display Base:
     - define text_list <def[text_list].unescaped.as_list>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_op "summon WitherSkull <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
+        - execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
         - define skull <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[wither_skull].within[1]>
         - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
         }
