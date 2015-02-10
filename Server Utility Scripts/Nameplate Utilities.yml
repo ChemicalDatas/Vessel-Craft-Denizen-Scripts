@@ -5,7 +5,7 @@
 #todo: Use math to figure out what option the player is really looking at to make a better feel.
 
 
-Display Defaults Events:
+Display Defaults:
     #############################################################################################################################
     #                                                                                                                           #
     #                                                                                                                           #
@@ -36,6 +36,9 @@ Display Defaults Events:
         #on display created in <cuboids> owned by <owner>:
         #on display titled <title>:
         #on display titled <title> in <cuboids>:
+        on server start:
+        - foreach <server.flag[displays].as_list>
+        
         on display creation:
         
         #on display titled <title> in <cuboids>:
@@ -153,7 +156,7 @@ Display Base:
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text_list|title
+    definitions: location|text_list|title|persistant
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
@@ -167,8 +170,17 @@ Display Base:
         - queue clear
         }
     
+    #Just checking for these values to set persistance to false
+    - if <def[persistant]> == 0
+      || <def[persistant]> == false
+      || <def[persistant]> == null
+      || <def[persistant]> == ""
+      define persistant 0
+      else
+      define persistant 1
+    
     # If the type of entity spawning technique is not provided set to default
-    - if <def[title]||none>         == none  define title "Context Menu"
+    - if <def[title]||none> == none  define title "Context Menu"
     
     #gives other scripts a say about whats displayed
     - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player>|text|<def[text_list]>|title|<def[title]>" save:Display
@@ -182,16 +194,14 @@ Display Base:
     - define text_list <def[text_list].unescaped.as_list>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_op "summon WitherSkull <def[location].x> <def[location].y> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1}"
-        - define skull <def[location].find.entities[wither_skull].within[1]>
+        - execute as_op "summon WitherSkull <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {direction:[],CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
+        - define skull <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[wither_skull].within[1]>
         - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
-        - define new_y <def[loop_index].mul[.25]>
-        - define location <def[location].add[0,<def[new_y]>,0]>
         }
     #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
     #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
-    - determine <def[display_entities].deduplicate.escaped>
+    - determine <def[display_entities].escaped>
     
 Display:
     #
@@ -212,14 +222,14 @@ Server Display:
     definitions: flag|location|text
     script:
     - define text <proc[iconize].context[<def[text]>]>
-    #- define text <def[flag]>|<def[text]>
     - define text <def[text].escaped>
+    - define flag displays.<def[flag]>
     - if <server.has_flag[<def[flag]>]> {
         - announce "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
         - remove <server.flag[<def[flag]>].as_list>
         - flag server <def[flag]>:!
         }
-    - flag server "<def[flag]>:|:<proc[Display Base].context[<def[location]>|<def[text]>].unescaped>"
+    - flag server "<def[flag]>:|:<proc[Display Base].context[<def[location]>|<def[text]>].unescaped>||persistant"
 
 
 
