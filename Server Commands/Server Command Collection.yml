@@ -283,7 +283,7 @@ Commands:
             - queue clear
             }
         - define flag <context.args.get[1]>
-        - define location <player.location.above>
+        - define location <player.location>
         - define text <parse:<context.args.get[2]>>
         - run "Server Display" def:<def[flag]>|<def[location]>|<def[text].escaped>
         
