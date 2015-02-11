@@ -31,13 +31,13 @@ Test Menu:
             #
             options: <player.location.find.players.within[100]>
             transformer: ".location"
-            script: "teleport to location"
+            script: teleport to location
             arguments: <option>
         
         
         nearby entities:
             options: <player.location.find.players.within[100]>
-            transformer: ".location"
+            transformer: .location
     
     
 #

@@ -71,35 +71,10 @@ Update Display Line:
     type: task
     definitions: line|text
     script:
-    - define <def[nameplate]> <>
-    - execute as_npc "npc select <def[nameplate].id>"
-    - execute as_npc "npc rename <def[text]>"
+    - define text <parse:<def[text]>>
+    - define text <proc[Iconize].context[<def[text]>]>
+    - adjust <def[entity]> custom_name:<def[text]>
     
-    - adjust <def[entity]> custom_name:<def[new_text]>
-    - remove
-    - rotate
-    - teleport
-    
-
-
-Determine Selection Index:
-    #############################################################################################################################
-    #                                                                                                                           #
-    # This expects a display to be at a premeasured distance  to the player.                                                    #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: procedure
-    definitions: display_size
-    script:
-    - define pitch <player.location.pitch>
-    - define subdivision 11.849
-    - define selection <player.location.pitch.mul[-1].div[<def[subdivision].round_up>]>
-    - if <def[selection]> <= 0 determine 1
-    - if <def[selection]> >= <def[display_size]> determine <def[display_size]>
-    - determine <def[selection]>
-    
-
-
 
 #########################################################################################################################
 ############################# Display Handlers ##########################################################################
