@@ -3,38 +3,35 @@
 
 
 Display Defaults:
-    #############################################################################################################################
-    #                                                                                                                           #
-    #                                                                                                                           #
-    # 65 range of 9 blocks view distance                                                                                        #
-    # 65 is the max before it cant be seen at all                                                                               #
-    # 60 25 view distance                                                                                                       #
-    # 55 36 view distance                                                                                                       #
-    # 55 is the point where its possible that the dismembered horse can be seen                                                 #
-    # 50 43 view distance                                                                                                       #
-    # 40 is 45 view distance                                                                                                    #
-    #                                                                                                                           #
-    #############################################################################################################################
     type: world
-    constants:
-        menu check delay: d@20t
-        update delay: 20t
-        display flash time: d@10s
-        display personal: 65
-        display server: 60
-        display picture: 50
-        
-        Display Player Spawn Distance: 4
-        
-        display time: 2
-    
     events:
         #on display created in <cuboids>:
         #on display created in <cuboids> owned by <owner>:
         #on display titled <title>:
         #on display titled <title> in <cuboids>:
-        on server start:
-        - foreach <server.flag[displays].as_list>
+        on player right clicks entity:
+        - announce "player clicked <context.entity.name||<context.entity.entity_type>>"
+        
+        on entity breaks hanging:
+        - announce breaks_hanging
+        
+        on entity damaged:
+        - announce "damaged_entity"
+        
+        on entity spawns:
+        - announce "entity spawns <context.reason>"
+        
+        on entity killed:
+        - announce "entity death"
+        
+        on entity death:
+        - announce "entity death"
+        
+        on player damages armor_stand:
+        - announce "damaged armor stand"
+        
+        on player damages entity:
+        - announce "damaged entity"
         
         on display creation:
         
@@ -149,11 +146,11 @@ Display Base:
     # Creates the entities and returns the entity list.                                                                         #
     # Youll need to choose how to store the entities for removal later.                                                         #
     #                                                                                                                           #
-    # notice: This is a script that needs to be managed by another script.                                                  #
+    # notice: This is a script that needs to be managed by another script.                                                      #
     #                                                                                                                           #
     #############################################################################################################################
     type: procedure
-    definitions: location|text_list|title|Marker|Invulnerable
+    definitions: location|text_list|title|persistant
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none {
@@ -167,6 +164,14 @@ Display Base:
         - queue clear
         }
     
+    - if <def[persistant]> == 0
+      || <def[persistant]> == ""
+      || <def[persistant]> == null
+      || <def[persistant]> == false
+      define persistant 0
+      else
+      define persistant 1
+    
     # If the type of entity spawning technique is not provided set to default
     - if <def[title]||none> == none  define title "Context Menu"
     
@@ -176,15 +181,16 @@ Display Base:
     - if <def[event_determination]> == cancelled queue clear
     - if <def[event_determination]> != none define text <def[event_determination]>
     
-    
     # The meat of the script
     - define display_entities li@
     - define text_list <def[text_list].unescaped.as_list>
+    - define location <def[location].below>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
-        - define skull <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[wither_skull].within[1]>
-        - define display_entities <def[display_entities].include[<def[skull]>].deduplicate>
+        - execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
+        #- execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
+        - define stand <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[Armor_Stand].within[1]>
+        - define display_entities <def[stand].include[<def[skull]>].deduplicate>
         }
     #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
