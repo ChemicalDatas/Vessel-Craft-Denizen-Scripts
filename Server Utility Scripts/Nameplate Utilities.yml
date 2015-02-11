@@ -12,26 +12,6 @@ Display Defaults:
         on player right clicks entity:
         - announce "player clicked <context.entity.name||<context.entity.entity_type>>"
         
-        on entity breaks hanging:
-        - announce breaks_hanging
-        
-        on entity damaged:
-        - announce "damaged_entity"
-        
-        on entity spawns:
-        - announce "entity spawns <context.reason>"
-        
-        on entity killed:
-        - announce "entity death"
-        
-        on entity death:
-        - announce "entity death"
-        
-        on player damages armor_stand:
-        - announce "damaged armor stand"
-        
-        on player damages entity:
-        - announce "damaged entity"
         
         on display creation:
         
