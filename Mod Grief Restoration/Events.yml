@@ -261,7 +261,7 @@ Auto breakable Restore:
     script:
     - if <def[yaml_id]||none> == none
       || !<yaml.list.contains[<def[yaml_id]||none>]> {
-        - announce "<script.name><&co> Did not recieve any valid yaml_id<&co> <def[yaml_id]||NO YAML_ID PASSED>"
+        - announce "<script.name><&co> Did not recieve any valid yaml_id<&co> <def[yaml_id]||NO YAML_ID PASSED>" to_console
         - queue clear
         }
     
