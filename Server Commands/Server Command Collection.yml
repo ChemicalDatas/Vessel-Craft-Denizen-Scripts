@@ -27,7 +27,7 @@ Commands:
     - Builder
     
     title: "[<blue>Vessel<gold>Craft<reset>]"
-    
+    teleport_history_max: 10
     
     ########################################################################################################################
     #                                                                                                                      #
@@ -81,6 +81,12 @@ Commands:
           queue clear
         
         - flag player teleport_history:|:<context.origin>
+        
+        - if <player.flag[teleport_history].as_list.size.is[or_more].than[<script.yaml_keys[teleport_history_max]>]> {
+            - define new_history <player.flag[teleport_history].as_list.get[1].to[<script.yaml_keys[teleport_history_max]>]>
+            - flag player teleport_history:!
+            - flag player teleport_history:|:<def[new_history]>
+            }
         
         on player death:
         - flag player teleport_history:|:<context.entity.location>
