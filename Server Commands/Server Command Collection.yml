@@ -362,7 +362,7 @@ Commands:
             - queue clear
             }
         - time <def[time]>t
-        - announce "<script.yaml_keys[title]> <gold><player.name.display><reset> set the time to <yellow><def[time]>."
+        - announce "<script.yaml_keys[title]> <reset><player.name.display><reset> set the time to <yellow><def[time]>."
         
         on day command:
         - determine passively fulfilled
