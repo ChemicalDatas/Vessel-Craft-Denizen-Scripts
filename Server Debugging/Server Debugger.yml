@@ -62,7 +62,7 @@ Notify Debug:
         - define script_file        <def[skript].filename||<def[unknown_loc]>>
         - define script_relfile     <def[skript].relative_filename||<def[unknown_loc]>>
         - define script_name        <def[skript].name||<def[no_container]>>
-        - define script_LOC_total   <def[skript].constants[script].size>
+        - define script_LOC_total   <def[skript].yaml_keys[script].size>
         - define step               <def[skript].step[<player||>]||<def[no_container]>>
         - define debug              <def[skript].debug||<def[no_steps]>>
         - define prefix             <def[skript].prefix||<def[no_container]>>
