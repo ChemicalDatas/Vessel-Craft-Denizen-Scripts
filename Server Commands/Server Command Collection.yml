@@ -72,6 +72,19 @@ Commands:
         on player join:
         - if <player.has_flag[can_fly]> flag <player> can_fly:!
         
+        on player teleports:
+        - if <player.has_flag[backtracking_teleport_history]> {
+            - flag player backtracking_teleport_history:!
+            - queue clear
+            }
+        - if <context.destination.distance[<context.origin>].is[or_less].than[10]>
+          queue clear
+        
+        - flag player teleport_history:|:<context.origin>
+        
+        on player death:
+        - flag player teleport_history:|:<context.entity.location>
+        
         on vc command:
         ########################################################################################################################
         #                                                                                                                      #
@@ -331,7 +344,25 @@ Commands:
         
         on time command:
         - determine passively fulfilled
-        - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time> ticks"
+        - if <context.args.is_empty> {
+            - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time> ticks"
+            - queue clear
+            }
+        - inject locally "is permitted"
+        - define dawn 23500
+        - define morning 0
+        - define noon 6000
+        - define day 6000
+        - define dusk 12000
+        - define night 18000
+        - define accessor <context.args.get[1]>
+        - define time <def[%accessor%]||<context.args.get[1]>>
+        - if <def[time].as_int> == null {
+            - narrate "<script.yaml_keys[title]> <blue>The argument you passed wasnt recogniced time. Ex<&co> <yellow>dawn, morning, noon, day, dusk, night, 0-24000"
+            - queue clear
+            }
+        - time <def[time]>t
+        - announce "<script.yaml_keys[title]> <gold><player.name.display><reset> set the time to <yellow><def[time]>."
         
         on day command:
         - determine passively fulfilled
@@ -462,8 +493,44 @@ Commands:
            - narrate "<script.yaml_keys[title]> <blue>Set your walking speed to<&co> <yellow><def[speed].mul[5]>"
            }
         
-         
-
+        #provide a targeting option from console or others
+        on mob command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - if <context.sender> == console {
+            - narrate "Sorry man, Youll need to be ingame to send any mobs the way you might be looking..."
+            - queue clear
+            }
+        - if <context.args.is_empty> {
+            - narrate "<script.yaml_keys[title]> <blue>Usage<&co> <light_purple>./mob cow|enderman|<&lt>server.match_player[<server.list_ops.random.name>]<&gt>"
+            - queue clear
+            }
+        - mount <parse:<context.args>> <player.location.cursor_on>
+        
+        #provide a targeting option to automaticaly send a player
+        on back command:
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        - if <context.server> == console {
+            - narrate "Sorry man, Youll need to be ingame to be sent back where you were teleported from......"
+            - queue clear
+            }
+        - if !<player.has_flag[teleport_history]> {
+            - narrate "<script.yaml_keys[title]> <blue>Sorry, you have no teleport history."
+            - queue clear
+            }
+        - define history_target <context.args.get[1]||0>
+        - if <def[history_target].as_int> == null {
+            - narrate "<script.yaml_keys[title]> <blue>Sorry, <yellow><def[history_target]> <bluw>was not a recogenisable number to use to get your history with."
+            }
+        - define size <player.flag[teleport_history].as_list.size>
+        - define index <def[size].sub[<context.args.get[1]||0>]>
+        - flag player backtracking_teleport_history
+        - teleport <player> <player.flag[teleport_history].as_list.get[<def[index]>]>
+        
+        
+        
+        
 #        on hurt command:
 #        - determine passively fulfilled
 #        - inject locally "is permitted"/lo
