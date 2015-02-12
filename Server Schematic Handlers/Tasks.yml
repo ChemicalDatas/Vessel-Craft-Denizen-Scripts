@@ -21,6 +21,9 @@
 Schematic Events:
     type: world
     events:
+        on server start:
+        - run "yaml load" def:
+        
         on player right clicks m@sign:
         - if <context.sign.contents> contains "[anivox]" {
             -
