@@ -12,7 +12,7 @@ Rideable Dragon:
         on player animation:
         
         on player right clicks:
-        - if <player.flag[dragon_control.riding_dragon]> {
+        - if <player.has_flag[dragon_control.riding_dragon]> {
             - run "Beacon Location" def:<player.location.cursor_on[<player.flag[]>]>
             }
         
