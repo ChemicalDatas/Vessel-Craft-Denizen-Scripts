@@ -80,7 +80,7 @@ Notify Debug:
         - define scripts li@task|procedure
         - define events li@world
         - define actions li@assignment
-        - if <def[scripts].contains[<def[script].constants[type]>]> {
+        - if <def[scripts].contains[<def[script].yaml_keys[type]>]> {
             - define script_max_lines_of_code   <def[skript].constants[script].size>
             - define remaining_lines_of_code    <def[size]>
             - define script_failed_line         <def[script_max_lines_of_code].sub[<def[remaining_lines_of_code]>]>
