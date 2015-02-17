@@ -85,7 +85,7 @@ Remove Stray Display:
     definitions: location|range
     script:
     - if <def[range]> == null define range 10
-    - define target <def[location].find.entities[Wither_Skull].within[<def[range]>]>
+    - define target <def[location].find.entities[ArmorStand].within[<def[range]>]>
     - remove <def[target]>
     - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
 
