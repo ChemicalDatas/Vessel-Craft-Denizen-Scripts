@@ -11,51 +11,71 @@
     events:
         on dnpc command:
         - determine passively fulfilled
-        - define npc <player.selected_npc>
+        
+        - define npc
+          <player.selected_npc>
+        
         #- if !<proc[Is Permitted].context[queuetask|<player.selected_npc>]> queue clear
         - if <player.selected_npc||none> == none {
             - narrate "./npc select (id) to run these commands with out error."
             - queue clear
             }
         
-        - define command "<context.args.get[1]||>"
-        - if %command% == "q_task" || %command% == "qt" {
+        - define command
+          "<context.args.get[1]||>"
+        
+        - if %command% == "q_task"
+          || %command% == "qt" {
             - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
             - execute as_player "ex run 'Add Task' 'def:%command%'"
             - narrate "Added to queue:<red> %command%"
             - queue clear
             }
-        - if %command% == "queue_escaped_task" || %command% == "qet" {
+        
+        - if %command% == "queue_escaped_task"
+          || %command% == "qet" {
             - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
             - execute as_player "ex run 'Add Escaped Task' 'def:<escape:%command%>'"
             - narrate "Added to queue:<red> %command%"
             - queue clear
             }
-        - if %command% == "p_queue_task" || %command% =="pqt" {
+        
+        - if %command% == "p_queue_task"
+          || %command% =="pqt" {
             - execute as_player "ex run 'Add Priority Task' 'def:<context.args.get[2].to[<context.args.size>]>'"
             - narrate "aAdded to queue:<red> <context.args.get[2].to[<context.args.size>]>"
             - queue clear
             }
-        - if %command% == "check_queue" || %command% == "cq" {
+        
+        - if %command% == "check_queue"
+          || %command% == "cq" {
             - narrate "<red><player.selected_npc.name>'s queue is:<&nl><gold><player.selected_npc.flag[task_queue].get[1]||No Next Task>"
             - queue clear
             }
-        - if %command% == "execute" || %command% == "e" {
+            
+        - if %command% == "execute"
+          || %command% == "e" {
             - execute as_player "ex run 'Npc Task Execute'"
             - narrate "<red>Executing next task item: <player.selected_npc.flag[task_queue]>."
             - queue clear
             }
-        - if %command% == "action_queue" || %command% == "aq" {
+            
+        - if %command% == "action_queue"
+          || %command% == "aq" {
             - define queue q@<player.selected_npc.id>_action_queue
             - narrate "<red>Checking npcs action queue: <def[queue].size||no queue>"
             - queue clear
             }
-        - if %command% == "clear_action_queue" || %command% == "caq" {
+            
+        - if %command% == "clear_action_queue"
+          || %command% == "caq" {
             - define queue q@<player.selected_npc.id>_action_queue
             - narrate "<red>clearing npcs action queue"
             - if <queue.exists[<def[queue].id>]> queue queue:<def[queue].id> clear
             }
-        - if %command% == "show_target_location" || %command% == "stl" {
+            
+        - if %command% == "show_target_location"
+          || %command% == "stl" {
             - define target <def[npc].navigator.target_location.simple.as_location||<def[npc].location.simple.as_location>>
             - define speed <def[npc].navigator.base_speed>
             - define mod_speed <def[npc].navigator.speed_modifier>
@@ -64,7 +84,9 @@
             - run "Beacon Location" def:<def[target]> instantly
             - queue clear
             }
-        - if %command% == "strategy" || %command% == "strat" {
+            
+        - if %command% == "strategy"
+          || %command% == "strat" {
             - define state <def[npc].flag[npc_state]||none>
             - define flag tactics.<def[state]>
             - define next_tactic "<proc[Npc tactics Selector]>"
