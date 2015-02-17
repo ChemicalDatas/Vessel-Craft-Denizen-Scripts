@@ -20,13 +20,14 @@
 
 Schematic Events:
     type: world
+    database_path: "scripts/Server Databases/Anivox.yml"
     events:
         on server start:
-        - run "yaml load" def:
+        - run "yaml load" def:<script.yaml_keys[database_path]>|anivox_data
         
         on player right clicks m@sign:
         - if <context.sign.contents> contains "[anivox]" {
-            -
+            - narrate "Anivox Animation starter detected"
             }
         
         on player enters notable cuboid:
