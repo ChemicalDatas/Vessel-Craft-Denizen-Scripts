@@ -5,7 +5,27 @@
 #                                                                                                                               #
 #################################################################################################################################
 
-Debug Utilities:
+
+#todo: have the server flaged to output to a type of output.
+#   log
+#   console
+#   to_ops
+#   to_flagged
+#   none
+#todo: Create a yaml object representing the error for storage while the server runs
+#todo the output feature will read a yaml object thats a culmulation of the error
+#yaml object should contain
+#   relative file name
+#   The error message
+
+#The error yaml file should be ordered by
+#   error type: ex, invalid tag, exceptions, command errors.... 
+#       script:
+#           line of erroring code
+
+
+
+ScriptDebug:
     type: world
     script_error_object_file: script_error_objects.yml
     events:
@@ -20,6 +40,293 @@ Debug Utilities:
         on raise error:
         - event "script generates error" context:message|<context.message>|queue|<context.queue>|script|<context.script>
 
+        on server start:
+        on script generates error:
+        - if !<server.has_flag[debug_output]> queue clear
+        - if <context.script||none> != none {
+            - yaml
+              load:<context.script.relative_filename>
+              id:<context.script.name>
+              
+            - run "Build Yaml Error Object"
+              def:<context.message>|<context.queue>|<context.script>
+            }
+        
+        - announce "<gold><script.name><&co> <blue><context.script||No script context> <green>Generated message<&co> <blue><context.message||No Message>"
+        #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
+        
+        
+        on server generates exception:
+        #- if !<server.has_flag[debug_output]> queue clear
+        #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
+
+
+    
+Notify Debug:
+    type: task
+    definitions: error_message|queue|skript
+    script:
+    - define time           "<util.date.time> <red><util.date.time.second> <gold>seconds"
+    - if <def[queue]||none> != none {
+        - define id             <def[queue].id>
+        - define size           <def[queue].size>
+        - define state          <def[queue].state>
+        - define script         "<def[queue].script||No script associated with queue>"
+        - define determination  "<def[queue].determination||No determination>"
+        - define type           <def[queue].type>
+        - define speed          <def[queue].speed>
+        - define commands       <def[queue].commands||None>
+        - define debug          "<def[queue].script.debug||Has no steps>"
+        - define queue_debug "
+            script<&co>                 <def[script]><&nl>
+            id<&co>                        <def[id]><&nl>
+            type<&co>                    <def[type]><&nl>
+            state<&co>                  <def[state]><&nl>
+            speed<&co>                <def[speed]><&nl>
+            size<&co>                    <def[size]><&nl>
+            debug<&co>                <def[debug]><&nl>
+            Remaining Commands:<&nl>
+            <def[commands]><&nl>
+            <&nl>#<&nl>
+            <&nl>#<&nl>
+            "
+        } else {
+        - define queue_debug "There was no associated script.<&nl>"
+        }
+    
+    
+    - if <def[skript]||none> != none {
+        - define no_container       "Has no script container"
+        - define no_steps           "Has no steps"
+        - define no_cooldown        "Has no cooldown"
+        - define unknown_loc        "Unknown File Location"
+        - define container          <def[skript].container_type||<def[no_container]>>
+        - define cooled_down        <def[skript].cooled_down[<player||none>]||<def[no_cooldown]>>
+        - define script_file        <def[skript].filename||<def[unknown_loc]>>
+        - define script_relfile     <def[skript].relative_filename||<def[unknown_loc]>>
+        - define script_name        <def[skript].name||<def[no_container]>>
+        - define script_LOC_total   <def[skript].yaml_keys[script].size>
+        - define step               <def[skript].step[<player||>]||<def[no_container]>>
+        - define debug              <def[skript].debug||<def[no_steps]>>
+        - define prefix             <def[skript].prefix||<def[no_container]>>
+        - define object_type        <def[skript].object_type||<def[no_container]>>
+        - define assigned_npcs      <server.get_npcs_assigned[<def[skript]>]||None>
+        - define script_defins      <def[queue].definitions||li@>
+        - define fallback_value     "(unable to get value)"
+        - foreach <def[script_defins]> {
+            - define text "<def[value]>: <def[%value%]||<def[fallback_value]>>"
+            - define definition_values "<&nl><proc[Append Right].context[<def[definition_values]||>|<def[text]>]>"
+            }
+        
+        # Determination of the offending script line
+        - define request "Could use a tag for a queue indicating the event or action that fired the queue... queue.event or queue.action maybe?"
+        - define scripts li@task|procedure
+        - define events li@world
+        - define actions li@assignment
+        - if <def[scripts].contains[<def[script].yaml_keys[type]>]> {
+            - define script_max_lines_of_code   <def[skript].constants[script].size>
+            - define remaining_lines_of_code    <def[size]>
+            - define script_failed_line         <def[script_max_lines_of_code].sub[<def[remaining_lines_of_code]>]>
+            
+            - define offending_line             <def[skript].constants[script].get[<def[script_failed_line]>]>
+            - define command                   "<def[offending_line].split[ ].get[1]>"
+            - define arguments                  "<def[offending_line].split[ ].get[2].to[<def[offending_line].split[ ].size>]>"
+            
+            - define line_error "
+            script total lines<&co>   <def[script_LOC_total]><&nl>
+            script line <&ns><&co>           <def[script_failed_line]><&nl>
+            offending code<&co>     <def[offending_line]><&nl>
+            error<&co>                       <def[error_message]><&nl>
+            <&nl>#<&nl>
+            command<&co>             <def[command]><&nl>
+            its arguments<&co>      <def[arguments]><&nl>
+            command_help<&co>          <&nl>http://mcmonkey.org/denizen/cmds/<def[command]><&nl>
+            "
+            } else {
+            - define line_error "
+            Please use this to debug your script<&co><&nl>
+            Remaining Commands<&co><&nl>
+            <def[commands]><&nl>
+            "
+            }
+        
+        
+        - define script_debug "
+        script_location<&co>      <def[script_file]><&nl>
+        relative location<&co>     <def[script_relfile]><&nl>
+        script_name<&co>          <def[script_name]><&nl>
+        definitions<&co>             <def[script_defins]><&nl>
+        definition_values<&co> <def[definition_values]><&nl>
+        object_type<&co>           <def[object_type]><&nl>
+        prefix<&co>                      <def[prefix]><&nl>
+        container<&co>               <def[container]><&nl>
+        step<&co>                        <def[step]><&nl>
+        cooled_down<&co>       <def[cooled_down]><&nl>
+        assigned_npcs<&co>   <def[assigned_npcs]><&nl>
+        determination<&co>      <def[determination]><&nl>
+        <&nl>#<&nl>
+        <def[line_error]>
+        <&nl>#<&nl>
+        <&nl>#<&nl>
+        "
+        } else {
+        - define script_debug "There was no associated script.<&nl>"
+        }
+    
+    - if <def[queue].npc||none> != none {
+        - define n                      <def[queue].npc>
+        - define npc_id                 <def[n].id||No_Id>
+        - define npc_spawned            <def[n].spawned||Not_Spawned>
+        - define npc_owner              <def[n].owner||No_Owner>
+        - define npc_name               <def[n].name||No_name>
+        - define npc_nickname           <def[n].nickname||No_Nickname>
+        - define npc_isprotected        <def[n].is_protected||Not_Protected>
+        - define npc_lookclose          <def[n].lookclose||Lookclose_Not_Applicable>
+        
+        - define npc_prev_location      <def[n].location.previous_location.simple||No_Previous_Location>
+        - define npc_location           <def[n].location.simple||No_location>
+        - define npc_nav_target_loc     <def[n].navigator.target_location||No_Target_Location>
+        - define npc_tp_onstuck         <def[n].teleport_on_stuck||No_Teleport_On_Stuck>
+        - define npc_is_navigating      <def[n].navigator.is_navigating||Not_Applicable>
+        - define npc_nav_speed          <def[n].navigator.speed||No_Nav_Speed>
+        - define npc_nav_range          <def[n].navigator.range||No_Nav_Range>
+        - define npc_nav_attack_range   <def[n].navigator.attack_range||No_Nav_Attack_Range>
+        - define npc_nav_attak_strat    <def[n].navigator.attack_stratagey||No_Nav_Attack_Stratagey>
+        - define npc_nav_speed_modifier <def[n].navigator.speed_modifier||No_Nav_Speed_Modifier>
+        - define npc_nav_base_speed     <def[n].navigator.base_speed||No_Nav_Base_Speed>
+        - define npc_nav_avoid_water    <def[n].navigator.avoid_water||Dose_Not_Avoid_Water>
+        - define npc_nav_base_speed     <def[n].navigator||>
+        
+        
+        - define npc_has_assignment     <def[n].has_script||No_Script_Assignment>
+        - define npc_script             <def[n].script||No_Attached_Script>
+        - define npc_script_erroring    <tern[<el@<def[n].script>.is[==].to[<def[skript]>]>]:<def[n].script>_Caused_The_Error||The_Npc_Script_Did_Not_Cause_The_Error>
+        
+        - define npc_flags              <def[n].list_flags.as_string||No_Flags>
+        - define npc_engaged            <def[n].is_engaged||Not_Engaged>
+        - define npc_ <def[n].||>
+        - define npc_ <def[n].||>
+        - define npc_ <def[n].||>
+        - define npc_ <def[n].||>
+        - define npc_ <def[n].||>
+        - define npc_ <def[n].||>
+        - define npc_anchors            <def[n].anchor.list.as_string||No_Anchors>
+        - define npc_traits             <def[n].traits.as_string||No_Traits>
+        - define npc_inventory          <def[n].inventory.list_contents.as_string||No_Inventory>
+        - define nearby_npcs            <def[n].location.find.npcs.within[25]>
+        - define npc_debug "
+        
+        "
+        } else {
+        - define npc_debug "There was no npc associated with this queue<&nl>"
+        }
+    
+    - if <def[queue].player||none> != none {
+        - define p                      <def[queue].player>
+        - define player_name            <def[p].name||none>
+        - define player_display_name    <def[p].name.display||none>
+        - define player_list_name       <def[p].name.list||none>
+        - define player_entity_id       <def[p].eid||none>
+        - define player_save_id         <def[p].save_name||none>
+        - define player_prefix          <def[p].prefix||none>
+        - define player_selected_npc    <def[p].selected_npc||none>
+        
+        - define player_is_op           <def[p].is_op||none>
+        - define player_location        <def[p].location.simple||none>
+        - define player_last_chats      <def[p].chat_history_list||none>
+        
+        - define player_target          <def[p].target||none>
+        - define player_open_inventory  <def[p].open_inventory||none>
+        - define player_item_cursor_on  <def[p].item_on_cursor||none>
+        
+        - define player_money           <def[p].money||none>
+        - define player_flags           "<def[p].list_flags.alphabetical.space_separated.replace[ ].with[<&nl>]||none>"
+        - define player_fall_distance   <def[p].fall_distance||none>
+        
+        - define player_debug_          <def[p].debug||none>
+        
+        - define player_debug "
+        player_prefix<&co>                     <def[player_prefix]><&nl>
+        player_name<&co>                    <def[player_name]><&nl>
+        player_list_name<&co>            <def[player_list_name]><&nl>
+        player_display_name<&co>    <def[player_display_name]><&nl>
+        player_location<&co>                <def[player_location]><&nl>
+        player_entity_id<&co>               <def[player_entity_id]><&nl>
+        player_save_id<&co>                <def[player_save_id]><&nl>
+        player_is_op?                  <def[player_is_op]><&nl>
+        player_debug<&co>                   <def[player_debug_]><&nl>
+        <&nl>#<&nl>
+        player_selected_npc<&co>      <def[player_selected_npc]><&nl>
+        player_target<&co>                    <def[player_target]><&nl>
+        player_item_cursor_on<&co>  <def[player_item_cursor_on]><&nl>
+        <&nl>#<&nl>
+        player_fall_distance<&co>      <def[player_fall_distance]><&nl>
+        player_last_chats<&co>           <def[player_last_chats]><&nl>
+        player_open_inventory<&co>  <def[player_open_inventory]><&nl>
+        <&nl>#<&nl>
+        <&nl>#<&nl>
+        "
+        } else {
+        - define player_debug "There was no player associated with this queue<&nl>"
+        }
+        #player_flags:       <&nl><def[player_flags]><&nl>
+
+    #The announcement phase
+    - announce "
+        <gold>__________ Start Debug ___________________________<&nl>#<&nl>#<&nl>#<&nl>
+        <gold>                      <def[time]><&nl>
+        
+        <red>The error message is as follows:<&nl>
+        <def[error_message]><&nl>
+        <blue><queue.stats><&nl>
+        
+        <red>~~~~~ <green>Queue Debug<reset> <red>~~~~~<&nl>
+        <def[queue_debug]>
+        
+        <red>~~~~~ <green>Script Debug<reset> <red>~~~~~<&nl>
+        <def[script_debug]>
+        
+        <red>~~~~~ <green>Player Debug<reset> <red>~~~~~<&nl>
+        <def[player_debug]>
+        
+        <red>~~~~~ <green>Npc Debug<reset> <red>~~~~~<&nl>
+        <def[npc_debug]>
+        
+        <gold>__________ End Debug ___________________________
+        " to_console
+
+
+
+
+debug format:
+    type: format
+    format: "<proc[Iconize].context[<dark_blue>[debugger]<reset> <text>]>"
+
+Debug Wrapper:
+    type: task
+    definitions: queue|error_message
+    script:
+    - define queue_options "li@commands|id|size|state|script|determination|type|speed"
+    - define script_options "li@container|cooled_down|script_name|step|debug|prefix|object_type"
+    - define mixed_final_options "li@stats|list|definitions"
+    - define script "<def[queue].script>"
+    
+    #someway to inject the debug_tracker right into the script
+    - run <def[script]> save:queue_id
+    - define created_queue <entry[queue_id].created_queue>
+    
+    
+    
+    - foreach <def[queue_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    - foreach <def[script_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    - foreach <def[mixed_final_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    
 
 
 
