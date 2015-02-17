@@ -10,70 +10,80 @@
 #    - define noob.intelligence ++
 #    - define noob.coding_skills ++
 #    }
+
+#    - # define a new object
+#    - Object  new_object
+#    - #set its first attribute
+#    - Object  new_object.name noobzilla
+#    - Narrate "hi there <def[new_object].name>"
+#    - #attribute checking
+#    - Object  new_object.job farmer
+#    - If <def[new_object].type.is[].to[]> == farmer {
+#      - Narrate 'I see your job is <def[new_object].job>, what is that?'
+#      }
+#    - Run "promote and announce" def:<def[new_object]>
+
+
 Object Database On Start Setup:
-    Database: Object_Database
+    database_location: script_database/objects.yml
     type: world
     events:
         on server start:
-        - run "Yaml Load" def:|<script.yaml_keys[database]>
+        - run "Yaml Load" def:<script.yaml_keys[database_location]>|object_database
 
-object:
-    #
-    # Returns an object id that coresponds to a temp yaml database entry
-    #
-    type: procedure
-    definitions: unique_name
-    script:
-    - if !<def[unique_name].exists> define object_id <util.random.uuid>
-    - yaml id:<script.yaml_keys[database]> set 
-    - determine <def[object_id]>
 
 object get:
+    #
+    # - define player_home <proc[object get].context[<player.name>|home]>
+    #
     type: procedure
-    definitions: object_id|attribute|as_list?
+    definitions: object_id
     script:
-    - if !<def[as_list?].exists> {
-        - define as_list? ""
-        } else {
-        - define as_list? ".as_list"
+    - if !<yaml[object_database].contains[<def[object_id]>]> {
+        - event "script generates error" "context:message|invalid object id/<def[object_id]>|script|<script>|queue|<queue>"
+        - queue clear
         }
-    - if <yaml[<def[object_id]>].contains[<def[attribute]>]> {
-        - determine <yaml[<def[object_id]>].read[<def[path]>]<def[as_list?]>>
-        } else {
-        - determine null
+    - foreach <queue.definitions>
+    - if !<yaml[object_database].contains[<def[object_id]>.<def[attribute_path]>]> {
+        - event "script generates error" "context:message|invalid object path <def[attribute_path]>|script|<script>|queue|<queue>"
+        - queue clear
         }
+    - define attribute li@
+    - determine <def[attribute]>
+
+
 
 object set:
-    # Takes escaped value|list pairs
-    # #Could be list of arguments then a list of values
-    type: procedure
-    definitions: object_id|attrib_value_set
+    #
+    # DO NOT INJECT THIS SCRIPT, this is not meant to be injected as this searches in the local queue
+    # for all definitions that were passed
+    #
+    # This works magic by getting all values passed on after the initial object id and path
+    # Data needs to be formatted for map_get ex <li@attribute/home|value/l@0,0,0,world.escaped>|<>
+    #
+    #                           object_id    | attrib / valuedata set in map_get form
+    # - ex run "object set" def:<player.name>|<li@attribute/home|value/l@0,0,0,world.escaped>
+    # - define player_home <proc[object get].context[<player.name>|home]>
+    #
+    type: task
+    definitions: object_id
     script:
-    - foreach <queue.definitions> {
-        - if <def[value]> == object_id foreach next
-        - define object_attrib_value_set <def[<def[value]>].unescaped>
-        - define path <def[object_attrib_value_set].get[1]>
-        - define value <def[object_attrib_value_set].get[2]>
-        - yaml id:<def[object_id]> set <def[path]>:<def[value]>
-        
-        - narrate "<def[object_attrib_value_set].get[1]> <def[object_attrib_value_set].get[2]>"
+    - if !<def[object_id].exists>
+      || <def[object_id]> == null
+      || <def[object_id]> == ''
+      || <def[object_id]> == none {
+        - event "script generates error" context:message|Object ID cannot be null or <&sq><&sq> or none|queue|<queue>|script|<script>
+        - queue clear
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    - foreach <queue.definitions> {
+        - if <def[value]> == <def[object_id]> foreach next
+        - define data <def[value].unescaped.as_list>
+        - define attrib <def[data].map_get[attribute]||none>
+        - define value <def[data].map_get[value]||none>
+        - if <def[attrib]> == none || <def[value]> == none foreach_next
+        - yaml id:object_database set <def[object_id]>.<def[attrib]>:<def[value]>
+        }
 
 
 
