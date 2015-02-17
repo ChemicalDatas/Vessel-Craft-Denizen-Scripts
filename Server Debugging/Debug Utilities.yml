@@ -21,26 +21,6 @@ Debug Utilities:
         - event "script generates error" context:message|<context.message>|queue|<context.queue>|script|<context.script>
 
 
-"Player Desires Debug":
-    #############################################################################################################################
-    #                                                                                                                           #
-    # This usage is a little funky as it requires {} at the end of the if statement.                                            #
-    # Or what you want to do if the player wants debug else it wont display any output.                                         #
-    # - if "<proc[Player Desires Debug].context[your debug output]>" {}                                                         #
-    #                                                                                                                           #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: procedure
-    debug: false
-    definitions: words
-    script:
-    - if <player.has_flag[desires_debug]> {
-        - determine true
-        } else {
-        - determine false
-        }
-    
-
 
 
 "Debug Dispatcher":
