@@ -63,26 +63,26 @@ Sentry:
         on attack closest target:
         - announce "Sentry is setting its attack target"
         - define npc_location <npc.location>
-        - define first_entity "<npc.flag[targets]>"
-        - if %first_entity% == null {
+        - define first_entity <npc.flag[targets]>
+        - if <def[first_entity]> == null {
             - chat "I have no target to attack" no_target
             - queue clear
             }
         
-        - define current_closest_distance <%first_entity%.location.distance[%npc_location%]>
+        - define current_closest_distance <def[first_entity].location.distance[<def[npc_location]>]>
         
         
         #todo: make this faster for lots of npcs in the list... think battle galore!
         #todo: if entity still exists check then attack.
         - foreach <npc.flag[local_targets].as_list> {
-            - define distance <%value%.location.distance[%npc_location%]>
-            - if <def[distance].is[or_less].than[%current_closest_distance%]> {
-                - define current_closest_distance   %distance%
-                - define current_target             %value%
+            - define distance <def[value].location.distance[<def[npc_location]>]>
+            - if <def[distance].is[or_less].than[<def[current_closest_distance]>]> {
+                - define current_closest_distance   <def[distance]>
+                - define current_target             <def[value]>
                 }
             }
-        - chat "My current target is: <%current_target%.name>" no_target
-        - attack <npc> target:%current_target%
+        - chat "My current target is: <def[current_target].name>" no_target
+        - attack <npc> target:<def[current_target]>
         
     
         on mob enter proximity:
