@@ -12,7 +12,7 @@ On Join Player Management:
         - if <server.list_scripts.contains[<script>]>
           announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
           else
-          announce "<script.yaml_keys[mod_title]> failed to load <script>... Thats why this is not completly saying this to you...." to_console
+          announce "<script.yaml_keys[mod_title]> failed to load <script>... If the server script list does not contain this, this will not run...." to_console
         
         
         on player joins:
@@ -50,14 +50,6 @@ On Join Player Management:
         - inject locally "path:eligible for password protection"
         - inject locally "path:command password check"
         
-        on set_spawn_lockdown command:
-        - determine passively fulfilled
-        - if <player.selected_region||true> {
-            - narrate "You need to select a region first for setting the lockdown region for login commands"
-            - queue clear
-            }
-        - note <player.selected_region> as:spawn_lockdown
-        - narrate "Set <blue><player.selected_region><reset> as the command lockdown area."
         
         on login command:
         - determine passively fulfilled
