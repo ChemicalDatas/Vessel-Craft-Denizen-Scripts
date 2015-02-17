@@ -5,6 +5,22 @@
 #                                                                                                                               #
 #################################################################################################################################
 
+Debug Utilities:
+    type: world
+    script_error_object_file: script_error_objects.yml
+    events:
+        on server start:
+        - run "yaml load" def:<script.yaml_keys[script_error_object_file]>|error_objects
+        
+        #on server stop
+        on stop command:
+        - run "yaml save" def:<script.yaml_keys[script_error_object_file]>|error_objects
+        
+        
+        on raise error:
+        - event "script generates error" context:message|<context.message>|queue|<context.queue>|script|<context.script>
+
+
 "Player Desires Debug":
     #############################################################################################################################
     #                                                                                                                           #
@@ -24,6 +40,8 @@
         - determine false
         }
     
+
+
 
 "Debug Dispatcher":
     #############################################################################################################################
