@@ -152,6 +152,12 @@ Display Base:
     #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
     - determine <def[display_entities].escaped>
     
+testd:
+    type: task
+    script:
+    - spawn e@armor_stand[custom_name_visibility=true;custom_name=test] <player.location>
+    
+
 Display:
     #
     # The culmulation of the display sets of scripts
