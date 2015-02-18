@@ -36,14 +36,9 @@ ScriptDebug:
         on stop command:
         - run "yaml save" def:<script.yaml_keys[script_error_object_file]>|error_objects
         
-        
-        on raise error:
-        - event "script generates error" context:message|<context.message>|queue|<context.queue>|script|<context.script>
-
-        on server start:
         on script generates error:
         - if !<server.has_flag[debug_output]> queue clear
-        - if <context.script||none> != none {
+        #- if <context.script||none> != none {
             - yaml
               load:<context.script.relative_filename>
               id:<context.script.name>
@@ -52,7 +47,7 @@ ScriptDebug:
               def:<context.message>|<context.queue>|<context.script>
             }
         
-        - announce "<gold><script.name><&co> <blue><context.script||No script context> <green>Generated message<&co> <blue><context.message||No Message>"
+        - announce "<gold><script.name><&co> <blue><context.script||No script context> <green>Generated message<&co> <reset><context.message||No Message>"
         #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
         
         
@@ -60,8 +55,362 @@ ScriptDebug:
         #- if !<server.has_flag[debug_output]> queue clear
         #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
 
+objt:
+    type: task
+    definitions: none
+    script:
+    - define type li@player|queue|script|npc
+    - foreach <def[type]> {
+        - define object <%value%>
+        - narrate ''
+        - narrate "%value% %object% <def[object]> <def[object].type>"
+        }
 
+queuet:
+    type: task
+    script:
+    - define queue <queue>
+    - define queue_accessors "queue_id/id|
+                            queue_size/size|
+                            queue_ state/state|
+                            queue_script/script|
+                            queue_determination/determination|
+                            queue_type/type|
+                            queue_speed/speed|
+                            queue_commands/commands|
+                            queue_debug/script.debug|
+                            queue_definitions/definitions"
     
+    - foreach <def[queue_accessors].as_list> {
+        - define attribute <def[value].split[/].get[1]>
+        - define accessor <def[value].split[/].get[2]>
+        - define %attribute% <def[queue].%accessor%||none>
+        - narrate "<green>%attribute%<&co> <gold><def[%attribute%]>"
+        
+        
+        }
+    - narrate ""
+    - narrate ""
+    
+Get Debug Data Test:
+    type: task
+    speed: 0t
+    script:
+    - define npc <player.selected_npc>
+    - inject "get debug data"
+    - narrate "done injecting"
+    - foreach <queue.definitions> {
+        - if <def[value].split[_].contains[npc]> {
+            - if <def[%value%]> == none
+              || %value% == npc_accessors {
+                - foreach next
+                }
+            - narrate "<gold><def[value]> <&nl><green><def[%value%]>"
+            }
+        }
+Get Debug Data:
+    #
+    # INJECTED SCRIPT
+    # This script defines data based on the definitions within
+    #
+    #this requires definitions to be already defined,
+    # - define player <player>
+    # - define player <queue.player>
+    # - define queue <context.queue>
+    # - define script <s@testing_sorta>
+    # - define npc <player.selected_npc>
+    type: task
+    script:
+    - define queue_accessors "
+        id/id|
+        size/size|
+        state/state|
+        script/script|
+        determination/determination|
+        type/type|
+        speed/speed|
+        commands/commands|
+        debug/script.debug|
+        definitions/definitions"
+    
+    - define script_accessor "
+        container_type/container_type|
+        cooled_down/cooled_down|
+        filename/filename|
+        relative_filename/relative_filename|
+        name/name|
+        loc/yaml_keys[script].size|
+        step/step[<&gt>player<&lt>]|
+        debug/debug|
+        prefix/prefix|
+        object_type/object_type|
+        assigned_to/get_npcs_assigned[<&gt>script<&lt>]"
+    
+    - define npc_accessors "
+        id/id|
+        spawned/spawned|
+        owner/owner|
+        name/name|
+        nickname/nickname|
+        protected/is_protected|
+        lookclose/lookclose|
+        previous_location/.location.previous_location.simple|
+        location/location.simple|
+        nav_target/navigator.target_location|
+        teleport_on_stuck/teleport_on_stuck|
+        navigating/navigator.is_navigating|
+        base_speed/navigator.base_speed|
+        range/navigator.range|
+        attack_range/navigator.attack_range|
+        stratagey/navigator.attack_stratagey|
+        speed_modifier/navigator.speed_modifier|
+        speed/navigator.base_speed|
+        avoid_water/navigator.avoid_water|
+        base_speed/navigator|
+        has_assignment/has_script|
+        script/script|
+        flags/list_flags|
+        engaged/is_engaged|
+        anchors/anchor.list|
+        inventory/inventory.list_contents|
+        traits/traits|
+        nearby_npcs/location.find.npcs.within[25]"
+    
+    - define player_accessors "
+        name/name|
+        display_name/name.display|
+        list_name/name.list|
+        entity_id/eid|
+        save_name/save_name|
+        prefix/prefix|
+        selected_npc/selected_npc|
+        is_op/is_op|
+        location/location.simple|
+        chat_history/chat_history_list|
+        target/target|
+        open_inventory/open_inventory|
+        is_op/is_op|
+        location/location.simple|
+        chat_history/chat_history_list|
+        target/target|
+        open_inventory/open_inventory|
+        item_on_cursor/item_on_cursor|
+        money/money|
+        list_flags/list_flags.alphabetical|
+        fall_distance/fall_distance|
+        debug/debug"
+    
+    #this requires definitions to be already defined,
+    # - define player <player||none>
+    # - define player <queue.player||none>
+    # - define queue <context.queue||none>
+    # - define script <s@testing_sorta||none>
+    # - define npc <player.selected_npc||none>
+    
+    #todo: maybe I might want to add to a list of attributes instead of creating definitions
+    #by reason of possibility of overwriting other definitions within a script
+    #thats why the definition created is %type%_%attribute%  or npc_location instead of just location
+    - define accessor_types li@queue|script|player|npc
+    - foreach <def[accessor_types]> {
+        - define type %value%
+        - define object <def[%value%]||none>
+        - if <def[object]> == none foreach next
+        - foreach <def[%type%_accessors].as_list> {
+            - define attribute <def[value].split[/].get[1]>
+            - define accessor <def[value].split[/].get[2]>
+            - define %type%_%attribute% <def[object].%accessor%||none>
+            }
+        }
+    
+
+
+#        - define fallback_value     "(unable to get value)"
+#        - foreach <def[script_defins]> {
+#            - define text "<def[value]>: <def[queue]||<def[fallback_value]>>"
+#            - define definition_values "<&nl><proc[Append Right].context[<def[definition_values]||>|<def[text]>]>"
+#            }
+#        
+#        # Determination of the offending script line
+#        - define request "Could use a tag for a queue indicating the event or action that fired the queue... queue.event or queue.action maybe?"
+#        - define scripts li@task|procedure
+#        - define events li@world
+#        - define actions li@assignment
+#        - if <def[scripts].contains[<def[script].yaml_keys[type]>]> {
+#            - define script_max_lines_of_code   <def[skript].constants[script].size>
+#            - define remaining_lines_of_code    <def[size]>
+#            - define script_failed_line         <def[script_max_lines_of_code].sub[<def[remaining_lines_of_code]>]>
+#            
+#            - define offending_line             <def[skript].constants[script].get[<def[script_failed_line]>]>
+#            - define command                   "<def[offending_line].split[ ].get[1]>"
+#            - define arguments                  "<def[offending_line].split[ ].get[2].to[<def[offending_line].split[ ].size>]>"
+#            
+#            - define line_error "
+#            script total lines<&co>   <def[script_LOC_total]><&nl>
+#            script line <&ns><&co>           <def[script_failed_line]><&nl>
+#            offending code<&co>     <def[offending_line]><&nl>
+#            error<&co>                       <def[error_message]><&nl>
+#            <&nl>#<&nl>
+#            command<&co>             <def[command]><&nl>
+#            its arguments<&co>      <def[arguments]><&nl>
+#            command_help<&co>          <&nl>http://mcmonkey.org/denizen/cmds/<def[command]><&nl>
+#            "
+#            } else {
+#            - define line_error "
+#            Please use this to debug your script<&co><&nl>
+#            Remaining Commands<&co><&nl>
+#            <def[commands]><&nl>
+#            "
+#            }
+
+
+
+
+debug format:
+    type: format
+    format: "<proc[Iconize].context[<dark_blue>[debugger]<reset> <text>]>"
+
+Debug Wrapper:
+    type: task
+    definitions: queue|error_message
+    script:
+    - define queue_options "li@commands|id|size|state|script|determination|type|speed"
+    - define script_options "li@container|cooled_down|script_name|step|debug|prefix|object_type"
+    - define mixed_final_options "li@stats|list|definitions"
+    - define script "<def[queue].script>"
+    
+    #someway to inject the debug_tracker right into the script
+    - run <def[script]> save:queue_id
+    - define created_queue <entry[queue_id].created_queue>
+    
+    
+    
+    - foreach <def[queue_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    - foreach <def[script_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    - foreach <def[mixed_final_options]> {
+        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
+        }
+    
+
+
+
+"Debug Dispatcher":
+    #############################################################################################################################
+    #                                                                                                                           #
+    # Debug dispatcher will unescape the information sent to the dispatcher.                                                    #
+    #                                                                                                                           #
+    # Id like this to have multiple ways to inform the player of the debug                                                      #
+    # 1 boss bar                                                                                                                #
+    # 2 side bar                                                                                                                #
+    # 3 in a book                                                                                                               #
+    # 4 Under the npc name?                                                                                                     #
+    # 5 In the tab menu.                                                                                                        #
+    # 6 Using the holo menus                                                                                                    #
+    # 7 Plain old Chat Display                                                                                                  #
+    # 8 Using the log command                                                                                                   #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: true
+    definitions: debug_text|method_of_display
+    script:
+    - define debug_text <def[debug_text].unescaped>
+    - define method_of_display <def[method_of_display].unescaped||chat>
+    
+#
+"x5":
+    #
+    # A script for testing out an idea for denizen automated script tests
+    #
+    scripttest:
+        test_1:
+            input: 1
+            expected: 5
+            setup:
+            - define scripts_input "<script.yaml_key[scripttest.test_1.input]>"
+            test:
+            - define scripts_real_return <proc[<script.name>].context[<def[scripts_input]>]>
+            teardown:
+            - announce Tearing_down_script
+            - flag server delete_me !
+            
+    type: procedure
+    definitions: number
+    script:
+    - determine <def[number].mul[5]>
+
+
+"Test Path":
+    scripttest:
+        test_1:
+            input:
+            expected: "This is the <blue>expected value"
+            setup:
+            test:
+            teardown:
+    type: procedure
+    definitions:
+    script:
+    - determine "But this is the <red>received value"
+    
+"STest":
+    #
+    # A script that runs the tests set up in the script name provided
+    #
+    # The script in question requires 
+    #
+    type: task
+    definitions: script_name
+    script:
+    - define path <def[script_name].relative_filename>
+    - yaml load:<def[path]> id:UT
+    - announce "<blue>Loaded yaml ids: <yellow><yaml.list>" to_console
+    
+    - define number_of_tests <yaml[UT].list_keys[<def[script_name]>.scripttest].size>
+    - announce "<blue>Starting <green><def[number_of_tests]> <blue>tests." to_console
+    - repeat <def[number_of_tests]> {
+        - define path scripttest.test_<def[value]>
+        - if <def[script_name].container_type> == procedure {
+            - inject <def[script_name]> "path:<def[path]>.setup"
+            - inject <def[script_name]> "path:<def[path]>.test"
+            - inject <def[script_name]> "path:<def[path]>.teardown"
+            - define scripts_expected_return <def[script_name].constant[<def[path]>.expected]>
+            - if <def[scripts_real_return]> == <def[scripts_expected_return]> {
+                - define script_name <def[script_name]>
+                - define test_results "<proc[Append Right].context[]>"
+                - define test_names
+                - announce "<gold>Script was successful" to_console
+                - announce "<blue>Scripts Return: <gold><def[scripts_real_return]>" to_console
+                - announce "<blue>Expected Value: <gold><def[scripts_expected_return]>" to_console
+                } else {
+                - announce "<red>Script failed"
+                }
+            }
+        
+        - if <def[script_name].constant[type]> == task {
+            - announce "Testing a task"
+            - run <def[script_name]> path:script2
+            }
+        }
+        
+    
+    - yaml unload id:UT
+
+
+Announce Arguments Passed:
+    #Injected script to announce all the args passed to a script
+    type: task
+    script:
+    - announce ""
+    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
+    - foreach <queue.definitions> {
+        - announce "<blue><bold>%value%: <reset><def[%value%]>"
+        }
+
+
 Notify Debug:
     type: task
     definitions: error_message|queue|skript
@@ -119,16 +468,16 @@ Notify Debug:
             }
         
         # Determination of the offending script line
-        - define request "Could use a tag for a queue indicating the event or action that fired the queue... queue.event or queue.action maybe?"
+        - define "request Could use a tag for a queue indicating the event or action that fired the queue... queue.event or queue.action maybe?"
         - define scripts li@task|procedure
         - define events li@world
         - define actions li@assignment
         - if <def[scripts].contains[<def[script].yaml_keys[type]>]> {
-            - define script_max_lines_of_code   <def[skript].constants[script].size>
+            - define script_max_lines_of_code   <def[skript].yaml_keys[script].size>
             - define remaining_lines_of_code    <def[size]>
             - define script_failed_line         <def[script_max_lines_of_code].sub[<def[remaining_lines_of_code]>]>
             
-            - define offending_line             <def[skript].constants[script].get[<def[script_failed_line]>]>
+            - define offending_line             <def[skript].yaml_keys[script].get[<def[script_failed_line]>]>
             - define command                   "<def[offending_line].split[ ].get[1]>"
             - define arguments                  "<def[offending_line].split[ ].get[2].to[<def[offending_line].split[ ].size>]>"
             
@@ -294,152 +643,4 @@ Notify Debug:
         
         <gold>__________ End Debug ___________________________
         " to_console
-
-
-
-
-debug format:
-    type: format
-    format: "<proc[Iconize].context[<dark_blue>[debugger]<reset> <text>]>"
-
-Debug Wrapper:
-    type: task
-    definitions: queue|error_message
-    script:
-    - define queue_options "li@commands|id|size|state|script|determination|type|speed"
-    - define script_options "li@container|cooled_down|script_name|step|debug|prefix|object_type"
-    - define mixed_final_options "li@stats|list|definitions"
-    - define script "<def[queue].script>"
-    
-    #someway to inject the debug_tracker right into the script
-    - run <def[script]> save:queue_id
-    - define created_queue <entry[queue_id].created_queue>
-    
-    
-    
-    - foreach <def[queue_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    - foreach <def[script_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    - foreach <def[mixed_final_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    
-
-
-
-"Debug Dispatcher":
-    #############################################################################################################################
-    #                                                                                                                           #
-    # Debug dispatcher will unescape the information sent to the dispatcher.                                                    #
-    #                                                                                                                           #
-    # Id like this to have multiple ways to inform the player of the debug                                                      #
-    # 1 boss bar                                                                                                                #
-    # 2 side bar                                                                                                                #
-    # 3 in a book                                                                                                               #
-    # 4 Under the npc name?                                                                                                     #
-    # 5 In the tab menu.                                                                                                        #
-    # 6 Using the holo menus                                                                                                    #
-    # 7 Plain old Chat Display                                                                                                  #
-    # 8 Using the log command                                                                                                   #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: task
-    debug: true
-    definitions: debug_text|method_of_display
-    script:
-    - define debug_text <def[debug_text].unescaped>
-    - define method_of_display <def[method_of_display].unescaped||chat>
-    
 #
-"x5":
-    #
-    # A script for testing out an idea for denizen automated script tests
-    #
-    scripttest:
-        test_1:
-            input: 1
-            expected: 5
-            setup:
-            - define scripts_input "<script.yaml_key[scripttest.test_1.input]>"
-            test:
-            - define scripts_real_return <proc[<script.name>].context[<def[scripts_input]>]>
-            teardown:
-            - announce Tearing_down_script
-            - flag server delete_me !
-            
-    type: procedure
-    definitions: number
-    script:
-    - determine <def[number].mul[5]>
-
-
-"Test Path":
-    scripttest:
-        test_1:
-            input:
-            expected: "This is the <blue>expected value"
-            setup:
-            test:
-            teardown:
-    type: procedure
-    definitions:
-    script:
-    - determine "But this is the <red>received value"
-    
-"STest":
-    #
-    # A script that runs the tests set up in the script name provided
-    #
-    # The script in question requires 
-    #
-    type: task
-    definitions: script_name
-    script:
-    - define path <def[script_name].relative_filename>
-    - yaml load:<def[path]> id:UT
-    - announce "<blue>Loaded yaml ids: <yellow><yaml.list>" to_console
-    
-    - define number_of_tests <yaml[UT].list_keys[<def[script_name]>.scripttest].size>
-    - announce "<blue>Starting <green><def[number_of_tests]> <blue>tests." to_console
-    - repeat <def[number_of_tests]> {
-        - define path scripttest.test_<def[value]>
-        - if <def[script_name].container_type> == procedure {
-            - inject <def[script_name]> "path:<def[path]>.setup"
-            - inject <def[script_name]> "path:<def[path]>.test"
-            - inject <def[script_name]> "path:<def[path]>.teardown"
-            - define scripts_expected_return <def[script_name].constant[<def[path]>.expected]>
-            - if <def[scripts_real_return]> == <def[scripts_expected_return]> {
-                - define script_name <def[script_name]>
-                - define test_results "<proc[Append Right].context[]>"
-                - define test_names
-                - announce "<gold>Script was successful" to_console
-                - announce "<blue>Scripts Return: <gold><def[scripts_real_return]>" to_console
-                - announce "<blue>Expected Value: <gold><def[scripts_expected_return]>" to_console
-                } else {
-                - announce "<red>Script failed"
-                }
-            }
-        
-        - if <def[script_name].constant[type]> == task {
-            - announce "Testing a task"
-            - run <def[script_name]> path:script2
-            }
-        }
-        
-    
-    - yaml unload id:UT
-
-
-Announce Arguments Passed:
-    #Injected script to announce all the args passed to a script
-    type: task
-    script:
-    - announce ""
-    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
-    - foreach <queue.definitions> {
-        - announce "<blue><bold>%value%: <reset><def[%value%]>"
-        }
-
