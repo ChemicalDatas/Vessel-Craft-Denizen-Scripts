@@ -106,7 +106,7 @@ ScriptDebug:
               || <def[%value%]> == none {
                 - foreach next
                 }
-            - log "<gold><&lb><def[value]><&rb><&co> <green><def[%value%]>"                                 type:none file:<def[file]>
+            - log "<&lb><def[value]><&rb><&co> <def[%value%]>"                                 type:none file:<def[file]>
             }
         - log "=======Finished with Debug Data======="                                                      type:none file:<def[file]>
         
