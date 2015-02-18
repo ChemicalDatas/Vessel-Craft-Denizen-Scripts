@@ -64,7 +64,8 @@ ScriptDebug:
         - define npc "
           <context.queue.npc||
           <queue.npc||
-          none>>"
+          <player.selected_npc||
+          none>>>"
         
         - define queue
           <context.queue||none>
@@ -78,22 +79,36 @@ ScriptDebug:
         - define ignored_data
           li@none|ignored_data|loop_index|value|type|accessor|attribute|object|accessor_types|npc_accessors|player_accessors|queue_accessors|script_accessors
         
-        - announce "=======<script.name>======="
-        - announce "Script<&co> <&lb><def[script].name||Unknown Script><&rb> <--- Generated an error."
-        - announce "The message is as follows<&co>"
-        - announce "<context.message>"
+        - define ignored_data
+          <def[ignored_data].include[player_list_flags]>
+        
+        - if <def[script].relative_filename||none> != none {
+            - define file_location <def[script].relative_filename.split[<&dot>].get[1]>
+            - define file_location /plugins/denizen<def[file_location]>
+            - define file_name <def[script].name>_errors.log
+            } else {
+            - define file_location /plugins/denizen/scripts
+            - define file_name general_errors.log
+            }
+        
+        
+        - define file <def[file_location]>/<def[file_name]>
+        - announce "file<&co> <def[file]>"
+        #- define file /plugins/denizen/script_errors.log
+        
+        #output
+        - log "=======<script.name>======="                                                                 type:warning file:<def[file]>
+        - log "Script<&co> <&lb><def[script].name||Unknown Script><&rb> <--- Generated an error."           type:none file:<def[file]>
+        - log "The message is as follows<&co>"                                                              type:none file:<def[file]>
+        - log "<context.message>"                                                                           type:none file:<def[file]>
         - foreach <queue.definitions.alphanumeric> {
             - if <def[ignored_data].contains[<def[value]>]> 
               || <def[%value%]> == none {
                 - foreach next
                 }
-            - announce "<gold><&lb><def[value]><&rb><&co> <green><def[%value%]>"
+            - log "<gold><&lb><def[value]><&rb><&co> <green><def[%value%]>"                                 type:none file:<def[file]>
             }
-        - announce "=======Finished with Debug Data======="
-        - announce ""
-        - announce ""
-        #- announce "<gold><&lb><script.name><&rb><&co> <blue><context.script||No script context> <green>Generated message<&co> <reset><context.message||No Message>"
-        #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
+        - log "=======Finished with Debug Data======="                                                      type:none file:<def[file]>
         
         
         on server generates exception:
@@ -205,12 +220,18 @@ Get Debug Data:
     #thats why the definition created is %type%_%attribute%  or npc_location instead of just location
     - define accessor_types li@queue|script|player|npc
     - foreach <def[accessor_types]> {
+        #store the type so its not overwritten later
         - define type %value%
+        #get the calling scripts value
         - define object <def[%value%]||none>
+        #if there was a failed or no definition at all
         - if <def[object]> == none foreach next
+        #foreach local definitions, queue_accessors, etc...
         - foreach <def[%type%_accessors].as_list> {
+            #split the name from the accessor value
             - define attribute <def[value].split[/].get[1]>
             - define accessor <def[value].split[/].get[2]>
+            ##access the attributes on the calling scripts object. eg player.name, queue.size, etc...
             - define %type%_%attribute% <def[object].%accessor%||none>
             }
         }
