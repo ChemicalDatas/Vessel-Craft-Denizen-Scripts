@@ -92,7 +92,7 @@ ScriptDebug:
             }
         
         
-        - define file <def[file_location]>/<def[file_name]>
+        - define file <def[file_location]>_error_log/<def[file_name]>
         #- announce "file<&co> <def[file]>"
         #- define file /plugins/denizen/script_errors.log
         
