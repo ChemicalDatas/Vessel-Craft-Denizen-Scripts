@@ -1,0 +1,61 @@
+2015-02-18 02:51:31 [WARNING] =======SCRIPTDEBUG=======
+ [OBJECT] <--- Generated an error.
+The message is as follows:
+Need an method refrence
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Object Utilities/OBJECT_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Object Utilities
+[file_name] OBJECT_errors.log
+[npc] n@93
+[npc_anchors] li@curent_wander_location|guarding_location
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@MOBPROX_RANGE|MOBPROX_ACCEPTNPCS|MOBPROX_TIMER
+[npc_has_assignment] true
+[npc_id] 93
+[npc_inventory] li@
+[npc_location] -53,10,-524,Hub
+[npc_lookclose] true
+[npc_name] Sentry
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_script] s@SENTRY
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 49
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name]
+[player_location] -52,10,-526,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@93
+[queue] q@OBJECT_PluginOperatedTeeth
+[queue_commands] li@QUEUE clear|INJECT <def[method]> locally
+[queue_debug] <G>Container='<A>OBJECT<Y>(PROCEDURE)<G>'
+[queue_definitions] li@object_id
+[queue_id] OBJECT_PluginOperatedTeeth
+[queue_script] s@OBJECT
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@OBJECT
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>OBJECT<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Object Utilities.yml
+[script_name] OBJECT
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Object Utilities.yml
+=======Finished with Debug Data=======
