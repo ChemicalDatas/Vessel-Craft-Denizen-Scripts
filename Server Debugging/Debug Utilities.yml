@@ -64,7 +64,7 @@ ScriptDebug:
           <player.selected_npc>
         
         - define ignored_data
-          li@loop_index|value|npc_accessors|player_accessors|queue|accessors|script|accessors|none
+          li@none|ignored_data|loop_index|value|npc_accessors|player_accessors|queue|accessors|script|accessors
         
         - inject "get debug data"
         
