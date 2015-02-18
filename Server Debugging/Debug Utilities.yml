@@ -59,17 +59,16 @@ ScriptDebug:
         
         - define script
           <context.script||none>
-          
-        - define npc
-          <player.selected_npc>
         
+        #ignored printing data based off of whats generated in the script get debug data
         - define ignored_data
-          li@none|ignored_data|loop_index|value|npc_accessors|player_accessors|queue|accessors|script|accessors
+          li@none|ignored_data|loop_index|value|type|accessor|attribute|object|accessor_types|npc_accessors|player_accessors|queue_accessors|script_accessors
         
         - inject "get debug data"
         
         - announce "=======<script.name>======="
-        - announce "<&lb><def[script].name||Unknown Script><&rb><&co> <context.message>"
+        - announce "Script<&co> <&lb><def[script].name||Unknown Script><&rb> <--- Generated an error."
+        - announce "The message is as follows<&co> <context.message>"
         - foreach <queue.definitions.alphanumeric> {
             - if <def[%value%]> == none
               || <def[ignored_data].contains[<def[value]>]> {
@@ -89,22 +88,6 @@ ScriptDebug:
         #- run "Notify Debug" def:<context.message>|<context.queue||none>|<context.script||none> instantly
 
 
-Get Debug Data Test:
-    type: task
-    speed: 0t
-    script:
-    - define npc <player.selected_npc>
-    - inject "get debug data"
-    - narrate "done injecting"
-    - foreach <queue.definitions> {
-        - if <def[value].split[_].contains[npc]> {
-            - if <def[%value%]> == none
-              || %value% == npc_accessors {
-                - foreach next
-                }
-            - narrate "<gold><def[value]> <&nl><green><def[%value%]>"
-            }
-        }
 Get Debug Data:
     #
     # INJECTED SCRIPT
@@ -130,7 +113,7 @@ Get Debug Data:
         debug/script.debug|
         definitions/definitions"
     
-    - define script_accessor "
+    - define script_accessors "
         container_type/container_type|
         cooled_down/cooled_down|
         filename/filename|
