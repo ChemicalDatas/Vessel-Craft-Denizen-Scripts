@@ -226,32 +226,6 @@ debug format:
     type: format
     format: "<proc[Iconize].context[<dark_blue>[debugger]<reset> <text>]>"
 
-Debug Wrapper:
-    type: task
-    definitions: queue|error_message
-    script:
-    - define queue_options "li@commands|id|size|state|script|determination|type|speed"
-    - define script_options "li@container|cooled_down|script_name|step|debug|prefix|object_type"
-    - define mixed_final_options "li@stats|list|definitions"
-    - define script "<def[queue].script>"
-    
-    #someway to inject the debug_tracker right into the script
-    - run <def[script]> save:queue_id
-    - define created_queue <entry[queue_id].created_queue>
-    
-    
-    
-    - foreach <def[queue_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    - foreach <def[script_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    - foreach <def[mixed_final_options]> {
-        - narrate "<blue><def[value]>: <gold><def[<def[value]>]>"
-        }
-    
-
 
 
 "Debug Dispatcher":
