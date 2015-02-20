@@ -1,0 +1,100 @@
+#
+# A set of scripts to record stats about the server for the owner to determine the servers health
+#
+Server Health Ping:
+    type: world
+    
+    
+    events:
+        on server start:
+        
+        
+        
+        
+        on lag command:
+        - narrate "Gathering System Stats"
+        
+        - if <context.console>
+          define console true
+          else 
+          define console false
+        
+        - flag tps_requesters:->:<player>
+        
+        - if !<queue.exists[q@lag_test]> {
+            - run "Start Tps Test" def:<context.args.get[1]>|<def[console]> id:lag_test
+            }
+        - if <server.list_plugins.contains[pl@NoCheatPlus]>
+            - execute "ncp lag" save:ncp_stats
+            - define ncpstats <entry[ncp_stats].output>
+            }
+        
+    
+
+Start TPS Test:
+    type: task
+    definitions: test_time|console
+    script:
+    - define test_time
+      <def[test_time]||d@1s>
+    
+    - define console
+      <def[console]||false>
+    
+    - define ticks 0
+    
+    - while <util.date.time.duration.sub[<queue.start_time>].is[less].than[<def[test_time].in_ticks>]> {
+        - define ticks <def[ticks].add[1]>
+        - wait d@1t
+        }
+        
+    - if <def[console]>
+      announce "Tps Results<&co> <def[ticks]>" to_console
+    
+    - if !<server.has_flag[tps_requesters>
+      queue clear
+    
+    - narrate "Tps Results<&co> <def[ticks]>"
+      targets:<server.flag[tps_requesters]>
+    
+    - flag server tps_requesters:!
+    
+
+ncptest:
+    type: task
+    speed: 0t
+    script:
+    - define extra_spike_info 
+      "li@ms within the last 40 to 60 minutes.|...|<&ns><&ns><&ns><&ns> TPS lag <&ns><&ns><&ns><&ns>|Perc.[time]"
+    
+    - define extra_tick_info 
+      li@[1s]|[3.3s]|[270s]
+    
+    - execute as_server
+      "ncp lag"
+      save:ncp_stats
+    
+    - define ncpstats
+      <entry[ncp_stats].output>
+    
+    - define reduced
+      "<def[ncpstats].as_string.split[<&co>]>"
+    
+    - define lag_spikes_data
+      <def[reduced].get[2]>
+    
+    - foreach <def[extra_spike_info]> {
+        - define lag_spikes_data <def[lag_spikes_data].replace[<def[value]>]>
+        }
+    
+    - define avg_tick_data
+      <def[reduced].get[3]>
+    
+    - foreach <def[extra_tick_info]> {
+        - define avg_tick_data <def[avg_tick_data].replace[<def[value]>]>
+        }
+    
+    
+    - announce "<gold>spike data<&co> <red><def[lag_spikes_data]>"
+    - announce "<gold>tick data<&co> <red><def[avg_tick_data]>"
+    
