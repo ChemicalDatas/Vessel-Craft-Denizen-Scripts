@@ -40,10 +40,10 @@ Bonus Handling:
     - if <def[actor].has_flag[<def[flag]>]> {
         - repeat <def[actor].flag[<def[flag]>].size> {
             - define item_set <def[actor].flag[<def[flag]>].get[<def[value]>]>
-            - define thresh <li@<def[item_set]>.get[1]>
-            - define out_of <li@<def[item_set]>.get[2]>
-            - define bonus <li@<def[item_set]>.get[3]>
-            - define amt <li@<def[item_set]>.get[4]>
+            - define thresh <def[item_set].as_list.get[1]>
+            - define out_of <def[item_set].as_list.get[2]>
+            - define bonus <def[item_set].as_list.get[3]>
+            - define amt <def[item_set].as_list.get[4]>
             - define amt "<proc[Random Range].context[<def[amt]>]>"
             
             - if "<proc[Threshold Random Success].context[<def[thresh]>|<def[out_of]>]>" {
