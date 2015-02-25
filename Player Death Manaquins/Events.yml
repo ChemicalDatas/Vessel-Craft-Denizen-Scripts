@@ -8,7 +8,7 @@ On Death Body Generation Event:
         - adjust <def[npc]> "set_assignment:s@dead body assignment"
         - inventory swap d:<def[npc].inventory> o:<player.inventory>
         - define time <script.yaml_keys[body_decay_time]>
-        - narrate "<red>You have <script.yaml_keys[body_decay_time].formatted> to get back to your body to get its loot."
+        - narrate "<red>You have <def[time].formatted> to get back to your body to get its loot."
         - determine NO_DROPS_OR_XP
         
         #todo: mor
@@ -23,7 +23,7 @@ dead body assignment:
         - define decay_time "<s@On Death Body Generation Event.yaml_keys[body_decay_time]>"
         - flag npc date_of_death:<server.current_time_millis>
         - flag npc deadbody
-        #- wait d@1s
+        - wait d@1s
         - animate <npc> animation:sleep
         - run remove def:<npc> delay:<def[decay_time]>
         
