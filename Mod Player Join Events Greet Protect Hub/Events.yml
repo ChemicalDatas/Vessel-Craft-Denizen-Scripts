@@ -6,7 +6,7 @@ On Join Player Management:
     mod_title: <blue>[Scripted Account Secure]<reset>
     password_required_permission: AccountProtection.PasswordRequired
     login_every_time_permission: AccountProtection.LoginEveryTime
-    script_cooldown: d@10t
+    script_cooldown: 10t
     events:
         on server start:
         - if <server.list_scripts.contains[<script>]>
@@ -16,11 +16,13 @@ On Join Player Management:
         
         
         on player joins:
+        - wait d@1s
         - adjust <player> gamemode:adventure
         - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
-        - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
+        - define login_every_time_permission <script.yaml_keys[login_every_time_permission]>
+        - if <player.has_permission[<def[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
-        - wait d@1s
+        - wait d@2s
         - execute as_server "title <player.name> subtitle <&dq><script.yaml_keys[subtitle]><&dq>" silent
         - execute as_server "title <player.name> title <&dq><script.yaml_keys[title]><&dq>" silent
         
@@ -47,6 +49,8 @@ On Join Player Management:
         
         
         on command:
+        - if <context.server>
+          queue clear
         - inject locally "path:eligible for password protection"
         - inject locally "path:command password check"
         
@@ -74,7 +78,7 @@ On Join Player Management:
     
     #Allows script to continue if theres no protections involved.
     eligible for password protection:
-    - cooldown <script.yaml_keys[script_cooldown]> s:<script.name>
+    - cooldown <script.yaml_keys[script_cooldown]> s:<script>
     - if <player.has_flag[AccountProtection.EnteredPassword]>
       queue clear
     
