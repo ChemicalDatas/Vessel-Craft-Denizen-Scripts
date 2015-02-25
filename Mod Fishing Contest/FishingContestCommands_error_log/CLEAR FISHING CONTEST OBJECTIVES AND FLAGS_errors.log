@@ -1,0 +1,233 @@
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_commands] li@SCOREBOARD remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>|FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 5
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-18 02:57:56 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Tag <server.flag[<def[script].name>.participants]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-18 02:57:56 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_MineTrialsScroll
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-18 10:30:52 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_commands] li@SCOREBOARD remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>|FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 5
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-18 10:30:53 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Tag <server.flag[<def[script].name>.participants]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-18 10:30:53 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_SeqCatalystFunctioning
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-25 13:58:40 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_commands] li@SCOREBOARD remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>|FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 5
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-25 13:58:41 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Tag <server.flag[<def[script].name>.participants]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======
+2015-02-25 13:58:41 [WARNING] =======SCRIPTDEBUG=======
+ [CLEAR FISHING CONTEST OBJECTIVES AND FLAGS] <--- Generated an error.
+The message is as follows:
+Scoreboard FISHING_CONTEST does not exist!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands_error_log/CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands
+[file_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_errors.log
+[queue] q@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_commands] li@FLAG server <def[script].name>.active:!|FLAG server <def[script].name>.participants:!|FLAG server <def[script].name>.scores:!|FLAG server <def[script].name>.wining_score:!
+[queue_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[queue_definitions] li@script
+[queue_id] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS_GovernmentalCraftDistinction
+[queue_script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_container_type] TASK
+[script_cooled_down] null
+[script_debug] <G>Container='<A>CLEAR FISHING CONTEST OBJECTIVES AND FLAGS<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+[script_name] CLEAR FISHING CONTEST OBJECTIVES AND FLAGS
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Fishing Contest/FishingContestCommands.yml
+=======Finished with Debug Data=======

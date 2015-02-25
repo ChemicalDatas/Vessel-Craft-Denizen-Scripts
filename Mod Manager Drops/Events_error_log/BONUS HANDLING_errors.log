@@ -1,0 +1,1795 @@
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -64,49,19,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DestructionBryanMinecraft
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DestructionBryanMinecraft
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:41:09 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -113,49,25,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_EssexPropeciaTheater
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_EssexPropeciaTheater
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:41:26 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -123,49,22,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_WaiverWeblogContrast
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_WaiverWeblogContrast
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:41:28 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -52,49,18,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_AppreciateShirtsFinal
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_AppreciateShirtsFinal
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:41:43 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -124,50,17,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ActorSwimmingDelete
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ActorSwimmingDelete
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:41:50 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -25,49,21,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ButtonsDenizenCache
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ButtonsDenizenCache
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:42:00 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -122,49,21,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_SubstantiallyVaPiano
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_SubstantiallyVaPiano
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:42:10 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -23,49,19,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ChangedModifiedWr
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ChangedModifiedWr
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:42:17 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -121,49,23,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_LinksExtrasYourself
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_LinksExtrasYourself
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:42:35 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -119,49,20,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_JudgesTierCole
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_JudgesTierCole
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:42:35 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -17,49,23,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_CitizensCentsMuseum
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_CitizensCentsMuseum
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:43:00 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -26,49,18,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_CornersVerMichigan
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_CornersVerMichigan
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:43:20 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -14,49,21,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_NotionMyspaceInstances
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_NotionMyspaceInstances
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 19:43:30 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -59,49,17,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DonnaLolFx
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DonnaLolFx
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:07:01 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -120,49,26,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ObligationsCoordinateMinecraft
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ObligationsCoordinateMinecraft
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:07:21 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -122,49,16,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_OverviewPropeciaSauce
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_OverviewPropeciaSauce
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:07:38 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -122,49,22,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_EdgarIncludeMassive
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_EdgarIncludeMassive
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:07:57 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -123,49,22,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ApolloImportanceRadius
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ApolloImportanceRadius
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:53:00 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -69,49,21,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_MessagingForcedRealtor
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_MessagingForcedRealtor
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:53:19 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -69,49,27,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_SupportsArenaHunter
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_SupportsArenaHunter
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:53:38 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -69,49,25,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DocAssociationPush
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DocAssociationPush
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:53:56 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -22,49,19,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_OctAbstractOpposition
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_OctAbstractOpposition
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:53:58 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -70,49,24,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_VirusesOfficerFallen
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_VirusesOfficerFallen
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:13 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -19,49,15,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_NiceEfficientLloyd
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_NiceEfficientLloyd
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:17 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -69,49,24,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DenizenEuroTu
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DenizenEuroTu
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:31 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -16,49,15,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_LukeContributedAdjustment
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_LukeContributedAdjustment
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:36 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -70,49,23,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DelhiSpherePensions
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DelhiSpherePensions
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:41 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -114,49,21,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_FriendsVariesGateway
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_FriendsVariesGateway
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:48 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -17,49,18,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_VeniceChargedSubmitted
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_VeniceChargedSubmitted
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:54:58 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -122,49,23,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_RetiredCircularOf
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_RetiredCircularOf
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:55:07 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -15,49,15,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_NeighborStepsParks
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_NeighborStepsParks
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:55:16 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -121,49,20,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_AlphaWantsMine
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_AlphaWantsMine
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:55:27 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -17,49,17,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_BroadbandVideoCabinet
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_BroadbandVideoCabinet
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:55:33 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@427
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 427
+[npc_inventory] li@i@diamond_sword
+[npc_location] -120,49,21,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ClintonMaliLegally
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ClintonMaliLegally
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-18 20:55:46 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@429
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 429
+[npc_inventory] li@i@diamond_sword
+[npc_location] -19,49,14,Hub
+[npc_lookclose] true
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ConvertedTransmissionDef
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ConvertedTransmissionDef
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-25 13:37:40 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 48
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name]
+[player_location] -41,59,25,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_target] e@e44c7f22-94ff-46b5-8296-66b0b47e4ac5
+[queue] q@BONUS HANDLING_PatientsUsuallyJoel
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_PatientsUsuallyJoel
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-25 14:08:23 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -65,49,19,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_ScriptRegisterConsultation
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_ScriptRegisterConsultation
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-25 14:08:40 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -67,49,24,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_TripsLiberalFeof
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_TripsLiberalFeof
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-25 14:08:58 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -68,49,29,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_DiamondChoiceFrame
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_DiamondChoiceFrame
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======
+2015-02-25 14:09:16 [WARNING] =======SCRIPTDEBUG=======
+ [BONUS HANDLING] <--- Generated an error.
+The message is as follows:
+Tag <def[actor].has_flag[<def[flag]>]> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events_error_log/BONUS HANDLING_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events
+[file_name] BONUS HANDLING_errors.log
+[npc] n@428
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 428
+[npc_inventory] li@i@diamond_sword
+[npc_location] -69,49,26,Hub
+[npc_lookclose] false
+[npc_name] Guard
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] false
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 0.6
+[npc_teleport_on_stuck] true
+[queue] q@BONUS HANDLING_FebTigersRapids
+[queue_commands] li@IF <def[drop_list].is_empty> determine NO_DROPS_OR_XP|DETERMINE <def[drop_list]>
+[queue_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[queue_definitions] li@actor|flag|drop_list
+[queue_id] BONUS HANDLING_FebTigersRapids
+[queue_script] s@BONUS HANDLING
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@BONUS HANDLING
+[script_container_type] PROCEDURE
+[script_cooled_down] null
+[script_debug] <G>Container='<A>BONUS HANDLING<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+[script_name] BONUS HANDLING
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Manager Drops/Events.yml
+=======Finished with Debug Data=======

@@ -1,0 +1,77 @@
+ [SQLMANAGER_OFFLINE] <--- Generated an error.
+The message is as follows:
+Tag <def[databases].is_empty> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~_error_log/SQLMANAGER_OFFLINE_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~
+[file_name] SQLMANAGER_OFFLINE_errors.log
+[queue] q@SQLMANAGER_OFFLINE_BowSpiritDoll
+[queue_commands] li@FOREACH %databases% { - define db %value% - yaml write:Offline_Cache.databases.%db%.status value:offline id:SQLManager_Offline }
+[queue_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[queue_definitions] li@databases
+[queue_id] SQLMANAGER_OFFLINE_BowSpiritDoll
+[queue_script] s@SQLMANAGER_OFFLINE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@SQLMANAGER_OFFLINE
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+[script_name] SQLMANAGER_OFFLINE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+=======Finished with Debug Data=======
+2015-02-18 10:30:23 [WARNING] =======SCRIPTDEBUG=======
+ [SQLMANAGER_OFFLINE] <--- Generated an error.
+The message is as follows:
+Tag <def[databases].is_empty> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~_error_log/SQLMANAGER_OFFLINE_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~
+[file_name] SQLMANAGER_OFFLINE_errors.log
+[queue] q@SQLMANAGER_OFFLINE_PodForumsArmenia
+[queue_commands] li@FOREACH %databases% { - define db %value% - yaml write:Offline_Cache.databases.%db%.status value:offline id:SQLManager_Offline }
+[queue_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[queue_definitions] li@databases
+[queue_id] SQLMANAGER_OFFLINE_PodForumsArmenia
+[queue_script] s@SQLMANAGER_OFFLINE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@SQLMANAGER_OFFLINE
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+[script_name] SQLMANAGER_OFFLINE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+=======Finished with Debug Data=======
+2015-02-25 13:58:10 [WARNING] =======SCRIPTDEBUG=======
+ [SQLMANAGER_OFFLINE] <--- Generated an error.
+The message is as follows:
+Tag <def[databases].is_empty> is invalid!
+[file] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~_error_log/SQLMANAGER_OFFLINE_errors.log
+[file_location] /plugins/denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~
+[file_name] SQLMANAGER_OFFLINE_errors.log
+[queue] q@SQLMANAGER_OFFLINE_ComeLazySuggesting
+[queue_commands] li@FOREACH %databases% { - define db %value% - yaml write:Offline_Cache.databases.%db%.status value:offline id:SQLManager_Offline }
+[queue_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[queue_definitions] li@databases
+[queue_id] SQLMANAGER_OFFLINE_ComeLazySuggesting
+[queue_script] s@SQLMANAGER_OFFLINE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@SQLMANAGER_OFFLINE
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>SQLMANAGER_OFFLINE<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+[script_name] SQLMANAGER_OFFLINE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Utility Scripts/Sql Manger ~Anthony~.yml
+=======Finished with Debug Data=======
