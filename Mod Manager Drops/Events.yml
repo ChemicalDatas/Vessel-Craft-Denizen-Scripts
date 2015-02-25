@@ -18,6 +18,9 @@ Player Flagged Bonuses:
         - determine  "<proc[Bonus Handling].context[break_<context.material.name>|<player>]>"
         
         on entity dies:
+        - if <context.damager||none> == none 
+          queue clear
+        
         - determine  "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
         
     
