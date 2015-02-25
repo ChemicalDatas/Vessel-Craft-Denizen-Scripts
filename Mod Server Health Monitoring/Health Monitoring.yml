@@ -14,15 +14,10 @@ Server Health Ping:
         on lag command:
         - narrate "Gathering System Stats"
         
-        - if <context.console>
-          define console true
-          else 
-          define console false
-        
         - flag tps_requesters:->:<player>
         
         - if !<queue.exists[q@lag_test]> {
-            - run "Start Tps Test" def:<context.args.get[1]>|<def[console]> id:lag_test
+            - run "Start Tps Test" def:<context.args.get[1]>|<context.server||false> id:lag_test
             }
         - if <server.list_plugins.contains[pl@NoCheatPlus]>
             - execute "ncp lag" save:ncp_stats
