@@ -37,23 +37,25 @@ Bonus Handling:
     - if !<def[actor].is_spawned||false>
       determine <def[drop_list]>
     
-    - if <def[actor].has_flag[<def[flag]>]> {
-        - repeat <def[actor].flag[<def[flag]>].size> {
-            - define item_set <def[actor].flag[<def[flag]>].get[<def[value]>]>
-            - define thresh <def[item_set].as_list.get[1]>
-            - define out_of <def[item_set].as_list.get[2]>
-            - define bonus <def[item_set].as_list.get[3]>
-            - define amt <def[item_set].as_list.get[4]>
-            - define amt "<proc[Random Range].context[<def[amt]>]>"
-            
-            - if "<proc[Threshold Random Success].context[<def[thresh]>|<def[out_of]>]>" {
-                - repeat <def[amt]> {
-                    - define drop_list "<proc[List Append Right].context[<def[drop_list]||li@>|<def[bonus]>]>"
-                    }
+    - if !<def[actor].has_flag[<def[flag]>]> 
+      determine <def[drop_list]>
+    
+    - repeat <def[actor].flag[<def[flag]>].size> {
+        - define item_set <def[actor].flag[<def[flag]>].get[<def[value]>]>
+        - define thresh <def[item_set].as_list.get[1]>
+        - define out_of <def[item_set].as_list.get[2]>
+        - define bonus <def[item_set].as_list.get[3]>
+        - define amt <def[item_set].as_list.get[4]>
+        - define amt "<proc[Random Range].context[<def[amt]>]>"
+        
+        - if "<proc[Threshold Random Success].context[<def[thresh]>|<def[out_of]>]>" {
+            - repeat <def[amt]> {
+                - define drop_list "<proc[List Append Right].context[<def[drop_list]||li@>|<def[bonus]>]>"
                 }
-            - define drop_list <def[drop_list].unescaped>
             }
+        - define drop_list <def[drop_list].unescaped>
         }
+    
     - if <def[drop_list].is_empty>
       determine NO_DROPS_OR_XP
     
