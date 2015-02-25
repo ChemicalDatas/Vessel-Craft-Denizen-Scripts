@@ -118,7 +118,7 @@ Display Base:
         - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
         - queue clear
         }
-    
+    - define persistant <def[persistant]||false>
     - if <def[persistant]> == 0
       || <def[persistant]> == ""
       || <def[persistant]> == null
@@ -131,7 +131,7 @@ Display Base:
     - if <def[title]||none> == none  define title "Context Menu"
     
     #gives other scripts a say about whats displayed
-    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player>|text|<def[text_list]>|title|<def[title]>" save:Display
+    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player||<npc||none>>|text|<def[text_list]>|title|<def[title]>" save:Display
     - define event_determination <entry[Display].determination>
     - if <def[event_determination]> == cancelled queue clear
     - if <def[event_determination]> != none define text <def[event_determination]>
@@ -145,7 +145,7 @@ Display Base:
         - execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
         #- execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
         - define stand <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[Armor_Stand].within[1]>
-        - define display_entities <def[stand].include[<def[skull]>].deduplicate>
+        - define display_entities <def[display_entities].include[<def[stand]>].deduplicate>
         }
     #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
