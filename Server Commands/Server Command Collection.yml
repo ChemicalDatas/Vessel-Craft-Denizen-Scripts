@@ -500,7 +500,7 @@ Commands:
         on mob command:
         - determine passively fulfilled
         - inject locally "is permitted"
-        - if <context.sender> == console {
+        - if <context.server> {
             - narrate "Sorry man, Youll need to be ingame to send any mobs the way you might be looking..."
             - queue clear
             }
@@ -508,7 +508,7 @@ Commands:
             - narrate "<script.yaml_keys[title]> <blue>Usage<&co> <light_purple>./mob cow|enderman|<&lt>server.match_player[<server.list_ops.random.name>]<&gt>"
             - queue clear
             }
-        - mount <parse:<context.args>> <player.location.cursor_on>
+        - mount <parse:<context.args>> <player.location.cursor_on.above>
         
         #provide a targeting option to automaticaly send a player
         on back command:
