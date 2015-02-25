@@ -108,7 +108,8 @@ Display Base:
     definitions: location|text_list|title|persistant
     script:
     # Raise error if recieved bad arguments
-    - if <def[location]||none> == none {
+    - if <def[location]||none> == none 
+      || <def[location]||none> == null {
         - define message "<script.name> requires that a location is not null."
         - event "Script Generates Error" context:message|<def[message]>|queue|<queue>
         - queue clear
@@ -127,7 +128,6 @@ Display Base:
       else
       define persistant 1
     
-    # If the type of entity spawning technique is not provided set to default
     - if <def[title]||none> == none  define title "Context Menu"
     
     #gives other scripts a say about whats displayed
@@ -142,8 +142,7 @@ Display Base:
     - define location <def[location].below>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
-        #- execute as_op "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,PersistenceRequired:<def[persistant]>}"
+        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
         - define stand <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[Armor_Stand].within[1]>
         - define display_entities <def[display_entities].include[<def[stand]>].deduplicate>
         }
@@ -244,27 +243,3 @@ Context Menu Display Timeout:
     - queue queue:q@<player.name>_context_menu stop
     - announce "context menu timed out!"
 
-    
-#####################################################################################
-#####################################################################################
-#Using the best options, if denizen wasnt buggy in how it spawns entities
-Display Function if command spawn worked for spawning wither entities:
-    type: procedure
-    definitions: text_list|location
-    script:
-    - define base_age -1700000
-    - define display_entities li@
-    - define text_list <def[text_list].unescaped.as_list>
-    - define size <def[text_list].size>
-    - define location <def[location].add[0,<def[height]>,0]>
-
-    - foreach <def[text_list]> {
-        - define line <proc[Iconize].context[<def[value]>]>
-        - define index <def[size].sub[<def[loop_index]>]>
-        - define line_age <def[index].mul[7000]>
-        - define age <def[base_age].add[<def[line_age]>]>
-        #Optimal Display Function If Spawn Command Worked:
-        - spawn e@wither_skull[velocity=0,0,0,<def[location].world.name>;custom_name=<def[line]>;custom_name_visibility=true] <def[location]> save:display_anchor
-        - define display_entities <def[display_entities.include[<entry[save:display_anchor].spawned_entities>]>
-        }
-    - determine <def[display_entities]>
