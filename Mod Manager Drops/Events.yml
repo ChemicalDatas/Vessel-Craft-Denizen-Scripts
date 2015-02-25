@@ -33,6 +33,10 @@ Bonus Handling:
     definitions: flag|actor
     script:
     - define drop_list li@
+    
+    - if !<def[actor].is_spawned||false>
+      determine <def[drop_list]>
+    
     - if <def[actor].has_flag[<def[flag]>]> {
         - repeat <def[actor].flag[<def[flag]>].size> {
             - define item_set <def[actor].flag[<def[flag]>].get[<def[value]>]>
@@ -50,7 +54,9 @@ Bonus Handling:
             - define drop_list <def[drop_list].unescaped>
             }
         }
-    - if <def[drop_list].is_empty> determine NO_DROPS_OR_XP
+    - if <def[drop_list].is_empty>
+      determine NO_DROPS_OR_XP
+    
     - determine <def[drop_list]>
     
 #
