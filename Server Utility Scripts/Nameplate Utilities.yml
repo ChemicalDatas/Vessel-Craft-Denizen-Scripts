@@ -241,5 +241,4 @@ Context Menu Display Timeout:
     #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
     - remove <def[displays].unescaped>
     - queue queue:q@<player.name>_context_menu stop
-    - announce "context menu timed out!"
 
