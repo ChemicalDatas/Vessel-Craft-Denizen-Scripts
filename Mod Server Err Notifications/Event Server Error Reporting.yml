@@ -3,11 +3,6 @@
 "Server Error Reporting Events":
     type: world
     events:
-        on reload scripts:
-        - if <context.haderror> {
-            - define sender <context.sender>
-            - event "Server Reload Error" context:sender|<context.sender>
-            }
         on server reload error:
         - narrate "<context.sender> there was an issue when reloading the scripts." targets:<server.list_online_ops> format:SAI
 
