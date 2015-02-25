@@ -37,7 +37,7 @@ dead body assignment:
         
         
         on spawn:
-        - define decay_time "<s@On Death Body Generation Event>"
+        - define decay_time "<s@On Death Body Generation Event.yaml_keys[body_decay_time]>"
         - if <util.date.time.duration.in_ticks.sub_int[<def[decay_time].in_ticks>].is[or_more].than[<npc.flag[date_of_death]>]>
           remove <npc>
         
