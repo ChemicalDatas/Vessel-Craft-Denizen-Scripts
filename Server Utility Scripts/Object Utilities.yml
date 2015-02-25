@@ -46,24 +46,31 @@ Object:
     definitions: object_id|method
     script:
     - if !<def[object_id].exists> {
-        - event "script generates error" "context:message|Need an object id|script|<script>"
+        - event "script generates error" "context:message|Need an object id|script|<script>|queue|<queue>"
+        - queue clear
+        }
+    - if !<yaml[object_database].contains[<def[object_id]>]> {
+        - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
         - queue clear
         }
     - if !<def[method].exists> {
-        - event "script generates error" "context:message|Need an method refrence|script|<script>"
+        - event "script generates error" "context:message|Need an method refrence|script|<script>|queue|<queue>"
+        - queue clear
+        }
+    - if !<def[object_id].exists>
+      || <def[object_id]> == null
+      || <def[object_id]> == ''
+      || <def[object_id]> == none {
+        - event "script generates error" "context:message|Object ID cannot be null or <&sq><&sq> or none|script|<script>|queue|<queue>"
         - queue clear
         }
     - inject <def[method]> locally
 
     get:
-    - if !<yaml[object_database].contains[<def[object_id]>]> {
-        - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>"
-        - queue clear
-        }
     - define attribute_list li@
     - foreach <queue.definitions> {
         - if !<yaml[object_database].contains[<def[object_id]>.<def[value]>]> {
-            - event "script generates error" "context:message|invalid object path<&co> <def[value]>|script|<script>"
+            - event "script generates error" "context:message|invalid object path<&co> <def[value]>|script|<script>|queue|<queue>"
             - queue clear
             }
         # include the attribute and add it to the attribute_list as escaped data (it could be a list)
@@ -72,14 +79,6 @@ Object:
     - determine <def[attribute_list]>
     
     set:
-    - if !<def[object_id].exists>
-      || <def[object_id]> == null
-      || <def[object_id]> == ''
-      || <def[object_id]> == none {
-        - event "script generates error" "context:message|Object ID cannot be null or <&sq><&sq> or none|script|<script>"
-        - queue clear
-        }
-    
     - foreach <queue.definitions> {
         - if <def[value]> == <def[object_id]> foreach next
         - define data <def[value].unescaped.as_list>
