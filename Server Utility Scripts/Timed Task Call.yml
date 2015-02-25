@@ -12,7 +12,8 @@ Server Scheduled Task Queue:
         - define time <context.time>
         - define hour <def[time]>
         - if <server.has_flag[time_scheduled_tasks]>
-            - foreach <server.flag[time_scheduled_tasks.%hour%.%min%].as_list>
+          && <server.has_flag[time_scheduled_tasks.%hour%]> {
+            - foreach <server.flag[time_scheduled_tasks.%hour%].as_list> {
                 - run <def[value]>
                 }
             }
