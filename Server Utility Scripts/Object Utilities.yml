@@ -69,9 +69,9 @@ Object:
     get:
     - define attribute_list li@
     - foreach <queue.definitions> {
+        - if <def[value]> == object_id || <def[value]> == method foreach next
         - if !<yaml[object_database].contains[<def[object_id]>.<def[value]>]> {
-            - event "script generates error" "context:message|invalid object path<&co> <def[value]>|script|<script>|queue|<queue>"
-            - queue clear
+            - define attribute_list <def[attribute_list].include[value_<def[value]>_not_found]>
             }
         # include the attribute and add it to the attribute_list as escaped data (it could be a list)
         - define attribute_list <def[attribute].include[<yaml[object_database].read[<def[object_id]>.<def[value]>].escaped>]>
@@ -80,8 +80,8 @@ Object:
     
     set:
     - foreach <queue.definitions> {
-        - if <def[value]> == <def[object_id]> foreach next
-        - define data <def[value].unescaped.as_list>
+        - if <def[value]> == object_id || <def[value]> == method foreach next
+        - define data <def[%value%].unescaped.as_list>
         - define attrib <def[data].get[1]||none>
         - define value <def[data].get[2]||none>
         - if <def[attrib]> == none || <def[value]> == none foreach_next
