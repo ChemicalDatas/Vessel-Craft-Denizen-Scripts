@@ -10,11 +10,14 @@ Server Health Ping:
         
         on scripttps command:
         - determine passively fulfilled
-        - define server_tick_start <server.flag[start_ticks]>
-        - define date_suggested_ticks <util.date.time.duration.in_ticks.sub[<def[server_tick_start].in_ticks>]>
-        - define total_recorded_ticks <q@server_tps_recorder.definition[ticks]>
-        - define dividend <def[date_suggested_ticks].div[<def[total_recorded_ticks]>]>
-        - narrate "Ticks since start<&co> <def[total_recorded_ticks]> suggested ticks<&co><def[date_suggested_ticks]> difference of<&co> <def[date_suggested_ticks].sub[<def[total_recorded_ticks]>]> which is <def[dividend]>x slower."
+        - define server_tick_start      <server.flag[start_ticks]>
+        - define date_suggested_ticks   <util.date.time.duration.in_ticks.sub[<def[server_tick_start].in_ticks>]>
+        - define total_recorded_ticks   <q@server_tps_recorder.definition[ticks]>
+        - define ratio                  <def[date_suggested_ticks].div[<def[total_recorded_ticks]>]>
+        - narrate "Ticks since start<&co> <red><def[total_recorded_ticks]><reset><&nl>
+                    suggested ticks<&co> <red><def[date_suggested_ticks]><reset><&nl>
+                    difference of<&co> <red><def[date_suggested_ticks].sub[<def[total_recorded_ticks]>]><reset><&nl>
+                    which is <red><def[ratio].round>x slower."
         
         on lag command:
         - determine passively fulfilled
@@ -75,13 +78,13 @@ Start TPS Test:
     - flag server tps_requesters:!
     
 
-
+#./ex run ncptest
 ncptest:
     type: task
     speed: 0t
     script:
     - define extra_spike_info 
-      "li@ms within the last 40 to 60 minutes.|...|<&ns><&ns><&ns><&ns> TPS lag <&ns><&ns><&ns><&ns>|Perc.[time]"
+      "li@ms within the last 40 to 60 minutes.|<&ns><&ns><&ns><&ns> TPS lag <&ns><&ns><&ns><&ns>|Perc.[time]"
     
     - define extra_tick_info 
       li@[1s]|[3.3s]|[270s]
