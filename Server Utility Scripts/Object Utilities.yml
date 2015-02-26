@@ -72,6 +72,7 @@ Object:
         - if <def[value]> == object_id || <def[value]> == method foreach next
         - if !<yaml[object_database].contains[<def[object_id]>.<def[value]>]> {
             - define attribute_list <def[attribute_list].include[value_<def[value]>_not_found]>
+            - foreach next
             }
         # include the attribute and add it to the attribute_list as escaped data (it could be a list)
         - define attribute_list <def[attribute].include[<yaml[object_database].read[<def[object_id]>.<def[value]>].escaped>]>
