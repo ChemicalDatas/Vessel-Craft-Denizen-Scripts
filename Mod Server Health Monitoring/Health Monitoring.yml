@@ -3,57 +3,77 @@
 #
 Server Health Ping:
     type: world
-    
-    
     events:
         on server start:
+        - run "Server TPS Recorder" id:server_tps_recorder
+        - flag server start_ticks:<util.date.time.duration>
         
-        
-        
+        on avgtps command:
+        - determine passively fulfilled
+        - define server_tick_start <server.flag[start_ticks]>
+        - define date_suggested_ticks <util.date.time.duration.in_ticks.sub[<def[server_tick_start].in_ticks>]>
+        - define total_recorded_ticks <q@server_tps_recorder.definition[ticks]>
+        - narrate "Ticks since start<&co> <def[total_recorded_ticks]> suggested ticks<&co><def[date_suggested_ticks]> difference of<&co> <def[date_suggested_ticks].sub[<def[total_recorded_ticks]>]>"
         
         on lag command:
+        - determine passively fulfilled
         - narrate "Gathering System Stats"
         
-        - flag tps_requesters:->:<player>
+        - flag server tps_requesters:->:<player>
         
         - if !<queue.exists[q@lag_test]> {
-            - run "Start Tps Test" def:<context.args.get[1]>|<context.server||false> id:lag_test
+            - run "Start Tps Test" def:<context.args.get[1].as_duration||d@1s>|<context.server||false> id:lag_test
             }
-        - if <server.list_plugins.contains[pl@NoCheatPlus]>
-            - execute "ncp lag" save:ncp_stats
+        - if <server.list_plugins.contains[pl@NoCheatPlus]> {
+            - execute as_server "ncp lag" save:ncp_stats
             - define ncpstats <entry[ncp_stats].output>
+            - announce "<def[ncpstats]>"
             }
         
+    
+
+Server TPS Recorder:
+    #runs indefinitely
+    type: task
+    script:
+    - define ticks 0
+    - while true {
+        - define ticks <def[ticks].add[1]>
+        - wait d@1t
+        }
     
 
 Start TPS Test:
     type: task
     definitions: test_time|console
+    speed: 0t
     script:
     - define test_time
-      <def[test_time]||d@1s>
+      <def[test_time].as_duration||d@1s>
     
     - define console
       <def[console]||false>
     
     - define ticks 0
     
-    - while <util.date.time.duration.sub[<queue.start_time>].is[less].than[<def[test_time].in_ticks>]> {
+    - while <util.date.time.duration.sub[<queue.start_time>].in_ticks.is[or_less].than[<def[test_time].in_ticks>]> {
         - define ticks <def[ticks].add[1]>
         - wait d@1t
         }
         
     - if <def[console]>
-      announce "Tps Results<&co> <def[ticks]>" to_console
+      announce "Tps Results<&co> <def[ticks].div[<def[test_time].in_seconds>]> ticks per second." to_console
+
     
-    - if !<server.has_flag[tps_requesters>
+    - if !<server.has_flag[tps_requesters]>
       queue clear
     
-    - narrate "Tps Results<&co> <def[ticks]>"
+    - narrate "Tps Results<&co> <def[ticks].div[<def[test_time].in_seconds>]> ticks per second."
       targets:<server.flag[tps_requesters]>
     
     - flag server tps_requesters:!
     
+
 
 ncptest:
     type: task
