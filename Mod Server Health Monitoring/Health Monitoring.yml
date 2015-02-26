@@ -8,12 +8,13 @@ Server Health Ping:
         - run "Server TPS Recorder" id:server_tps_recorder
         - flag server start_ticks:<util.date.time.duration>
         
-        on avgtps command:
+        on scripttps command:
         - determine passively fulfilled
         - define server_tick_start <server.flag[start_ticks]>
         - define date_suggested_ticks <util.date.time.duration.in_ticks.sub[<def[server_tick_start].in_ticks>]>
         - define total_recorded_ticks <q@server_tps_recorder.definition[ticks]>
-        - narrate "Ticks since start<&co> <def[total_recorded_ticks]> suggested ticks<&co><def[date_suggested_ticks]> difference of<&co> <def[date_suggested_ticks].sub[<def[total_recorded_ticks]>]>"
+        - define dividend <def[date_suggested_ticks].div[<def[total_recorded_ticks]>]>
+        - narrate "Ticks since start<&co> <def[total_recorded_ticks]> suggested ticks<&co><def[date_suggested_ticks]> difference of<&co> <def[date_suggested_ticks].sub[<def[total_recorded_ticks]>]> which is <def[dividend]>x slower."
         
         on lag command:
         - determine passively fulfilled
