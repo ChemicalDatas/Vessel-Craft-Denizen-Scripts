@@ -37,6 +37,10 @@ Bonus Handling:
     - if !<def[actor].is_spawned||false>
       determine <def[drop_list]>
     
+    - if !<def[actor].is_player>
+      && !<def[actor].is_npc>
+      determine <def[drop_list]>
+    
     - if !<def[actor].has_flag[<def[flag]>]> 
       determine <def[drop_list]>
     
@@ -50,7 +54,7 @@ Bonus Handling:
         
         - if "<proc[Threshold Random Success].context[<def[thresh]>|<def[out_of]>]>" {
             - repeat <def[amt]> {
-                - define drop_list "<proc[List Append Right].context[<def[drop_list]||li@>|<def[bonus]>]>"
+                - define drop_list "<def[drop_list].include[<def[bonus]>]>"
                 }
             }
         - define drop_list <def[drop_list].unescaped>
