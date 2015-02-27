@@ -32,6 +32,16 @@ test_proc:
                     three/3"
     - narrate "<def[test].map_get[one]>"
 
+Object Database Startup:
+    type: world
+    path: script_database/object_database.yml
+    events:
+        on server start:
+        - run "yaml load" def:<script.yaml_keys[path]>|object_database
+        
+        on server shutdown:
+        - announce "<script.name> performing shutdown routine."
+
 
 Object:
     #
@@ -45,8 +55,11 @@ Object:
     type: procedure
     definitions: object_id|method
     script:
-    - if !<def[object_id].exists> {
-        - event "script generates error" "context:message|Need an object id|script|<script>|queue|<queue>"
+    - define object_id <def[object_id]||none>
+    - if <def[object_id]> == null
+      || <def[object_id]> == ''
+      || <def[object_id]> == none {
+        - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
         - queue clear
         }
     - if !<yaml[object_database].contains[<def[object_id]>]> {
@@ -55,13 +68,6 @@ Object:
         }
     - if !<def[method].exists> {
         - event "script generates error" "context:message|Need an method refrence|script|<script>|queue|<queue>"
-        - queue clear
-        }
-    - if !<def[object_id].exists>
-      || <def[object_id]> == null
-      || <def[object_id]> == ''
-      || <def[object_id]> == none {
-        - event "script generates error" "context:message|Object ID cannot be null or <&sq><&sq> or none|script|<script>|queue|<queue>"
         - queue clear
         }
     - inject <def[method]> locally
