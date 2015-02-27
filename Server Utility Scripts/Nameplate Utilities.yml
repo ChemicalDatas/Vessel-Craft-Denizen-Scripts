@@ -10,7 +10,10 @@ Display Defaults:
         #on display titled <title>:
         #on display titled <title> in <cuboids>:
         on player right clicks entity:
-        - announce "player clicked <context.entity.name||<context.entity.entity_type>>"
+        - announce "[<script.name>] player clicked <context.entity.name||<context.entity.entity_type>>"
+        
+        on player right clicks:
+        - announce "[<script.name>] player clicked at <player.target.name||<player.target.entity_type||no_target>>"
         
         
         on display creation:
@@ -24,9 +27,9 @@ Display Defaults:
         #keep all displays stored in a display list and check if  they have a removal method, 
         #   if not remove them maybe on shutdown or creation?
         on player opens context menu:
-        - announce "opens context menu"
+        #- announce "opens context menu"
         on player opens title menu:
-        - announce "opens title menu"
+        #- announce "opens title menu"
         
         #on player opens <context> menu:
         #- announce "opens named context: <context.context> menu"
@@ -132,9 +135,10 @@ Display Base:
     
     #gives other scripts a say about whats displayed
     - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player||<npc||none>>|text|<def[text_list]>|title|<def[title]>" save:Display
-    - define event_determination <entry[Display].determination>
-    - if <def[event_determination]> == cancelled queue clear
-    - if <def[event_determination]> != none define text <def[event_determination]>
+    - define event_determination <entry[Display].determinations>
+    - if <def[event_determination].contains[cancelled]> queue clear
+    #this will 
+    - if <def[event_determination].contains[none]> != none define text <def[event_determination]>
     
     # The meat of the script
     - define display_entities li@
@@ -207,7 +211,7 @@ Context Menu:
         timeout     |<def[time_out]>"
     
     - ^event <def[events]> <def[context]> save:context_readjust
-    - ^if <entry[context_readjust].determination> == cancelled queue clear
+    - ^if <entry[context_readjust].determinations.contains[cancelled]> queue clear
     
     - ^define time_out <def[time_out]||d@10s>
     - ^define options <def[option_list].unescaped>
@@ -237,8 +241,12 @@ Context Menu Display Timeout:
     type: task
     definitions: displays
     script:
-    #- announce "<player.name><&sq>s menu timed out."
-    #- event "Context Menu Timeout" context:player|<player>|queue|<player>_context_menu|displays|<def[displays]>
     - remove <def[displays].unescaped>
     - queue queue:q@<player.name>_context_menu stop
 
+tstthg:
+    type: task
+    script:
+    - define thing li@
+    - define thing.test test
+    - narrate "<def[thing]> <def[thing].test||failed> <def[thing.test]||failed>"
