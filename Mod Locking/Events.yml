@@ -51,7 +51,7 @@ Chest Locking:
         
         
         #This is to cancel the clicking on an inventory
-        on player right clicks m@chest:
+        on player right clicks chest:
         - define chest <context.location.inventory>
         - if !<proc[Is_Locked].context[<def[chest]>]> queue clear
         - narrate "<red>Is locked"
@@ -63,7 +63,7 @@ Chest Locking:
         - narrate "You have the key for this "
         
         
-        on player breaks m@chest:
+        on player breaks chest:
         - define chest <context.location.inventory>
         - if !<proc[Is_Locked].context[<def[chest]>]> queue clear
         - if !<proc[Has_Key_For].context[<def[chest]>]> {

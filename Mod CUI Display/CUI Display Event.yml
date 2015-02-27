@@ -1,7 +1,7 @@
 CUI Display Event:
     type: world
     events:
-        on player clicks block with i@wood_axe:
+        on player clicks block with wood_axe:
         - if <player.selected_region||no_region> == no_region queue clear
         - showfake m@glowstone <player.selected_region.get_outline> to:<player>
         #- showfake m@glass <player.selected_region.get_blocks[m@air]>

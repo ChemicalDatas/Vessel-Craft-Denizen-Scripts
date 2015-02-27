@@ -97,6 +97,7 @@ ScriptDebug:
         #- define file /plugins/denizen/script_errors.log
         
         #output
+        - announce "<red>[<def[script].name||NOSCRIPT>] <blue><context.message>"
         - log "=======<script.name>======="                                                                 type:warning file:<def[file]>
         - log "Script<&co> <&lb><def[script].name||Unknown Script><&rb> <--- Generated an error."           type:none file:<def[file]>
         - log "The message is as follows<&co>"                                                              type:none file:<def[file]>

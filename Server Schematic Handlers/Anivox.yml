@@ -25,7 +25,9 @@ Schematic Events:
         on server start:
         - run "yaml load" def:<script.yaml_keys[database_path]>|anivox_data
         
-        on player right clicks m@sign:
+        on player right clicks sign:
+        - narrate "clicked a sign <script.name>"
+        
         - if <context.sign.contents> contains "[anivox]" {
             - narrate "Anivox Animation starter detected"
             }

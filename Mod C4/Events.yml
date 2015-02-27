@@ -1,28 +1,28 @@
 bigC4:
     type: world
     events:
-        on player drops i@wiredc4:
+        on player drops wiredc4:
         - foreach <player.flag[c4setup].as_list> {
             - flag <def[value]> c4_location_charges:->:<context.location>
             - flag <def[value]> c4_entity_charges:<-:<player>
             }
         
         #location attachment
-        on player right clicks with i@c4explosives:
+        on player right clicks with c4explosives:
         - if <context.location||none> == none queue clear
         - flag player c4_location_charges:->:<context.location>
         - narrate "C4 has been set at <context.location.simple>"
         
         
         #entity attachment
-        on player right clicks entity with i@c4explosives:
+        on player right clicks entity with c4explosives:
         - flag <player> <script.name>.c4_entity_charges:->:<context.entity>
         - flag <context.entity> <script.name>.c4_entity_charges:<-:<player>
         - give i@wiredc4 to:<context.entity.inventory>
         - narrate "You have placed C4 on <context.entity.name>"
         
         #blow up any flagged entity
-        on player right clicks with i@c4dettrigger:
+        on player right clicks with c4dettrigger:
         - if <player.has_flag[<script.name>.c4_location_charges] run c4det
         - if <player.has_flag[<script.name>.c4_entity_charges]> run c4detonation
         - flag player c4_location_charges:!

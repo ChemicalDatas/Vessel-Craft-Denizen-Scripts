@@ -12,11 +12,7 @@ Class Telekinetic:
         #  
         #  <context.location.simple>" 
         
-        on m@log falls:
-        #- announce 
-        #  "log has fallen at<&co> <context.location.simple>" 
-        
-        
+
         on telekinetic levitate:
         #context.location
         #context.level

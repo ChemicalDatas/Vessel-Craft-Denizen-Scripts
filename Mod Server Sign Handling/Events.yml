@@ -10,22 +10,22 @@ Sign Handling:
     # they just punch the signs and the sign changes its form.
     # That command was last located in the server commands file
     events:
-        on player breaks m@sign_post:
+        on player breaks sign_post:
         - if <player.has_flag[editing_sign]> {
             - determine cancelled
             }
         
-        on player breaks m@wall_sign:
+        on player breaks wall_sign:
         - if <player.has_flag[editing_sign]> {
             - determine cancelled
             }
         
-        on player changes m@sign_post:
+        on player changes sign_post:
         #Some selective escaping for special characters.
         - define new <proc[Iconize].context[<context.new.escaped>]>
         - determine <def[new].unescaped.as_string>
         
-        on player changes m@wall_sign:
+        on player changes wall_sign:
         #Some selective escaping for special characters.
         - define new <proc[Iconize].context[<context.new.escaped>]>
         - determine <def[new].unescaped>
