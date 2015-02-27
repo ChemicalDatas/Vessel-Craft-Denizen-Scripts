@@ -76,17 +76,15 @@ Commands:
             - flag player backtracking_teleport:!
             - queue clear
             }
-        - if <context.destination.distance[<context.origin>].is[or_less].than[10]>
+        - if <context.destination.distance[<context.origin>].is[or_less].than[5]>
           queue clear
         
-        - announce "adding location to teleport history <>"
+        - announce "adding location to teleport history. History size<&co> <player.flag[teleport_history].as_list.size>"
         
-        - flag player teleport_history:|:<context.origin>
+        - flag player teleport_history:->:<context.origin>
         
-        - if <player.flag[teleport_history].as_list.size.is[or_more].than[<script.yaml_keys[teleport_history_max]>]> {
-            - define new_history <player.flag[teleport_history].as_list.get[1].to[<script.yaml_keys[teleport_history_max]>]>
-            - flag player teleport_history:!
-            - flag player teleport_history:|:<def[new_history]>
+        - if <player.flag[teleport_history].as_list.size.is[more].than[<script.yaml_keys[teleport_history_max]>]> {
+            - define -_- "<proc[Flag Pop Left].context[<player>|teleport_history]>"
             }
         
         on player death:
@@ -142,15 +140,12 @@ Commands:
             - flag server debug_output:true
             }
         
-        
         on debug command:
         - determine passively fulfilled
         - flag server
         - define toggle_true "Debug On"
         - define toggle_false "Debug Off"
         - run "Toggle Flag" "def:desires_debug|%toggle_true%|%toggle_false%|Toggled"
-        
-        
         
         on dnick command:
         - determine passively fulfilled
@@ -527,8 +522,10 @@ Commands:
             - queue clear
             }
         - define index <context.args.get[1]||1>
-        - if <def[index].as_int> == null {
-            - narrate "<script.yaml_keys[title]> <blue>Sorry, <yellow><def[index]> <bluw>was not a recogenisable number to use to get your history with."
+        - if <def[index].as_int||not_an_int> == not_an_int
+          || <def[index].is[more].than[<player.flag[teleport_history].as_list.size>]> {
+            - narrate "<script.yaml_keys[title]> <blue>Sorry, <yellow><def[index]> <blue>was not a number or an oversized number to use to get your history with. <red>Sending you to your last location."
+            - define index 1
             }
         - flag player backtracking_teleport
         - teleport <player> <player.flag[teleport_history].as_list.reversed.get[<def[index]>]>
