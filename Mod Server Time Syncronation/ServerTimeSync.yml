@@ -1,4 +1,19 @@
-"Scripted Time Changer":
+# Syncs the world time to the servers real time.
+Auto Sync:
+    debug: false
+    type: world
+    delay: d@1m
+    
+    events:
+        on server start:
+        - while true {
+            - run "Scripted Time Changer"
+            - wait <script.yaml_keys[delay]>
+            }
+        
+    
+
+Scripted Time Changer:
     #The procedure Num_Hours24 to Ticks is a time converter that converts hours of the day
     #into the ticks equivalent of the same time.
     type: task
