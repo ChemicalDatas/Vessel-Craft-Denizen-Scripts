@@ -70,6 +70,8 @@ Commands:
         - if <player.has_flag[can_fly]> flag <player> can_fly:!
         
         on player teleports:
+        #this is checking perhaps for player type entities.... was  recent change in the underlying code....
+        - if <context.entity.is_npc> queue clear
         - if <player.has_flag[backtracking_teleport_history]> {
             - flag player backtracking_teleport_history:!
             - queue clear
