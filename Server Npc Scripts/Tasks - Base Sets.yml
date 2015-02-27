@@ -340,6 +340,9 @@ Narrate:
     definitions: words|format
     script:
     - if <def[format].unescaped||none> == none
+      || !<def[format].exists>
+      || <def[format].unescaped> == ''
+      || <def[format].unescaped> == 'null'
       define format
       ''
       else
