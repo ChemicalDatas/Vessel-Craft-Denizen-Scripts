@@ -79,7 +79,6 @@ Commands:
         - if <context.destination.distance[<context.origin>].is[or_less].than[5]>
           queue clear
         
-        - announce "adding location to teleport history. History size<&co> <player.flag[teleport_history].as_list.size>"
         
         - flag player teleport_history:->:<context.origin>
         
