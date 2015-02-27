@@ -6,8 +6,7 @@ Auto Sync:
     
     events:
         on server start:
-              #the repeat request   #The script called        #The recall timing inital delay      #Calling Script (debug)
-        - run "Repeated Task Call" "def:Scripted Time Changer|<script.yaml_keys[delay]>|Auto Sync" delay:20
-        
-
-        
+        - while true {
+            - run "Scripted Time Changer"
+            - wait <script.yaml_keys[delay]>
+            }
