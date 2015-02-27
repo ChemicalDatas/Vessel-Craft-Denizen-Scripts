@@ -290,10 +290,10 @@ Book Lock Events:
         }
     - ~event "Player Locked item interaction"
         context:players|<def[players].escaped>|costs|<def[costs].escaped>|passwords|<def[passwords].escaped>|groups|<def[groups].escaped>|signers|<def[signer].escaped>|location|<def[location]>|inventory|<def[inventory]>
-        save:determination
-    - ~define determination <entry[determination].determination>
-    - if <def[determination].is[==].to[none]> queue clear
-    - determine <def[determination]>
+        save:determinations
+    - ~define determinations <entry[determinations].determinations>
+    - if <def[determinations].contains[none]> queue clear
+    - determine <def[determinations]>
 
 #
 

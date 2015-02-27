@@ -1,5 +1,5 @@
 Denizen Irc Capture:
-    ScriptTitle: <red><magic>ii<red>[DIRC]]<magic>ii<reset>
+    ScriptTitle: <red><magic>ii<red>[DIRC]<magic>ii<reset>
     type: world
     events:
         on dirc command:
@@ -8,8 +8,8 @@ Denizen Irc Capture:
         
         on server start:
         #- wait d@5s
-        #- announce "<script.yaml_keys[ScriptTitle]> starting up..." to_console
-        #- inject ConnectAsChemDenizenIRC
+        - announce "<script.yaml_keys[ScriptTitle]> starting up..." to_console
+        - inject ConnectAsChemDenizenIRC
         
         on irc message:
         - announce "<script.yaml_keys[ScriptTitle]> <yellow><context.channel> <blue><context.message><reset><&co> <context.message>"
@@ -21,12 +21,21 @@ ConnectDenizenIRC:
     script:
     - announce "<s@Denizen Irc Capture.yaml_keys[ScriptTitle]> Starting to connect to the IRC..." to_console
     - ~irc connect ircserver@irc.esper.net
+    
+    
     - wait d@2s
     - announce "<s@Denizen Irc Capture.yaml_keys[ScriptTitle]> User authentication..." to_console
-    - irc raw ircserver@irc.esper.net "USER Chemii vesselcraft.minecraftnoob.com vesselcraft.minecraftnoob.com Chemii"
+    - irc raw ircserver@irc.esper.net "USER VCScript vesselcraft.minecraftnoob.com vesselcraft.minecraftnoob.com VCScript"
+    
+    
     - wait d@2s
     - announce "<s@Denizen Irc Capture.yaml_keys[ScriptTitle]> Setting nickname" to_console
-    - irc raw ircserver@irc.esper.net "NICK Chemii"
+    - irc raw ircserver@irc.esper.net "NICK VCScript"
+    
+    
     - wait d@2s
     - announce "<s@Denizen Irc Capture.yaml_keys[ScriptTitle]> Joining Channel...." to_console
-    - ~irc join ircchannel@irc.esper.net#denizen-dev
+    - ~irc join ircchannel@irc.esper.net#Vesselcraft
+    
+    - wait d@2s
+    - irc message ircchanel@irc.esper.net#Vesselcraft "Vesselcraft has connected!"

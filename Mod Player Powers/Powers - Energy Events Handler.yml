@@ -111,12 +111,19 @@ Player Powers Energy Events:
         
         - event "Player Delta Energy" context:delta|<context.amount>|energy_type|<def[energy_type]>|modifier|<def[action]> save:Energy_Result
         - run "Energy Packet Representation" def:<context.delta>|<def[after_mod]>|<context.energy_type> id:<player.name>_Epacket_<util.random.duuid> save:Energy_Packet
-        - define Energy_Result <entry[Energy_Result].determination>
+        - define Energy_Result <entry[Energy_Result].determinations>
         - define energy_packet <entry[Energy_Packet].created_queue>
         
         #todo: Feedback for the player "<def[energy]>: <def[ammount_remaining]>"
         # if the net energy is negative release the energy back to the player pool
-        - if <def[Energy_Result].is[less].than[0]> {
+        
+        #todo: this sums the energy results....
+        - define result 0
+        - foreach <def[Energy_Result]> {
+            - define result <def[result].add[<def[value]>]>
+            }
+        
+        - if <def[result].is[less].than[0]> {
             - narrate "<yellow><context.energy_type> <blue>energy: <light_purple><def[Energy_Result]>..."
             - queue id:<def[energy_packet].id> resume
             - queue id:<context.queue.id> clear
