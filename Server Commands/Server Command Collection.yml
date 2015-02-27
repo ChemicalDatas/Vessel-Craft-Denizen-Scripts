@@ -71,13 +71,15 @@ Commands:
         
         on player teleports:
         #this is checking perhaps for player type entities.... was  recent change in the underlying code....
-        - if !<context.entity.is_player> queue clear
-        - if <player.has_flag[backtracking_teleport_history]> {
-            - flag player backtracking_teleport_history:!
+        #- if !<context.entity.is_player> queue clear
+        - if <player.has_flag[backtracking_teleport]> {
+            - flag player backtracking_teleport:!
             - queue clear
             }
         - if <context.destination.distance[<context.origin>].is[or_less].than[10]>
           queue clear
+        
+        - announce "adding location to teleport history <>"
         
         - flag player teleport_history:|:<context.origin>
         
@@ -516,7 +518,7 @@ Commands:
         on back command:
         - determine passively fulfilled
         - inject locally "is permitted"
-        - if <context.server> == console {
+        - if <context.server> {
             - narrate "Sorry man, Youll need to be ingame to be sent back where you were teleported from......"
             - queue clear
             }
@@ -524,14 +526,12 @@ Commands:
             - narrate "<script.yaml_keys[title]> <blue>Sorry, you have no teleport history."
             - queue clear
             }
-        - define history_target <context.args.get[1]||0>
-        - if <def[history_target].as_int> == null {
-            - narrate "<script.yaml_keys[title]> <blue>Sorry, <yellow><def[history_target]> <bluw>was not a recogenisable number to use to get your history with."
+        - define index <context.args.get[1]||1>
+        - if <def[index].as_int> == null {
+            - narrate "<script.yaml_keys[title]> <blue>Sorry, <yellow><def[index]> <bluw>was not a recogenisable number to use to get your history with."
             }
-        - define size <player.flag[teleport_history].as_list.size>
-        - define index <def[size].sub[<context.args.get[1]||0>]>
-        - flag player backtracking_teleport_history
-        - teleport <player> <player.flag[teleport_history].as_list.get[<def[index]>]>
+        - flag player backtracking_teleport
+        - teleport <player> <player.flag[teleport_history].as_list.reversed.get[<def[index]>]>
         
         
         
