@@ -5,7 +5,7 @@ Scheduled Task For Server Time:
     header: "<&lb><script.name><&rb>"
     type: world
     events:
-        on time changes in w@hub:
+        on time changes in hub:
         - define hour <context.time>
         - if <server.has_flag[time_scheduled_tasks.<def[hour]>]> {
             - foreach <server.flag[time_scheduled_tasks.<def[hour]>]> {
