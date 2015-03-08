@@ -146,8 +146,9 @@ Display Base:
     - define location <def[location].below>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
-        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[loop_index].mul[.25]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
-        - define stand <def[location].add[0,<def[loop_index].mul[.25]>,0].find.entities[Armor_Stand].within[1]>
+        - define new_y <def[loop_index].mul[.25]>
+        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
+        - define stand <def[location].add[0,<def[new_y]>,0].find.entities[Armor_Stand].within[1]>
         - define display_entities <def[display_entities].include[<def[stand]>].deduplicate>
         }
     #
