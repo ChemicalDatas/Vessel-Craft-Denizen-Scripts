@@ -138,7 +138,7 @@ Display Base:
     - define event_determination <entry[Display].determinations>
     - if <def[event_determination].contains[cancelled]> queue clear
     #this will 
-    - if <def[event_determination].contains[none]> != none define text <def[event_determination]>
+    - if <def[event_determination].contains[none]> define text <def[event_determination]>
     
     # The meat of the script
     - define display_entities li@
