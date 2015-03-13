@@ -1,7 +1,5 @@
 On Join Player Management:
     type: world
-    subtitle: "Welcome back <gold><player.name>"
-    title: "<blue>Vessel Craft"
     password_token_lifetime: d@1h
     mod_title: <blue>[Scripted Account Secure]<reset>
     password_required_permission: AccountProtection.PasswordRequired
@@ -22,9 +20,6 @@ On Join Player Management:
         - define login_every_time_permission <script.yaml_keys[login_every_time_permission]>
         - if <player.has_permission[<def[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
-        - wait d@2s
-        - execute as_server "title <player.name> subtitle <&dq><script.yaml_keys[subtitle]><&dq>" silent
-        - execute as_server "title <player.name> title <&dq><script.yaml_keys[title]><&dq>" silent
         
         on player toggles flight:
         - inject locally "path:eligible for password protection"

@@ -8,7 +8,6 @@ Announcement Bar:
     events:
         on player join:
         - wait d@2s
-        - if !<player.is_online||false> queue clear
         - define individual_greet       "<player.name.display>, <script.yaml_key[individual]>"
         - define server_announcement    "<player.name.display> <script.yaml_key[server]>"
         - define other_players          <server.list_online_players.exclude[<player>]>
@@ -17,3 +16,15 @@ Announcement Bar:
         #todo: tell mcmonkey about the adding spaces in your list causes invalid player tag recognition...
         - run "Boss Bar" def:<def[individual_greet]>|<player>|0|d@3t
         - run "Boss Bar" def:<def[server_announcement]>|<def[other_players].escaped>|0|d@3t
+    
+
+On Join Welcome Title:
+    type: world
+    subtitle: "Welcome back <gold><player.name>"
+    title: "<blue>Vessel Craft"
+    
+    events:
+    
+        on player join:
+        - wait d@2s
+        - title title:<script.yaml_keys[title]> subtitle:<script.yaml_keys[subtitle]> targets:<player>
