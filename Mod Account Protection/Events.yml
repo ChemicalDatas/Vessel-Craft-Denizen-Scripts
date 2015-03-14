@@ -4,7 +4,7 @@ On Join Player Management:
     mod_title: <blue>[Scripted Account Secure]<reset>
     password_required_permission: AccountProtection.PasswordRequired
     login_every_time_permission: AccountProtection.LoginEveryTime
-    script_cooldown: 10t
+    script_cooldown: 1s
     events:
         on server start:
         - if <server.list_scripts.contains[<script>]>
