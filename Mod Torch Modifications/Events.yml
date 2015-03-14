@@ -1,17 +1,25 @@
-Torch Modifications:
+Luminescent Items:
     affected_mobs: wolf|spider|cavespider|witch
-    luminescent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket|i@jack_o_lantern|i@glowstone_dust
-    success rate: 6|10
+    luminescent_items: i@torch|i@glowstone|i@sea_lantern|i@redstone_torch_on|i@lava_bucket|i@jack_o_lantern|i@glowstone_dust|i@beacon
     success max: 10
     success min: 6
     duration: d@2s-15s
     light_time_update: d@12t
+    light_levels:
+        i@torch: 12
+        i@glowstone: 15
+        i@sea_lantern: 15
+        i@redstone_torch_on: 4
+        i@lava_bucket: 6
+        i@jack_o_lantern: 8
+        i@glowstone_dust: 5
+        i@beacon: 15
+        
     
     type: world
     events:
-        on player damages entity:
+        on entity damages entity:
         - if !<player.item_in_hand.simple> == i@torch queue clear
-        - define rate "<script.yaml_keys[Success Rate]>"
         - define max "<script.yaml_keys[success max]>"
         - define min "<script.yaml_keys[success min]>"
         - define roll <util.random.int[0].to[<def[max]>]>
@@ -19,59 +27,64 @@ Torch Modifications:
         - define duration <script.yaml_keys[duration]>
         - burn <context.entity> duration:%duration%
         
-        on entity targets player:
+        on entity targets:
         - if !<script.yaml_keys[affected_mobs].contains[<context.entity.name>]> queue clear
         - if !<context.reason.contains[closest_player]>                         queue clear
-        - if !<player.item_in_hand.simple.is[===].to[i@torch]>                  queue clear
+        - if !<context.target.item_in_hand.simple.is[===].to[i@torch]>          queue clear
         - determine cancelled
-        
         
         on player holds item:
         - define name <player.name>_light_update_queue
         - if <queue.exists[<def[name]>]> queue clear
-        - run "Item Light Update" def:<script> id:<def[name]>
+        - run "Hand Item Light Update" def:<script>|<player> id:<def[name]>
         
-Item Light Update:
+Hand Item Light Update:
     type: task
-    definitions: script
+    definitions: script|entity
+    speed: 0t
     script:
-    - wait d@1t
-    
-    - define key
-      <def[script].name>.last_light_location
-    
-    - while <def[script].yaml_keys[luminescent_items].contains[<player.item_in_hand.simple>]> {
+    - if !<server.list_scripts.contains[<def[script]||none]>]>
+      || !<def[entity].is_spawned||false> {
+        - define message "Incorrect input for <script.name><&co> script<&co> <def[script]||none> entity<&co> <def[entity]||none>"
+        - event "Script Generates Error" context:queue|<queue>|script|<script>|message|<def[message]>
+        - queue clear
+        }
+
+    - while <def[script].yaml_keys[luminescent_items].contains[<def[entity].item_in_hand.simple>]> {
         
         - wait <def[script].yaml_keys[light_time_update]>
-          
-        - define loc
-          <player.location.add[0,3,0].simple.as_location>
         
-        #Im not sure what default to set it to for it to be correct
-        #If the player has stayed still (dont need to reupdate the lightning)
-        - if <def[loc]> == <player.flag[<def[key]>]||Player_Has_A_Null_Last_Location>
+        - define location
+          <def[entity].location.simple.as_location>
+        
+        #if didnt move, dont do anything
+        - if <def[location]> == <def[last_location]||no_last_location>
           while next
         
-        - showfake m@air
-          <player.flag[<def[key]>]>
-          d:d@1t
+        #change lightning according to scripted values
+        - light
+          <def[location]>
+          <def[script].yaml_keys[light_levels.<def[entity].item_in_hand.simple>]>
+          duration:d@1m
         
-        - showfake m@ender_portal
-          <def[loc]>
-          d:d@1m
+        #reset old lightning if last_location exists
+        - if <def[last_location].exists||false>
+          light
+          <def[last_location]>
+          reset
         
-        #Flag clears so when the next check if the player has moved (the flag contains last light location), 
-        #if thats null redo the lightning
-        #Just to avoid lighting bugs when the player is moving fast and switches items
-        - flag <player>
-          <def[key]>:<def[loc]>
-          duration:d@10s
+        #define last_location as this location
+        - define last_location
+          <def[location]>
         }
     
-    - showfake
-      m@air
-      <player.flag[<def[key]>]||<player.location.add[0,3,0].simple.as_location>>
-      d:d@1t
+    - if <def[last_location].exists||false>
+      light 
+      <def[last_location]>
+      reset
+    
+#    - showfake
+#      m@air
+#      <player.flag[<def[key]>]||<player.location.add[0,3,0].simple.as_location>>
+#      d:d@1t
         
-    - flag <player>
-      <def[key]>:!
