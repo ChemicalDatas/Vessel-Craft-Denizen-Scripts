@@ -16,7 +16,9 @@ On Join Player Management:
         on player joins:
         - wait d@1s
         - adjust <player> gamemode:adventure
-        - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
+        - define location <player.bed_spawn||<player.world.spawn_location>>
+        - define location_arround "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
+        - teleport <player> <def[location_arround].get_spawnable_blocks.random>
         - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
         
