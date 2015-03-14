@@ -46,7 +46,11 @@ Cube Surrounding:
     - define outset
       <def[outset]||1>
     
-    - determine <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
+    - define cuboid 
+      <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
+    
+    - determine <def[cuboid].as_cuboid>
+      
     
 Outset Cuboid:
     ############################################################################################################################
@@ -60,8 +64,10 @@ Outset Cuboid:
     - define outset
       <def[outset]||1>
     
-    - determine
-      <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
+    - define new_cuboid <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
+    
+    - determine <def[new_cuboid].as_cuboid>
+      
 
 
 Cube Surrounding Location:
