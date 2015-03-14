@@ -82,8 +82,10 @@ Cube Surrounding Location:
     - define outset
       <def[outset]||1>
     
-    - determine
-      <def[location].sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[location].add[<def[outset]>,<def[outset]>,<def[outset]>]>
+    - define cuboid <def[location].sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[location].add[<def[outset]>,<def[outset]>,<def[outset]>]>
+    
+    - determine <def[cuboid].as_cuboid>
+      
 
 
 Spawnable Locations In Cuboid:
