@@ -17,8 +17,7 @@ On Join Player Management:
         - wait d@1s
         - adjust <player> gamemode:adventure
         - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
-        - define login_every_time_permission <script.yaml_keys[login_every_time_permission]>
-        - if <player.has_permission[<def[login_every_time_permission]>]>
+        - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
         
         on player toggles flight:
@@ -41,8 +40,6 @@ On Join Player Management:
         - inject locally "path:eligible for password protection"
         - inject locally "path:action password check"
         
-        
-        
         on command:
         - if <context.server>
           queue clear
@@ -60,7 +57,7 @@ On Join Player Management:
             - narrate "<script.yaml_keys[mod_title]> <red>Incorrect Password for <player.name.display||<player.name>>"
             - queue clear
             }
-        - narrate "<script.yaml_keys[mod_title]> <script.yaml_keys[subtitle]>"
+        - narrate "<script.yaml_keys[mod_title]> Welcome back <yellow><player.name>"
         - flag player AccountProtection.EnteredPassword:true duration:<script.yaml_keys[password_token_lifetime]>
         
         on setpass command:
