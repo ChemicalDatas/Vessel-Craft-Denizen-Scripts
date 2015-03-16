@@ -239,10 +239,3 @@ Context Menu Display Timeout:
     script:
     - remove <def[displays].unescaped>
     - queue queue:q@<player.name>_context_menu stop
-
-tstthg:
-    type: task
-    script:
-    - define thing li@
-    - define thing.test test
-    - narrate "<def[thing]> <def[thing].test||failed> <def[thing.test]||failed>"
