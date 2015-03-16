@@ -10,7 +10,7 @@ Object Database Startup:
     path: script_database/object_database.yml
     events:
         on server start:
-        - run "yaml load" def:<script.yaml_keys[path]>|object_database
+        - run "yaml load" def:<script.yaml_keys[path]>|temp_objects
         
         on server shutdown:
         - announce "<script.name> performing shutdown routine."
@@ -42,7 +42,7 @@ Object:
     definitions: yaml_id|object_id|method
     script:
     #- inject "Announce Arguments Passed"
-    - define yaml_id <def[yaml_id]||object_database>
+    - define yaml_id <def[yaml_id]||temp_objects>
     - if !<yaml.list.contains[<def[yaml_id]>]> {
         - event "script generates error" "context:message|invalid yaml id<&co> <def[yaml_id]>|script|<script>|queue|<queue>"
         - queue clear
