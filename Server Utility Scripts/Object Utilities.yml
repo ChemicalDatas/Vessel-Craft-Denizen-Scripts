@@ -44,59 +44,93 @@ Object Database Startup:
 
 
 Object:
+    #Has the ability to handle multiple dynamic inputs
+    #This has a scope that extends beyond script, as its more of a global variable
+    #Get returns a list wether its 1 or multiple requests
     #
+    #  #set an attribute on red_team
     # - define kills <li@kills|10.escaped>
     # - define wins <li@wins|0.escaped>
     # - define none_or_setter <proc[object].context[red_team|set|<def[kills]>|<def[wins]>]>
-    # - define team_stats <proc[object].context[red_team|get|kills|wins]>
-    # - define team_red_wins <def[team_stats].get[]>
-    # - define red_wins <proc[object].context[red_team|wins]>
     #
+    #  #get kills and wins
+    # - define team_stats <proc[object].context[red_team|get|kills|wins]>
+    # - define team_red_wins <def[team_stats].get[1]>
+    #
+    #  #just get the wins from redteam
+    # - define red_wins <proc[object].context[red_team|get|wins]>
+    #
+    #  #clears the object from memory
+    # - define clear_red_ream <proc[object].context[red_team|clear]>
+    #
+    # #raises an error and returns li@
+    # - define red_wins <proc[object].context[red_team|get|wins]>
     type: procedure
     definitions: object_id|method
     script:
-    - define object_id <def[object_id]||none>
-    - if <def[object_id]> == null
-      || <def[object_id]> == ''
-      || <def[object_id]> == none {
+    #- inject "Announce Arguments Passed"
+    - if <def[object_id]||none> == none {
         - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
         - queue clear
         }
-    - if !<yaml[object_database].contains[<def[object_id]>]> {
-        - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
-        - queue clear
-        }
-    - if !<def[method].exists> {
+    - if <def[method]||none> == none {
         - event "script generates error" "context:message|Need an method refrence|script|<script>|queue|<queue>"
         - queue clear
         }
     - inject <def[method]> locally
 
     get:
+    - if !<yaml[object_database].contains[<def[object_id]>]> {
+        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - queue clear
+        }
+    - define ignored_values li@
+    - define ignored_values <def[ignored_values].include[<script.yaml_keys[definitions].as_list>]>
+    - define ignored_values <def[ignored_values].include[li@attribute_list|loop_index|ignored_values|value]>
     - define attribute_list li@
     - foreach <queue.definitions> {
-        - if <def[value]> == object_id || <def[value]> == method foreach next
-        - if !<yaml[object_database].contains[<def[object_id]>.<def[value]>]> {
-            - define attribute_list <def[attribute_list].include[value_<def[value]>_not_found]>
+        - if <def[ignored_values].contains[<def[value]>]> foreach next
+        - if !<yaml[object_database].contains[<def[object_id]>.<def[%value%]>]> {
+            #I choose to raise the error instead of returning none
+            #This mimicks a global variable and there isnt anyway to remove it unless the server restarts.
+            #
+            - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> dose not have attribute<&co> <red><def[%value%]>|script|<script>|queue|<queue>"
             - foreach next
             }
         # include the attribute and add it to the attribute_list as escaped data (it could be a list)
-        - define attribute_list <def[attribute].include[<yaml[object_database].read[<def[object_id]>.<def[value]>].escaped>]>
+        #- announce "trying to find <def[%value%]>"
+        - define attribute_list <def[attribute_list].include[<yaml[object_database].read[<def[object_id]>.<def[%value%]>].escaped>]>
         }
+    #- announce "object contains<&co> <yaml[object_database].list_deep_keys[<def[object_id]>]>"
     - determine <def[attribute_list]>
     
     set:
+    - define ignored_values li@
+    - define ignored_values <def[ignored_values].include[<script.yaml_keys[definitions].as_list>]>
+    - define ignored_values <def[ignored_values].include[li@|loop_index|ignored_values|value]>
     - foreach <queue.definitions> {
-        - if <def[value]> == object_id || <def[value]> == method foreach next
+        - if <def[ignored_values].contains[<def[value]>]> foreach next
         - define data <def[%value%].unescaped.as_list>
         - define attrib <def[data].get[1]||none>
         - define value <def[data].get[2]||none>
         - if <def[attrib]> == none || <def[value]> == none foreach_next
+        #- announce "setting <def[attrib]> <def[value]>"
         - yaml id:object_database set <def[object_id]>.<def[attrib]>:<def[value]>
         }
+    #- if <yaml[object_database].contains[<def[object_id]>]> {
+    #    - narrate "<green>Sucessfully created object. <def[object_id]> is ready."
+    #    } else {
+    #    - narrate "<red>Failed to create object. <def[object_id]> is not in the yaml memory."
+    #    }
     - determine none
-
-
+    
+    clear:
+    - if !<yaml[object_database].contains[<def[object_id]>]> {
+        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - queue clear
+        }
+    - yaml id:object_database set <def[object_id]>:!
+    - determine none
 
 
 
