@@ -238,7 +238,10 @@ Temp Yaml Handling:
     events:
         on server start:
         - run "Yaml Load" def:_temp_yaml_location_|temp
-        - run "Repeated Task Call" "def:Expire Temp Yaml Data|d@6h|<queue>|<queue>"
+        - while true {
+            - inject "Expire Temp Yaml Data"
+            - wait d@6h
+            }
 
 Expire Temp Yaml Data:
     type: task
