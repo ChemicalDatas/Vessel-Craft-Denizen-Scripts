@@ -61,17 +61,10 @@ Hand Item Light Update:
         - if <def[location]> == <def[last_location]||no_last_location>
           while next
         
-        #light level checking, if a player is switching items quickly
-        - define light_level_for_item 
-          <def[script].yaml_keys[light_levels.<def[entity].item_in_hand.simple>]||none>
-        
-        - if <def[light_level_for_item]> == none
-          while next
-        
         #change lightning according to scripted values
         - light
           <def[location]>
-          <def[light_level_for_item]>
+          <def[script].yaml_keys[light_levels.<def[entity].item_in_hand.simple>]||reset>
           duration:d@1m
         
         #reset old lightning if last_location exists
