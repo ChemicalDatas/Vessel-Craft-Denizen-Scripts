@@ -36,7 +36,7 @@ Luminescent Items:
         on player holds item:
         - define name <player.name>_light_update_queue
         - if <queue.exists[<def[name]>]> queue clear
-        - run "Hand Item Light Update" def:<script>|<player> id:<def[name]> instantly
+        - run "Hand Item Light Update" def:<script>|<player> id:<def[name]>
         
 Hand Item Light Update:
     type: task
