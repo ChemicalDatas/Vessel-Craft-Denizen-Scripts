@@ -3,34 +3,7 @@
 #instead of define a new command called object?
 #- object noob.intelligence ????
 #
-#- define noob.intelligence "5"
-#- define noob.coding_skills "0"
-#- narrate "noob with <def[noob].intelligence> brains and <def[coding_skills]> coding skills is realllllyyy a noob"
-#- foreach <li@Each|time|he|studies> {
-#    - define noob.intelligence ++
-#    - define noob.coding_skills ++
-#    }
 
-#    - # define a new object
-#    - Object  new_object
-#    - #set its first attribute
-#    - Object  new_object.name noobzilla
-#    - Narrate "hi there <obj[new_object].name>"
-#    - #attribute checking
-#    - Object  new_object.job farmer
-#    - If <obj[new_object].type.is[].to[]> == farmer {
-#      - Narrate 'I see your job is <obj[new_object].job>, what is that?'
-#      }
-#    - Run "promote and announce" def:<obj[new_object]>
-
-test_proc:
-    type: task
-    definitions: one|two
-    script:
-    - define test "li@one/1|
-                    two/2|
-                    three/3"
-    - narrate "<def[test].map_get[one]>"
 
 Object Database Startup:
     type: world
