@@ -239,18 +239,13 @@ Temp Yaml Handling:
         on server start:
         - run "Yaml Load" def:_temp_yaml_location_|temp
         - while true {
-            - inject "Expire Temp Yaml Data"
+            - yaml unload id:temp
+            - yaml create id:temp
             - wait d@6h
             }
-
-Expire Temp Yaml Data:
-    type: task
-    script:
-    - yaml unload id:temp
-    - yaml create id:temp
-
-
+        
     
+
 Write Timed Data:
     #
     # Data to write, path is the location of data
