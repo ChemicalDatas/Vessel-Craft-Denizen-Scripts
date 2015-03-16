@@ -39,9 +39,14 @@ Object:
     # #raises an error and returns li@
     # - define red_wins <proc[object].context[red_team|get|wins]>
     type: procedure
-    definitions: object_id|method
+    definitions: yaml_id|object_id|method
     script:
     #- inject "Announce Arguments Passed"
+    - define yaml_id <def[yaml_id]||object_database>
+    - if !<yaml.list.contains[<def[yaml_id]>]> {
+        - event "script generates error" "context:message|invalid yaml id<&co> <def[yaml_id]>|script|<script>|queue|<queue>"
+        - queue clear
+        }
     - if <def[object_id]||none> == none {
         - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
         - queue clear
@@ -51,9 +56,9 @@ Object:
         - queue clear
         }
     - inject <def[method]> locally
-
+    
     get:
-    - if !<yaml[object_database].contains[<def[object_id]>]> {
+    - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
         - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
         - queue clear
         }
@@ -63,7 +68,7 @@ Object:
     - define attribute_list li@
     - foreach <queue.definitions> {
         - if <def[ignored_values].contains[<def[value]>]> foreach next
-        - if !<yaml[object_database].contains[<def[object_id]>.<def[%value%]>]> {
+        - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>.<def[%value%]>]> {
             #I choose to raise the error instead of returning none
             #This mimicks a global variable and there isnt anyway to remove it unless the server restarts.
             #
@@ -88,7 +93,7 @@ Object:
         - define value <def[data].get[2]||none>
         - if <def[attrib]> == none || <def[value]> == none foreach_next
         #- announce "setting <def[attrib]> <def[value]>"
-        - yaml id:object_database set <def[object_id]>.<def[attrib]>:<def[value]>
+        - yaml id:<def[yaml_id]> set <def[object_id]>.<def[attrib]>:<def[value]>
         }
     #- if <yaml[object_database].contains[<def[object_id]>]> {
     #    - narrate "<green>Sucessfully created object. <def[object_id]> is ready."
@@ -98,20 +103,19 @@ Object:
     - determine none
     
     clear:
-    - if !<yaml[object_database].contains[<def[object_id]>]> {
+    - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
         - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
         - queue clear
         }
-    - yaml id:object_database set <def[object_id]>:!
+    - yaml id:<def[yaml_id]> set <def[object_id]>:!
     - determine none
     
     attributes:
-    - if !<yaml[object_database].contains[<def[object_id]>]> {
+    - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
         - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
         - queue clear
         }
-    - determine <yaml[object_database].list_deep_keys[<def[object_id]>]>
-    - 
+    - determine <yaml[<def[yaml_id]>].list_deep_keys[<def[object_id]>]>
     
 
 
