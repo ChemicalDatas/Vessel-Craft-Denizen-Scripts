@@ -15,7 +15,7 @@ Object Database Startup:
         on server shutdown:
         - announce "<script.name> performing shutdown routine."
 
-
+#note: to avoid a obscure bugs, objects might need to have the queue id prefixed to the object_id
 Object:
     #Has the ability to handle multiple dynamic inputs
     #This has a scope that extends beyond script, as its more of a global variable
@@ -104,6 +104,15 @@ Object:
         }
     - yaml id:object_database set <def[object_id]>:!
     - determine none
+    
+    attributes:
+    - if !<yaml[object_database].contains[<def[object_id]>]> {
+        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - queue clear
+        }
+    - determine <yaml[object_database].list_deep_keys[<def[object_id]>]>
+    - 
+    
 
 
 
