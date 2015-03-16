@@ -351,10 +351,11 @@ debug format:
 
 Announce Arguments Passed:
     #Injected script to announce all the args passed to a script
+    #If placed at the end of a script, this will gather the names of all definitions within a script.
     type: task
     script:
     - announce ""
-    - announce "<red><magic>ii<reset><bold>Arguments to <blue><queue.script.name><magic>ii<red>:"
+    - announce "<red><magic>ii<reset><bold>Arguments to <blue><bold><queue.script.name><reset><red><magic>ii<reset><red>:"
     - foreach <queue.definitions> {
         - announce "<blue><bold>%value%: <reset><def[%value%]>"
         }
