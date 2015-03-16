@@ -38,6 +38,10 @@ ScriptDebug:
     events:
         on server start:
         - run "yaml load" def:<script.yaml_keys[script_error_object_file]>|error_objects
+        - while true {
+            - wait d@1h
+            - run "yaml save" def:<script.yaml_keys[script_error_object_file]>|error_objects
+            }
         
         #on server stop
         on stop command:
