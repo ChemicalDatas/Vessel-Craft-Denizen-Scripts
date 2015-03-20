@@ -19,6 +19,10 @@ On Join Player Management:
         - define location <player.bed_spawn||<player.world.spawn_location>>
         - define location_arround "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
         - teleport <player> <def[location_arround].get_spawnable_blocks.random>
+        #Ops and * permission users will always have the permission
+        #This is a way to not even check
+        - if <player.has_flag[ignore_login_every_time]>
+          queue clear
         - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
         
@@ -60,6 +64,10 @@ On Join Player Management:
             - queue clear
             }
         - narrate "<script.yaml_keys[mod_title]> Welcome back <yellow><player.name>"
+        - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]> {
+            - narrate "<script.yaml_keys[mod_title]> If you tire of logging in each time do ./ex flag <&lt>player<&gt> ignore_login_every_time
+                        That will allow you to ignore the permission check. Applies to * perm groups and ops."
+            }
         - flag player AccountProtection.EnteredPassword:true duration:<script.yaml_keys[password_token_lifetime]>
         
         on setpass command:
