@@ -301,7 +301,7 @@ Book Lock Events:
         context:players|<def[players].escaped>|costs|<def[costs].escaped>|passwords|<def[passwords].escaped>|groups|<def[groups].escaped>|signers|<def[signer].escaped>|location|<def[location]>|inventory|<def[inventory]>
         save:determinations
     - define determinations <entry[determinations].determinations>
-    - if <def[determinations].contains[none]> queue clear
+    - if <def[determinations].contains[cancelled]> determine cancelled
     - determine <def[determinations]>
 
 #
