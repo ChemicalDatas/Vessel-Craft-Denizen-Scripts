@@ -99,9 +99,10 @@ Book Lock Player Allow Check:
         - if <def[players].contains[all]>
           queue clear
         
-        - foreach <def[signers].as_list>
-          if <server.match_player[<def[value]>].is[==].to[<player>]>
-          queue clear
+        - foreach <def[signers].as_list> {
+              - if <server.match_player[<def[value]>].is[==].to[<player>]>
+                queue clear
+              }
         
         - if <def[players].is_empty>
           queue clear
@@ -109,9 +110,10 @@ Book Lock Player Allow Check:
         - if <def[players].contains[<player.name>]>
           queue clear
         
-        - foreach <def[players].as_list>
-          if <server.match_player[<def[value]>].is[==].to[<player>]>
-          queue clear
+        - foreach <def[players].as_list> {
+              - if <server.match_player[<def[value]>].is[==].to[<player>]>
+                queue clear
+              }
         
         - if <player.is_op>
           queue clear
@@ -124,6 +126,7 @@ Book Lock Player Allow Check:
         
         - determine
           cancelled
+        
     
 
 Book Lock Group Allow Check:
@@ -154,7 +157,7 @@ Book Lock Password Allow Check:
     events:
         on player locked item interaction:
         #- announce "<context.passwords.unescaped>"
-        - define passwords <def[passwords].unescaped>
+        - define passwords <context.passwords.unescaped>
         - if <def[passwords].is_empty> queue clear
         - if <player.is_op>
           queue clear
@@ -207,7 +210,8 @@ Book Lock Cost Allow Check:
     events:
         on player locked item interaction:
         - define costs <context.costs.unescaped>
-        - announce "costs might be<&co> <def[costs].space_separated>"
+        - if <def[costs].is_empty> queue clear
+        - narrate "Cost to open this item might be<&co> <def[costs].space_separated>"
         - if <player.is_op>
           queue clear
         
@@ -227,8 +231,10 @@ Book Lock Cost Allow Check:
 
 
 Book Lock Events:
-    lockable:
-      li@wooden_door|dark_oak_door_block|spruce_door_block|jungle_door_block|acacia_door_block|iron_door_block|fence_gate|dark_oak_fence_gate|acacia_fence_gate|spruce_fence_gate|birch_fence_gate|jungle_fence_gate|
+    lockable: "li@wooden_door|dark_oak_door_block|spruce_door_block|
+                jungle_door_block|acacia_door_block|iron_door_block|
+                fence_gate|dark_oak_fence_gate|acacia_fence_gate|
+                spruce_fence_gate|birch_fence_gate|jungle_fence_gate"
     type: world
     events:
         on player breaks block:
@@ -262,7 +268,7 @@ Book Lock Events:
         - define location <context.entity.location>
         - inject locally "path:Build Locked Object Event"
         
-    
+        
         on player chats:
         - if <queue.exists[<player.name.display>_entry_capture_<player>]> {
             - queue q@<player.name.display>_entry_capture_<player> resume
@@ -277,21 +283,24 @@ Book Lock Events:
     - define costs li@
     - define groups li@
     - define signer li@
+    - define inventory <tern[<def[inventory].exists>]:<def[inventory]>||none>
     - define local_framed_books <proc[get_framed_books].context[<def[location]>]>
     
     - foreach <def[local_framed_books]> {
         - define signer <def[signer].include[<def[value].book.author||li@>]>
         - foreach <def[value].book.pages.escaped> {
             - define entry_list "<def[value].split[&nl]>"
-            - define page_function <def[entry_list].get[first].replace[&co]>
+            - define page_function <def[entry_list].get[1].replace[&co]>
             - define included_entries <def[entry_list].get[2].to[<def[entry_list].size>]>
-            - define %page_function% <def[%page_function%].include[<def[included_entries]>]>
+            #This rebuilds the predefined areas like players, passwords, costs and adds to the list.
+            #Provides a fallback of empty list if the value if the player misspells a definition
+            - define %page_function% <def[%page_function%].include[<def[included_entries]>]||li@>
             }
         }
-    - ~event "Player Locked item interaction"
+    - event "Player Locked item interaction"
         context:players|<def[players].escaped>|costs|<def[costs].escaped>|passwords|<def[passwords].escaped>|groups|<def[groups].escaped>|signers|<def[signer].escaped>|location|<def[location]>|inventory|<def[inventory]>
         save:determinations
-    - ~define determinations <entry[determinations].determinations>
+    - define determinations <entry[determinations].determinations>
     - if <def[determinations].contains[none]> queue clear
     - determine <def[determinations]>
 
@@ -308,7 +317,7 @@ get_framed_books:
     script:
     - define book_list li@
     - define frames <def[location].find.entities[item_frame].within[2]>
-    - if <def[frames].is_empty> queue clear
+    - if <def[frames].is_empty> determine <def[book_list]>
     - foreach <def[frames]> {
         - if !<def[value].framed_item.is_book> foreach next
         - define book_list <def[book_list].include[<def[value].framed_item>]>
