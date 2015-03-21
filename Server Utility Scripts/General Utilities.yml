@@ -605,7 +605,10 @@ Wait for Valid Player:
     type: task
     script:
     - if !<def[duration].exists>    define duration d@1s
+    - if !<def[max_wait].exists>    define max_wait 20
     - while !<player.is_spawned> {
         - wait <def[duration]>
+        - if <def[loop_index].is[or_more].than[<def[max_wait]>]>
+          queue clear
         }
     
