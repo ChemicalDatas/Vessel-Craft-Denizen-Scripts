@@ -172,7 +172,7 @@ Controller Event Detection2:
             } else {
             
             - define event_list
-              "<def[event_list].include[player focuses on entity|player focuses on <def[entity].entity_type>]>"
+              "<def[event_list].include[player focuses on entity|player focuses on <def[target].entity_type>]>"
             
             - define context_list
               <def[context_list].include[entity|<def[target]>]>
