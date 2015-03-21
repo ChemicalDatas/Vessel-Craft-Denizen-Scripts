@@ -63,7 +63,7 @@ Ingas Exotic Sword:
     - This is how you make the lore
     
     on player animates:
-    - define targets "<proc[Block Line].context[<player>|5]>"
+    - define targets "<proc[Block Line].context[<player>|5]||li@>"
     - showfake m@glowstone <def[targets]> duration:d@2s
     
     
