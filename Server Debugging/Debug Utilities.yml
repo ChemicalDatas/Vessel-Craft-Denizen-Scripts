@@ -47,7 +47,7 @@ Determine Error Type:
     type: procedure
     definitions: message
     script:
-     - define error_types "li@Missing Tag|Invalid dCommand|Invalid Arguments|Depreciated"
+     - define error_types "li@Missing Tag|Invalid dCommand|Invalid Arguments|Depreciated|Internal exception was thrown!"
      -
      - determine <def[error_type]>
 
@@ -423,10 +423,85 @@ queuet:
     - narrate ""
     
 
+    
+#todo: check if using not only type checking but default_values too....
+#Its possible to use <el@type.type>, .as_list returns list, and "strings" return elements.
+#But '1'.type returns element instead of int. Only way to determine valid ints for math tags is "element.as_int"
+#if that returns as valid then its truly something the scripts can use.
+typechecking:
+    #
+    #injected script for checking type values predefined within a script.
+    # if a script has 2 set values location and outset. There needs to be 
+    # yaml keys prefixed with type_ and contains a acessor value. That needs to be returned as valid
+    # for this to raise an input error
+    #script:
+    #   type_int: as_int
+    #   type_element: prefix
+    #   type_player: as_player
+    #   type_queue: as_queue
+    #   definitions: int|element|player|queue
+    #   script:
+    #   - narrate "yada yada"
+    #
+    #The types need to be of similar name as the definitions
+    #
+    # Todo: add support for special values and accessors ex: contains[__must_contain_this_value],
+    # this might be beyond the scope and the security value of the script.
+    #
+    type: task
+    speed: 0t
+    script:
+    - define __ignored_values
+      li@value|loop_index|__ignored_values
+    
+    - if <queue.script.yaml_keys[definitions]||no_definitions> != no_definitions {
+        - if <queue.definitions.exclude[<def[__ignored_values]>].is_empty> {
+            - define __message "Definition(s) failed type check. There were no values passed."
+            - event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+            - queue clear
+            }
+        
+        - foreach <queue.definitions.exclude[<def[__ignored_values]>]> {
+            
+            #- announce "<script.name> checking for <def[value]>"
+            
+            - if <def[value].starts_with[__]>
+              foreach next
+            
+            - define __accessor
+              <queue.script.yaml_keys[type_%value%]||none>
+            
+            - if <def[__accessor]> == none 
+              foreach next
+            
+            #- announce "<script.name> <def[%value%]>.%__accessor% <def[%value%].%__accessor%||failed_tag>"
+            
+            - define __expected_value
+              <def[%value%].%__accessor%||failed_tag>
+            
+            - if <def[__expected_value]> == failed_tag {
+                - define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
+                - event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                - queue clear
+                }
+            }
+        }
+    
+__tstchecking:
+    type: task
+    type_int: as_int
+    type_element: prefix
+    definitions: int|element
+    script:
+    - inject typechecking
+    - announce "<def[int]> <def[int].type>"
+    - announce "<script.name> completed its task and did not raise an error."
 
 
 
-Notify Debug:
+
+
+__Notify Debug:
     type: task
     definitions: error_message|queue|skript
     script:
