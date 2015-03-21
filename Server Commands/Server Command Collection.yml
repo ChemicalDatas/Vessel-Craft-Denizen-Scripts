@@ -245,33 +245,6 @@ Commands:
         
         
         
-        on signedit command:
-        # This command depends on the mod server sign handling
-        # This only sets up the options for the server to handle the player break sign event.
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        
-        - define line <context.parsed_args.get[1]>
-        - define text <context.parsed_args.get[2]>
-        - define is_int "Is int: <proc[Is Int].context[%line%]>"
-        - if "!<proc[Is Int].context[%line%]>" || %line% == null {
-            - narrate format:SAI "You did not specify a line to edit. That should be your 2nd argument."                           
-            - narrate format:SAI "<bold>ex: <reset><&dot><&bs><blue>signedit <yellow>1 <gray><&dq>This is your first line<&dq>"
-            - queue clear
-            }
-        - if %text% = null {
-            - define text "<reset>"
-            } else {
-            - define text <proc[Iconize].context[%text%]>
-            }
-            
-        - narrate format:Formatted "<gray>Ready to edit line<white>: <gold>%line% <gray>with: <reset>%text%"
-        - narrate format:Formatted "<gray>Please <underline>punch <gray>the <gold>sign(s) <gray>you want to change in <gold>10 <gray>seconds."
-        
-        - flag player "editing_sign:%line%|%text%" duration:10
-        
-        
-        
         #on display command:
         #- determine passively fulfilled
         #- inject locally "is permitted"
@@ -347,6 +320,7 @@ Commands:
         - determine passively fulfilled
         - if <context.args.is_empty> {
             - narrate "<script.yaml_keys[title]> <yellow>The time is <player.world.time> ticks"
+            - narrate "<script.yaml_keys[title]> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, 0-24000)"
             - queue clear
             }
         - inject locally "is permitted"
@@ -358,7 +332,7 @@ Commands:
         - define night 18000
         - define accessor <context.args.get[1]>
         - define time <def[%accessor%]||<context.args.get[1]>>
-        - if <def[time].as_int> == null {
+        - if <def[time].as_int||failed_time> == failed_time {
             - narrate "<script.yaml_keys[title]> <blue>The argument you passed wasnt recogniced time. Ex<&co> <yellow>dawn, morning, noon, day, dusk, night, 0-24000"
             - queue clear
             }
