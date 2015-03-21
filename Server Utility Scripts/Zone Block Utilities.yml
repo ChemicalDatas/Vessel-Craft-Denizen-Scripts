@@ -50,7 +50,6 @@ Cube Surrounding:
       <def[entity].location.sub[<def[outset]>,<def[outset]>,<def[outset]>]>|<def[entity].location.add[<def[outset]>,<def[outset]>,<def[outset]>]>
     
     - determine <def[cuboid].as_cuboid>
-      
     
 Outset Cuboid:
     ############################################################################################################################
@@ -67,8 +66,6 @@ Outset Cuboid:
     - define new_cuboid <def[cuboid].min.sub[<def[outset]>|<def[outset]>|<def[outset]>]>|<def[cuboid].max.add[<def[outset]>|<def[outset]>|<def[outset]>]>
     
     - determine <def[new_cuboid].as_cuboid>
-      
-
 
 Cube Surrounding Location:
     ############################################################################################################################
@@ -77,8 +74,12 @@ Cube Surrounding Location:
     #                                                                                                                          #
     ############################################################################################################################
     type: procedure
+    type_location: as_location
+    type_outset: as_int
     definitions: location|outset
     script:
+    - inject typechecking
+    
     - define outset
       <def[outset]||1>
     
