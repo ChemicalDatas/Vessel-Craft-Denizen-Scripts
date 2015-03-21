@@ -22,8 +22,9 @@ Sign Handling:
         
         on player changes sign_post:
         #Some selective escaping for special characters.
-        - define new <proc[Iconize].context[<context.new.escaped>]>
-        - determine <def[new].unescaped.as_string>
+        - define new <proc[Iconize].context[<context.new.escaped>].unescaped>
+        - announce "<script.name> <def[new].as_string> "
+        - determine <def[new].as_string>
         
         on player changes wall_sign:
         #Some selective escaping for special characters.
@@ -39,3 +40,58 @@ Sign Handling:
                 }
             }
         
+        
+        
+        on signedit command:
+        # This command depends on the mod server sign handling
+        # This only sets up the options for the server to handle the player break sign event.
+        - determine passively fulfilled
+        - inject locally "is permitted"
+        
+        - define line <context.parsed_args.get[1]||none>
+        - define text <context.parsed_args.get[2]||none>
+        - define is_int "Is int: <proc[Is Int].context[%line%]>"
+        - if "!<proc[Is Int].context[%line%]>" 
+          || <def[line]> == none {
+            - narrate format:SAI "You did not specify a line to edit. That should be your 2nd argument."                           
+            - narrate format:SAI "<bold>ex: <reset><&dot><&bs><blue>signedit <yellow>1 <gray><&dq>This is your first line<&dq>"
+            - queue clear
+            }
+        - if <def[text]> == none
+          || <def[text]> == "" {
+            - define text "<reset>"
+            } else {
+            - define text <proc[Iconize].context[%text%]>
+            }
+            
+        - narrate format:Formatted "<gray>Ready to edit line<white>: <gold>%line% <gray>with: <reset>%text%"
+        - narrate format:Formatted "<gray>Please <underline>punch <gray>the <gold>sign(s) <gray>you want to change in <gold>10 <gray>seconds."
+        
+        - flag player "editing_sign:%line%|%text%" duration:10
+        
+    
+
+
+Modify Sign Line:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # location is a sign location.                                                                                              #
+    # Line is a line number to alter                                                                                            #
+    # Text is the text to alter with                                                                                            #
+    #                                                                                                                           #
+    #todo: set this up so that it no longer requires a _type option. Get the sign type from the location and match it here.  #
+    #############################################################################################################################
+    type: task
+    debug: false
+    definitions: _type|location|line|text
+    script:
+    - define lines li@1|2|3|4
+    - define sign li@
+    - foreach <def[lines]> {
+        - if <def[value]> == <def[line]>
+          define sign <def[sign].include[<def[text]>]>
+          else
+          define sign <def[sign].include[<def[location].sign_contents.get[<def[value]>]>]>
+        }
+    - sign "type:<def[type]>" <def[sign]> <def[location]>
+    
