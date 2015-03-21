@@ -80,7 +80,7 @@ breakable Listener:
         
         
         on player stops sprinting:
-        - define locations <player.location.add[<player.location.direction.vector>].above>
+        - define locations li@<player.location.above>
         
         - inject locally
           path:script_meat
