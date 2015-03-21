@@ -382,7 +382,7 @@ Commands:
         on i command:
         - determine passively fulfilled
         - inject locally "is permitted"
-        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].max_stack>>]
+        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack>>]
         - define item <def[item].as_item||Not_An_Item>
         - if <def[item].type||Not_An_Item> != "Item"  {
             - narrate "<script.yaml_keys[title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
@@ -392,7 +392,7 @@ Commands:
         - give <def[item]>
 
 
- 
+
         on ci command:
         - determine passively fulfilled
         - inject locally "is permitted"
@@ -449,12 +449,8 @@ Commands:
         on ping command:
         - determine passively fulfilled
         - inject locally "is permitted"
-        - random 5
-        - narrate "<red>Pong"
-        - narrate "<blue>Pong"
-        - narrate "<green>Pong"
-        - narrate "<yellow>Pong"
-        - narrate "<light_purple>Pong"
+        - define colors li@<red>|<blue>|<green>|<yellow>|<light_purple>
+        - narrate "<def[colors].random>Pong"
          
         on speed command:
         - determine passively fulfilled
