@@ -604,7 +604,6 @@ __Return__:
 Wait for Valid Player:
     type: task
     script:
-    - if !<def[wait].exists>        define wait 10
     - if !<def[duration].exists>    define duration d@1s
     - while !<player.is_spawned> {
         - wait <def[duration]>
