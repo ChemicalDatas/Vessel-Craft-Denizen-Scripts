@@ -29,7 +29,7 @@
 #        #loc/yaml_keys[<&lt>def[script]<&gt>].size|
 #        #step/step[<&lt>player<&gt>]|
 #        #assigned_to/get_npcs_assigned[<&lt>def[script]<&gt>]
-
+#
 #
 #            - define script_max_lines_of_code   <def[skript].yaml_keys[script].size>
 #            - define remaining_lines_of_code    <def[size]>
@@ -38,6 +38,10 @@
 #            - define offending_line             <def[skript].yaml_keys[script].get[<def[script_failed_line]>]>
 #            - define command                   "<def[offending_line].split[ ].get[1]>"
 #            - define arguments                  "<def[offending_line].split[ ].get[2].to[<def[offending_line].split[ ].size>]>"
+#
+# todo: have some default type checking built into scripts
+#
+
 
 Determine Error Type:
     type: procedure
@@ -96,10 +100,8 @@ ScriptDebug:
         - inject "get debug data"
         
         #ignored printing data based off of whats generated in the script get debug data
-        - define ignored_data "li@none|ignored_data|loop_index|value|
-                                type|accessor|attribute|object|
-                                accessor_types|npc_accessors|player_accessors|
-                                queue_accessors|script_accessors"
+        - define ignored_data 
+            li@none|ignored_data|loop_index|value|type|accessor|attribute|object|accessor_types|npc_accessors|player_accessors|queue_accessors|script_accessors
         
         - define ignored_data
           <def[ignored_data].include[player_list_flags]>
