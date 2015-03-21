@@ -9,6 +9,7 @@ Boss Bar Base:
     type: task
     definitions: message|p_list|bar
     script:
+    - if <server.list_online_players.is_empty> queue clear
     - if <def[message]||none> != none {
         - if <def[bar]||none> != none {
             - adjust <def[p_list].unescaped||<server.list_online_players>> show_boss_bar:<def[bar]>|<def[message].unescaped||>
