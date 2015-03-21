@@ -14,7 +14,10 @@ On Join Player Management:
         
         
         on player joins:
-        - wait d@1s
+        - while !<player.is_spawned> {
+            - wait d@1s
+            - if <def[loop_index].is[or_more].than[10]> queue clear
+            }
         - adjust <player> gamemode:adventure
         - define location <player.bed_spawn||<player.world.spawn_location>>
         - define location_arround "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
