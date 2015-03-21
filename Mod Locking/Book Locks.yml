@@ -1,5 +1,5 @@
 # Script that listens for players opening inventories and checks if they have the right key for it.
-Chest Locking:
+Book Locking:
     type: world
     lock type:
         pick: i@stick[displayname=lockpick]

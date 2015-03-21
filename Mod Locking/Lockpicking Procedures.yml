@@ -19,7 +19,7 @@ Has_Key_For:
     - define lock_string <def[inventory].list_contents.get[1].lore.escaped>
     #- narrate "locking string: <def[lock_string]>"
     #- narrate "<player.inventory.list_contents.with_lore[<def[lock_string]>].get[1]>"
-    - if <player.inventory.list_contents.with_lore[<def[lock_string]>].get[1]> != null {
+    - if <player.inventory.list_contents.with_lore[<def[lock_string]>].get[1]||none> != none {
         - determine true
         } else {
         - determine false
