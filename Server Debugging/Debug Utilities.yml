@@ -385,7 +385,7 @@ Announce Arguments Passed:
         }
 
 
-objt:
+__objt:
     type: task
     definitions: none
     script:
@@ -396,7 +396,7 @@ objt:
         - narrate "%value% %object% <def[object]> <def[object].type>"
         }
 
-queuet:
+__queuet:
     type: task
     script:
     - define queue <queue>
@@ -423,7 +423,7 @@ queuet:
     - narrate ""
     
 
-    
+
 #todo: check if using not only type checking but default_values too....
 #Its possible to use <el@type.type>, .as_list returns list, and "strings" return elements.
 #But '1'.type returns element instead of int. Only way to determine valid ints for math tags is "element.as_int"
@@ -451,24 +451,38 @@ typechecking:
     type: task
     speed: 0t
     script:
-    - define __ignored_values
-      li@value|loop_index|__ignored_values
+    - ^define __ignored_values
+      li@value|loop_index|__ignored_values|__required_script_definitions|__present_definitions
     
-    - if <queue.script.yaml_keys[definitions]||no_definitions> != no_definitions {
-        - if <queue.definitions.exclude[<def[__ignored_values]>].is_empty> {
-            - define __message "Definition(s) failed type check. There were no values passed."
-            - event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+    - ^define __required_script_definitions
+      <queue.script.yaml_keys[definitions].as_list||none>
+    
+    - if <def[__required_script_definitions]> != none {
+        
+        - ^define __present_definitions
+          <queue.definitions.exclude[<def[__ignored_values]>]>
+        
+        - if <def[__present_definitions].size.is[less].than[<def[__required_script_definitions].size>]> {
+            - define __missing_definitions
+              <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
+            
+            - ^define __message
+              "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].as_string>"
+            
+            - ^event "script generates error"
+              context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+            
             - queue clear
             }
         
-        - foreach <queue.definitions.exclude[<def[__ignored_values]>]> {
-            
+        
+        - foreach <def[__present_definitions]> {
             #- announce "<script.name> checking for <def[value]>"
             
             - if <def[value].starts_with[__]>
               foreach next
             
-            - define __accessor
+            - ^define __accessor
               <queue.script.yaml_keys[type_%value%]||none>
             
             - if <def[__accessor]> == none 
@@ -476,12 +490,12 @@ typechecking:
             
             #- announce "<script.name> <def[%value%]>.%__accessor% <def[%value%].%__accessor%||failed_tag>"
             
-            - define __expected_value
+            - ^define __expected_value
               <def[%value%].%__accessor%||failed_tag>
             
             - if <def[__expected_value]> == failed_tag {
-                - define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
-                - event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                - ^define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
+                - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
                 - queue clear
                 }
             }
