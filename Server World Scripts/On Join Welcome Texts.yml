@@ -8,6 +8,7 @@ Announcement Bar:
     events:
         on player join:
         - wait d@2s
+        - inject "Wait for Valid Player"
         - define individual_greet       "<player.name.display>, <script.yaml_key[individual]>"
         - define server_announcement    "<player.name.display> <script.yaml_key[server]>"
         - define other_players          <server.list_online_players.exclude[<player>]>
