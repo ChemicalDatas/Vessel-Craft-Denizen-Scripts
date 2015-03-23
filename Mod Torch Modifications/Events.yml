@@ -19,7 +19,7 @@ Luminescent Items:
     type: world
     events:
         on entity damages entity:
-        - if !<context.damager.item_in_hand.simple> == i@torch queue clear
+        - if <context.damager.item_in_hand.simple||none> != i@torch queue clear
         - define max "<script.yaml_keys[success max]>"
         - define min "<script.yaml_keys[success min]>"
         - define roll <util.random.int[0].to[<def[max]>]>
