@@ -602,13 +602,30 @@ __Return__:
     
 
 Wait for Valid Player:
+    #
+    #A script designed to delay a script when injected
+    #Delays until a valid player can be found
+    #Clear the queue if the <player> refrence is invalid. cases (instalog)
+    #IF dose not find a spawned player raises error, clears the queue
+    #
+    #
     type: task
     script:
     - if !<def[duration].exists>    define duration d@1s
     - if !<def[max_wait].exists>    define max_wait 20
+    - wait <def[duration]>
+    - if <player||not_valid_player> == not_valid_player {
+        - define message "<script.name> Failed to get a valid player"
+        #- announce <def[message]> to_console
+        - event "script generates error" context:message|<def[message]>|script|<queue.script>|queue|<queue>
+        - queue clear
+        }
     - while !<player.is_spawned> {
         - wait <def[duration]>
-        - if <def[loop_index].is[or_more].than[<def[max_wait]>]>
-          queue clear
+        - if <def[loop_index].is[or_more].than[<def[max_wait]>]> {
+            - define message "Player failed to spawn"
+            - event "script generates error" context:message|<def[message]>|script|<queue.script>|queue|<queue>
+            - queue clear
+            }
         }
     
