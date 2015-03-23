@@ -78,7 +78,7 @@ Cube Surrounding Location:
     type_outset: as_int
     definitions: location|outset
     script:
-    - inject typechecking
+    - inject typecheck
     
     - define outset
       <def[outset]||1>

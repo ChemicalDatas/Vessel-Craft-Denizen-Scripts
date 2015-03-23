@@ -428,7 +428,7 @@ __queuet:
 #Its possible to use <el@type.type>, .as_list returns list, and "strings" return elements.
 #But '1'.type returns element instead of int. Only way to determine valid ints for math tags is "element.as_int"
 #if that returns as valid then its truly something the scripts can use.
-typechecking:
+typecheck:
     #
     #injected script for checking type values predefined within a script.
     # if a script has 2 set values location and outset. There needs to be 
@@ -507,7 +507,7 @@ __tstchecking:
     type_element: prefix
     definitions: int|element
     script:
-    - inject typechecking
+    - inject typecheck
     - announce "<def[int]> <def[int].type>"
     - announce "<script.name> completed its task and did not raise an error."
 

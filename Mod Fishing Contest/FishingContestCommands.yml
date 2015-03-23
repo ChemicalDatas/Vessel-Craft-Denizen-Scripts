@@ -14,7 +14,9 @@ Fishing_Contest:
     
     events:
         on server start:
-        - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
+        - if <server.has_flag[<script.name>.active]> {
+            - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
+            }
         
         #fishes while fishing? Just casts a fishing rod is a better name...
         on player fishes while fishing:
@@ -39,7 +41,7 @@ Fishing_Contest:
                 - announce "<magic>ii<blue>Winning score <blue>has been set to<&co> <italic><underline><light_purple><server.flag[<script.name>.wining_score]>"
                 }
             }
-        - scoreboard id:<script.name> objective:<script.name> viewers:<server.flag[<script.name>.participants].as_list>
+        - scoreboard id:<script.name> objective:<script.name> viewers:<server.flag[<script.name>.participants].as_list||<server.list_online_players>>
         
         on player fishes while caught_fish:
         #update scoreboard
@@ -62,7 +64,9 @@ Fishing_Contest:
 Clear Fishing Contest Objectives and Flags:
     type: task
     definitions: script
+    script_type: as_script
     script:
+    - inject typecheck
     - scoreboard remove id:<def[script].name>
     - scoreboard remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>
     - flag server <def[script].name>.active:!
