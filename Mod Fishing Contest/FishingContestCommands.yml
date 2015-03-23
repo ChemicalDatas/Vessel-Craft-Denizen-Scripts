@@ -15,7 +15,8 @@ Fishing_Contest:
     events:
         on server start:
         - if <server.has_flag[<script.name>.active]> {
-            - run "Clear Fishing Contest Objectives and Flags" def:<script> delay:d@30s
+            - wait d@30s
+            - inject locally "Clear Fishing Contest"
             }
         
         #fishes while fishing? Just casts a fishing rod is a better name...
@@ -56,21 +57,16 @@ Fishing_Contest:
         - if <server.flag[<script.name>.scores.<player>].is[or_more].than[<server.flag[<script.name>.wining_score]>]> {
             - announce "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish and won the contest!"
             - announce "<gray>Please wait <script.yaml_keys[fishing_contest_win_cooldown].formatted> while we restock your local fishing holes to start another contest."
-            - run "Clear Fishing Contest Objectives and Flags" def:<script>
+            - inject locally "Clear Fishing Contest"
             - flag server <script.name>.cooldown duration:<script.yaml_keys[fishing_contest_win_cooldown]>
             }
         
 
-Clear Fishing Contest Objectives and Flags:
-    type: task
-    definitions: script
-    script_type: as_script
-    script:
-    - inject typecheck
-    - scoreboard remove id:<def[script].name>
-    - scoreboard remove id:<def[script].name> viewers:<server.flag[<def[script].name>.participants]>
-    - flag server <def[script].name>.active:!
-    - flag server <def[script].name>.participants:!
-    - flag server <def[script].name>.scores:!
-    - flag server <def[script].name>.wining_score:!
+    Clear Fishing Contest:
+    - scoreboard remove id:<script.name>
+    - scoreboard remove id:<script.name> viewers:<server.flag[<script.name>.participants]>
+    - flag server <script.name>.active:!
+    - flag server <script.name>.participants:!
+    - flag server <script.name>.scores:!
+    - flag server <script.name>.wining_score:!
     
