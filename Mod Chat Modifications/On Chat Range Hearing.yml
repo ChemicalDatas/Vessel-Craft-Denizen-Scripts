@@ -6,10 +6,19 @@ Player Chat Range Modifications:
     script:
     events:
         on player chats:
-        #- foreach <player.location.find.players.within[75]> {
-        #- foreach <player.location.find.players.within[75].exclude[<player>]> {
-        #    - define distance "<player.location.distance[<def[value].location>]>"
-        #    - define message "<proc[Iconize].context[<context.message.replace[\]>]>"
-        #    - narrate "[<player.name.display>][<def[distance].simple>m]: <def[message]>"
-        #    }
+        #- run "Message Nearby Players of Chat" def:<context.message>
         #- determine cancelled
+    
+
+Message Nearby Players of Chat:
+    type: task
+    script:
+    - define message li@
+    - foreach <queue.definitions.exclude[message]> {
+        - define message <def[message].include[<def[value]>]>
+        }
+    - foreach <player.location.find.players.within[75].exclude[<player>]> {
+        - define distance "<player.location.distance[<def[value].location>]>"
+        - define message "<proc[Iconize].context[<def[message].as_string.replace[\]>]>"
+        - narrate "[<player.name.display>][<def[distance].simple>m]: <def[message]>" targets:<def[value]>
+        }
