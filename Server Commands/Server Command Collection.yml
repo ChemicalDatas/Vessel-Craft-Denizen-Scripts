@@ -382,7 +382,7 @@ Commands:
         on i command:
         - determine passively fulfilled
         - inject locally "is permitted"
-        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack>>]
+        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack||1>>]
         - define item <def[item].as_item||Not_An_Item>
         - if <def[item].type||Not_An_Item> != "Item"  {
             - narrate "<script.yaml_keys[title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
