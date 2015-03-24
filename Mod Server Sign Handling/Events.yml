@@ -11,14 +11,12 @@ Sign Handling:
     # That command was last located in the server commands file
     events:
         on player breaks sign_post:
-        - if <player.has_flag[editing_sign]> {
-            - determine cancelled
-            }
+        - if <player.has_flag[editing_sign]>
+          determine cancelled
         
         on player breaks wall_sign:
-        - if <player.has_flag[editing_sign]> {
-            - determine cancelled
-            }
+        - if <player.has_flag[editing_sign]>
+          determine cancelled
         
         on player changes sign_post:
         #Some selective escaping for special characters.
@@ -29,16 +27,18 @@ Sign Handling:
         on player changes wall_sign:
         #Some selective escaping for special characters.
         - define new <proc[Iconize].context[<context.new.escaped>]>
+        - announce "<script.name> <def[new].as_string> "
         - determine <def[new].unescaped>
             
         on player animates ARM_SWING:
-        - ^define looking_at <player.location.cursor_on[4]>
-        - ^define block <def[looking_at].material>
-        - ^if <def[block]> = m@wall_sign || <def[block]> = m@sign_post {
-            - ^if <player.flag[editing_sign]> != null {
-                - run "Modify Sign Line" "def:<def[block].replace[m@]>|<def[looking_at]>|<player.flag[editing_sign]>"
-                }
-            }
+        - define looking_at <player.location.cursor_on[4]>
+        - define block <def[looking_at].material.name>
+        - define signs li@wall_sign|sign_post
+        - if !<def[signs].contains[<def[block]>]>
+          queue clear
+        
+        - if <player.has_flag[editing_sign]>
+          run "Modify Sign Line" "def:<def[looking_at]>|<player.flag[editing_sign].as_list.as_string.replace[ ].with[|]>"
         
         
         
@@ -64,6 +64,7 @@ Sign Handling:
             - define text <proc[Iconize].context[%text%]>
             }
             
+        - narrate                  ""
         - narrate format:Formatted "<gray>Ready to edit line<white>: <gold>%line% <gray>with: <reset>%text%"
         - narrate format:Formatted "<gray>Please <underline>punch <gray>the <gold>sign(s) <gray>you want to change in <gold>10 <gray>seconds."
         
@@ -79,19 +80,36 @@ Modify Sign Line:
     # Line is a line number to alter                                                                                            #
     # Text is the text to alter with                                                                                            #
     #                                                                                                                           #
-    #todo: set this up so that it no longer requires a _type option. Get the sign type from the location and match it here.  #
     #############################################################################################################################
     type: task
     debug: false
-    definitions: _type|location|line|text
+    definitions: location|line|text
+    type_location: as_location
+    type_line: as_int
     script:
-    - define lines li@1|2|3|4
-    - define sign li@
+    #- inject "announce arguments passed"
+    - ^inject typecheck
+    - ^define type <def[location].material.name>
+    - ^define lines li@1|2|3|4
+    - ^define sign ""
     - foreach <def[lines]> {
-        - if <def[value]> == <def[line]>
-          define sign <def[sign].include[<def[text]>]>
-          else
-          define sign <def[sign].include[<def[location].sign_contents.get[<def[value]>]>]>
+        - if <def[value]> == <def[line]> {
+            
+            - if <def[sign]> == "" {
+                - define sign <def[text]>
+                } else {
+                - define sign <def[sign]>|<def[text]>
+                }
+            
+            } else {
+            
+            - if <def[sign]> == "" {
+                - define sign <def[location].sign_contents.get[<def[value]>]>
+                } else {
+                - define sign <def[sign]>|<def[location].sign_contents.get[<def[value]>]>
+                }
+            
+            }
         }
-    - sign "type:<def[type]>" <def[sign]> <def[location]>
+    - ^sign automatic <def[sign].replace[li@]> <def[location]>
     
