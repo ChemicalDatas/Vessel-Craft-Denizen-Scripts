@@ -11,13 +11,34 @@ Fishing_Contest:
     fishing_contest_data_timeout: d@20m
     fishing_contest_score_to: <util.random.int[5].to[10]>
     fishing_contest_objective: "<gold><magic><gold>Fishing <light_purple>Contest"
+    permissions:
+        can_join: fishingcontest.canjoin
+        can_win: fishingcontest.canwin
+        can_get_prizes: fishingcontest.cangetprizes
+        commands:
+            reset:
+            start:
+            
     
     events:
-        on server start:
-        - if <server.has_flag[<script.name>.active]> {
-            - wait d@30s
-            - inject locally "Clear Fishing Contest"
+        on fcontest command:
+        - determine passively fulfilled
+        - if !<player.is_op> {
+            - narrate "<red>Sorry you dont have enough permission for this command. See an admin for help. Only op is set up for this now..."
+            - queue clear
             }
+        
+        - define commands_list li@reset
+        - if <def[commands_list].contains[<context.args.get[1]>]> {
+            - inject locally <context.args.get[1]>
+            - queue clear
+            }
+        - narrate "<blue>args are<&co> <gold><def[commands_list].as_string>"
+        
+        
+        on server start:
+        - wait d@30s
+        - inject locally reset
         
         #fishes while fishing? Just casts a fishing rod is a better name...
         on player fishes while fishing:
@@ -57,14 +78,18 @@ Fishing_Contest:
         - if <server.flag[<script.name>.scores.<player>].is[or_more].than[<server.flag[<script.name>.wining_score]>]> {
             - announce "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish and won the contest!"
             - announce "<gray>Please wait <script.yaml_keys[fishing_contest_win_cooldown].formatted> while we restock your local fishing holes to start another contest."
-            - inject locally "Clear Fishing Contest"
+            - inject locally reset
             - flag server <script.name>.cooldown duration:<script.yaml_keys[fishing_contest_win_cooldown]>
             }
         
-
-    Clear Fishing Contest:
+    #Reset command and auto run on server start
+    reset:
+    - narrate "Resetting the fishing contest."
+    - if !<server.has_flag[<script.name>.active]> {
+        - announce "The server did not have a active fishing contest"
+        - queue clear
+        }
     - scoreboard remove id:<script.name>
-    - scoreboard remove id:<script.name> viewers:<server.flag[<script.name>.participants]>
     - flag server <script.name>.active:!
     - flag server <script.name>.participants:!
     - flag server <script.name>.scores:!
