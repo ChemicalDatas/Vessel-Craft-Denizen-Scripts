@@ -10,10 +10,10 @@ Display Defaults:
         #on display titled <title>:
         #on display titled <title> in <cuboids>:
         on player right clicks entity:
-        - announce "[<script.name>] player clicked <context.entity.name||<context.entity.entity_type>>"
+        #- announce "[<script.name>] player clicked <context.entity.name||<context.entity.entity_type>>"
         
         on player right clicks:
-        - announce "[<script.name>] player clicked at <player.target.name||<player.target.entity_type||no_target>>"
+        #- announce "[<script.name>] player clicked at <player.target.name||<player.target.entity_type||no_target>>"
         
         
         on display creation:
