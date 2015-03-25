@@ -428,7 +428,7 @@ Beacon Location:
       cu@<def[location].add[-1,-2,-1]>|<def[location].add[1,-2,1]>
     
     - define targets
-      <def[player_list].unescaped||<player>>
+      <def[player_list].unescaped||<player||<server.list_online_players>>>
     
     - define duration
       <def[duration]||d@20s>
