@@ -4,11 +4,12 @@
 Autosave:
     type: world
     debug: false
-    values:
-        #15mins
-        autosave_time: 900
+    autosave_time: d@15m
         
     events:
         on server start:
-        - run "Repeated Task Call" "def:Citizens Denizens Autosave|<script.yaml_key[values.autosave_time]>|Autosave" delay:20
+        - while true {
+            - wait <script.yaml_keys[autosave_time]>
+            - inject "Citizens Denizens Autosave"
+            }
 
