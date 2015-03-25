@@ -21,103 +21,80 @@
             - queue clear
             }
         
+        - define alias_list "li@qt/q_task|qet/queue_escaped_task|
+                            cq/check_queue|pqt/p_queue_task|
+                            e/execute|aq/action_queue|caq/clear_action_queue|
+                            stl/show_target_location|strat/stratagey|
+                            "
+        
+        - define commands_list "li@q_task|queue_escaped_task|check_queue|
+                                p_queue_task|execute|action_queue|
+                                clear_action_queue|show_target_location|stratagey"
+        
+        
         - define command
           "<context.args.get[1]||>"
         
-        - if %command% == "q_task"
-          || %command% == "qt" {
-            - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
-            - execute as_player "ex run 'Add Task' 'def:%command%'"
-            - narrate "Added to queue:<red> %command%"
-            - queue clear
-            }
-        
-        - if %command% == "queue_escaped_task"
-          || %command% == "qet" {
-            - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
-            - execute as_player "ex run 'Add Escaped Task' 'def:<escape:%command%>'"
-            - narrate "Added to queue:<red> %command%"
-            - queue clear
-            }
-        
-        - if %command% == "p_queue_task"
-          || %command% =="pqt" {
-            - execute as_player "ex run 'Add Priority Task' 'def:<context.args.get[2].to[<context.args.size>]>'"
-            - narrate "aAdded to queue:<red> <context.args.get[2].to[<context.args.size>]>"
-            - queue clear
-            }
-        
-        - if %command% == "check_queue"
-          || %command% == "cq" {
-            - narrate "<red><player.selected_npc.name>'s queue is:<&nl><gold><player.selected_npc.flag[task_queue].get[1]||No Next Task>"
-            - queue clear
-            }
-            
-        - if %command% == "execute"
-          || %command% == "e" {
-            - execute as_player "ex run 'Npc Task Execute'"
-            - narrate "<red>Executing next task item: <player.selected_npc.flag[task_queue]>."
-            - queue clear
-            }
-            
-        - if %command% == "action_queue"
-          || %command% == "aq" {
-            - define queue q@<player.selected_npc.id>_action_queue
-            - narrate "<red>Checking npcs action queue: <def[queue].size||no queue>"
-            - queue clear
-            }
-            
-        - if %command% == "clear_action_queue"
-          || %command% == "caq" {
-            - define queue q@<player.selected_npc.id>_action_queue
-            - narrate "<red>clearing npcs action queue"
-            - if <queue.exists[<def[queue].id>]> queue queue:<def[queue].id> clear
-            }
-            
-        - if %command% == "show_target_location"
-          || %command% == "stl" {
-            - define target <def[npc].navigator.target_location.simple.as_location||<def[npc].location.simple.as_location>>
-            - define speed <def[npc].navigator.base_speed>
-            - define mod_speed <def[npc].navigator.speed_modifier>
-            - narrate "<blue>Target location: <def[target]>"
-            - narrate "<blue><def[npc].name> speed: <def[speed]> <def[mod_speed]>"
-            - run "Beacon Location" def:<def[target]> instantly
-            - queue clear
-            }
-            
-        - if %command% == "strategy"
-          || %command% == "strat" {
-            - define state <def[npc].flag[npc_state]||none>
-            - define flag tactics.<def[state]>
-            - define next_tactic "<proc[Npc tactics Selector]>"
-            - narrate ""
-            - announce "<blue>Checking <player.selected_npc.name> for <def[flag]>"
-            - if <def[npc].has_flag[<def[flag]>]> {
-                - narrate "<blue>Current stratagy: <gold><def[state]>"
-                - repeat <def[npc].flag[<def[flag]>].size> {
-                    - narrate "<def[npc].flag[<def[flag]>].get[<def[value]>]>"
-                    }
-                - narrate "<blue>next tactic: <gold><def[next_tactic]>"
+        - if <def[commands].contains[<def[command]>]>
+          || <def[alias_list].map_get[<def[command]>]||none> != none {
+                - inject locally <def[command]>
                 - queue clear
                 }
-            - narrate "<red>Npc did not have the tactics for state: <def[state]>"
+        - narrate "<yellow>Your options are<&co> <red><def[commands_list].space_separated>"
+        
+        q_task:
+        - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
+        - execute as_player "ex run 'Add Task' 'def:%command%'"
+        - narrate "Added to queue:<red> %command%"
+        
+        queue_escaped_task:
+        - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
+        - execute as_player "ex run 'Add Escaped Task' 'def:<escape:%command%>'"
+        - narrate "Added to queue:<red> %command%"
+        
+        p_queue_task:
+        - execute as_player "ex run 'Add Priority Task' 'def:<context.args.get[2].to[<context.args.size>]>'"
+        - narrate "aAdded to queue:<red> <context.args.get[2].to[<context.args.size>]>"
+        
+        check_queue:
+        - narrate "<red><player.selected_npc.name>'s queue is:<&nl><gold><player.selected_npc.flag[task_queue].get[1]||No Next Task>"
+        
+        execute:
+        - execute as_player "ex run 'Npc Task Execute'"
+        - narrate "<red>Executing next task item: <player.selected_npc.flag[task_queue]>."
+        
+        action_queue:
+        - define queue q@<player.selected_npc.id>_action_queue
+        - narrate "<red>Checking npcs action queue: <def[queue].size||no queue>"
+        
+        clear_action_queue:
+        - define queue q@<player.selected_npc.id>_action_queue
+        - narrate "<red>clearing npcs action queue"
+        - if <queue.exists[<def[queue].id>]> queue queue:<def[queue].id> clear
+        
+        show_target_location:
+        - define target <def[npc].navigator.target_location.simple.as_location||<def[npc].location.simple.as_location>>
+        - define speed <def[npc].navigator.base_speed>
+        - define mod_speed <def[npc].navigator.speed_modifier>
+        - narrate "<blue>Target location: <def[target]>"
+        - narrate "<blue><def[npc].name> speed: <def[speed]> <def[mod_speed]>"
+        - run "Beacon Location" def:<def[target]> instantly
+        
+        stratagey:
+        - define state <def[npc].flag[npc_state]||none>
+        - define flag tactics.<def[state]>
+        - define next_tactic "<proc[Npc tactics Selector]>"
+        - narrate ""
+        - announce "<blue>Checking <player.selected_npc.name> for <def[flag]>"
+        - if <def[npc].has_flag[<def[flag]>]> {
+            - narrate "<blue>Current stratagy: <gold><def[state]>"
+            - repeat <def[npc].flag[<def[flag]>].size> {
+                - narrate "<def[npc].flag[<def[flag]>].get[<def[value]>]>"
+                }
+            - narrate "<blue>next tactic: <gold><def[next_tactic]>"
             - queue clear
             }
+        - narrate "<red>Npc did not have the tactics for state: <def[state]>"
         
         
-        #Fall back 
-        - if %command% == '' {
-            - narrate "Commands are:<gold>
-                <&nl>q_task, qt
-                <&nl>queue_escaped_task, qet
-                <&nl>p_queue_task, pqt
-                <&nl>check_queue, cq
-                <&nl>execute, e
-                <&nl>action_queue, aq
-                <&nl>clear_action_queue, caq
-                <&nl>show_target_location, stl
-                <&nl>strategy, strat"
-            }
-
-
 
