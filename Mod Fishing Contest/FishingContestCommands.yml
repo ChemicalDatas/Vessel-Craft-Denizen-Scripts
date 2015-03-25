@@ -152,7 +152,6 @@ Fishing_Contest:
         - queue clear
         
         }
-    
     - scoreboard remove
       id:<script.name>
     
