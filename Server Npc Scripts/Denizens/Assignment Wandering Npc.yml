@@ -20,8 +20,11 @@
         #Could be: blacksmith, king, fisherman, bandit, thief, apothecary, scribe, 
         #librarian, mage, enchanter, craftsman, farmer, merchant, inn_keeper, guard, royal_guard
         #Priest, hunter, miner, logger, information_and_service (server use)
-    
+
     actions:
+        on despawn:
+        - queue id:q@<npc.id>_task_execute clear
+        
         on assignment:
         - chat "I am now wandering arround this location."
         - anchor add <npc.location> "id:<npc.constant[anchor]>"
