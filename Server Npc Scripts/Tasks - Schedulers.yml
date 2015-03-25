@@ -219,8 +219,24 @@ Add Priority Task:
     script:
     - run "Flag Append Left" def:npc|task_queue|%task%
 
+simtask:
+    type: task
+    script:
+    - while true {
+        - queue pause
+        - announce "<script.name> <def[loop_index]>"
+        - if <def[loop_index].is[or_more].than[10]>
+          queue clear
+        }
 
-
+Npc Logic Tick:
+    type: task
+    script:
+    - while true {
+        - queue pause
+        - define objective <npc.flag[objective]||wander>
+        - inject <def[next_task]>
+        }
 
 
 Npc Task Execute:
@@ -237,7 +253,7 @@ Npc Task Execute:
     #If the npc is engaged do not keep scheduling tasks... 
     #Could be if the npc is sleeping.
     - while <npc.is_engaged> {
-        - wait d@1s
+        - wait d@10s
         }
     
     - define task <npc.flag[task_queue]||none>
@@ -252,9 +268,9 @@ Npc Task Execute:
     - define task_name <def[task].unescaped.as_list.get[first]>
     - define args "<def[task].unescaped.as_list.get[2].to[<def[task].unescaped.as_list.size>]||>"
     
-    - run %task_name% def:%args%
+    - run %task_name% def:%args%                id:<npc.id>_action_queue
     #This adds a task execution to the end of the action queue to keep it running.
-    - run <script> delay:d@10s                       id:<npc.id>_action_queue
+    - inject <script>                           id:<npc.id>_action_queue
     
 
 
