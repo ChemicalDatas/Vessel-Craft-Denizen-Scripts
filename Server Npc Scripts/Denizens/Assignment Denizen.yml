@@ -1,0 +1,278 @@
+Npc Event Listener:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # The Npc World Event listener.                                                                                             #
+    # This listens for custom events scheduled in the scripts.                                                                  #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: world
+    events:
+        on completed task:
+        - announce "Task: <green><context.task> <reset>has completed"
+        - announce "<blue>Placeholder for npc task execute."
+
+
+
+Denizen:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This script depends on the constants assigned.                                                                            #
+    # When you click on the npc he will then set that location as an anchor.                                                    #
+    # Then wander around it from time to time.                                                                                  #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # Npc's should be non-persistent un-notable npcs random pawning around.                                                     #
+    # After some requirements they should become notable or persistent npcs.                                                    #
+    #                                                                                                                           #
+    #                                                                                                                           #
+    # My ideas include npcs that are 'persistent' and non persistent.                                                           #
+    # on de-spawn or death npcs don't re-spawn and are deleted                                                                  #
+    # Their inventory is dropped or just forgotten...                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: assignment
+    default constants:
+        greeting: "Good day sir!"
+        anchor: "curent_wander_location"
+        #Only gets set on spawn....
+        speed: .65
+        delay: d@1s-10s
+        range: 10
+        sleep_time: d@1s-10s
+        task_reschedule: d@1m-2m
+        
+        states:
+        - food
+        - water
+        - energy
+        - exhaustion
+        - awareness
+        - mood
+        - 
+        
+        stats:
+        - vigor
+        - strength
+        - intelligence
+        - knowledge
+        - intunement
+        
+        #references the type of work 'scheduler' for the npc.
+        #Types of personal schedulers too.
+        work: "Vagrant Task Execute"
+        personal:
+        #Could be: blacksmith, king, fisherman, bandit, thief, apothecary, scribe, 
+        #librarian, mage, enchanter, craftsman, farmer, merchant, inn_keeper, guard, royal_guard
+        #Priest, hunter, miner, logger, Carpenter
+        #Adventurer, <-Special npc's that are random and despawn
+        #Information and service (server use)
+    
+    actions:
+        on spawn:
+        - announce "Npc: <npc.name> spawned and will start executing its tasks"
+        - run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        
+        on despawn:
+        #If npc isnt persistent remove 
+        
+        on remove:
+        
+        on assignment:
+        - flag npc tactic_stack:Wander
+        - flag npc sight_range:<npc.navigator.range>
+        - anchor add <npc.location> "id:<npc.constant[current wander location]>"
+        
+        on completed task:
+        #- announce "<blue>Completed Task: <yellow><context.task>"
+        #- run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        
+        
+        on no task execute:
+        # Schedule a npcs tactic scheduler
+        # Set the npc to wandering tactics
+        #- flag npc npc_state:Wandering
+        #- run "Npc Tactics Executor"
+        
+        #- announce "Npc had no task to execute"
+        #- run "Add Task" "def:s@Wander Nearby"
+        #- run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        
+        
+        
+        on empty tactics execution:
+        #When the npc's selected tactic has no solution for their current state.
+        - announce "The tactic: <context.type> failed to produce any instruction for the npc to perform."
+
+#############################################################################################################
+########################## Navigation State Triggers ########################################################
+#############################################################################################################
+        
+        on complete navigation:
+        - run "Npc Tactics Executor"
+        
+        
+        on cancel navigation:
+        - chat "I need to cancel my navigation target."
+        - run "Npc Tactics Executor"
+        #Reschedule Previous Task to see it completed.
+        #Add some countdown for retries to get there.
+        #Else find a fall back method.
+        
+        on stuck:
+        - announce "Npc: <npc.name> is stuck"
+        - teleport <npc> <npc.location.add[.5,0,-.5]>
+        - run "Npc Tactics Executor" delay:d@1s
+        - determine none
+        #- flag npc "Travel Distress"
+        #- flag npc knowledge.travel_distress_locations:<-:<npc.flag[Travel_location]>
+        #- run "Npc Task Execute" delay:<npc.constant[delay]>
+        #- announce "<npc.name> canceled its navigation"
+        #- run "Add Knowledge" "def:cancel_navigation|<reason>|<npc.flag[knowledge.cancel_navigation.<context.reason>].add[1]>"
+
+#############################################################################################################
+########################## Npc State Triggers ###############################################################
+#############################################################################################################          
+#Sets of npc triggers that determine a state of change in the npc.
+        
+        on exhausted:
+        - flag npc food:10
+        #- run "Food Scheduler"
+        #Start queue to find food / water
+
+        
+        
+        #Relevant for npc fishing
+        on start fishing:
+        on stop fishing:
+        on cast fishing rod:
+        on reel in fishing rod:
+        
+        on dig:
+        #Run the task dispatcher
+        
+        on death:
+        #Place a carpet then start a countdown for removal
+        #If npc isnt revived before the countdown ends. Remove /despawn npc.
+
+#############################################################################################################
+########################## Entity Interaction Triggers ######################################################
+#############################################################################################################  
+#Sets of npc triggers that indicate entity enviromental changes.'
+
+        on mob enter proximity:
+        on <entity> enter proximity:
+        #on mob move proximity:
+        #on <entity> move proximity:
+        # - run "Add Knowledge" def:<%entity%>|encountered
+        
+        
+        on kill:
+        on kill of <entity>:
+        #Check if requirements are met
+        #
+        # - run "Add Knowledge" def:<%entity%>|<player.location>
+        
+        
+        #Npc death is handled elsewhere
+        #this is for recording in the area
+        #or announcing the npc death wails to other npcs
+        on death by entity:
+        on death by <entity>:
+        on death by block:
+        on death by <cause>:
+        #Npc script to determine its perceptiveness and announce 
+        #to local npcs or players in the area what killed the npc.
+        #For extra sensing players or npcs this could me a chill to premonitions
+        #
+        # - run "Add Knowledge" def:<%entity%>|<player.location>
+
+        on attack:
+        on attack on <entity>:
+
+        on hit:
+        on hit <entity>:
+        #If hunting add another hit queue
+        #Check if requirements are met then schedure next item
+        
+        on interact:
+        #- if <context.type> == block {
+        #    - announce "<npc.name> Interacated with <context.location.material>"
+        #    }
+        #- if <context.type> == entity {
+        #    - announce "<npc.name> Interacted with a <context.entity.name>"
+        #    }
+#############################################################################################################
+########################## Player Interaction Triggers ######################################################
+############################################################################################################# 
+        on chat:
+        #This is just a debug input. This will be removed.
+        #Used to add a queue item to the npcs task
+        
+        on no click trigger:
+        #Update tasks if allowed to wake
+        #Maybe an npc is busy so pickpocket it
+        
+        on click:
+        - narrate "You clicked me"
+        #Fire Player Npc enteraction task
+        #Engage npc
+        
+        
+        on unavailable:
+        #Like if the npc is engaged
+        #Things to engage the npc with
+        #Hunting
+        #Sleeping
+        #Cooking
+        #
+        #Narrate to the player what the npc is seeming to be doing
+        #Maybe a check for player perception? then provide some npc work flags that describe what it could look like thier doing?
+        #Narrate scripts might help with the player perception for automation of the narrations
+        
+        on no damage trigger:
+        #Run Player Npc Interaction task
+        
+        on damage:
+        #A check to see if the npc's intention queue or the action queue needs to be stoped / reset and task rescheduling begins
+        #There should be no queue attached to the check. As its a general check and the check its self will cancel the queue
+        #Therefore running the next item.
+        #- run "Damage Interuption Check" instantly
+        #- run "Damage Handling Scheduler" def:
+        
+        on push:
+        #Push check should contain a queue cancel if its relivant to the npc.
+        #- run "Push Interuption Check" instantly
+        #- run "Push Handling Scheduler" def:
+        #Tag Player as rude
+        
+        on push return:
+        #
+#############################################################################################################
+########################## Player Proximity Triggers ########################################################
+#############################################################################################################
+
+        on enter proximity:
+        #- run "Show Npc Task Queue"
+        #- run "Show Npc Task Status"
+        
+        on exit proximity:
+        #on move proximity:
+        on proximity:
+        
+
+
+
+##############
+
+
+
+
+
+
+
+
+
+
+
+
+
