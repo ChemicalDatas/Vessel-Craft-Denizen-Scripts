@@ -41,6 +41,13 @@ Denizen:
         sleep_time: d@1s-10s
         task_reschedule: d@1m-2m
         
+        mood enums:
+            angry: <red>
+            cautious: <yellow>
+            good: <blue>
+            happy: <green>
+            sick: <dark_purple>
+        
         states:
         - food
         - water
@@ -69,8 +76,9 @@ Denizen:
     
     actions:
         on spawn:
-        - announce "Npc: <npc.name> spawned and will start executing its tasks"
-        - run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        - announce "Npc: <npc.name> spawned and will start his logic tick."
+        - run "Npc Logic Tick" id:<npc.id>_logic_tick
+        #- run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
         
         on despawn:
         #If npc isnt persistent remove 
@@ -82,47 +90,56 @@ Denizen:
         - flag npc sight_range:<npc.navigator.range>
         - anchor add <npc.location> "id:<npc.constant[current wander location]>"
         
-        on completed task:
-        #- announce "<blue>Completed Task: <yellow><context.task>"
-        #- run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        on completed objective:
+        #- queue q@<npc.id> "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
+        #remove objective from objective queue
+        - flag <npc> objective:->:<context.objective>
+        - wait d@4s
+        - queue q@<npc.id>_logic_tick resume
         
-        
-        on no task execute:
-        # Schedule a npcs tactic scheduler
-        # Set the npc to wandering tactics
-        #- flag npc npc_state:Wandering
-        #- run "Npc Tactics Executor"
-        
-        #- announce "Npc had no task to execute"
-        #- run "Add Task" "def:s@Wander Nearby"
-        #- run "Npc Task Execute" delay:<npc.constant[delay]> id:<npc.id>_scheduled_queue
-        
-        
-        
-        on empty tactics execution:
-        #When the npc's selected tactic has no solution for their current state.
-        - announce "The tactic: <context.type> failed to produce any instruction for the npc to perform."
 
 #############################################################################################################
 ########################## Navigation State Triggers ########################################################
 #############################################################################################################
+        on begin navigation:
+        #- run "Beacon Location" def:<npc.navigator.target_location||<npc.location>>
         
         on complete navigation:
-        - run "Npc Tactics Executor"
-        
+        #- run "Npc Tactics Executor"
+        - chat  "Made it to where I was going." no_target
+        - wait d@4s
+        - queue q@<npc.id>_logic_tick resume
         
         on cancel navigation:
-        - chat "I need to cancel my navigation target."
-        - run "Npc Tactics Executor"
-        #Reschedule Previous Task to see it completed.
+        - chat "I need to pick a different location." no_target
+        - wait d@4s
+        - queue q@<npc.id>_logic_tick resume
+        #- run "Npc Tactics Executor"
         #Add some countdown for retries to get there.
         #Else find a fall back method.
         
         on stuck:
-        - announce "Npc: <npc.name> is stuck"
-        - teleport <npc> <npc.location.add[.5,0,-.5]>
-        - run "Npc Tactics Executor" delay:d@1s
-        - determine none
+        - chat "<npc.name> Im stuck, seems I cant get there." no_target
+        #if the npc is floating It will not pathfind anyplace else.
+        - if <npc.location.below.material> == m@air {
+            - chat "Hmmm.... I seem to be floating..." no_target
+            - define direction li@1,0,0|0,0,1|-1,0,0|0,0,-1
+            - define possibles li@
+            - foreach <def[direction]> {
+                - define target_location <npc.location.add[<def[value]>]>
+                - if <def[target_location].below.material>  != m@air
+                  && <def[target_location].material>        == m@air
+                  && <def[target_location].above.material>  == m@air
+                  define possibles <def[possibles].include[<def[target_location]>]>
+                }
+            - define safe_spot <def[possibles].random>
+            - chat "Going to<&co> <def[safe_spot].simple>" no_target
+            - teleport <npc> <def[safe_spot]>
+            }
+        
+        # - run "Npc Tactics Executor" delay:d@1s
+        #- determine none passively
+        
         #- flag npc "Travel Distress"
         #- flag npc knowledge.travel_distress_locations:<-:<npc.flag[Travel_location]>
         #- run "Npc Task Execute" delay:<npc.constant[delay]>
@@ -188,7 +205,8 @@ Denizen:
 
         on attack:
         on attack on <entity>:
-
+        
+        
         on hit:
         on hit <entity>:
         #If hunting add another hit queue
@@ -205,15 +223,32 @@ Denizen:
 ########################## Player Interaction Triggers ######################################################
 ############################################################################################################# 
         on chat:
-        #This is just a debug input. This will be removed.
-        #Used to add a queue item to the npcs task
+        - if <script.yaml_keys[<context.message>]||no_internal_code> != no_internal_code {
+            - chat "yeah, I can do that."
+            - inject locally <context.message>
+            - queue clear
+            }
+        - chat "I dont know how to do<&co> <context.message>. Ill see what SAI Says."
+        - if !<server.list_scripts.contains[<context.message.as_script>]||false> {
+            - chat "Sorry, I couldnt find out how to do that. instruction<&co> <red><context.message>"
+            - queue clear
+            }
+        - if <context.message.as_script.yaml_keys[definitions].as_list.is_empty||true> {
+            - chat "running script<&co> <context.message>"
+            - inject <context.message>
+            - queue clear
+            } else {
+            - chat "Sorry, that script required extra input. Cant do it. Ive tried..."
+            }
         
         on no click trigger:
         #Update tasks if allowed to wake
         #Maybe an npc is busy so pickpocket it
         
         on click:
-        - narrate "You clicked me"
+        #- narrate "You clicked me"
+        #- inject code_injection
+        - queue q@<npc.id>_logic_tick resume
         #Fire Player Npc enteraction task
         #Engage npc
         
@@ -258,21 +293,56 @@ Denizen:
         on exit proximity:
         #on move proximity:
         on proximity:
+        - flag <npc> recent_events:|:<>
         
+        on custom action:
+        - flag <npc> recent_events:|:<context.action||no_action_specified>/<context.arguments>
 
-
+    start logic tick:
+    - chat "Im starting my logic tick"
+    - run "Npc Logic Tick"  id:<npc.id>_logic_tick
+    
+    start chat tick:
+    - run "Npc Chat Tick"   id:<npc.id>_chat_tick
+    
+    clear logic tick:
+    - chat "Im clearing my logic tick"
+    - queue q@<npc.id>_logic_tick clear
 
 ##############
 
+Npc Waiting for Chat Response:
+    type: task
+    definitions: script|input|wait
+    script:
+    - if <def[script]||none> != none 
+      define script <def[script]>
+    
+    - if <def[input]||none> != none 
+      define input <def[input]>
+    
+    - if <def[wait]||false> {
+          - queue pause
+          }
+    
+    - chat "alright, ive got your response. Ill see if that can be done. <blue>script<&co> <def[input]> <yellow>args<&co> <def[input]>"
+    - run <def[script]> def:<def[input]>
+    
 
 
-
-
-
-
-
-
-
-
-
-
+code_injection:
+    type: task
+    script:
+    - define code <player.chat_history[1]||none>
+    - if <script.yaml_keys[<def[code]>]||no_code_branch> == no_code_branch {
+        - chat "I dont know how to do <&sq><def[code]><&sq>. You might have to script that into my code."
+        - queue clear
+        }
+      
+    - inject locally path:<def[code]>
+    
+    test:
+    - announce "You entered into the code test"
+    
+    test2:
+    - announce "You entered into code test 2! wow! Another set of scripts injected from locally...."
