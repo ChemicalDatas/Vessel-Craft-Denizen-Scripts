@@ -1,6 +1,6 @@
 On Join Player Management:
     type: world
-    password_token_lifetime: d@1h
+    password_token_lifetime: d@6h
     mod_title: <blue>[Scripted Account Secure]<reset>
     password_required_permission: AccountProtection.PasswordRequired
     login_every_time_permission: AccountProtection.LoginEveryTime
