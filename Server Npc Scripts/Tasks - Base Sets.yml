@@ -137,9 +137,8 @@ Resume Queue:
       <npc.id>_action_queue
       
     - if <queue.exists[<def[queue]>]>
-      queue
-      queue:<def[queue]>
-      resume 
+      queue <def[queue]>
+      resume
     #- announce "Resuming <green>Queue"
 
 
@@ -241,9 +240,7 @@ Teleport:
     script:
     - teleport <npc>
       <def[location]>
-
-
-
+    
 
 Wander Nearby:
     type: task
