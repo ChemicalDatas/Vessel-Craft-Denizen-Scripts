@@ -174,28 +174,6 @@ Work Task Scheduler:
     -
 
 
-
-Travel Scheduler:
-    #############################################################################################################################
-    #                                                                                                                           #
-    # This scheduler will determine the method of reaching a goal point.                                                        #
-    # Id currently like this to handle |Anthony|'s tasks for travel.                                                            #
-    #                                                                                                                           #
-    #############################################################################################################################
-    type: task
-    definitions: location
-    script:
-    
-#
-
-
-
-
-
-
-
-
-
 Add Task:
     #############################################################################################################################
     #                                                                                                                           #
@@ -219,26 +197,34 @@ Add Priority Task:
     script:
     - run "Flag Append Left" def:npc|task_queue|%task%
 
-simtask:
+
+travel:
     type: task
     script:
-    - while true {
-        - queue pause
-        - announce "<script.name> <def[loop_index]>"
-        - if <def[loop_index].is[or_more].than[10]>
-          queue clear
+    - define definition target
+    - inject ifDefinition
+    - announce "<script.name> def <def[definition]> <def[target]> exists? <def[target].exists>"
+    - if !<def[target].exists> {
+        - while next
         }
-
-Npc Logic Tick:
-    type: task
-    script:
-    - while true {
-        - queue pause
-        - define objective <npc.flag[objective]||wander>
-        - inject <def[next_task]>
-        }
-
-
+    
+    #I would love to define a material accessor material.find_nearby[10]
+    #Cuboid.get_spawnable_location
+    - define target_accessor "li@npc/location|
+                                player/location|
+                                cuboid/get_spawnable_blocks[]
+                                location/as_location
+                                entity/location
+                                inventory/location
+                                "
+    
+    - define accessor <def[target_accessor].map_get[<def[target].type>]>
+    
+    - walk <npc> <def[target].%accessor%>
+    
+    - define target_accessor:!
+    
+    
 Npc Task Execute:
     #############################################################################################################################
     #                                                                                                                           #
