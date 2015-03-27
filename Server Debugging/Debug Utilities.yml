@@ -466,6 +466,15 @@ typecheck:
             - define __missing_definitions
               <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
             
+            - foreach <def[__missing_definitions]> {
+                # if contains a default_definitionName
+                - if <queue.script.yaml_keys[default_<def[value]>]||none> != none
+                  define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
+                }
+            
+            - if <def[__missing_definitions].is_empty>
+              queue clear
+            
             - ^define __message
               "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].as_string>"
             
