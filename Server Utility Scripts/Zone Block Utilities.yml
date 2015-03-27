@@ -99,7 +99,7 @@ Spawnable Locations In Cuboid:
     definitions: cuboid|white_list|black_list
     script:
     - define white_list
-      <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks>
+      <def[material_list].unescaped.as_list||li@m@dirt|m@grass|m@stone|m@stone_brick|m@gravel|m@sand|m@wooden_slab|m@oak_planks|m@brick>
     
     - define black_list
       <def[black_list].unescaped.as_list||li@>
