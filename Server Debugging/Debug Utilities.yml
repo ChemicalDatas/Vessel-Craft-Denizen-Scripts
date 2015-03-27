@@ -467,23 +467,20 @@ typecheck:
               <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
             
             - foreach <def[__missing_definitions]> {
-                # if contains a default_definitionName
                 - if <queue.script.yaml_keys[default_<def[value]>]||none> != none
                   define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
                 }
             
-            - if <def[__missing_definitions].is_empty>
-              queue clear
-            
-            - ^define __message
-              "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].as_string>"
-            
-            - ^event "script generates error"
-              context:message|<def[__message]>|script|<queue.script>|queue|<queue>
-            
-            - queue clear
+            - if !<def[__missing_definitions].is_empty> {
+                - ^define __message
+                  "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].as_string>"
+                
+                - ^event "script generates error"
+                  context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                
+                - queue clear
+                }
             }
-        
         
         - foreach <def[__present_definitions]> {
             #- announce "<script.name> checking for <def[value]>"
