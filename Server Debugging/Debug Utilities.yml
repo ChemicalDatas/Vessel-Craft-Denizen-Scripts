@@ -422,7 +422,13 @@ __queuet:
     - narrate ""
     - narrate ""
     
-
+#typeprep performs a check on the input types, raises errors if incorrect types
+#type prep provides unescaping
+typePrep:
+    type: task
+    speed: 0t
+    script:
+    
 
 #todo: check if using not only type checking but default_values too....
 #Its possible to use <el@type.type>, .as_list returns list, and "strings" return elements.
