@@ -409,39 +409,35 @@ Entity Display Location:
     - determine
       <def[location].sub[0,.9,0]>
     
-
+#turn typecheck into typePrep
 Beacon Location:
     type: task
     definitions: location|player_list|duration
+    type_location: as_location
+    type_player_list: as_list
+    default_player_list: <player||<server.list_online_players>>
+    default_duration: d@20s
     script:
-    - define location
-      <def[location].as_location.simple.as_location>
+    - inject typecheck
     
-    - define current_point
-      <def[location].highest>
+    - define cuboid_above cu@<def[location]>|<def[location].highest>
     
-    - define locations
+    - define beam_locations
       li@
     
-    - while <def[current_point].is[!=].to[<def[location]>]> {
-        - if !<def[current_point].material.is_transparent>
-          define locations <def[locations].include[<def[current_point]>]>
-        
-        - define current_point
-          <def[current_point].sub[0,1,0]>
+    - foreach <def[cuboid_above].get_members> {
+        - if !<def[value].material.is_transparent> {
+          define beam_locations <def[locations].include[<def[value]>]>
         }
     
     - define beacon_base
       cu@<def[location].add[-1,-2,-1]>|<def[location].add[1,-2,1]>
     
     - define targets
-      <def[player_list].unescaped||<player||<server.list_online_players>>>
-    
-    - define duration
-      <def[duration]||d@20s>
+      <def[player_list].unescaped>
     
     - showfake m@glass
-      <def[locations].unescaped>
+      <def[beam_locations]>
       to:<def[targets]>
       d:<def[duration]>
     
