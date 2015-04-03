@@ -21,8 +21,9 @@ Lore Modification Event Detection:
         - if <def[inventory].inventory_type> == chest {
             - define location <def[inventory].location>
             - define owner "<proc[Get Location Property].context[<def[location]>|owner]>"
-            - if <def[owner]> == null 
-              || <def[owner]> == <player.name> queue clear
+            - if <def[owner].is_empty>
+              || <def[owner]> == <player.name>
+              queue clear
             }
         - if <def[inventory].type> == player {
             - define owner "<def[inventory].id_holder.name>"
