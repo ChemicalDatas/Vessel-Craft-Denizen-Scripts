@@ -6,8 +6,8 @@ Player Chat Range Modifications:
     script:
     events:
         on player chats:
-        #- run "Message Nearby Players of Chat" def:<context.message>
-        #- determine cancelled
+        - determine passively cancelled
+        - run "Message Nearby Players of Chat" def:<context.message>
     
 
 Message Nearby Players of Chat:
