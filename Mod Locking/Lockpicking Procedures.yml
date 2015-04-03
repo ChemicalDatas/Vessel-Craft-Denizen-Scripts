@@ -2,20 +2,23 @@ Is_Locked:
     type: procedure
     definitions: inventory
     script:
-    - define active_lock "<def[inventory].list_contents.get[1]>"
+    - define active_lock "<def[inventory].list_contents.first||li@air>"
+    
     #checks if an item was created by an denizen item script
-    - define item_script "<def[active_lock].scriptname>"
+    - define item_script "<def[active_lock].scriptname||no_script>"
+    
     #- narrate "item script: <def[item_script]>"
-    - if <def[item_script].contains[Lock]> {
-        - determine true
-        } else {
-        - determine false
-        }
+    - if <def[item_script].contains[Lock]>
+      determine true
+      else
+      determine false
 
 Has_Key_For:
     type: procedure
     definitions: inventory
+    type_inventory: as_inventory
     script:
+    - inject typechecking
     - define lock_string <def[inventory].list_contents.get[1].lore.escaped>
     #- narrate "locking string: <def[lock_string]>"
     #- narrate "<player.inventory.list_contents.with_lore[<def[lock_string]>].get[1]>"
