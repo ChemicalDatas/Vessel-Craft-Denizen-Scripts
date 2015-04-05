@@ -19,11 +19,13 @@ Luminescent Items:
     type: world
     events:
         on entity damages entity:
-        - if <context.damager.item_in_hand.simple||none> != i@torch queue clear
+        - if <context.damager.item_in_hand.simple||none> != i@torch
+          queue clear
         - define max "<script.yaml_keys[success max]>"
         - define min "<script.yaml_keys[success min]>"
         - define roll <util.random.int[0].to[<def[max]>]>
         - if !<def[roll].is[or_more].than[<def[min]>]> queue clear
+        - narrate "<gray>You set your enemies on <red>fire<yellow>!"
         - define duration <script.yaml_keys[duration]>
         - burn <context.entity> duration:%duration%
         
