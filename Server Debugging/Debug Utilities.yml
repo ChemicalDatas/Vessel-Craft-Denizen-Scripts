@@ -445,6 +445,8 @@ typecheck:
     #   type_element: prefix
     #   type_player: as_player
     #   type_queue: as_queue
+    #   default_element: 49
+    #   default_int: 1
     #   definitions: int|element|player|queue
     #   script:
     #   - narrate "yada yada"
