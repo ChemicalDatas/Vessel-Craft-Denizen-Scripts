@@ -8,23 +8,21 @@ Vote Tracker:
     type: world
     events:
         on votifier vote:
-        - define player <server.match_player[<context.username>]>
-        - if <def[player]> == null {
-            - if !<server.list_offline_players.contains[<context.username>]> {
-                - announce "The server received a vote from an unknown player! Thanks man!"
-                - queue clear
-                }
+        - define player <server.match_player[<context.username>]||<server.match_offline_player[<context.username>]||no_match>>
+        - if <def[player]> == no_match {
+            - announce "The server received a vote from an unknown player! Thanks man!"
+            - queue clear
             }
-           
+        
         - flag <def[player]> voted_service:->:<context.service>
         - flag <def[player]> voted_time:->:<context.time>
         - flag <def[player]> vote_thaked:!
         - flag <def[player]> vote_count:++
-        - announce "<def[player].name.display> voted for the server!"
+        - announce "<gold><def[player].name.display><reset> voted for the server!"
         
         on player join:
         - wait d@10s
-        - if !<player.is_online||true> queue clear
+        - inject "Wait for Valid Player"
         - inject locally "path:Thanks for Voting"
 
     Thanks for Voting:
@@ -34,8 +32,3 @@ Vote Tracker:
         - flag <player> vote_thaked duration:d@1h 
         - run "Boss Bar" def:<def[thanks]>|<player>|200|d@10s
         }
-
-
-
-
-
