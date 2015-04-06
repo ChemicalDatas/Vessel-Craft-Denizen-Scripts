@@ -154,13 +154,16 @@ breakable Listener:
 Break breakable:
     type: task
     definitions: block_list
+    type_block_list: as_list
     script:
-    - foreach <def[block_list].unescaped.as_list> {
+    - inject typechecking
+    - define block_list <def[block_list].unescaped>
+    - foreach <def[block_list]> {
         - playsound <def[value]> sound:breakable
         - playeffect <def[value]> effect:iconcrack_<def[value].material.id> qty:5
         }
     
-    - modifyblock <def[block_list].unescaped>
+    - modifyblock <def[block_list]>
       m@air
       delayed
     
