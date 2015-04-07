@@ -59,23 +59,31 @@ On Join Player Management:
             - narrate "<script.yaml_keys[mod_title]> <green>You<&sq>ve already entered your password."
             - queue clear
             }
-        - if <player.flag[AccountProtection.Password]> != <context.args.escaped> {
+        - if <player.flag[AccountProtection.Password]||no_password> != <context.args.escaped> {
             - narrate "<script.yaml_keys[mod_title]> <red>Incorrect Password for <player.name.display||<player.name>>"
             - queue clear
             }
         - narrate "<script.yaml_keys[mod_title]> Welcome back <yellow><player.name>"
         - if <player.has_permission[<script.yaml_keys[login_every_time_permission]>]> {
             - if <player.has_flag[ignore_login_every_time]> {
-                - narrate "<script.yaml_keys[mod_title]> If you tire of logging in each time do ./ex flag <&lt>player<&gt> ignore_login_every_time<&nl>
-                            <yellow>That will allow you to ignore the permission check. <&nl><red>Applies to * perm groups and ops."
+                - narrate "<script.yaml_keys[mod_title]> Want to login each time?<&nl>
+                            ./ex flag <&lt>player<&gt> ignore_login_every_time:!"
                 } else {
-                - narrate "<script.yaml_keys[mod_title]> Want to login each time? ./ex flag <&lt>player<&gt> ignore_login_every_time:!"
+                - narrate "<script.yaml_keys[mod_title]><&nl>
+                            If you tire of logging in each time do<&nl>
+                            ./ex flag <&lt>player<&gt> ignore_login_every_time<&nl>
+                            <yellow>That will allow you to ignore the permission check.<&nl>
+                            <red>Applies to * perm groups and ops."
                 }
             }
         - flag player AccountProtection.EnteredPassword:true duration:<script.yaml_keys[password_token_lifetime]>
         
         on setpass command:
         - determine passively fulfilled
+        - if <context.args.is_empty> {
+            - narrate "<script.yaml_keys[mod_title]> You didnt enter anything. You need to enter some password."
+            - queue clear
+            }
         - define args <context.args.escaped>
         - flag <player> AccountProtection.Password:<def[args]>
         - narrate "<script.yaml_keys[mod_title]> <blue>You've set your password to <def[args].space_separated> <player.name.display||<player.name>>"
