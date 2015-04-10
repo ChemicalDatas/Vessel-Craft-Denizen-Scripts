@@ -8,6 +8,7 @@
 Boss Bar Base:
     type: task
     definitions: message|p_list|bar
+    speed: 0t
     script:
     - if <server.list_online_players.is_empty> queue clear
     - if <def[message]||none> != none {
@@ -26,6 +27,7 @@ Boss Bar:
     #Runs through each line in the words list.
     type: task
     definitions: word_list|p_list|bar|delay
+    speed: 0t
     script:
     - ^define p_list    <def[p_list]||<server.list_online_players.escaped>>
     - ^define delay     <def[delay].as_duration||d@40t>
