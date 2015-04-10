@@ -17,29 +17,13 @@ SniperShot:
         - playeffect <context.entity.eye_location>
           effect:RED_DUST qty:10 offset:0.5
         
-        - if <context.damager.is_player>
-          narrate "<proc:Entez_Headshot>"
-          targets:<context.damager> 
+        - if <context.damager.is_player> {
+            - run "Boss Bar" "def:<red>Headshot!|<player>"
+            }
         
         - if <context.entity.equipment.helmet|no_helmet> no_helmet
-          determine <math:<context.damage>*1.5>
+          determine <context.damage.mul[1.5]>
           else
-          determine <math:<context.damage>*1.25>
+          determine <context.damage.mul[1.25]>
         }
 
-#Determines the message to send on headshot
-Entez_Headshot:
-    type: Procedure
-    script:
-    - if <context.entity.name> == "Spider"{
-        - random 3
-        - determine "Critical!"
-        - determine "Abdomen Shot!"
-        - determine "Nice Shot!"
-        } else {
-        - random 3
-        - determine "Boom! Headshot!"
-        - determine "That's gonna leave a mark!"
-        - determine "Headshot!"
-        }
-  
