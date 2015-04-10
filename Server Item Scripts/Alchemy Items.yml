@@ -1,7 +1,0 @@
-# A Script to add yaml files with custom items in-game
-#todo: Make a script that autoupdates this file.
-#todo: make a script that autoupdates the server alchemy file
-"Potion of Horror":
-    type: item
-    recipie:
-    -
