@@ -1,24 +1,37 @@
 # Script that replaces predefined characters for their ASCII equivalents
 # Utilizes a world script as a key value lookup table. The world script name should be: kvreplacment
 
-Player Chat Range Modifications:
-    type: task
-    script:
+Player Chat Canceling:
+    type: world
     events:
         on player chats:
         - determine passively cancelled
+
+Player Chat Local Notification:
+    type: world
+    events:
+        on player chats:
         - run "Message Nearby Players of Chat" def:<context.message>
     
 
 Message Nearby Players of Chat:
     type: task
+    speed: 0t
     script:
     - define message li@
+    
     - foreach <queue.definitions.exclude[message]> {
-        - define message <def[message].include[<def[value]>]>
+        - define message <def[message].include[<def[%value%]>]>
         }
-    - foreach <player.location.find.players.within[75].exclude[<player>]> {
-        - define distance "<player.location.distance[<def[value].location>]>"
+    
+    - foreach <player.location.find.players.within[30]> {
+        
+        - define distance "<player.location.distance[<def[value].location>]||0>"
+        
+        - define direction "<player.location.direction[<def[value].location>]>"
+        
         - define message "<proc[Iconize].context[<def[message].as_string.replace[\]>]>"
-        - narrate "[<player.name.display>][<def[distance].simple>m]: <def[message]>" targets:<def[value]>
+        
+        - narrate "[<player.name>][<def[distance].round_up>m][<yellow><def[direction]><reset>]: <def[message]>"
+          targets:<def[value]>
         }
