@@ -20,7 +20,6 @@ Mod Bow Modification Commands:
         }
     
     events:
-        
         on vc-test_dummy_command command:
         -
    
