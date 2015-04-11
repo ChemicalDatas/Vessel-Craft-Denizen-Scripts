@@ -409,11 +409,11 @@ Pop Block:
 
 Modifyblock:
     type: task
-    definitions: locations_list|block
+    definitions: locations_list|material
     script:
     - modifyblock
       <def[locations_list].unescaped>
-      <def[block]>
+      <def[material]>
 
 
 Switch:
