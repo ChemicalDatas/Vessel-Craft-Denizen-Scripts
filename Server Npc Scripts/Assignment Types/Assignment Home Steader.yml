@@ -1,0 +1,14 @@
+"Sign Processor":
+    type: assignment    
+    actions:
+        on click:
+        - flag npc "task_queue:->:Walk Near|<p@Chemical_Datas.chat_history>"
+        - run "Npc Task Execute"
+        
+        on chat:
+        - define rel_signs "<proc[Relevant Sign Search].context[<npc.location>|<context.message>]>"
+        - if %rel_signs% != null {
+            - anchor add <%rel_signs%.get[1]> id:<context.message>
+            - chat "Ive found <%rel_signs%.size> signs that match that criteria."
+            }
+        

@@ -1,0 +1,57 @@
+#
+# A series of scripts to help with creating schematic sets / ordering / running 
+#
+# Anivox data should contain:#
+#   - timings
+#   - global_location
+#   - frame
+#       - offset_data
+#       - file name
+#       - sound
+#       - script
+# Should Anivox Data should contain location refrences, it should be relative to the 
+# frame orgin, ex: windmill running causes a player to get velocity added when under the
+# fans, a smasher should crush entities within a cuboid (under the smasher), a crucible
+# if it has stone in its bowl, should turn that into lava before pouring out,
+# a cannon should fire a projectile based on the closest persons direction vector
+# a auto excavator... should auto copy / paste its drilling arm and pop blocks along with
+# stash them in a nearby chest....
+#
+
+Schematic Events:
+    type: world
+    database_path: "scripts/Server Databases/Anivox.yml"
+    events:
+        on server start:
+        - run "yaml load" def:<script.yaml_keys[database_path]>|anivox_data
+        
+        on player right clicks sign:
+        - narrate "clicked a sign <script.name>"
+        
+        - if <context.sign.contents> contains "[anivox]" {
+            - narrate "Anivox Animation starter detected"
+            }
+        
+        on player enters notable cuboid:
+        #Check if a cuboid contains animation data
+        #Cuboid data need to contain ref to anivox data
+        - if <yaml[anivox_data].contains[<>]> {
+            - foreach <yaml[anivox_data]>
+            - schematic load
+            }
+
+Create Anivox Set:
+    type: task
+    definitions: 
+    
+Animate Anivox:
+    type: task
+    definitions: anivox_ref|frame_delays
+    script:
+    #loads schematics into memory
+    #
+    - define anivox_data_frames <yaml[anivox_data].contains[]>
+    - foreach <def[anivox_ref]> {
+        # Check if loaded into memroy
+        - if <def[value]>
+        }

@@ -1,0 +1,37 @@
+﻿NickNameManager:
+    type: assignment
+    debug: false
+    interact scripts:
+    - 0 Nick Name Handler
+    default constants:
+        main menu options: "(TARGET NICKNAME)"
+        npc self identification: "Im a nick name manager. I handle all server nick names."
+    actions:
+        on assignment:
+        - trigger name:chat state:true 
+        - trigger name:click state:true
+        on click:
+        - chat "<cons:npc self identification>"
+        - run "Nickname Disable"
+        - narrate format:ScriptOptions "<cons:main menu options>"
+    
+
+Nick Name Handler:
+    type: Interact
+    requirement:
+        Mode: all
+        List: 
+        - op
+    steps:
+        default:
+            chat Trigger:
+                send:
+                    Trigger: "/REGEX:.+/"
+                    script:
+                    - define target "<context.message.split[ ].get[1]>"
+                    - define name "<context.message.split[ ].get[2]>"
+                    - define target <server.match_player[<def[target]>]>
+                    - chat "Ill allow <def[target].name> new name to be<&co> %name%"
+                    - flag <def[target]> NickName:%name%
+                    - execute as_server "nick <def[target].name> <target.flag[NickName]>"
+
