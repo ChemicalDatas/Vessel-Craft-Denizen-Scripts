@@ -13,6 +13,8 @@ On Join Player Management:
           announce "<script.yaml_keys[mod_title]> failed to load <script>... If the server script list does not contain this, this will not run...." to_console
         
         
+        
+        
         on player joins:
         - inject "wait for valid player"
         - adjust <player> gamemode:adventure
