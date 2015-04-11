@@ -27,9 +27,12 @@ Message Nearby Players of Chat:
     
     - foreach <player.location.find.players.within[30]> {
         
-        - define distance "<player.location.distance[<def[value].location>]||0>"
+        - define distance "<player.location.distance[<def[value].location>]||unknown>"
         
-        - define direction "<player.location.direction[<def[value].location>]>"
+        - define direction <player.location.direction[<def[value].location>]||nearby>
+        
+        - if <def[direction]> == null
+          define direction nearby
         
         - define message "<proc[Iconize].context[<def[message].as_string.replace[\]>]>"
         
