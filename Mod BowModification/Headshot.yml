@@ -4,7 +4,7 @@
 
 
 #When an arrow hits, determines if the arrow was on the head. If so, damage is multiplied 1.5x for entities without helmets, and 1.25x for entities with helmets
-SniperShot:
+Headshot:
   Type: World
   Events:
     on entity damaged by arrow:
