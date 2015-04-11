@@ -1,4 +1,0 @@
-"SAI":
-    type: format
-    format: "<red><&lb>Server<&rb><yellow><&lb><player.world.name><&rb><gold><magic><&lb><reset><gold>SAI<magic><&rb><reset>: <blue><proc[Iconize].context[<text>]>"
-    
