@@ -1,0 +1,212 @@
+# A Script to add yaml files with custom items in-game.
+"KVW Assignment":
+    type: assignment
+    
+    interact scripts:
+    - 0 Yaml Writing Test
+    
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:chat state:true
+
+"Yaml Writing Test":
+    type: interact
+    requirements:
+        mode: none
+        list:
+        - op
+    steps:
+        'default':
+            click Trigger:
+                script:
+                - ^yaml create id:<player.name>script
+                - ^narrate format:ScriptOptions "KEY (your key), KEYHELP, QUICK ADD, VALUE, WRITE, SAVE"
+                
+            chat Trigger:
+                "Key":
+                    trigger: "The key is /REGEX:key.+/."
+                    script:
+                    - ^define key "<context.message.after[key]>"
+                    
+                    - chat "Alright, The key is set."
+                    - ^flag player Current_Script_Key:%key%
+                    - ^narrate "Key: %key%"
+                    
+                "Key Help":
+                    trigger: "I need some /keyhelp/. Would you tell me how to do it?"
+                    script:
+                    - narrate "Youll need to specify a key like this." 
+                    - narrate "my.key" 
+                    - narrate "<gray>This scripts out to be:" "
+                    - narrate "my:"
+                    - narrate "....key:"
+                    - narrate "<gray>so if you wanted:"
+                    - narrate "scriptname:"
+                    - narrate "....steps:
+                    - narrate "........default:"
+                    - narrate "............click trigger:"
+                    - narrate "................script:"
+                    - narrate "<gray>youd need to do:"
+                    - narrate "<gray>scriptname.steps.default.clicktrigger.script"
+                    
+                    
+                "Value":
+                    trigger: "I want to add a /value/."
+                    script:
+                    - chat "Alright, Lets work out the Value?"
+                    - chat "What type of value is it? List or Value?"
+                    - chat "If its a single value. Just say: <&dq>value (your value)<&dq>"
+                    - ^zap "Determine Value"
+                
+                
+                "Quick Add":
+                    trigger: "Lets add by /REGEX:quick add/ method."
+                    script:
+                    - chat "A pro eh?"
+                    - zap "Quick Add"
+                
+                "Write to File":
+                    trigger: "Lets /write/ the values to a temp file."
+                    script:
+                    - yaml write:<player.flag[Current_Script_Key]> value:<player.flag[Current_Script_Value]> id:<player.name>script
+                    #- flag player Current_Script_Key:!
+                    #- flag player Current_Script_Value:!
+                    - ^narrate "Wrote and cleared key value combo."
+                    - ^narrate "Ready to set a new key and value."
+                    - ^narrate "Dont forget to save the script."
+                
+                "Save to Disk":
+                    trigger: "I want to /save/ the script."
+                    script:
+                    - ^define path "scripts/userscripts/<player.name>/test_type_folder/<player.name>_script.yml"
+                    - ^define id "<player.name>script"
+                    - ^narrate "Writing to: %path%"
+                    - yaml savefile:%path% id:%id%
+                    - ^narrate "Wrote file to disk"
+                
+
+                    
+        'Quick Add':
+            click Trigger:
+                script:
+                    script:
+                    - narrate "Just say: (your key)(your value)"
+                
+            chat Trigger:
+                'Quick Add':
+                    trigger: "/REGEX:.+/"
+                    script:
+                    - ^define key "<context.message.split[ ].get[0]>"
+                    - ^define value "<context.message.split[ ].get[2]>"
+                    
+                    - ^flag player Current_Script_Key:%key%
+                    - ^flag player Current_Script_Value:%value%
+                    - ^narrate "%key%: %value%"
+                    - ^zap "default"
+                    
+                    
+                    
+        'Determine Value':
+            click Trigger:
+                script:
+                    script:
+                    - narrate format:ScriptOptions "HELP, LIST, VALUE"
+                
+            chat Trigger:
+                'Get List':
+                    trigger: "I want to add a /list/ as a value."
+                    script:
+                    - chat "Ok, start naming off items in the list. Ill save them for writing later."
+                    - narrate "Youll need to start narrating off items in your list that you have in mind."
+                    - zap "Get Value List"
+                    
+                'Get Value':
+                    trigger: "/REGEX:value.+/"
+                    script:
+                    - define value "<context.message.after[value ]>"
+                    - flag player Current_Script_Value:<context.message>
+                    - narrate "Value: %value%"
+                    - zap "default"
+                    
+                'Help':
+                    trigger: "I need some /help/ with this."
+                    script:
+                    - narrate "Theres just options here. They are the type of value you want to use for the key you <&rb>have|<&lb> defined"
+                    - narrate "Command value: is a single value you define by saying..."
+                    - narrate "<&dq>value (whatever the value is)<&dq>"
+                    - narrate "This is:"
+                    - narrate "(your key): (your value)"
+                    - narrate "This differs from adding a list"
+                    - narrate "Which look like this:"
+                    - narrate "(your key):"
+                    - narrate "- value"
+                    - narrate "- value"
+                    - narrate "- value"
+                    - narrate ""
+                
+
+                    
+        'Get Value List':
+            click Trigger:
+                script:
+                    script:
+                    - narrate format:ScriptOptions "*COMMAND*, EDIT *line number*, LIST, HELP, DONE"
+                
+            chat Trigger:
+                'Add Item':
+                    # This is where you can limit the types of commands that go into the list. Like execute as_server op <player.name>
+                    # Place in this regex /REGEX:chat|narrate|flag.+/ in this format for the commands you want to whitelist
+                    # /REGEX:^
+                    trigger: "/REGEX:.+/"
+                    script:
+                    - flag player Current_Script_Value:->:<context.message>
+                    - chat "Adding <context.message> to the list."
+                    
+                'Edit Line':
+                    trigger: "I would like to /REGEX:edit.+/ "
+                    script:
+                    - define line <context.message.after[edit ]>
+                    # I wish there was a way to edit a value in the list by index
+                    - flag player Current_Script_Value:->:<context.message>
+                    - chat "Adding <context.message> to the list."
+                    
+                'Done Adding Items to List':
+                    trigger: "Im /done/ here."
+                    script:
+                    - chat "Sure."
+                    - zap "default"
+                    
+                'List Values':
+                    trigger: "What do I have in the /list/ already?"
+                    script:
+                    - foreach <player.flag[Current_Script_Value].as_list> narrate %value%
+                    
+                'Help':
+                    trigger: "I need some /help/ understanding this."
+                    script:
+                    - chat "For each time you chat Ill add that chat to the list."
+                    - chat "This helps add this value as a list to the key you specify in another menu."
+                    - chat "Each chat will need to be a command in a list."
+                    - narrate "you say: chat <&dq>Hi there<&dq>"
+                    - narrate "you say: narrate <&dq>This is a quest narration<&dq>"
+                    - chat "The list would look like this then..."
+                    - narrate "- chat <&dq>Hi there<&dq>"
+                    - narrate "- narrate <&dq>This is a quest narration<&dq>"
+                    - narrate ""
+
+    
+
+
+"Write Key Value":
+    type: task
+    definitions: key|value|id
+    script:
+    - yaml write:%key% value:%value% id:%id%
+    
+    
+"Construct Key Value":
+    type: procedure
+    definitions: base|step
+    script:
+    - determine %base%.%step%

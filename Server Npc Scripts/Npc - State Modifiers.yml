@@ -1,0 +1,103 @@
+#A set of scripts designed for the modification of npc status
+#Npc
+#Food
+#Water
+#Energy
+#Awareness
+#Mood
+#Exhausted
+
+#Vigor
+#Strength...
+#Intelligence
+#Knowledge
+#Intunement
+"Npc Stats Defaults":
+    type: task
+    script:
+    vigor: 10
+    strength: 10
+    exhaustion: 0
+    
+    intelligence: 10
+    knowledge: 10
+    
+    intunement: 10
+    awareness: 10
+    
+    mood: neutral
+
+"Npc Drain Stat":
+    type: task
+    definitions: stat|amount
+    script:
+    - if %amount% == null define amount 1
+    - flag npc %stat%:-:%amount%
+
+
+"Npc Decrement Stat":
+    type: task
+    definitions: stat
+    script:
+    - flag npc %stat%:--
+
+"Npc Increment Stat":
+    #A repeatable task 
+    type: task
+    definitions: stat
+    script:
+    - flag npc %stat%:++
+    
+    
+"Tick Npc Stats":
+    # A task that's run periodically
+    type: task
+    script:
+    - foreach <server.list_npcs> {
+        - run "Stats Tick"
+        }
+
+
+#todo: come up with a better name
+#todo: finishme
+"Stats Tick":
+    # Npc stats are in a list of 2 values. 
+    # The first is the actual state.
+    # The second is the max value or the roof value.
+    type: task
+    definitions:
+    script:
+    - foreach %stat_list%
+    # This gets the first item on the list.
+    - define current_value <npc.flag[%state_name%_level]>
+    - define new_value <def[current_value].add[1]>
+    #                                                           Ifffy here V
+    - define new_npc_stat "<proc[Index Modify].context[<npc.flag[%state_name%_level].as_list>|1|%new_value%]>"
+    - flag <npc> %state_name%_level:
+    
+    - flag <npc> food_level:
+    - flag <npc> exhaustion_level:
+    - flag <npc> water_level:
+    - flag <npc> energy_level:
+    - flag <npc> awareness_level:
+
+"Start Stats Tick":
+    type: task
+    script:
+    - define tank li@food|water
+    - define exhaustion <npc.flag[exhaustion]>
+    - foreach %tank% {
+        - define %value% <npc.flag[%value%]>
+        - if <def[%value%].is[or_more].than[1]> {
+            - flag npc %value%:--
+            - 
+            - if <def[exhaustion].is[or_more].than[1]> {
+                - flag npc exhaustion:--
+                }
+            }
+        }
+    - flag <npc> energy_level:+:<def[food].add[<def[water]>]>
+
+
+
+

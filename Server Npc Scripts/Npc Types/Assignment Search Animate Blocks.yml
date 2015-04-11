@@ -1,0 +1,130 @@
+"Search Manager":
+    type: assignment
+
+    interact scripts:
+    - 0 Search and Destroy
+    
+    actions:
+        on assignment:
+        - trigger name:click toggle:true
+        - trigger name:chat toggle:true
+        
+        on click:
+        #- chat "Stopping what I was doing"
+        #- queue clear
+        - ^announce "Starting Collection"
+        - inject locally "Dispatcher"
+        
+        
+        # on complete navigation:
+        # - ^define c_index <npc.flag[current_index]>
+        # - ^define max_index <npc.flag[total_index]>
+        # - ^define b_locats <npc.flag[block_locations].as_list>
+        # - ^define target_b <%b_locats%.get[%c_index%]>
+        
+        # - ^if %c_index% > %max_index% queue clear
+        # - ^look <npc> <%target_b%.below>
+        
+        # - ~break <%target_b%>
+        # - ^flag npc current_index:++
+        # - ^flag npc block_locations:<-:%target_b%
+        # - inject locally "Dispatcher"
+
+        
+        # on cancel navigation:
+        # - ^define target_b <npc.flag[current_target]>
+        # - ^announce "<npc.name> <red>cancled <white>its navigation."
+        # - ^flag npc current_index:++
+        # - ^flag npc block_locations:<-:%target_b%
+        # - inject locally "Dispatcher"
+
+        on dig:
+        - ^announce "<npc.name> broke a block at: <gold><context.location>"
+        #- ^inventory add 
+        #- inject locally "Dispatcher"
+    
+    
+    #sudo code for on complete navigation
+    # Action Dispatcher:
+    # - if %target% != %nearby% {
+        # - %build / break blocks to get to location%
+        # - flag npc action_tries:++
+        # - run %ReDispatch npc to location%
+        # - queue clear
+        # - flag npc action_tries:!
+        # }
+    # - look npc <%target%>
+    # - inject locally "Animate Block Break"
+    # - 
+
+    
+    Animate Block Break:
+    - animate <npc> animation:arm_swing
+    - modifyblock <npc.flag[found_list].get[<npc.flag[current_index].as_int>]> 0
+    - drop <npc.flag[searching_for]> <npc.flag[found_list].get[<npc.flag[current_index].as_int>]> qty:1
+    
+    Dispatcher:
+    - define c_index <npc.flag[current_index]>
+    - define max_index <npc.flag[total_index]>
+    - define b_locats <npc.flag[block_locations].as_list>
+    - define target_b <%b_locats%.get[%c_index%]>
+    
+    - if %c_index% > %max_index% queue clear
+    - walkto <npc> <%target_b%> speed:.6 auto_range
+    #- announce "list of blocks: <%b_locats%>"
+    #- announce "Current index: %c_index%"
+    #- announce "Next target: <green><%target_b%>"
+    
+
+"Search and Destroy":
+    type: interact
+    requirements:
+        mode: none
+    steps:
+        'default':
+            chat Trigger:
+                "Pick Target Block":
+                    trigger: "I want you to search for /REGEX:.+/."
+                    script:
+                    - ^flag npc block_locations:!
+                    - ^flag npc block_locations:|:<npc.location.find.blocks[<context.message>].within[4]>
+                    - ^flag npc current_index:1
+                    - ^flag npc total_index:<npc.flag[block_locations].size.as_int>
+                    - ^chat "Ive found <npc.flag[total_index]> blocks that match that refrence"
+                    - foreach <npc.location.find.blocks[<context.message>].within[4]> {
+                        - break %value%
+                        }
+                        
+
+#For the break command, Determines if there will be difficulty in 
+#Getting to the block to be mined. Returns true or false
+"Npc Can Get To":
+    type: procedure
+    definitons: location
+    script:
+    - 
+    - determine
+    
+
+"Npc Can See":
+    type: procedure
+    definitions: object
+    script:
+    - look <npc> <%object%.location>
+    - if <npc.can_see[%object%]> determine true else determine false
+    
+
+#Searches a location for intresting objects
+"Intrested Objects":
+    type: procedure
+    definitions: location
+    script:
+    - define distance <npc.navigator.range.div[2]>
+    - foreach <npc.flag[Intrested_Objects]> {
+        - define etype <%value%.entity_type>
+        - if %etype% = "block" determine <%location%.find.surface_blocks[%etype%].within[%distance%]>
+        - if %etype% = "living entity" determine <%location%.find.living_entities.within[%distance%]>
+        - if %etype% = "entity" determine <%location%.find.entities[%etype%].within[%distance%]>
+        - if %etype% = "npc" determine <%location%.find.npcs.within[%distance%]>
+        - if %etype% = "player" determine <%location%.find.players.within[%distance%]>
+        }

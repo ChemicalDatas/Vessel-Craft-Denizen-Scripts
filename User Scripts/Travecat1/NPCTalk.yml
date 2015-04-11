@@ -1,0 +1,12 @@
+Gate Keeper talk:
+    Type: assignment
+    actions:
+        on enter proximity:
+        - chat "Town not open." 
+        on exit proximity:
+        - chat "Have a nice day."
+        on assignment:
+        - lookclose <npc>           state:true
+        - trigger name:chat         state:true
+        - trigger name:proximity    state:true
+        - chat "Now entering Trave's area."

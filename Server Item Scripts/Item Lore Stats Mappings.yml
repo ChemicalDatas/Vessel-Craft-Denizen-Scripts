@@ -1,0 +1,59 @@
+# A Script to add yaml files with custom items in-game
+# http://dev.bukkit.org/bukkit-plugins/item-lore-stats/
+
+"ILS Mapping":
+    type: task
+    script:
+    stats:
+        
+        
+        
+        Weapon Speed:
+            values: "string"
+            
+            string:
+            - "Slow"
+            - "Normal"
+            - "Fast"
+        
+        Armour:
+            values: "range percent"
+            
+            percent:
+            - "<%entity%.flag[armor.]>"
+            
+            int:
+            - "%value%"
+        Damage:
+        -
+        
+        statslist:
+        - "Damage"
+        - "Armor"
+        - "Dodge"
+        - "Block"
+        - "Crit Chance"
+        - "Crit Damage"
+        - "Health"
+        - "Health Regen"
+        - "Life Steal"
+        - "Ignition"
+        - "Reflect"
+        - "Slow"
+        - "Poison"
+        - "Wither"
+        - "Harming"
+        - "Blind"
+        - "Speed"
+        - "XP Bonus"
+        - "PvE Dmg Modifier"
+        - "PvP Dmg Modifier"
+        - "Level"
+        - "Class"
+        - "Bound to"
+        - "Weapon Speed"
+        - "Right-click to cast Living Bomb"
+        - "Right-click to cast Lightning"
+        - "Right-click to cast Fireball"
+        - "Right-click to cast Frostbolt"
+        

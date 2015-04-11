@@ -1,0 +1,182 @@
+anti-sword guard:
+  type: assignment
+
+  # Set this to true if you want to see debug info
+  # Warning! This uses the 'move proximity' action
+  # which can be very spammy!
+  debug: false
+
+  # Points of interaction .. for NPCs they are called 'actions'
+  # These actions will call other local scripts that will carry
+  # out further instructions
+  actions:
+
+    # Set up the guard location and triggers when the script
+    # is assigned
+    on assignment:
+    - trigger name:proximity state:true range:7
+    - trigger name:damage state:true
+    - trigger name:chat state:false
+    - trigger name:click state:true
+      # Set guard location to current location
+    - run locally 'set guard location'
+      # Make vulnerable, able to be killed, can be
+      # toggled with '/npc vulnerable'
+    - vulnerable
+
+    # This will fire each time a player moved within range of
+    # a guard. If the player has a sword in hand, and the guard
+    # isn't already aggressive (chasing a player), and the 
+    # player isn't already on the suspicion list, run 'disarm' 
+    on move proximity:
+    - if '<player.item_in_hand.material>' contains 'sword'
+      && !<npc.has_flag[aggressive]> 
+      && '!<npc.flag[suspicious].as_list>' contains '<player>'{
+        - run locally 'disarm' 'id:<npc.id>_disarm'
+      }
+
+    # On exit proximity, if the player has not disarmed, attack!
+    # We're naming the queue with the 'id:' argument, that way
+    # it can be cancelled later if need be. 'get sword' is essentially
+    # a tiny looping script.
+    on exit proximity:
+    - if '<npc.flag[suspicious].as_list>' contains '<player>' 
+       && !<npc.has_flag[aggressive]> {
+      - run locally 'get sword' 'id:<npc.id>_getsword'
+      }
+
+    # On spawn, reset to guard location. This will fire when the NPC
+    # respawns from death, too.
+    on spawn:
+    - run locally 'reset' instantly
+
+    # On death, spew a message
+    on death:
+    - narrate 'You say to the guard, "Respect my sword!"'
+    - run locally 'reset' instantly
+
+    # Set spawn location of click if op, otherwise just greet
+    # ...unless you have a sword!
+    on click:
+    - look <player.location>
+    - if <player.is_op> run locally 'set guard location' 
+      else if '!<player.item_in_hand.material>' contains 'sword'
+      chat 'Good day, sir.'
+
+    # Take damage
+    on damage:
+      # Mix things up
+    - random 3
+    - heal 5
+    - heal 2
+    - heal 0
+      # ...and again.
+    - random 2
+    - chat 'Argh! You will pay!'
+    - narrate 'You slice through the guard!'
+      # ...and of course, attack back!
+    - attack <npc> target:<player>
+
+
+  # This script will be run when a player moves in proximity
+  # of a guard. This will be when the guard checks players.
+  disarm:
+  - ^if '!<player.item_in_hand.material>' contains 'sword' {
+      - chat 'Rightly so, mister!'
+      - attack cancel
+      - run locally 'reset'
+      - queue clear
+    }
+    # Put the player in the suspicious list so that it doesn't 
+    # run disarm twice on a player. It's a list so that multiple
+    # players can be tracked.
+  - ^if !<npc.flag[suspicious].as_list> contains '<player>'
+    flag <npc> suspicious:->:<player>
+    # Make the npc look at the player, chat some words. Feel free
+    # to change this up. Feeling daring? Many scripts keep dialogue
+    # as a 'constant', try converting this script to follow suit!
+  - ^lookclose toggle:true
+  - chat 'Halt! You shall not have that sword!'
+  - wait 1
+  - chat 'Disarm yourself, fool!'
+    # random wait to easily mix things up 
+  - random 3
+  - wait 10
+  - wait 3
+  - wait 7
+    # If the npc has warned this player more than 3 times, 
+    # engage -- run 'get sword'!
+  - if <player.flag[sword_guard_warnings]> > 3 {
+      - run locally 'get sword' 'id:<npc.id>_getsword'
+      - queue clear
+    } else flag <player> sword_guard_warnings:++
+    # Else, at this point the script will run again, in the form of
+    # a 'script injection'. This script will be put back into
+    # the queue that was running it, essentually creating a loop.
+  - ^inject locally 'disarm'
+  
+
+  # This script will run if the player runs or does not disarm
+  get sword:
+    # Check if player is still holding sword.
+  - ^if '!<player.item_in_hand.material>' contains 'sword' {
+      - chat 'Rightly so, mister!'
+      - attack cancel
+      - run locally 'reset'
+      - queue clear
+    } 
+    # Mark the npc as aggressive so that it can't be bothered
+    # by other people -- this is now his target
+  - ^flag <npc> aggressive:<player>
+    # attack the player
+  - ^attack <npc> target:<player>
+  - chat 'You will drop your weapon!'
+    # Mix up the timing
+  - random 3
+  - wait 3
+  - wait 5
+  - wait 10
+    # If the player has sucessfully ran away from the npc,
+    # reset the guard
+  - ^if <player.location.distance[<npc.location>]> > 15 {
+      - narrate 'You yell to the guard, "Eat my dust!"'
+      - run locally 'reset'
+      - queue clear
+    } else {
+      - run locally 'get sword' 'id:<npc.id>_getsword'
+    }
+
+
+  # Run this to set the guarding location to the NPCs current spot
+  set guard location:
+  - ^flag <npc> 'guard_location:<npc.location>'
+  - chat 'I will guard this position!'
+  - chat 'No sword on MY watch!'
+
+
+  # Returns the NPC to the guarding location, and resets some flags
+  reset:
+    # If the NPC is spawned, move it to the location it needs to guard
+  - ^if <npc.is_spawned> 
+      && '<npc.location.distance[<npc.flag[guard_location]>]>' < 100 {
+      - attack cancel
+      - walk '<npc.flag[guard_location]>'
+    } else {
+      - attack cancel
+      - teleport <npc> '<npc.flag[guard_location]>'
+    }
+    # Toggle off lookclose
+  - ^lookclose toggle:false
+    # Reset queues
+  - ^if '<queue.exists[<npc.id>_getsword]>' 
+     queue <npc.id>_getsword clear
+  - ^if '<queue.exists[<npc.id>_disarm]>' 
+     queue <npc.id>_disarm clear
+    # Reset some flags
+  - ^flag <npc> aggressive:!
+  - foreach '<npc.flag[suspicious].as_list>'
+    - if %value% != null flag %value% sword_guard_warnings:!
+  - ^flag <npc> suspicious:!
+    # Reset health
+  - health 50
+  - heal

@@ -1,0 +1,384 @@
+"Environment Event Notify":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: event|location|args
+    script:
+    - foreach <%location%.find.npcs.within[25]> {
+        - define distance <%value%.location.distance[]>
+        }
+    
+
+"Entity Event Notify":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: event|entity
+    script:
+    -
+    
+"Player Event Notify":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: event
+    script:
+    - define location <player.location>
+
+
+
+
+Npc World Informant:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # The script that searches for local npcs within an event to inform them and their dispatcher of an local event.            #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    debug: false
+    
+    constants:
+        server: "<green>Vessel Craft"
+        greeting: "<red><player.name><reset>, Welcome to"
+        farewell: "Thanks for playing"
+        
+    script:
+    -
+    
+    events:
+        on block falls:
+        #<context.location>
+        
+        on player enters notable cuboid:
+        on player exits notable cuboid:
+        #<context.from>
+        #<context.to>
+        
+        on player exits biome:
+        on player enters biome:
+        #<context.from>
+        #<context.to>
+        #<context.old_biome>
+        #<context.new_biome>
+        
+        on player jumps:
+        #<context.location>
+        
+        on player breaks block:
+        #<context.location>
+        #<context.material>
+        #<context.cuboids>
+        
+        on block burns:
+        #<context.location>
+        #<context.material>
+        
+        on block being built:
+        #<context.location>
+        #<context.>
+        #<context.new_material
+        
+        on player damages block:
+        #<context.location>
+        #<context.material>
+        #<context.cuboids>
+        
+        on block dispenses item:
+        #<context.item>
+        #<context.location>
+        
+        on block fades:
+        #<context.location>
+        #<context.material>
+        
+        on block forms:
+        #<context.location>
+        #<context.material>
+        
+        on liquid spreads:
+        #<context.destination>
+        #<context.location>
+        #<context.material>
+        
+        on block grows:
+        #<context.location>
+        #<context.material>
+        
+        
+        on block ignites:
+        #<context.location>
+        #<context.material>
+        
+        on piston extends:
+        #<context.location>
+        #<context.material>
+        #<context.length>
+        
+        on piston retracts:
+        #<context.location>
+        #<context.retract_location>
+        #<context.material>
+        
+        on player places block:
+        #<context.location>
+        #<context.material>
+        #<context.item_in_hand>
+        
+        on brewing stand brews:
+        #<context.location>
+        #<context.inventory>
+        
+        on entity forms block:
+        #<context.location>
+        #<context.material>
+        #<context.entity>
+        
+        on furnace burns item:
+        #<context.location>
+        #<context.item>
+        
+        on player takes item from furnace:
+        #<context.location>
+        #<context.item>
+        
+        on furnace smelts item:
+        #<context.location>
+        #<context.source_item>
+        #<context.result_item>
+        
+        on leaves decay:
+        #<context.location>
+        #<context.material>
+        
+        on player changes sign:
+        #<context.location>
+        #<context.new>
+        #<context.old>
+        #<context.new_escaped>
+        #<context.old_escaped>
+        #<context.material>
+        
+        on hanging breaks:
+        #<context.cause>
+        #<context.entity>
+        #<context.hanging>
+        
+        on player places hanging:
+        #<context.hanging>
+        #<context.location>
+        
+        on creeper powered:
+        #<context.entity>
+        #<context.lightning>
+        #<context.cause>
+        
+        on entity changes block:
+        #<context.entity>
+        #<context.location>
+        #<context.old_material>
+        #<context.new_material>
+        
+        on entity combusts:
+        #<context.duration>
+        #<context.entity>
+        
+        on entity damaged:
+        #<context.cause>
+        #<context.damage>
+        #<context.entity>
+        
+        on entity killed:
+        #<context.cause>
+        #<context.entity>
+        #<context.damage>
+        #<context.damager>
+        #<context.projectile>
+        
+        on entity damages entity:
+        #<context.cause>
+        #<context.entity>
+        #<context.damage>
+        #<context.damager>
+        #<context.projectile>
+        
+        on entity kills entity:
+        #<context.cause>
+        #<context.entity>
+        #<context.damager>
+        #<context.projectile>
+        
+        on entity dies:
+        #<context.entity>
+        #<context.damager>
+        #<context.message>
+        #<context.inventory>
+        #<context.cause>
+        
+        on entity explodes:
+        #<context.blocks>
+        #<context.entity>
+        #<context.location>
+        
+        on potion splash:
+        #<context.potion>
+        #<context.entities>
+        #<context.location>
+        #<context.entity>
+        
+        on entity heals:
+        #<context.amount>
+        #<context.entity>
+        #<context.reason>
+        
+        on entity enters portal:
+        #<context.entity>
+        #<context.location>
+        
+        on entity exits portal:
+        #<context.entity>
+        #<context.location>
+        
+        on entity shoots bow:
+        #<context.entity>
+        #<context.projectile>
+        #<context.bow>
+        #<context.force>
+        
+        on entity tamed:
+        #<context.entity>
+        
+        on entity targets:
+        #<context.entity>
+        #<context.reason>
+        #<context.target>
+        
+        on entity teleports:
+        #<context.entity>
+        #<context.orgin>
+        #<context.desitnation>
+        
+        on entity unleashed:
+        #<context.entity>
+        #<context.reason>
+        
+        on entity explosion primes:
+        #<context.entity>
+        #<context.orgin>
+        #<context.fire>
+        
+        on entity changes food level:
+        #<context.entity>
+        #<context.food>
+        
+        on horse jumps:
+        #<context.entity>
+        #<context.color>
+        #<context.variant>
+        #<context.food>
+        
+        on item despawns:
+        #<context.item>
+        #<context.entity>
+        
+        on item spawns:
+        #<context.item>
+        #<context.entity>
+        #<context.location>
+        
+        on pig zapped:
+        #<context.>
+        #<context.>
+        #<context.>
+        
+        on projectile hits block:
+        #<context.projectile>
+        #<context.shooter>
+        #<context.location>
+        
+        on entity shoots block:
+        #<context.projectile>
+        #<context.shooter>
+        #<context.location>
+        
+        on player dyes sheep:
+        #<context.entity>
+        #<context.color>
+        
+        on sheep regrows wool:
+        #<context.entity>
+        
+        on slime splits:
+        #<context.entity>
+        #<context.count>
+        
+        on item enchanted:
+        #<context.location>
+        #<context.inventory>
+        #<context.item>
+        
+        on player clicks:
+        #<context.item>
+        #<context.inventory>
+        #<context.cursor_item>
+        #<context.click>
+        #<context.slot>
+        #<context.is_shift_click>
+        #<context.action>
+        
+        on player closes inventory:
+        #<context.inventory>
+        
+        on player drags in inventory:
+        #<context.item>
+        #<context.inventory>
+        
+        on item moves from inventory:
+        #<context.orgin>
+        #<context.destination>
+        #<context.initiator>
+        #<context.item>
+        
+        on player opens inventory:
+        #<context.inventory>
+        
+        on inventory picks up item:
+        #<context.inventory>
+        #<context.item>
+        
+        on player chats:
+        #<context.message>
+        
+        on player edits book:
+        #<context.title>
+        #<context.pages>
+        #<context.book>
+        #<context.signing>
+        
+        on player signs book:
+        #<context.title>
+        #<context.pages>
+        #<context.book>
+        #<context.signing>
+
+        on player breaks item:
+        #<context.item>
+        
+        on player animates:
+        #<context.animation>
+        
+        on player enters bed:
+        #<context.location>
+
+
+        
+        
+        
+
+#
+

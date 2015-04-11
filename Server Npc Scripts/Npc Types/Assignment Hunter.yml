@@ -1,0 +1,149 @@
+"Hunter":
+    type: assignment
+    debug: false
+    interact scripts:
+        - 0 Build Hunting Targets
+    
+    actions:
+        on assignment:
+        - chat "im in hunting mode now"
+        - trigger name:click state:true
+        - trigger name:chat state:true
+        
+        # on chat:
+        # - define animal <player.chat_history>
+        # - narrate "<npc.name> is now searching for entity %animal%."
+        # - inject "Build Queue HnG Local Mobtype"
+        
+        # on remove assignment:
+        # - chat Setting default choice assignment
+        # - assignment "NPC Options"
+        
+        # on kill <npc.flag[Current_Hunt_Target]>:
+        # - chat killed cow
+        
+    "Look For Visible Mobs":
+    - if <npc.flag[Current_Index]> > <npc.flag[Total_Index]> {
+        - zap "Ready for Hunting"
+        - narrate "<npc.name> is ready to hunt"
+        - queue clear
+        }
+    - look <npc> <%LocalMobs%.get[%current index%].location>
+    - wait 1
+    - if <proc[Is Visible].contex[<%LocalMobs%.get[%current index%]>]>
+      flag npc "Visible Mobs":|:<%LocalMobs%.get[%current index%]>
+      narrate "<npc.name> found one!"
+    - flag npc "Current Index":++
+    - inject localy "Look For Visible Mobs"
+        
+
+"Build Hunting Targets":
+    type: interact
+    requirements:
+        mode: None
+        list:
+    steps:
+        'default':
+            
+            click Trigger:
+                script:
+                - NARRATE "Tell the <npc.name> what mob to hunt."
+                
+            chat Trigger:
+                'Build Huntable Mob List':
+                    Trigger: "/REGEX:.+/, eh?"
+                    script:
+                    - flag npc Total_Index:0
+                    - flag npc Current_Index:0
+                    - flag npc Visible_Mobs:!
+                    - flag npc Current_Hunt_Target:<context.message>
+                    - define LocalMobs <proc["Get Local Mobs"].context[<context.message>]>
+                    
+                    - flag npc Total_Index:<%Local Mobs%.size>
+                    - narrate "starting to search for <context.message>"
+                    - inject locally "Look For Visible Mobs"
+                    
+
+                    - narrate "Found <npc.flag[Visible Mobs].size>"
+                    #- zap "Ready for Hunting"
+        
+
+                    
+        "Ready for Hunting":
+            click trigger:
+                script:
+                - narrate "<npc.name> is ready to start hunting <npc.flag[Current_Hunt_Target]>"
+                - narrate "Restarting Script"
+                - zap default
+        
+                   
+
+"Get Local Mobs":
+    type: procedure
+    definitions: animal
+    script:             
+    - determine <npc.location.find.entities[%animal%].within[<npc.navigator.range>]>                 
+                      
+                      
+"Is Visible":
+    type: procedure
+    definitions: entity
+    script:
+    - if <npc.can_see[%entity%]>
+      narrate "<npc.name> sees a <%entity%.type> with id of %entity%"
+      determine true
+    
+
+    
+    
+"Build Queue HnG Local Mobtype":
+    type: task
+    script:
+    - run Spotted_Mob def:%animal%
+    - narrate "<npc.name> only noted <npc.flag[spottedmobs].size> %animal%s"
+    - if <proc[determine seeable targets].context[]> 
+      run "Start queueing targets" def:%animal%    
+    
+
+#I need to delay the time for looking at a mob to determine if its seeable
+"Spotted_Mob":
+    type: task
+    script:
+    - flag npc spottedmobs:!
+    - define localmob 
+    - foreach %localmob% {
+      - inject "Look and Take Note" def:%value%|%1%
+      }
+    - narrate "Found <%localmob%.size> %1%s in the area."
+
+    
+
+
+    
+
+      
+"Start queueing targets":
+    type: task
+    script:
+    - narrate "<npc.name> is now proceding with %1%"
+    - foreach <npc.flag[spottedmobs]> {
+      - define nextmob %value%
+      - inject "Hunting Gathering Process"
+      }
+
+"Hunting Gathering Process":
+    type: task
+    script:
+    - attack %nextmob%
+    # This is supposted to wait untill the mob dies
+    - inject "Gathering Item Queue"
+ 
+
+"Gathering Item Queue":
+    type: task
+    script:
+    # TODO: I might want to do a search and walk to to get local items
+    # 3 is the magic number for pickup range
+    - define localitems <npc.location.find.entities[].within[3]>
+    - inventory add %localitems% destination:<npc.inventory> 
+    
