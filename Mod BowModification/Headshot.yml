@@ -12,8 +12,7 @@ SniperShot:
     - define entity <context.entity>
     - define eye_location <def[entity].eye_location>
     - if <def[arrow_location].y.is[or_more].than[<def[eye_location].y.sub[.05]>]>
-      && <def[arrow_location].y.is[or_more].than[<def[eye_location].y.add[.7]>]> {
-    
+      && <def[arrow_location].y.is[or_less].than[<def[eye_location].y.add[.7]>]> {
         - playeffect <context.entity.eye_location>
           effect:RED_DUST qty:10 offset:0.5
         
