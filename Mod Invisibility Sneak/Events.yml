@@ -10,12 +10,15 @@ Invisibility Sneak:
     #invisibility ranges.
     nearby: 6
     faraway: 30
+    #The nearby check checks within the nearby range for entities, if yes, dont proceed
+    #The faraway check checks for entities withn range, if theres none, dont proceed
+    #comment both to just allow invisibility with out entity restriction.
     checks:
     - nearby
     #- faraway
     events:
         on player starts sneaking:
-        - foreach <script.yaml_keys[checks]> {
+        - foreach <script.yaml_keys[checks].as_list> {
             - if <def[value].is[==].to[nearby]>
               define contains !
               else
