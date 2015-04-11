@@ -1,0 +1,76 @@
+# A Script to add yaml files with custom items in-game.
+"Item Creation Manager":
+    type: assignment
+    
+    interact scripts:
+    - 0 Script Value Determination
+
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:chat state:true
+        
+        
+        
+        
+"Script Value Determination":
+    type: interact
+    requirements:
+        mode: none
+        list:
+        - op
+    steps:
+        'default':
+            click Trigger:
+                script:
+                - narrate "Creating Yaml File"
+                - yaml create id:myfile
+                - yaml write:Mithril.type value:item id:myfile
+                - yaml write:Mithril.material value:lapis_ore id:myfile
+                - yaml write:Mithril.display_name value:<red>Mithril id:myfile
+                - yaml savefile:scripts/userscripts/<player.name>/myfile.yml id:myfile
+                - yaml load:myfile.yml id:myfile
+
+                - define value <yaml[myfile].list_keys[]>
+                - narrate "%value%"
+                
+            chat Trigger:
+                #Sets the item name thats refrenced in other scripts.
+                'Name':
+                    Trigger: "I want the name of the item to be: <gold>/REGEX:name|Name/."
+                    script:
+                    
+                    - define name <context.message.replace[name].with[]>
+                    - chat "Setting the name of the item to <red>%name%"
+                    -
+                    
+                #Sets the item type    
+                'Type':
+                    Trigger: "I want it to be a: <gold>/REGEX:type|Type.+/."
+                    script:
+                    - chat "Setting the type of the item to <red><context.message>"
+                    
+                #Sets the display name    
+                'Display Name':
+                    Trigger: "I want everyone to know it as: <gold>/REGEX:displayname.+/."
+                    script:
+                    - chat "Setting the display name of the item to <red><context.message>"
+                    
+                #For Leather Armor
+                'Color':
+                    Trigger: "I want the color to be: <gold>/REGEX:color.+/."
+                    script:
+                    - chat "Setting the color of the item to <red><context.message>"
+                
+                #Starts the Recipie Script
+                'Recipie':
+                    Trigger: "The <gold>/recipie/ is a little difficult to explain."
+                    script:
+                    - chat "Alright, lets discuss the recipie of the item in question."
+                    - zap "Recipie Creation"
+                    
+                    
+                    
+                    
+                    
+                    

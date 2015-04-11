@@ -1,0 +1,30 @@
+Block Interact Display Triggers:
+    type: world
+    defaults:
+    events:
+        on player animates ARM_SWING:
+        #todo: maybe perform a facing check too
+        - if <queue.exists[<player.name>_context_menu]> {
+            - queue queue:<player.name>_context_menu resume
+            }
+        
+        on player right clicks block:
+        - if <queue.exists[<player.name>_context_menu]> {
+            - narrate "<gray>You already have a menu open."
+            - queue clear
+            }
+        
+        - if <player.item_in_hand> == i@air {
+            - define options_list   "<escape:li@Narrate|Search>"
+            - define script_list    "<escape:li@narrate|narrate>"
+            - define argument_list  "<escape:li@<escape:li@<context.location.material>|SAI>|<escape:li@Nothing to search for yet...> >"
+            - define title "options"
+            - define context "Block Interact"
+            - run "Context Menu" "def:<def[options_list]>|<def[script_list]>|<def[argument_list]>|<def[context]>|<def[title]>|d@20s" id:<player.name>_context_menu
+            }
+        
+        # on player damages block:
+        # - define display_location "<proc[Entity Display Location].context[<player>]>"
+        # - define text <escape:li@<red><context.material.name>|<gold>[bheart]>
+        # - run "Display" "def:<def[display_location]>|<def[text]>|d@13t"
+        # - determine passively fulfilled

@@ -1,0 +1,312 @@
+
+
+
+"Yaml Injector Transformer":
+    type: task
+    script:
+    - announce '~~~~~~~~~~~~~~~~ <script.name> startin ~~~~~~~~~~~~~~~~~~~~~~~' to_console
+    - define file_path 'testyaml.yml'
+    - define node 'Server Ops'
+    - inject "Yaml Definitions"
+    - foreach <def[Narration Lines]> {
+        - narrate <def[value]>
+        }
+    
+#
+
+
+
+"Yaml Node Definitions":
+    # To create definitions just inject this script. This will create definitions from the keys in the yaml.
+    # Requires a definitions called 'file_path' to be present in the calling script.
+    # File path is a yaml file location in your servers file directory.
+    # This script reads all of the keys in that into definitions with names of the key and the values of the value.
+    
+    # There is another limitation to this. This has issues for redefining variables in the script and if theres
+    # subnodes with the same name:
+    #   npc_memory:
+    #       locations:
+    #           home: l@0,0,0
+    #           friends_home:
+    #               home: l@10,10,10
+    #
+    # This will rewrite the definition called home with the last found home variable.
+    # This example is possible but not likely if you structure you nodes in a logical fashion.
+    
+    # info: This REQUIRES a definition called 'file_path' to be pre-defined.
+    # info: This REQUIRES a definition called 'node' to be pre-defined.
+    # Reason is that the yaml.list_keys function dose not find root nodes
+    # info: Optional definition called 'node_list' to be pre-defined.
+    type: task
+    script:
+    - announce '~~~~~~~~~~~~~~~~ <script.name> startin ~~~~~~~~~~~~~~~~~~~~~~~' to_console
+    - define name <util.random.duuid>
+    - yaml load:<def[file_path]> id:<def[name]>
+    - inject "Yaml Get Data"
+    - yaml unload id:<def[name]>
+    
+
+
+"Yaml Define Key Values":
+    # This is a task that populates definitions for its parent script.
+    # The first set of keys will be the definition names
+    
+    # info: Optional definition called 'node_list' to be pre-defined.
+    # info: This REQUIRES a definition called 'node_list' to be pre-defined.
+    # Reason is that the yaml.list_keys function dose not find root nodes
+    type: task
+    script:
+    - announce '~~~~~~~~~~~~~~~~ <script.name> startin ~~~~~~~~~~~~~~~~~~~~~~~' to_console
+        #If key_list == null that means theres no more nodes to traverse
+    - foreach <def[node_list]> {
+        - define node <def[value]>
+        - define key_list "<yaml[<def[name]>].list_keys[<def[node]>]>"
+        - if <def[key_list]> == null {
+            - define <def[node]> "<yaml[<def[name]>].read[<def[node]>]>"
+            } else {
+            - inject "Yaml Define Key Values"
+            }
+        }
+#
+
+# Chemical_Datas:
+    # #value
+    # nickname: Chemii
+    
+    # #value: list
+    # completed_quests:
+    # - a war waged
+    # - peasants bread
+    # - quarrying for dirt
+    
+    # #node
+    # magic:
+        # strength:10
+        # regen: 20
+        # capacity: 100
+        # spells:
+        # - fire
+        # - quake
+        # - lightning
+    
+    # #node
+    # armor:
+        # #value
+        # helmet: diamond_helmet
+        # #value
+        # chestplate: leather_chestplate
+        
+#Chemical_Datas{nickname|completed_quests|magic|armor}
+"Yaml Construct Node Tree":
+    type: task
+    script:
+    -
+    - define node_tree 
+    
+    
+
+
+
+"Get Line":
+    type: procedure
+    definitions: line_list|line_number
+    script:
+    - define line_list <unescape:<def[line_list]>>
+    - foreach <def[line_list]> {
+        - narrate <def[value]>
+        }
+    
+#
+
+
+#A set of scripts called injectors / transformers
+"Next Item":
+    #Injected Task that gets the next item in the item_list
+    #This manipulates variable 'next_item' and changes it in the script to the next item.
+    #This requires definition name 'iter_list' to be present
+    type: task
+    script:
+    - if <def[iter_list]> == null announce "<script.name> failed to define 'iter_list' before 'Next Item' was called!" to_console
+    - if <def[next_item_index]> == null define next_item_index 1
+    - define next_item "<<def[iter_list]>.get[<def[next_item_index]>]>"
+    - define next_item_index <def[next_item_index].add[1]>
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

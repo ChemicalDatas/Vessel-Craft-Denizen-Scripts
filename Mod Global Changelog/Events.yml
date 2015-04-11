@@ -1,0 +1,56 @@
+ChangeLog:
+    type: world
+    changelog_path: ../../../test.yml
+    #Changelog to tables
+    #      players                      log
+    # p-uuid | p-name    log_id|time_stamp|p-uuid|log
+    events:
+        # <player> <player.name>
+        on server start:
+        - sql id:changelog connect:localhost:3306/changelog username:root password:info
+        #- sql id:changelog "update:CREATE table ChangeLog()"
+        
+        on changelog command:
+        - determine passively fulfilled
+        - define server none
+        - define addition none
+        - define player <player>
+        - define date <util.date>
+        
+        #todo: add a date accessor
+        - if <def[args].get[1].contains[add]>
+        - if <def[args].get[1].contains>
+        #args   ./changelog add (log)
+        #       ./changelog (player name)
+        #       ./changelog (day)
+        
+        #The changelog will need a list of players that contributed to it
+        
+        
+        on initChangeLog command:
+        - determine passively fulfilled
+        - inject locally "path:Initialize ChangeLog Database"
+        
+
+    Initialize ChangeLog Database:
+    - sql id:changelog "update:CREATE table log(log_id MEDIUMINT NOT NULL AUTO_INCREMENT, time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP, player_uid varchar(255), log varchar(255))"
+
+Add_ChangeLog_Entry:
+    type: task
+    definitions: LOG
+    script:
+    -
+    - sql id:changelog
+
+
+SQL_SELECT:
+    type: procedure
+    definitions: id|path|data
+    script:
+    - narrate "<blue><script.name><reset> <blue>select <def[data]> from <def[path]>"
+    - ~sql id:<def[id]> "query:select <def[data]> from <def[path]>" save:sql
+    - determine <entry[sql].result>
+    
+    
+# id        path              select_string
+# changelog|changelog.players|where player_name = Chemical_Datas

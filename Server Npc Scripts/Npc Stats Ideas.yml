@@ -1,0 +1,231 @@
+#This remembers the npc stats for the npc. 
+#Remembered in terms of a main memory and a secondary linkage
+#This can be used to get other primary memories
+#
+
+# (Primary)
+    # home
+    #   location:
+    #   inhabitants:
+    #   - self (npc.id)
+    #   - wife (npc.id)
+    #   - child (npc.id)
+    # work
+    #   type: blacksmith
+    #   location: 
+    #   - <denizens work location>
+    #   - grove of trees
+    #   - fishing pier
+    #   - last location of animals
+    #   
+    # 
+
+    
+    
+# (Linking)
+#   # wife
+# (linking, verb)
+#              (object Noun, proper noun)
+#   (linkage) (Primary)
+#npc killed a cow
+#               e@entity.eid
+#               e@entity.uuid
+
+
+#Knowledge is kept in 2 parts for access.
+#First key is the type of knowledge. Nothing specific yet.
+
+
+#The linking knowledge is the specific knowledge. Player names and so on. 
+#The linkage is the library of knowledge and where it resides. Its the index of the primary knowledge.
+
+#So If it enters a cuboid thats a players home. The player needs to politely ask the npc to stay out.
+#The npc will then remember a few things. Restricted areas
+
+
+
+#Added a dirty trick so that primary if it turns to to be a string that resolves into a string, it will then be used as an index for memory
+#primary = npc.location.find.entities[cow].within[5]
+
+"Knowledge Configuration":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    configuration:
+        primary knowledge list:
+        - kill
+        - death
+        - town
+            
+        #Entity contains players, npc's family, mobs
+        - entity 
+        - player
+        - location
+        - restricted areas
+        - food
+        - water
+        - job
+        
+        primary knowledge:
+            job:
+                location:
+                type:
+                
+            town:
+                location:
+                service:
+                    - inn
+                    - pub
+                    - castle
+                    - guards
+                    - mail
+                    - enchanting
+                    - apthacary
+                    - blacksmithy
+                    - stable
+                    - pier
+                    - ships
+                    - transport
+                    - teleport
+                    
+            entity:
+                location:
+                #last seen doing is accessing the entity.flag[task_discription]
+                last_seen_doing: 
+            kill:
+                entity:
+                location: 
+                
+            death:
+                #Stored by index
+                #so if the entity is index 2 all the entity data is in index 2
+                entity:
+                location:
+            
+
+
+
+"Add Knowledge":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: primary|linking|value
+    script:
+    - flag npc "knowledge.%primary%.%linking%:|:<%value%>"
+    
+    
+    #Spatial type npc
+    - flag npc knowledge.<npc.location.simple>:|:%primary%
+    - flag npc knowledge.<cuboid.name>
+    
+
+    
+    
+    #When a linkage is pinged it should return a list of primary keys to search for
+    - flag npc knowledge.%linkage%:|:%primary%
+    
+    
+
+    
+    
+"Stats Framework":
+    #############################################################################################################################
+    #                                                                                                                           #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    script:
+    stats:
+        wisdom:
+        focus:
+        
+        #- run "Add Knowledge" def:entity|location
+        knowledge:
+        
+        experience:
+            ailments:
+                given:
+                    poison:
+                    
+                    
+                    
+                recieved:
+                
+                
+            damage:
+                #e@%entity%.last_damage.amount
+                #e@%entity%.last_damage.cause
+                #e@%entity%.last_damage.duration
+                give:
+                    #- "<%cause%>": %value% ++
+                    #- "<%entity%.entity_type>": %value% ++
+                    
+                receive:
+                    #- %cause%: "<%entity%.last_damge.amount>" 
+                    fire:
+                    poison:
+                    fall:
+                    projectile:
+                    suffocation:
+                    
+                
+            blocks:
+                place:
+                    air: int
+                    dirt:
+                    gravel:
+                    cobblestone:
+                    wood:
+                    log:
+                    
+                break:
+                    air:
+                    dirt:
+                    gravel:
+                    cobblestone:
+                    wood:
+                    log:
+            
+            entity:
+                #- %entity_name%: %disposition%
+                
+            block:
+                
+            fears:
+                #m@
+                blocks: "air lava"
+                #entity.entity_type
+                entity_names: "Chemical_Datas Rag1ngW1f3 herobrine arrfie(chems_dog) creeper brown_dye(poop)"
+                tools: "i@iron_hoe"
+                materials: "m@diamond m@coal_ore"
+                
+            likes:
+                #foreach <npc.flag[experience.likes.mobs].split[ ]>
+                #el@%element%.contains[<>]
+                mobs: "cow chicken"
+                blocks: "air stone"
+                players: "chemical_Datas"
+                tools: "i@diamond_pickaxe"
+                materials: "m@diamond_ore"
+                
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,254 @@
+#A set of scripts designed to enable Exotic and Legendary Items
+#When an event happens it tries to find the specified path on the scripted item.
+#
+
+Item in Hand Script Event Injector:
+    type: world
+    events:
+        on time changes:
+        - define path "on time changes"
+        - inject locally path:Injector
+        
+        on player damages entity:
+        - define path "on player damages entity"
+        - inject locally path:Injector
+        
+        on player steps on block:
+        - define path "on player steps on block"
+        - inject locally path:Injector
+
+        on player chats:
+        - define path "on player chats"
+        - inject locally path:Injector
+        
+        on player clicks block:
+        - define path "on player clicks block"
+        - inject locally path:Injector
+        
+        on player picks up item:
+        - define path "on player picks up item"
+        - inject locally path:Injector
+    
+        on player right clicks:
+        - define path "on player right clicks"
+        - inject locally path:Injector
+        
+        on player damages block:
+        - define path "on player damages block"
+        - inject locally path:Injector
+        
+        on player animates:
+        - define path "on player animates"
+        - inject locally path:Injector
+        
+        
+    Injector:
+    - define script <player.item_in_hand.scriptname.as_script||true>
+    - if <def[script]> queue clear
+    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - inject <def[script]> path:<def[path]>
+
+
+
+
+Item in Hand Script Event Injector 2:
+    type: world
+    events:
+        on time changes:
+        - define path "on <context.time>"
+        - inject locally path:Injector
+        
+        on player animates:
+        - define path "on player animates <context.animation>"
+        - inject locally path:Injector
+        
+        on player damaged:
+        - define path "on player damaged by <context.cause>"
+        - inject locally path:Injector
+        
+        on player damages block:
+        - define path "on player damages <context.material>"
+        - inject locally path:Injector
+        
+        
+        on player damages entity:
+        - define path "on player damages <context.entity.name>"
+        - inject locally path:Injector
+        
+        on player enters biome:
+        - define path "on player enters <context.new_biome>"
+        - inject locally path:Injector
+        
+        on player exits biome:
+        - define path "on player exits <context.old_biome>"
+        - inject locally path:Injector
+        
+        on player jumps:
+        - define path "on player jumps"
+        - inject locally path:Injector
+        
+        on player steps on block:
+        - define path "on player steps on <context.location.material>"
+        - inject locally path:Injector
+        
+        on player chats:
+        - define path "on player chats <context.message>"
+        - inject locally path:Injector
+        
+        on player changes world:
+        - define path "on player changes world"
+        - inject locally path:Injector
+        
+        on player drops item:
+        - define path "on player drops item"
+        - inject locally path:Injector
+        
+        on player changes xp:
+        - define path "on player changes xp"
+        - inject locally path:Injector
+        
+        on player clicks block:
+        - define path "on player clicks <context.location.material>"
+        - inject locally path:Injector
+        
+        on player joins:
+        - define path "on player joins"
+        - inject locally path:Injector
+        
+        on player picks up item:
+        - define path "on player picks up <context.item>"
+        - inject locally path:Injector
+        
+        on player starts sneaking:
+        - define path "on player starts sneaking"
+        - inject locally path:Injector
+        
+        on player stops sneaking:
+        - define path "on player stops sneaking"
+        - inject locally path:Injector
+        
+        on player starts sprinting:
+        - define path "on player starts sprinting"
+        - inject locally path:Injector
+        
+        on player stops sprinting:
+        - define path "on player stops sprinting"
+        - inject locally path:Injector
+
+    Injector:
+    - define script <player.item_in_hand.scriptname.as_script||true>
+    - if <def[script]> queue clear
+    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - inject <def[script]> path:<def[path]>
+#
+
+
+
+Item on Head Script Event Injector:
+    type: world
+    events:
+        on player damages entity:
+        - define path "on player damages entity"
+        - inject locally path:Injector
+        
+        on player steps on block:
+        - define path "on player steps on block"
+        - inject locally path:Injector
+
+        on player chats:
+        - define path "on player chats"
+        - inject locally path:Injector
+        
+        on player clicks block:
+        - define path "on player clicks block"
+        - inject locally path:Injector
+        
+        on player picks up item:
+        - define path "on player picks up item"
+        - inject locally path:Injector
+        
+        on player changes xp:
+        - define path "on player changes xp"
+        - inject locally path:Injector
+    
+    Injector:
+    - define script <player.equipment.helmet.scriptname.as_script||true>
+    - if <def[script]> queue clear
+    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - inject <def[script]> path:<def[path]>
+
+
+
+Item in Hand Script Event Injector 2:
+    type: world
+    events:
+        on player right clicks:
+        - define path "on player right clicks"
+        - inject locally path:Injector
+
+        on player damaged:
+        - define path "on player damaged by <context.cause>"
+        - inject locally path:Injector
+        
+        on player damages entity:
+        - define path "on player damages <context.entity.name>"
+        - inject locally path:Injector
+        
+        on player enters biome:
+        - define path "on player enters <context.new_biome>"
+        - inject locally path:Injector
+        
+        on player exits biome:
+        - define path "on player exits <context.old_biome>"
+        - inject locally path:Injector
+        
+        on player jumps:
+        - define path "on player jumps"
+        - inject locally path:Injector
+        
+        on player chats:
+        - define path "on player chats <context.message>"
+        - inject locally path:Injector
+        
+        on player changes world:
+        - define path "on player changes world"
+        - inject locally path:Injector
+        
+        on player changes xp:
+        - define path "on player changes xp"
+        - inject locally path:Injector
+        
+        on player clicks block:
+        - define path "on player clicks <context.location.material>"
+        - inject locally path:Injector
+        
+        on player joins:
+        - define path "on player joins"
+        - inject locally path:Injector
+        
+        on player picks up item:
+        - define path "on player picks up <context.item>"
+        - inject locally path:Injector
+        
+        on player starts sneaking:
+        - define path "on player starts sneaking"
+        - inject locally path:Injector
+        
+        on player stops sneaking:
+        - define path "on player stops sneaking"
+        - inject locally path:Injector
+        
+        on player starts sprinting:
+        - define path "on player starts sprinting"
+        - inject locally path:Injector
+        
+        on player stops sprinting:
+        - define path "on player stops sprinting"
+        - inject locally path:Injector
+    
+    Injector:
+    - define script <player.equipment.helmet.scriptname.as_script||true>
+    - if <def[script]> queue clear
+    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - inject <def[script]> path:<def[path]>
+#
