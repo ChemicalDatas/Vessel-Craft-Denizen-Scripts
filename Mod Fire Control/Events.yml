@@ -47,33 +47,54 @@ Mod Scripted Fire Protection:
         - define size <q@fire_restoration.size||0>
         
         - if <server.has_flag[fire_emergency]> {
-            - define fire_locations <def[location].find.blocks[m@fire].within[15]>
+            - define fire_locations
+              <def[location].find.blocks[m@fire].within[15]>
             
-            - define announce_targets <def[location].find.players.within[150]>
-            - define num_fire_blocks <def[fire_locations].size>
-            - define text1 "<script.yaml_keys[script_name]> <red>Server has a fire emergency"
-            - define text2 "<script.yaml_keys[script_name]> <red>fire blocks nearby: <yellow><def[num_fire_blocks]> <blue>@location: <yellow><def[location].simple>"
-            - narrate <def[text1]> targets:<def[announce_targets]>
-            - narrate <def[text2]> targets:<def[announce_targets]>
+            - define announce_targets
+              <def[location].find.players.within[150]>
             
-            - modifyblock <def[fire_locations]> air naturally
+            - define num_fire_blocks
+              <def[fire_locations].size>
+            
+            - define text1
+              "<script.yaml_keys[script_name]> <red>Server has a fire emergency"
+            
+            - define text2
+              "<script.yaml_keys[script_name]> <red>fire blocks nearby<&co> <yellow><def[num_fire_blocks]> <blue>@location<&co> <yellow><def[location].simple>"
+            
+            - narrate <def[text1]>
+              targets:<def[announce_targets]>
+            
+            - narrate <def[text2]>
+              targets:<def[announce_targets]>
+            
+            - modifyblock <def[fire_locations]>
+              air
+              naturally
+            
             - determine cancelled
             }
         
         - if <def[size].is[or_more].than[<script.yaml_keys[fire_emergency]>]> {
-            - if !<server.has_flag[fire_emergency]> flag server fire_emergency duration:60
+            - if !<server.has_flag[fire_emergency]>
+              flag server fire_emergency
+              duration:60
             }
         
         - if <def[size].is[more].than[<script.yaml_keys[fire_warning]>]> 
           && <def[size].is[less].than[<script.yaml_keys[fire_emergency]>]> {
-            - if !<server.has_flag[fire_warning]> flag server fire_warning duration:60
+            - if !<server.has_flag[fire_warning]>
+              flag server fire_warning
+              duration:60
             }
         
         
         on fire spreads:
-        #- announce "spreading fire"
         - if <server.has_flag[fire_warning]> {
-            - if !<context.location.world.has_storm> weather storm world:<context.location.world>
+            - if !<context.location.world.has_storm>
+              weather storm
+              world:<context.location.world>
+              type:global
             - determine cancelled
             }
 
