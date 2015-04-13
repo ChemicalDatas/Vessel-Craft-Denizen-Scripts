@@ -29,13 +29,19 @@ Message Nearby Players of Chat:
         
         - define distance "<player.location.distance[<def[value].location>]||unknown>"
         
-        - define direction <player.location.direction[<def[value].location>]||nearby>
+        - define direction <def[value].location.direction[<player.location>]||nearby>
         
         - if <def[direction]> == null
           define direction nearby
         
-        - define message "<proc[Iconize].context[<def[message].as_string.replace[\]>]>"
+        - define message <def[message].as_string||<def[message]>>
         
-        - narrate "[<player.name>][<def[distance].round_up>m][<yellow><def[direction]><reset>]: <def[message]>"
+        - define message "<proc[Iconize].context[<def[message].replace[\]>]>"
+        
+        - define name "<player.name.display||
+                      <player.name.list||
+                      <player.name>>>"
+        
+        - narrate "[<def[name]>][<def[distance].round_up>m <yellow><def[direction]><reset>]: <def[message]>"
           targets:<def[value]>
         }
