@@ -36,7 +36,7 @@ Message Nearby Players of Chat:
         
         - define message <def[message].as_string||<def[message]>>
         
-        - define message "<proc[Iconize].context[<def[message].replace[\]>]>"
+        #- define message "<proc[Iconize].context[<def[message].replace[\]>]>"
         
         - define name "<player.name.display||
                       <player.name.list||
