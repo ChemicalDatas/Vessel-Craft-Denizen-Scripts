@@ -12,16 +12,43 @@ Player Flagged Bonuses:
     #   - thresh|out_of|item_to_drop|range
     #   - 1     | 1    | i@coal     | 1-4
     type: world
-    debug: false
+    add_bonus_materials: true
+    #supplant drops completly replaces drops with whats determined here.
+    supplant_drops: false
     events:
         on player breaks block:
-        - determine  "<proc[Bonus Handling].context[break_<context.material.name>|<player>]>"
+        - if <player.gamemode.is[==].to[creative]>
+          queue clear
+        
+        - define drop_list
+          li@
+        
+        - if <script.yaml_keys[add_bonus_materials]>
+          define drop_list
+          "<def[drop_list].include[<proc[Bonus Handling].context[break_<context.material.name>|<player>]>]>"
+        
+        - if <script.yaml_keys[supplant_drops]>
+          determine <def[drop_list]>
+        
+        - foreach <def[drop_list]> {
+            - drop <def[value]> <context.location>
+            }
         
         on entity dies:
         - if <context.damager||none> == none 
           queue clear
         
-        - determine  "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
+        - define drop_list <context.drops||li@>
+        
+        - if <script.yaml_keys[add_bonus_materials]> {
+            - define bonus
+              "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
+            
+            - define drop_list
+              <def[drop_list].include[<def[bonus]>]>
+            }
+        
+        - determine <def[drop_list]>
         
     
 
