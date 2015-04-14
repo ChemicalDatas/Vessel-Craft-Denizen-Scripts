@@ -32,7 +32,7 @@ Luminescent Items:
         on entity targets:
         - if !<script.yaml_keys[affected_mobs].contains[<context.entity.name>]> queue clear
         - if !<context.reason.contains[closest_player]>                         queue clear
-        - if !<context.target.item_in_hand.simple.is[==].to[i@torch]>          queue clear
+        - if !<context.target.item_in_hand.simple.is[==].to[i@torch]>           queue clear
         - determine cancelled
         
         on player holds item:
