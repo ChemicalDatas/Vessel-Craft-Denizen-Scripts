@@ -1,17 +1,13 @@
 On Join Player Management:
     type: world
     password_token_lifetime: d@6h
-    mod_title: <blue>[Scripted Account Secure]<reset>
+    mod_title: <gray>[Scripted Account Secure]<reset>
     password_required_permission: AccountProtection.PasswordRequired
     login_every_time_permission: AccountProtection.LoginEveryTime
     script_cooldown: 1s
     events:
         on server start:
-        - if <server.list_scripts.contains[<script>]>
-          announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
-          else
-          announce "<script.yaml_keys[mod_title]> failed to load <script>... If the server script list does not contain this, this will not run...." to_console
-        
+        - announce "<script.yaml_keys[mod_title]> is actively protecting player accounts!" to_console
         
         on player joins:
         - inject "wait for valid player"
@@ -84,9 +80,9 @@ On Join Player Management:
             - narrate "<script.yaml_keys[mod_title]> You didnt enter anything. You need to enter some password."
             - queue clear
             }
-        - define args <context.args.escaped>
-        - flag <player> AccountProtection.Password:<def[args]>
-        - narrate "<script.yaml_keys[mod_title]> <blue>You've set your password to <def[args].space_separated> <player.name.display||<player.name>>"
+        - define args <context.args>
+        - flag <player> AccountProtection.Password:<def[args].escaped>
+        - narrate "<script.yaml_keys[mod_title]> <blue>You've set your password to <gold><&sq><def[args].space_separated||<def[args]>><&sq> <green><player.name.display||<player.name>>"
     
     
     
