@@ -235,10 +235,10 @@ Controller Event Detection:
           
         #Building a tuple of information for the context, escaped
         - define context_element
-          <el@location|<context.location>.escaped>
+          li@location|<context.location>
           
         - define context 
-          <def[context].include[<def[context_element]>]>
+          <def[context].include[<def[context_element].escaped>]>
         
         - event <def[event_list].unescaped> 
           context:<def[context]>
