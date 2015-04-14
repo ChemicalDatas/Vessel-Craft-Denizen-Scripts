@@ -3,7 +3,6 @@
 
 Autosave:
     type: world
-    debug: false
     autosave_time: d@15m
         
     events:
@@ -13,3 +12,9 @@ Autosave:
             - inject "Citizens Denizens Autosave"
             }
 
+Citizens Denizens Autosave:
+    type: task
+    script:
+    - execute as_server "denizen save"
+    - execute as_server "citizens save"
+    

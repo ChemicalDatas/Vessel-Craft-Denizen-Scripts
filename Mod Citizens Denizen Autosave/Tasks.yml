@@ -1,7 +1,0 @@
-"Citizens Denizens Autosave":
-    type: task
-    debug: false
-    script:
-    - execute as_server "denizen save"
-    - execute as_server "citizens save"
-    
