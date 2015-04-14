@@ -25,7 +25,7 @@ Custom Player Kits:
 
 
     # the kit contents    
-    kit_noob:
+    noob:
         i@iron_block:
             amount:
             - 1
@@ -35,7 +35,7 @@ Custom Player Kits:
             - Paper Weight
             - <player.name>'s Heart
             lore:
-            - <player.names>
+            - <player.name>
             - A piece of <player.names> cold iron heart!
         i@seeds:
         i@pumpkin_seeds:
