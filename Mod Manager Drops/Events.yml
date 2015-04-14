@@ -56,7 +56,6 @@ Player Flagged Bonuses:
 Bonus Handling:
     # This builds an dlist of items for the drop command to handle
     type: procedure
-    debug: false
     definitions: flag|actor
     script:
     - define drop_list li@
