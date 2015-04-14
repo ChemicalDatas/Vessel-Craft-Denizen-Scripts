@@ -15,7 +15,6 @@ Luminescent Items:
         i@glowstone_dust: 5
         i@beacon: 15
         
-    
     type: world
     events:
         on entity damages entity:
@@ -81,7 +80,7 @@ Hand Item Light Update:
         }
     
     - if <def[last_location].exists||false>
-      light 
+      light
       <def[last_location]>
       reset
     
