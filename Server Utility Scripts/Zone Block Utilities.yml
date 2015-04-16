@@ -390,7 +390,11 @@ Entity Display Location:
     - define offset
       <script.yaml_keys[<def[entity].location.direction>]>
     
-    - if <def[vertical].exists> {
+    - define location
+      <def[entity].eye_location.add[<def[offset]>]>
+    
+    #pitch adjustment
+    - if <def[vertical]||not_verticle> != not_verticle {
         - define pitch
           <def[entity].location.pitch>
         
@@ -401,13 +405,14 @@ Entity Display Location:
           define y_offset -1
         
         - define location
-          <def[location].eye_location[0,<def[y_offset]>,0]>
+          <def[location].add[0,<def[y_offset]>,0]>
         }
-    - define location
-      <def[entity].eye_location.add[<def[offset]>]>
     
-    - determine
-      <def[location].sub[0,.9,0]>
+    #height adjustment
+    - define eye_offset <def[entity].eye_location.y.sub[<def[entity].location.y>]>
+    
+    #sub eye offset minus a height of the nameplate to put the start of the nameplate at the 0.0 pitch
+    - determine <def[location].sub[0,<def[eye_offset].sub[1.1]>,0]>
     
 #turn typecheck into typePrep
 Beacon Location:
