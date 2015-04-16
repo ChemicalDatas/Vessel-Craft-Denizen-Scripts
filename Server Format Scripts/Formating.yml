@@ -12,18 +12,44 @@
     format: "[<bold><red>DEBUG<reset>]: <blue><text>"
     
 
-"Color Codes Announcment":
+Color Codes Announcment:
     type: task
+    colors:
+    - bold/&l
+    - underline/&n
+    - italic/&o
+    - magic/&k
+    - strikethrough/&m
+    - reset/&r
+    - black/&0
+    - dark_blue/&1
+    - dark_green/&
+    - dark_aqua/&3
+    - dark_red/&4
+    - dark_purple/&5
+    - gold/&6
+    - gray/&7
+    - dark_gray/&8
+    - blue/&9
+    - green/&a
+    - aqua/&b
+    - red/&c
+    - light_purple/&d
+    - yellow/&e
+    - white/&f
     script:
-    - narrate "<black>&0 - Black        <dark_blue>&1 - Dark Blue       <dark_green>&2 - Dark Green"
-    - narrate "<dark_aqua>&3 - Dark Aqua  <dark_red>&4 - Dark Red        <dark_purple>&5 - Dark Purple"
-    - narrate "<gold>&6 - Gold         <gray>&7 - Grey              <dark_gray>&8 - Dark Gray"
-    - narrate "<blue>&9 - Blue         <green>&a - Green            <aqua>&b - Aqua"
-    - narrate "<red>&c - Red          <light_purple>&d - Light_Purple    <yellow>&e - Yellow"
-    - narrate "<white>&f - White         <gold>&l - <bold>Bold           <reset><gold>&n - <underline>Underline"
-    - narrate "<gold><italic>&o - Italic        <reset><gold>&k - <magic>Magic             <reset><gold>&m - <strikethrough>StrikeThrough"
-    - narrate "<reset><gold>&r - Reset"
+    - define colors <script.yaml_keys[colors]>
+    - foreach <def[colors]> {
+        - define key <def[value].split[/].first>
+        - define valu <def[colors].map_get[<def[key]>]>
+        - define color_key "<%key%><def[key]>"
+        - narrate "<def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
+        }
     
 Formatted:
     type: format
     format: "<proc[Iconize].context[<text>]>"
+    
+Plain:
+    type: format
+    format: <text>
