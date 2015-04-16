@@ -18,7 +18,7 @@ Vote Tracker:
         - flag <def[player]> voted_time:->:<context.time>
         - flag <def[player]> vote_thaked:!
         - flag <def[player]> vote_count:++
-        - announce "<gold><def[player].name.display><reset> voted for the server!"
+        - announce "<gold><def[player].name.display||<def[player].name>><reset> voted for the server!"
         
         on player join:
         - wait d@10s
