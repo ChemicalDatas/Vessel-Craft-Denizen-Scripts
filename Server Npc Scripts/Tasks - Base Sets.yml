@@ -335,18 +335,10 @@ Narrate:
     #and optionally a escaped format.
     type: task
     definitions: words|format
+    default_format: plain
     script:
-    - if <def[format].unescaped||none> == none
-      || !<def[format].exists>
-      || <def[format].unescaped> == ''
-      || <def[format].unescaped> == 'null'
-      define format
-      ''
-      else
-      define format format<&co><def[format]>
-    
-    - narrate <def[words].unescaped>
-      <def[format]>
+    - define format format<&co><def[format].unescaped||<script.yaml_keys[default_format]>>
+    - narrate <def[words].unescaped> <def[format]>
       
 
 Eat Effect:
