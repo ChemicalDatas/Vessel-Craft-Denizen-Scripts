@@ -51,19 +51,6 @@ Display Defaults:
 
 
 
-Determine Max Possible Display Height:
-    #############################################################################################################################
-    #                                                                                                                           #
-    # procedure for figuring out selection indexes                                                                              #
-    #                                                                                                                           #
-    #############################################################################################################################
-    #todo: Calibrate the setting for accuracy at long and short distances.
-    type: procedure
-    definitions: num_plates
-    script:
-    - determine <def[num_plates].mul[.5]>
-    
-
 #todo: complete me
 Update Display Line:
     #############################################################################################################################
@@ -224,11 +211,77 @@ Context Menu:
     - ^define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
     
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
-    - ^define arguments <def[argument_list].reverse.get[<def[option_selected]>].unescaped>
-    - run <def[script]> def:<def[arguments]> instantly
-    #- ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - ^define arguments <def[argument_list].get[<def[option_selected]>]>
+    - ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - run <def[script]> def:<def[arguments].unescaped> instantly
 
-
+Determine Selection Index:
+    type: procedure
+    definitions: num_options|location
+    type_location: as_location
+    nameplate_entitylocation_offset: -1.6
+    script:
+    #- announce ""
+    #- announce ""
+    - define player_loc <player.eye_location>
+    - define player_pitch <player.location.pitch.mul[-1]>
+    
+    #todo:change me, Id like the player to be able to look down on a display
+    - if <def[player_pitch].is[less].than[0]>
+      define player_pitch 0
+    
+    #the location passed to this is the entity location, not the nameplate location
+    - define location <def[location].add[0,<script.yaml_keys[nameplate_entitylocation_offset]>,0]>
+    #- announce "trying <player.chat_history_list.first>"
+    #- define location <def[location].add[0,<player.chat_history_list.first>,0]>
+    
+    #if player is looking horizontal to up else looking down
+    - if <def[player_pitch].is[less].than[0]> {
+        - define trig_funct acos
+        - define player_pitch <def[player_pitch].mul[-1]>
+        } else {
+        - define trig_funct acos
+        }
+    
+    #if <poi_b_y_diff> is -
+    #point_b
+    - define y_difference  <def[location].y.sub[<def[player_loc].y>]>
+    - define point_b <def[location].sub[0,<def[y_difference]>,0]>
+    
+    #figuring the adjacent side
+    - define adjacent <def[player_loc].distance[<def[point_b]>]>
+    
+    
+    - define closest_sign_index 1
+    - define last_smallest_difference 360
+    #- announce ""
+    #- announce "<script.name> starting angle checking."
+    #- announce "player_y<&co> <def[player_loc].y> loc_y<&co> <def[location].y> <&nl>y_difference<&co> <def[y_difference]> <&nl>point_b_y<&co> <def[point_b].y> <&nl>side_a_length <def[side_a_length]>"
+    - repeat <def[num_options]> {
+        #- announce ""
+        - define sign_location <def[location].add[0,<def[value].mul[.25]>,0]>
+        - define hypotenuse <player.location.distance[<def[sign_location]>]>
+        #- announce "sign_loc_y<&co> <def[sign_location].y> point_b_y<&co> <def[point_b].y> side_b_length<&co> <def[side_b_length]>"
+        
+        - define ratio <def[adjacent].div[<def[hypotenuse]>]>
+        - define target_angle <def[ratio].%trig_funct%.to_degrees>
+        
+        #- announce "ratio <def[ratio]> target_angle<&co> <def[target_angle]>"
+        #- announce "target_angle <def[target_angle]>"
+        #- announce "player pitch <def[player_pitch]>"
+        
+        #- announce "player<&co> <player.location.pitch> sign<&co> <def[value]> atan<&co> <def[angle]>"
+        - define angle_difference <def[target_angle].sub[<def[player_pitch]>]>
+        #- announce "angle_difference <def[angle_difference]> <def[last_smallest_difference]> smaller? <def[angle_difference].abs.is[less].than[<def[last_smallest_difference]>]>"
+        - if <def[angle_difference].abs.is[less].than[<def[last_smallest_difference]>]> {
+            - define last_smallest_difference <def[angle_difference].abs>
+            - define closest_sign_index <def[value]>
+            }
+        #- announce "last_smallest_difference<&co> <def[last_smallest_difference]> which is index<&co> <def[closest_sign_index]>"
+        }
+    #- announce "<gold>index<&co> <def[closest_sign_index]>"
+    - determine <def[closest_sign_index]>
+    
 Context Menu Display Timeout:
     #
     # Removes entities after the timeout
