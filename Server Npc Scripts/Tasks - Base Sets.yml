@@ -103,7 +103,10 @@ Delay:
     type: task
     definitions: delay
     script:
-    - queue queue:<npc.id>_action_queue
+    - define queue
+      <npc.id>_action_queue
+    
+    - queue <def[queue].as_queue>
       delay:<def[delay]||d@1s>
     
 
@@ -118,12 +121,8 @@ Pause Queue:
       <npc.id>_action_queue
       
     - if <queue.exists[<def[queue]>]>
-      queue
-      queue:<def[queue]>
+      queue <def[queue].as_queue>
       pause
-      else
-      announce "
-      Queue did not exist to pause!"
     
     #- announce "Pausing <red>Queue  (resuming when a resume queue is called...)"
 
