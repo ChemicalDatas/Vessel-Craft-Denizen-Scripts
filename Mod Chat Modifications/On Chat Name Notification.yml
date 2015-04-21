@@ -13,8 +13,22 @@ Player Chat Notification:
         #if each player chats and theres a lot of players.....
         - define message <context.message>
         - if <def[message].contains[@]> {
+            - announce "testing?"
             - define target_string  "<def[message].after[@].split[ ].get[first]>"
-            - define target         <server.match_player[<def[target_string].replace[@]>]>
+            - define target         <server.match_player[<def[target_string]>]>
             - if !<def[target].has_flag[chat_notifications]> queue clear
             - playsound <def[target]> sound:<script.yaml_key[values.noise_type]> volume:<script.yaml_key[values.volume]> pitch:<script.yaml_keys[values.pitch]>
             }
+
+Ping Player:
+    type: task
+    definitions: text
+    speed: 1t
+    script:
+    - define uuids <server.list_online_players>
+    - define players <def[uuids].parse[name]>
+    - define players <def[players].include[<def[uuids].parse[name.display]>]>
+    - define players <def[players].include[<def[uuids].parse[name.list]>]>
+    - if <def[text].contains_any_text[<def[players]>]> {
+        - narrate "found player"
+        }
