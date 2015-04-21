@@ -75,7 +75,7 @@ Remove Stray Display:
     definitions: location|range
     script:
     - if <def[range]> == null define range 10
-    - define target <def[location].find.entities[ArmorStand].within[<def[range]>]>
+    - define target <def[location].find.entities[Armor_Stand].within[<def[range]>]>
     - remove <def[target]>
     - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
 
@@ -96,6 +96,14 @@ Display Base:
     #############################################################################################################################
     type: procedure
     definitions: location|text_list|title|persistant
+    default_title: none
+    default_small: 1b
+    default_invulenerable: 1b
+    default_marker: 1
+    default_persistance: 1b
+    default_invisible: 1b
+    default_nobaseplate: 1b
+    default_nogravity: 1b
     script:
     # Raise error if recieved bad arguments
     - if <def[location]||none> == none 
@@ -124,24 +132,24 @@ Display Base:
     - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player||<npc||none>>|text|<def[text_list]>|title|<def[title]>" save:Display
     - define event_determination <entry[Display].determinations>
     - if <def[event_determination].contains[cancelled]> queue clear
-    #this will 
     - if <def[event_determination].contains[none]> define text <def[event_determination]>
     
     # The meat of the script
     - define display_entities li@
     - define text_list <def[text_list].unescaped.as_list>
     - define location <def[location].below>
+    - define pre_search_size <def[text_list].size>
+    - define preexisting_armor_stands <def[location].find.entities[Armor_Stand].within[<def[pre_search_size]>]>
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
         - define new_y <def[loop_index].mul[.25]>
-        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:1,Marker:1b,Invisible:1,NoBasePlate:1,NoGravity:1,PersistenceRequired:<def[persistant]>}"
-        - define stand <def[location].add[0,<def[new_y]>,0].find.entities[Armor_Stand].within[1]>
-        - define display_entities <def[display_entities].include[<def[stand]>].deduplicate>
+        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:<script.yaml_keys[default_small]>,Marker:<script.yaml_keys[default_marker]>,Invisible:<script.yaml_keys[default_invisible]>,Invulnerable:<script.yaml_keys[default_invulenerable]>,NoBasePlate:<script.yaml_keys[default_nobaseplate]>,NoGravity:<script.yaml_keys[default_nogravity]>,PersistenceRequired:<def[persistant]>}"
+        - define new_stands <def[location].add[0,<def[new_y]>,0].find.entities[Armor_Stand].within[1]>
+        - define display_entities <def[display_entities].include[<def[new_stands]>]>
         }
-    #
     #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
     #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
-    - determine <def[display_entities].escaped>
+    - determine <def[display_entities].deduplicate.exclude[<def[preexisting_armor_stands]>].escaped>
     
 
 Display:
@@ -149,11 +157,10 @@ Display:
     # The culmulation of the display sets of scripts
     # display_time is optional as it defaults to 2 seconds
     #
-    #
     type: task
     definitions: location|text|display_time
     script:
-    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>]>"
+    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>|no_title]>"
     - wait <def[display_time]||d@30t>
     - remove <def[display_entities].unescaped>
     
