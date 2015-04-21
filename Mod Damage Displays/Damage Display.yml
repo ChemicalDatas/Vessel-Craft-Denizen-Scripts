@@ -5,7 +5,6 @@ DamageDisplay:
     - item_frame
     events:
         on entity damaged:
-        
         - if <script.yaml_keys[entity_blacklist].contains[<context.entity.entity_type>]>
           queue clear
         - define damage <context.damage>
