@@ -1,8 +1,14 @@
 DamageDisplay:
-  type: world
-  events:
-    on entity damaged:
-    - define damage <context.damage>
-    - if <def[damage].is[or_less].than[0]> queue clear
-    - define text "<escape:li@<black><context.cause>|<red>[bheart] -<context.damage.round_down>>"
-    - run "Display" "def:<context.entity.location.add[0,1.5,0]>|<def[text]>|d@13t"
+    type: world
+    entity_blacklist:
+    - armor_stand
+    - item_frame
+    events:
+        on entity damaged:
+        
+        - if <script.yaml_keys[entity_blacklist].contains[<context.entity.entity_type>]>
+          queue clear
+        - define damage <context.damage>
+        - if <def[damage].is[or_less].than[0]> queue clear
+        - define text "<escape:li@<black><context.cause>|<red>[bheart] -<context.damage.round_down>>"
+        - run "Display" "def:<context.entity.location.add[0,1.5,0]>|<def[text]>|d@13t"
