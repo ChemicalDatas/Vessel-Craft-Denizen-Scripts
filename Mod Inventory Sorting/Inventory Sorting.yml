@@ -1,0 +1,10 @@
+Inventory Sorting:
+    type: world
+    events:
+        on player clicks in inventory:
+        - if <context.slot> == -998
+          && <context.inventory.inventory_type> == chest {
+            - inventory close
+            - inventory swap d:<context.inventory> o:<context.inventory.list_contents.alphanumeric>
+            - inventory open destination:<context.inventory>
+            }
