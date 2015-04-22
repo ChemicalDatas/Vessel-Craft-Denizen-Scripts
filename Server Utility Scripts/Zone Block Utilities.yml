@@ -401,13 +401,13 @@ Entity Display Location:
           define y_offset -1
         
         - define location
-          <def[location].eye_location[0,<def[y_offset]>,0]>
+          <def[entity].eye_location[0,<def[y_offset]>,0]>
         }
     - define location
       <def[entity].eye_location.add[<def[offset]>]>
     
     - determine
-      <def[location].sub[0,.9,0]>
+      <def[location].sub[0,5.9,0]>
     
 #turn typecheck into typePrep
 Beacon Location:
