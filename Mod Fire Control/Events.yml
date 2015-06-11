@@ -35,6 +35,7 @@ Mod Scripted Fire Protection:
         
         on block burns:
         - define location <context.location>
+        - define queue fire_restoration
         
         #could modify to handle bukkit enums too
         # The next lines are to build up a queue to check the size of.
@@ -43,8 +44,7 @@ Mod Scripted Fire Protection:
         #- if "<script.yaml_keys[enums].contains[<def[location].material.bukkit_enum>]>" {} 
         - run ModifyBlock def:<def[location]>|<def[location].material> id:fire_restoration delay:<script.yaml_keys[fire_restoration_delay]>
         
-        
-        - define size <q@fire_restoration.size||0>
+        - define size <def[queue].size||0>
         
         - if <server.has_flag[fire_emergency]> {
             - define fire_locations <def[location].find.blocks[m@fire].within[15]>
