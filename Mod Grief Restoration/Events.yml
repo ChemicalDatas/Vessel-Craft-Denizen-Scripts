@@ -373,14 +373,3 @@ Auto breakable Restore:
     - announce "<script.name> Finished restoring the previously broken glass from the .yml file." to_console
     - event "Request Breakable HardSave"
     
-tb:
-    type: task
-    definitions: message
-    script:
-    - repeat 10 {
-        - announce "<def[message]> <def[value]>"
-        - bungee all {
-            - announce "<def[message]> <def[value]>"
-            }
-        - wait d@2s
-        }
