@@ -2,7 +2,7 @@
 # A form of griefprevention that allows players to grief but restores the griefed items
 # 
 
-breakable Listener:
+Block Healing Listener:
     type: world
     database_path: script_database\griefed_blocks.yml
     database_id: griefed_blocks
@@ -10,9 +10,26 @@ breakable Listener:
     recursion_limit: 20
     dump_breakable_delay: d@10s
     
+    
     #because this will auto load chunks and reset the breakables back
     load_write_save_delay: d@1s
     auto_restore_on_start_delay: d@1m
+    #what material to replace with when restored
+    replaceables:
+        m@stone_brick:
+        - m@cracked_stone_brick
+        m@cracked_stone_brick:
+        - m@cobblestone
+        m@stone:
+        - m@cobblestone
+        m@cobblestone:
+        - m@gravel
+        m@gravel:
+        - m@air
+        m@grass:
+        - m@dirt
+        m@tnt:
+        - m@air
     breakable_list:
     - m@glass
     - m@white_stained_glass
@@ -57,46 +74,97 @@ breakable Listener:
     events:
         on request breakable hardsave:
         - define queue_id request_breakable_save
+        
         - if !<queue.exists[<def[queue_id]>]>
           run "Yaml Save"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
           id:<def[queue_id]>
           delay:<script.yaml_keys[dump_breakable_delay]>
         
+        
         on server start:
         - run "Yaml Load"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
+        
         - run "Auto breakable Restore"
           def:<script.yaml_keys[database_id]>|<script.yaml_keys[load_write_save_delay]>
           delay:<script.yaml_keys[auto_restore_on_start_delay]>
+        
         
         on server stop:
         - run "Yaml Save"
           def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
         
         
+        on entity explodes:
+        - define locations
+          <context.blocks>
         
+        - define path
+          exploded_block_sets.<util.random.duuid>
+        
+        - define yaml_id
+          <script.yaml_keys[database_id]>
+        
+        - define delay
+          <script.yaml_keys[restore_delay]>
+        
+        - run "Save breakable"
+          def:<def[yaml_id]>|<def[locations].escaped>|<def[path]>
+          instantly
+        
+        - run "Restore breakable"
+          def:<def[yaml_id]>|<def[path]>
+          delay:<def[delay]>
+        
+        
+        #on entity explosion primes:
+        #- announce "Entity explosion primes?"
+        
+        
+        on block burns:
+        - define location
+          li@<context.location>
+        
+        - define path
+          burned_block_sets.<util.random.duuid>
+        
+        - define yaml_id
+          <script.yaml_keys[database_id]>
+        
+        - define delay
+          <script.yaml_keys[restore_delay]>
+        
+        - run "Save breakable"
+          def:<def[yaml_id]>|<def[location].escaped>|<def[path]>
+          instantly
+        
+        - run "Restore breakable"
+          def:<def[yaml_id]>|<def[path]>
+          delay:<def[delay]>
         
         
         on player stops sprinting:
         - define locations li@<player.location.above>
         
         - inject locally
-          path:script_meat
+          path:shatter_then_replace
         
         - hurt 2
+        
         
         on entity damaged by fall:
         - define locations
           <context.entity.location.below>
         
         - inject locally
-          path:script_meat
+          path:shatter_then_replace
         
         - determine cancelled
         
-        #this is bugged as denizen returns some block thats 5 blocks away from the actual block hit...
+        
+        #this event is bugged as denizen returns some block thats 5 blocks away from the actual block hit...
         on projectile hits block:
         - define target_offsets li@0,0,0|1,0,0|-1,0,0|0,1,0|0,-1,0|0,0,1|0,0,-1
         
@@ -115,10 +183,10 @@ breakable Listener:
             }
         
         - inject locally
-          path:script_meat
+          path:shatter_then_replace
         
     
-    script_meat:        
+    shatter_then_replace:        
     - define materials
       <script.yaml_keys[breakable_list].as_list>
     
@@ -175,9 +243,7 @@ Save breakable:
     definitions: yaml_id|locations|path
     script:
     - define locations <def[locations].unescaped>
-    
-    - define locations_materials
-      <def[locations].parse[material]>
+    - define locations_materials <def[locations].parse[material]>
     
     - if !<def[path].exists>
         || <def[path]>      == ""
@@ -307,4 +373,14 @@ Auto breakable Restore:
     - announce "<script.name> Finished restoring the previously broken glass from the .yml file." to_console
     - event "Request Breakable HardSave"
     
-    
+tb:
+    type: task
+    definitions: message
+    script:
+    - repeat 10 {
+        - announce "<def[message]> <def[value]>"
+        - bungee all {
+            - announce "<def[message]> <def[value]>"
+            }
+        - wait d@2s
+        }
