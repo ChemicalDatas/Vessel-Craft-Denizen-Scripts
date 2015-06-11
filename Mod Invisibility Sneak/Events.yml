@@ -8,19 +8,34 @@
 Invisibility Sneak:
     type: world
     #invisibility ranges.
-    close_range: 6
-    max_range: 30
-        
+    nearby: 6
+    faraway: 30
+    #The nearby check checks within the nearby range for entities, if yes, dont proceed
+    #The faraway check checks for entities withn range, if theres none, dont proceed
+    #comment both to just allow invisibility with out entity restriction.
+    checks:
+    - nearby
+    #- faraway
     events:
         on player starts sneaking:
-        - if "<proc[Reason to Turn Invisible]>" {
-            - playeffect <player.location> large_smoke qty:50
-            - invisible <player> state:true
-            - while <player.has_effect[invisibility]> {
-                - playeffect <player.location.sub[0,1.5,0]> effect:footstep
-                - wait d@15t-2s
-                }
+        - foreach <script.yaml_keys[checks].as_list> {
+            - if <def[value].is[==].to[nearby]>
+              define contains !
+              else
+              define contains ''
             
+            - define distance
+              <script.yaml_keys[<def[value]>]>
+              
+            - if %contains%<player.location.find.entities.within[<def[distance]>].exclude[<player>].is_empty>
+              queue clear
+            }
+        - playeffect <player.location> large_smoke qty:50
+        - invisible <player> state:true
+        - wait d@1s
+        - while <player.is_sneaking> {
+            - playeffect <player.location.sub[0,1.3,0]> effect:footstep
+            - wait d@15t-2s
             }
         
         on player stops sneaking:
@@ -29,44 +44,3 @@ Invisibility Sneak:
             - playeffect <player.location> large_smoke qty:50
             - invisible <player> state:false
             }
-    
-Reason to Turn Invisible:
-    type: procedure
-    script:
-    - if "<proc[Players Within Range]>" determine true
-    - if "<proc[Npcs Within Range]>" determine true
-    - determine false
-
-Players Within Range:
-    type: procedure
-    script:
-    - define range "<s@Invisibility Sneak.yaml_keys[close_range]>"
-    - define close_players <player.location.find.players.within[<def[range]>].exclude[<player>].get[1]||li@>
-        
-    - if <def[close_players].is_empty> {
-        - define range "<s@Invisibility Sneak.yaml_keys[max_range]>"
-        - define players <player.location.find.players.within[<def[range]>].exclude[<player>].get[1]||li@>
-        - if !<def[players].is_empty> determine true
-        }
-    - determine false
-    
-
-
-Npcs Within Range:
-    type: procedure
-    script:
-    - define range "<s@Invisibility Sneak.yaml_keys[close_range]>"
-    - define close_npcs <player.location.find.npcs.within[<def[range]>].get[1]||li@>
-    - if <def[close_npcs].is_empty> {
-        - define range "<s@Invisibility Sneak.yaml_keys[max_range]>"
-        - define npcs <player.location.find.npcs.within[<def[range]>].get[1]||li@>
-        - if !<def[npcs].is_empty> determine true
-        }
-    - determine false
-
-
-
-
-
-
-

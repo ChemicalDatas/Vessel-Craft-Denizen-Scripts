@@ -56,16 +56,7 @@ Player Bow Handling:
         on entity shoots block:
         
         on entity damaged by arrow:
-        - If <context.projectile.location.y> >= <context.entity.eye_location.y.sub[-0.05]> && <context.projectile.location.y> <= <context.entity.eye_location.y.add[0.70]> {
-            - ^playeffect <context.entity.eye_location> effect:RED_DUST qty:10 offset:0.5     
-            - ^If <context.damager.is_player> Narrate targets:<context.damager> "<proc:Headshot>"
-            - ^If <context.entity.equipment.helmet> == null determine <math:<context.damage>*1.5>
-            } else {
-            - determine <math:<context.damage>*1.25>
-            }
 
-
-  
 #######################################################################################        
 #Breaking glass, ice, blocks with bows
 #Special Abilities: Lightning, Razor, Piercing, Explosive, Compression, Poison, Slow, Net, Fire, Doombringer
@@ -116,19 +107,3 @@ Player Bow Handling:
 
 
 
-
-#Determines the message to send on headshot
-'Headshot':
-  type: Procedure
-  script:
-  - if <context.entity.name> == "Spider"{
-    - random 3
-    - determine "Critical!"
-    - determine "Abdomen Shot!"
-    - determine "Nice Shot!"
-    } else {
-    - random 3
-    - determine "Boom! Headshot!"
-    - determine "That's gonna leave a mark!"
-    - determine "Headshot!"
-    }

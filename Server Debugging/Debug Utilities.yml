@@ -101,7 +101,7 @@ ScriptDebug:
         
         #ignored printing data based off of whats generated in the script get debug data
         - define ignored_data 
-            li@none|ignored_data|loop_index|value|type|accessor|attribute|object|accessor_types|npc_accessors|player_accessors|queue_accessors|script_accessors
+            li@none|ignored_data|loop_index|value|type|accessor|attribute|object|accessor_types|npc_accessors|player_accessors|queue_accessors|script_accessors|file_location|file_name|file
         
         - define ignored_data
           <def[ignored_data].include[player_list_flags]>
