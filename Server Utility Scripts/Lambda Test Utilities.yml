@@ -1,0 +1,110 @@
+#
+# 
+#
+# is hungry(npc)
+#
+# define str rock
+# can_equip(item(str))
+#
+#
+# 
+# set_goal()
+#
+#
+#find(target_material)
+# 
+#
+#
+#
+#
+internal_lambda:
+    type: procedure
+    # li@<add|<3,3>>|<>|
+    script:
+    - foreach <queue.definitions> {
+        - 
+        }
+    - inject locally ""
+
+#
+
+
+
+
+
+
+
+
+#############################################################################################################
+############################### Lambda ######################################################################
+#############################################################################################################
+
+__Return__:
+    #
+    # Executes code from a script container, This will None unless the code determines the return
+    #
+    type: procedure
+    definitions: script|path
+    script:
+    - define return None
+    - inject <def[script]> path:<def[path]>
+    - determine <def[return]>
+    
+
+lambda:
+    #return another scripts return
+    type: procedure
+    definitions: procedure|path|arguments
+    script:
+    - 
+    - determine <def[]>
+    
+#
+lambda_left_more_than_right:
+    #takes a list of definitions required to be in map format
+    type: task
+    required_definitions:
+    - left_procedure
+    - right_procedure
+    - left_arguments
+    - right_arguments
+    script:
+    - inject define_map_arguments
+    - inject check_for_required_definitions
+    - if <proc[%left_procedure%].context[<def[left_arguments].unescaped>].is[more].than[<proc[%right_procedure%].context[<def[right_arguments].unescaped>]>]>
+
+check_for_required_definitions:
+    type: task
+    script:
+    - foreach <queue.script.yaml_keys[required_definitions]> {
+        - if !<def[%value%].exists> {
+            - define message "Was <def[value]> defined in this script?"
+            - event "script generates error" context:queue|<queue>|script|<queue.script>|message|<def[message]>
+            - queue clear
+            }
+        }
+
+define_map_arguments:
+    type: task
+    script:
+    - foreach <queue.definitions> {
+        - define <def[value].split[/].get[1]> <def[%value%].split[/].get[2]>
+        }
+    - define loop_index:!
+    - define value:!
+
+
+teest_procedure:
+    type: procedure
+    definitions: procedure|args
+    script:
+    - 
+    - determine <def[procedure].context[<def[args]>]>
+
+teestP:
+    type: procedure
+    script:
+    - announce "proc worked"
+    - determine true
+
+

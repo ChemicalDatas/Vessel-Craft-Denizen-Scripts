@@ -588,19 +588,6 @@ In Allowed Group:
             # }
         
 
-#
-__Return__:
-    #
-    # Executes code from a script container, This will None unless the code determines the return
-    #
-    type: procedure
-    definitions: script|path
-    script:
-    - define return None
-    - inject <def[script]> path:<def[path]>
-    - determine <def[return]>
-    
-
 Wait for Valid Player:
     #
     #A script designed to delay a script when injected
