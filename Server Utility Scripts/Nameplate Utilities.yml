@@ -79,7 +79,9 @@ Remove Stray Display:
     default_range: 10
     script:
     - inject typecheck
-    - if <def[range]> == null define range 10
+    - foreach <queue.definitions.as_list> {
+        - announce "<script.name> %value% <def[%value%]>"
+        }
     - define target <def[location].find.entities[Armor_Stand].within[<def[range]>]>
     - remove <def[target]>
     - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
@@ -165,7 +167,7 @@ Display:
     type: task
     definitions: location|text|display_time
     script:
-    - wait d@1t
+    - wait d@2t
     - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>|no_title]>"
     - wait <def[display_time]||d@30t>
     - remove <def[display_entities].unescaped>
