@@ -707,7 +707,7 @@ __Notify Debug:
         - define player_item_cursor_on  <def[p].item_on_cursor||none>
         
         - define player_money           <def[p].money||none>
-        - define player_flags           "<def[p].list_flags.alphabetical.space_separated.replace[ ].with[<&nl>]||none>"
+        - define player_flags           "<def[p].list_flags.alphabetical.as_string.replace[ ].with[<&nl>]||none>"
         - define player_fall_distance   <def[p].fall_distance||none>
         
         - define player_debug_          <def[p].debug||none>
