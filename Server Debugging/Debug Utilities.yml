@@ -456,6 +456,9 @@ typecheck:
     # Todo: add support for special values and accessors ex: contains[__must_contain_this_value],
     # this might be beyond the scope and the security value of the script.
     #
+    # This does use the <parse> tag to fill out default values, meaning you should beware 
+    # What the default values will be parsed out to. It should be straitforward and already defined at
+    # someplace within the script as a yaml.key value.
     type: task
     speed: 0t
     script:
@@ -465,6 +468,7 @@ typecheck:
     - ^define __required_script_definitions
       <queue.script.yaml_key[definitions].as_list||none>
     
+    #finds default values and missing values then defines those within the script
     - if <def[__required_script_definitions]> != none {
         
         - ^define __present_definitions
@@ -475,8 +479,13 @@ typecheck:
               <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
             
             - foreach <def[__missing_definitions]> {
-                - if <queue.script.yaml_key[default_<def[value]>]||none> != none
-                  define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
+                - if <queue.script.yaml_key[default_<def[value]>]||none> != none {
+                    - define __missing_definitions
+                      <def[__missing_definitions].exclude[<def[value]>]>
+                    
+                    - define %value%
+                      <parse:<queue.script.yaml_key[default_<def[value]>]>>
+                    }
                 }
             
             - if !<def[__missing_definitions].is_empty> {
@@ -508,8 +517,12 @@ typecheck:
               <def[%value%].%__accessor%||failed_tag>
             
             - if <def[__expected_value]> == failed_tag {
-                - ^define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
-                - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                - ^define __message
+                  "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
+                
+                - ^event "script generates error"
+                  context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                
                 - queue clear
                 }
             }
@@ -519,10 +532,12 @@ __tstchecking:
     type: task
     type_int: as_int
     type_element: prefix
-    definitions: int|element
+    definitions: int|element|extra_value
+    default_int: 1
+    default_extra_value: default_hardcoded_script_value
     script:
     - inject typecheck
-    - announce "<def[int]> <def[int].type>"
+    - announce "the extra value was<&co> <def[extra_value]>"
     - announce "<script.name> completed its task and did not raise an error."
 
 
