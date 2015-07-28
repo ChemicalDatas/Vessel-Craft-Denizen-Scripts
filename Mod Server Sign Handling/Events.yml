@@ -21,13 +21,13 @@ Sign Handling:
         on player changes sign_post:
         #Some selective escaping for special characters.
         - define new <proc[Iconize].context[<context.new.escaped>].unescaped>
-        - announce "<script.name> <def[new].as_string> "
-        - determine <def[new].as_string>
+        - announce "<script.name> <def[new].space_separated> "
+        - determine <def[new].space_separated>
         
         on player changes wall_sign:
         #Some selective escaping for special characters.
         - define new <proc[Iconize].context[<context.new.escaped>]>
-        - announce "<script.name> <def[new].as_string> "
+        - announce "<script.name> <def[new].space_separated> "
         - determine <def[new].unescaped>
             
         on player animates ARM_SWING:
@@ -38,7 +38,7 @@ Sign Handling:
           queue clear
         
         - if <player.has_flag[editing_sign]>
-          run "Modify Sign Line" "def:<def[looking_at]>|<player.flag[editing_sign].as_list.as_string.replace[ ].with[|]>"
+          run "Modify Sign Line" "def:<def[looking_at]>|<player.flag[editing_sign].as_list.space_separated.replace[ ].with[|]>"
         
         
         

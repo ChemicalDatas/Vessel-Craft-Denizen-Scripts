@@ -8,5 +8,5 @@ Get and Announce Player Spell List:
     script:
     - execute as_server "cast list <server.match_player[<def[player]>].name>" save:spell_list
     - define list <entry[spell_list].output>
-    - announce <gold><def[list].as_string>
+    - announce <gold><def[list].space_separated>
     

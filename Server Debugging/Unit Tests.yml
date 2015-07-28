@@ -3,7 +3,7 @@ type parse unittests:
     #todo: finish me
     type: procedure
     definitions: element|type_tests
-    default_type_tests: li@as_boolean|as_decimal|as_int|as_money|as_list|as_script|as_queue|as_duration|as_string|as_chunk|as_color|as_cuboid|as_entity|as_inventory|as_item|as_location|as_material|as_npc|as_player|as_world|as_plugin
+    default_type_tests: li@as_boolean|as_decimal|as_int|as_money|as_list|as_script|as_queue|as_duration|space_separated|as_chunk|as_color|as_cuboid|as_entity|as_inventory|as_item|as_location|as_material|as_npc|as_player|as_world|as_plugin
     script:
     - define type_list li@
     - define type_tests <def[type_tests].unescaped.as_list||<script.yaml_key[default_type_tests]>>

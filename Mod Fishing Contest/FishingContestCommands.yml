@@ -42,7 +42,7 @@ Fishing_Contest:
             }
         
         - narrate
-          "<blue>args are<&co> <gold><def[commands_list].as_string>"
+          "<blue>args are<&co> <gold><def[commands_list].space_separated>"
         
         
         on server start:

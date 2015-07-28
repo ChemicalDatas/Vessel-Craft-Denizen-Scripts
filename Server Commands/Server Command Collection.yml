@@ -157,10 +157,10 @@ Commands:
                 - narrate "could not find a matching player for <context.args.get[1]>"
                 - queue clear
                 }
-            - define name <context.args.get[2].as_string>
+            - define name <context.args.get[2].space_separated>
             } else {
             - define player <player>
-            - define name <context.args.as_string>
+            - define name <context.args.space_separated>
             }
         
         - define name <proc[Iconize].context[<def[name]>]>

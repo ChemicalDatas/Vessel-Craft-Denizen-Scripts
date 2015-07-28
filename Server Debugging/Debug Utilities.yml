@@ -481,7 +481,7 @@ typecheck:
             
             - if !<def[__missing_definitions].is_empty> {
                 - ^define __message
-                  "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].as_string>"
+                  "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].space_separated>"
                 
                 - ^event "script generates error"
                   context:message|<def[__message]>|script|<queue.script>|queue|<queue>
@@ -669,7 +669,7 @@ __Notify Debug:
         - define npc_script             <def[n].script||No_Attached_Script>
         - define npc_script_erroring    <tern[<el@<def[n].script>.is[==].to[<def[skript]>]>]:<def[n].script>_Caused_The_Error||The_Npc_Script_Did_Not_Cause_The_Error>
         
-        - define npc_flags              <def[n].list_flags.as_string||No_Flags>
+        - define npc_flags              <def[n].list_flags.space_separated||No_Flags>
         - define npc_engaged            <def[n].is_engaged||Not_Engaged>
         - define npc_ <def[n].||>
         - define npc_ <def[n].||>
@@ -677,9 +677,9 @@ __Notify Debug:
         - define npc_ <def[n].||>
         - define npc_ <def[n].||>
         - define npc_ <def[n].||>
-        - define npc_anchors            <def[n].anchor.list.as_string||No_Anchors>
-        - define npc_traits             <def[n].traits.as_string||No_Traits>
-        - define npc_inventory          <def[n].inventory.list_contents.as_string||No_Inventory>
+        - define npc_anchors            <def[n].anchor.list.space_separated||No_Anchors>
+        - define npc_traits             <def[n].traits.space_separated||No_Traits>
+        - define npc_inventory          <def[n].inventory.list_contents.space_separated||No_Inventory>
         - define nearby_npcs            <def[n].location.find.npcs.within[25]>
         - define npc_debug "
         
@@ -707,7 +707,7 @@ __Notify Debug:
         - define player_item_cursor_on  <def[p].item_on_cursor||none>
         
         - define player_money           <def[p].money||none>
-        - define player_flags           "<def[p].list_flags.alphabetical.as_string.replace[ ].with[<&nl>]||none>"
+        - define player_flags           "<def[p].list_flags.alphabetical.space_separated.replace[ ].with[<&nl>]||none>"
         - define player_fall_distance   <def[p].fall_distance||none>
         
         - define player_debug_          <def[p].debug||none>

@@ -34,7 +34,7 @@ Message Nearby Players of Chat:
         - if <def[direction]> == null
           define direction nearby
         
-        - define message "<proc[Iconize].context[<def[message].as_string.replace[\]>]>"
+        - define message "<proc[Iconize].context[<def[message].space_separated.replace[\]>]>"
         
         - narrate "[<player.name>][<def[distance].round_up>m][<yellow><def[direction]><reset>]: <def[message]>"
           targets:<def[value]>

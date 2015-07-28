@@ -97,7 +97,7 @@ ncptest:
       <entry[ncp_stats].output>
     
     - define reduced
-      "<def[ncpstats].as_string.split[<&co>]>"
+      "<def[ncpstats].space_separated.split[<&co>]>"
     
     - define lag_spikes_data
       <def[reduced].get[2]>

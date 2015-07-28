@@ -26,7 +26,7 @@
         }
     #- narrate "Words after replacement: <def[words]>"
     
-    - define words "<def[words].as_string>"
+    - define words "<def[words].space_separated>"
     #- narrate "Words after string-ization: <def[words]>"
     
     - define words "<def[words].replace[li@]>"

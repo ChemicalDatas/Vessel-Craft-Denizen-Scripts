@@ -43,12 +43,12 @@
         - narrate "<yellow>Your options are<&co> <red><def[commands_list].space_separated>"
         
         q_task:
-        - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
+        - define command "<context.args.get[2].to[<context.args.size>].space_separated.substring[4]>"
         - execute as_player "ex run 'Add Task' 'def:%command%'"
         - narrate "Added to queue:<red> %command%"
         
         queue_escaped_task:
-        - define command "<context.args.get[2].to[<context.args.size>].as_string.substring[4]>"
+        - define command "<context.args.get[2].to[<context.args.size>].space_separated.substring[4]>"
         - execute as_player "ex run 'Add Escaped Task' 'def:<escape:%command%>'"
         - narrate "Added to queue:<red> %command%"
         
