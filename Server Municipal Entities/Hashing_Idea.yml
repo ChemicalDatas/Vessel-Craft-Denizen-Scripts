@@ -1,0 +1,15 @@
+#armor stands as point refrences for towns?
+#That would give an identity to a town, and have it placed by flags
+
+
+entity governance rules:
+    type: task
+    definitions: entity_refrence
+    script:
+    - define  entity <def[entity_refrence]||server>
+    - define over_rule <server.flag[governance.<queue>.parrent]>
+    - define this_rules <server.flag[]>
+    - while <server.flag[governance.<queue>]> {
+        -
+        - wait <def[check_delay]||d@1m>
+        }

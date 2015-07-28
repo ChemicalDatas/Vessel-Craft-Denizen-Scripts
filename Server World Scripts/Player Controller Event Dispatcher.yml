@@ -16,7 +16,7 @@ Controller Event Detection2:
         #################################################
         on player starts sneaking:
         - define key <player.name>.<script.name>.sneak_doubletap
-        - define duration "<script.yaml_keys[sneak doubletap timeout]>"
+        - define duration "<script.yaml_key[sneak doubletap timeout]>"
         
         - run "Write Timed Data"
           def:++|%key%|<def[duration]>|temp
@@ -65,7 +65,7 @@ Controller Event Detection2:
         #####################################################
         on player right clicks block:
         - define duration 
-          "<script.yaml_keys[concentrate counter]>"
+          "<script.yaml_key[concentrate counter]>"
           
         - define action 
           "timed concentrate counter"
@@ -98,7 +98,7 @@ Controller Event Detection2:
         #################################
         on player right clicks entity:
         - define duration
-          "<script.yaml_keys[concentrate counter]>"
+          "<script.yaml_key[concentrate counter]>"
           
         - define action
           "timed concentrate counter"
@@ -143,7 +143,7 @@ Controller Event Detection2:
         - define target             <player.target||<player.location.cursor_on.simple.as_location>>
         
         - define duration 
-          "<script.yaml_keys[focus counter]>"
+          "<script.yaml_key[focus counter]>"
           
         - define action
           "timed focus counter"

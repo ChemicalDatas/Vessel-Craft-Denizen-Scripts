@@ -8,7 +8,7 @@ Autosave:
     events:
         on server start:
         - while true {
-            - wait <script.yaml_keys[autosave_time]>
+            - wait <script.yaml_key[autosave_time]>
             - inject "Citizens Denizens Autosave"
             }
 

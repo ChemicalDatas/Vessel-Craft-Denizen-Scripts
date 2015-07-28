@@ -104,10 +104,10 @@ Spawnable Locations In Cuboid:
     - inject typecheck
     
     - define white_list
-      <def[material_list].unescaped.as_list||<script.yaml_keys[default_white_list]>>
+      <def[material_list].unescaped.as_list||<script.yaml_key[default_white_list]>>
     
     - define black_list
-      <def[black_list].unescaped.as_list||<script.yaml_keys[default_black_list]>>
+      <def[black_list].unescaped.as_list||<script.yaml_key[default_black_list]>>
     
     - define target_locations
       li@
@@ -388,7 +388,7 @@ Entity Display Location:
     definitions: entity|vertical
     script:
     - define offset
-      <script.yaml_keys[<def[entity].location.direction>]>
+      <script.yaml_key[<def[entity].location.direction>]>
     
     - define location
       <def[entity].eye_location.add[<def[offset]>]>

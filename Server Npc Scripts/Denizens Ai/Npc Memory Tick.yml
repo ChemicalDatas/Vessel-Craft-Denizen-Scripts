@@ -1,0 +1,166 @@
+
+
+#takes in sensory information and stores it
+#invalidates old data
+#listens to events: proximity enter leave|material falls|on command (hero scorcery)
+#                   entity combusts| entity damaged|entity killed|entity damages entity|entity kills entity
+#
+#                   player holds item|player unequips item (sound, if seen location)|player steps on block
+#                   player empties bucket|player fills bucket
+#                   player chats|player breaks block|player damages block|places block|player takes item from furnace
+#                   player places hanging|
+#
+#                   liquid spreads|block burns|on block bieng built|blocks dispenses item|block fades
+#                   pison retracts|block spreads|brewing stand brews|leaves decay|entity combusts
+#                   entity forms block|block physics|furnace burns item|furnace_smelts item into item
+#                   on time changes (world?)|on hanging breaks|on entity breaks hanging because cause
+#                   vechicle collides with block| vechicle collides with entity|creeper powered|entity changes material
+#                   
+#                   
+
+
+Npc Memory Access:
+    #
+    # This should search the memory tick for releviant information
+    # Quality is optional as without it it should return a bunch of information about what it knows.
+    # If quality is specified this should return unknown if there isnt a known quality about an subject
+    type: procedure
+    definitions: subject|quality
+    script:
+    - if <def[subject].type> == element {
+        - narrate "custom type maybe? start memory search for that element to find out qualities of that element"
+        - define 
+        }
+
+#I might need a separate tick for events and a separate tick for memory / invalidation
+Npc Memory Tick:
+    type: task
+    #
+    # This defines a subject (an object (list, element, location)) and associates "subject names" to link stuff together"
+    # definition knownobject[player] = li@type_list/(li@entity|player|custom_type[leader, village_master]?) | 
+    # definition knownobject[player_location] = l@0,0,0,world
+    # definition knownobject[player_chat] = 
+    #
+    #Qualititys list for known types
+    # definition knowntype[player] = entity|location|
+    # definition knowntype[entity] =
+    #
+    #npc walk:
+    #   type: task
+    #   definitions: npc|location
+    #   default_npc: <npc>
+    #   default_location: <npc.location>
+    #   type_npc: as_npc
+    #   type_location: as_location
+    #   success condition: <npc.location.is[==].to[<def[location]>]>
+    #   success condition: event:<npc> damages <def[entity]>
+    #   script:
+    #   - inject "Injected or Run"  #checks if <queue.script> == <script> if injected checks for definitions within the queue else formats and type checks the inputs
+    #                               # if the inputs dont match the type checking notify the npc that the action failed
+    #                               # that way the npc can retry the script in another way
+    #                               # when successfull notify the npc of success
+    #   - walk <def[npc]> <def[location]>
+    #
+    # within knownaction[walk] inputs = <self>|<def[target]>
+    #
+    #
+    script:
+    - define vision_range 20
+    - define hearing_range 20
+    - define locations li@
+    
+    #a known(type)(type)
+    - define known_types li@
+    #- define (%type%_qualities) li@
+    
+    #set to listen to flag changes / clears / expiration
+    - flag <npc> flag_intrests.memory:remember_this|sence
+    - flag <npc> event_intrests.memory:npc damaged|npc killed|
+    #teach a npc to listen for events ex: player chats "teach:event event:npc npc damaged/context:cause|damage"
+    
+    
+    #stored by event time...
+    #that way data can be invalidated easily
+    #ex event time li@duration|duration
+    - define index_event_time li@
+    
+    #indexing by event/time|actor/time
+    
+    #inteligent definition names for indexing later on
+    #base data
+    #   - location
+    #   - 
+    #
+    #refrence data
+    #   - player, event, cuboid
+    
+    #events stored by duration, this is an index
+    #define (event_time) li@event_name\unique_data_id|event_name\unique_data_id
+    #define (actor) li@event\event_data (broke block/location | ignited block/location | heard sound/direction)
+    #define (unique_data_id) li@unique_data()
+    - define index_event_name li@
+    
+    
+    #
+    # event names sorted
+    # define unique_data_id li@player/<player>|
+    
+    - define intrests li@
+    - while true {
+        - queue pause
+        - if <npc.has_flag[memory.intrests]> {
+            - define intrests <def[intrests].include[<npc.flag[memory.intrests]||none>]>
+            }
+        - if <def[intrests].is_empty>
+          while next
+        
+        #- wait d@10s ?? to keep fresh data in scope.
+        - define last_sensory_check <util.date.time.duration>
+        #Invalidate data
+        #Message Logic upon new event -action notice context:object|<player>|action|within_striking_distance
+        #data should be organized by key value/
+        #
+        }
+    
+    #define entity possible states
+    define:
+    - define <def[definition]> <parse:<def[definition_value]>>
+    
+    search:
+    - if !<def[target].exists>
+      queue clear
+    
+    invalidate:
+    
+    type quality add:
+    - 
+    
+    examine:
+    - if !<def[target].exists>
+      while next
+    
+    #get the target.types attributes available to examine and remember
+    - define target_type <def[target].type>
+    - define type_qualities <def[%type%]>
+    
+
+
+type parse2:
+    type: procedure
+    definitions: npc|subject
+    script:
+    - define memory <def[npc].id>_memory_tick
+    - define memory <def[memory].as_queue>
+    - define recall_list li@
+    
+    - define memory <def[memory].definition[<def[subject]>]>
+    
+    - announce <def[object].type>
+    - determine ""
+
+
+
+
+
+
+

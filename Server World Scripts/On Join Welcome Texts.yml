@@ -28,4 +28,4 @@ On Join Welcome Title:
     
         on player join:
         - wait d@2s
-        - title title:<script.yaml_keys[title]> subtitle:<script.yaml_keys[subtitle]> targets:<player>
+        - title title:<script.yaml_key[title]> subtitle:<script.yaml_key[subtitle]> targets:<player>

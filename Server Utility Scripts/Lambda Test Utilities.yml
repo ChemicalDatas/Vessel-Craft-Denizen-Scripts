@@ -76,7 +76,7 @@ lambda_left_more_than_right:
 check_for_required_definitions:
     type: task
     script:
-    - foreach <queue.script.yaml_keys[required_definitions]> {
+    - foreach <queue.script.yaml_key[required_definitions]> {
         - if !<def[%value%].exists> {
             - define message "Was <def[value]> defined in this script?"
             - event "script generates error" context:queue|<queue>|script|<queue.script>|message|<def[message]>

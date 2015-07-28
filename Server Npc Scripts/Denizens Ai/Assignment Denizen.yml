@@ -223,7 +223,7 @@ Denizen:
 ########################## Player Interaction Triggers ######################################################
 ############################################################################################################# 
         on chat:
-        - if <script.yaml_keys[<context.message>]||no_internal_code> != no_internal_code {
+        - if <script.yaml_key[<context.message>]||no_internal_code> != no_internal_code {
             - chat "yeah, I can do that."
             - inject locally <context.message>
             - queue clear
@@ -233,7 +233,7 @@ Denizen:
             - chat "Sorry, I couldnt find out how to do that. instruction<&co> <red><context.message>"
             - queue clear
             }
-        - if <context.message.as_script.yaml_keys[definitions].as_list.is_empty||true> {
+        - if <context.message.as_script.yaml_key[definitions].as_list.is_empty||true> {
             - chat "running script<&co> <context.message>"
             - inject <context.message>
             - queue clear
@@ -334,7 +334,7 @@ code_injection:
     type: task
     script:
     - define code <player.chat_history[1]||none>
-    - if <script.yaml_keys[<def[code]>]||no_code_branch> == no_code_branch {
+    - if <script.yaml_key[<def[code]>]||no_code_branch> == no_code_branch {
         - chat "I dont know how to do <&sq><def[code]><&sq>. You might have to script that into my code."
         - queue clear
         }

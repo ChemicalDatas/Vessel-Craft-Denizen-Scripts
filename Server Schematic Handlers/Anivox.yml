@@ -23,7 +23,7 @@ Schematic Events:
     database_path: "scripts/Server Databases/Anivox.yml"
     events:
         on server start:
-        - run "yaml load" def:<script.yaml_keys[database_path]>|anivox_data
+        - run "yaml load" def:<script.yaml_key[database_path]>|anivox_data
         
         on player right clicks sign:
         - narrate "clicked a sign <script.name>"

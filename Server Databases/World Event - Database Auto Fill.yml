@@ -26,8 +26,8 @@
         on server start:
         #load database
         #use a script in the flag / database managment yml
-        #- foreach "<script.yaml_keys[database locations names]>" {
-        #    - yaml "load:<script.yaml_keys[database locations.%value%]>" id:%value%
+        #- foreach "<script.yaml_key[database locations names]>" {
+        #    - yaml "load:<script.yaml_key[database locations.%value%]>" id:%value%
         #    - if <yaml.list.contains[%value%]> {
         #        - announce "Loaded Database>" format:SAI to_console
         #        }

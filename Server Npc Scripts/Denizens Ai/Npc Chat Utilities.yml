@@ -1,0 +1,116 @@
+#
+# Based off of a chat list
+# For chatting to a npc, this will check the npc for qualifications
+# based off of those qualifications, this will determine what chat options you will have
+# Each qualification will have a database of references
+# The player will have quals as well that are measured against the the npcs qualifications
+#
+#
+# Qualification Database:
+#   player:
+#       type: player
+#       measures:
+#           against:
+#           for:
+#
+#   sales:
+#       type: 
+#       Measures:
+#           against:
+#           -
+#           for:
+#           - prosperity
+#   bandit:
+#       type: job
+#       measures:
+#           against:
+#           - prosperity
+#           - order
+#
+#   Hero:
+#       type: adventurer
+#
+#   Inkeeper:
+#       type: job
+#       measures:
+#           against:
+#           for:
+#           - prosperity
+#
+# inkeeper will have quals of..
+#   - Services
+#   - Rumor Mill
+#   - Sales
+#   - land owner
+#   - town member
+#   - nation member
+#   - peasant
+#   - experienced (job level)
+#
+# This will build a List of chat options the player then can pick to interact with
+# 
+#
+#
+
+
+
+
+
+Get Chat Options:
+    #
+    #This should return a list of text?
+    #This should return a list li@<escaped:(script)|<Command args>>
+    type: procedure
+    
+    script:
+    -
+    -
+    - determine <def[text]>
+    
+Event_Ideas_for_Npc_QuestS_CHatting?:
+    type: task
+    definitions: event|args
+    script:
+    -
+    - run <def[event]> def:<def[args]>
+    
+
+#Npc KeyWords need to be mentioned and highlighted when the npc chats
+#When the player says those words within his sentence like subject:my name that will prompt
+#A lookup of for the speech controller to reply
+#
+
+Npc Chat:
+    type: task
+    script:
+    - queue <npc.id>_chat_tick resume
+
+Npc Chat logic:
+    #
+    # A separate Npc Talker, runs in a different queue
+    # Takes a list of word sets and delays based on how many space separated words are
+    # in each set
+    #
+    # It might be a good idea for using minecraft chat links to autofill a reply for the player to use...
+    # - npc "OH hi there. My name is <<npc.name> >" <- if the player clicks the name it might auto fillin a default text for the npc to reply to
+    # maybe it could pop open a list of chat options.... like a chat help box.
+    #
+    type: task
+    script:
+    - if !<def[speech_list].exists>
+      define speech_list li@
+    - while !<def[speech_list].is_empty> {
+        - queue pause
+        - if <def[speech_list].is_empty>
+          while next
+        
+        - foreach <def[speech_list]> {
+            - define next_chat <def[speech_list].first>
+            - define size_delay "<def[next_chat].split[ ].size>"
+            - chat <def[next_chat]>
+            - define speech_list <def[speech_list].get[2].to[<def[speech_list].size>]||li@>
+            - wait <def[size_delay].as_duration>
+            }
+        }
+    
+    

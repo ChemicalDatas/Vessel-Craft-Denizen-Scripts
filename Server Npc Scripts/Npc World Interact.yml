@@ -15,8 +15,8 @@
     
     events:
         on npc interact:
-        - if <context.type> == ENTITY   run <script.yaml_keys[entity_script]>       def:<context.entity>
-        - if <context.type> == BLOCK    run <script.yaml_keys[block_script]>        def:<context.location>
+        - if <context.type> == ENTITY   run <script.yaml_key[entity_script]>       def:<context.entity>
+        - if <context.type> == BLOCK    run <script.yaml_key[block_script]>        def:<context.location>
         
     
 
@@ -29,13 +29,13 @@
     script:
     - define material <%location%.material>
     - announce %material%
-    - if <script.yaml_keys[chests].contains[%material%]> {
+    - if <script.yaml_key[chests].contains[%material%]> {
         - animate <npc> animation:ARM_SWING
         - run "Animate Chest" def:%location%|open
         - run "Animate Chest" def:%location%|close delay:d@3s
         }
         
-    - if <script.yaml_keys[switch_able]>.contains[%material%]> {
+    - if <script.yaml_key[switch_able]>.contains[%material%]> {
         - animate <npc> animation:ARM_SWING
         - run Switch def:%location%
         }

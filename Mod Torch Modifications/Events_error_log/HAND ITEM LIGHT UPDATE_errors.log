@@ -1,0 +1,37 @@
+ [HAND ITEM LIGHT UPDATE] <--- Generated an error.
+The message is as follows:
+Incorrect input for HAND ITEM LIGHT UPDATE: script: s@LUMINESCENT ITEMS entity: p@645cfa1b-7c9d-4a7c-ad12-00f163f83fb2
+[player] p@645cfa1b-7c9d-4a7c-ad12-00f163f83fb2
+[player_chat_history] li@
+[player_debug] Player='<A>p@ArtifactMaker<G>'
+[player_display_name] ArtifactMaker
+[player_entity_id] 28
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] ArtifactMaker
+[player_location] -44,59,12,Hub
+[player_money] 100.0
+[player_name] ArtifactMaker
+[player_open_inventory] in@player[holder=p@645cfa1b-7c9d-4a7c-ad12-00f163f83fb2]
+[player_prefix] Player
+[player_save_name] 64.645CFA1B7C9D4A7CAD1200F163F83FB2
+[queue] q@ArtifactMaker_light_update_queue
+[queue_commands] li@QUEUE clear|WHILE <def[script].yaml_key[luminescent_items].contains[<def[entity].item_in_hand.simple>]> { - wait <def[script].yaml_key[light_time_update]> - define location <def[entity].location.simple.as_location> - if <def[location]> == <def[last_location]||no_last_location> while next - light <def[location]> <def[script].yaml_key[light_levels.<def[entity].item_in_hand.simple>]||reset> duration:d@1m - if <def[last_location].exists||false> light <def[last_location]> reset - define last_location <def[location]> }|IF <def[last_location].exists||false> light <def[last_location]> reset
+[queue_debug] <G>Container='<A>HAND ITEM LIGHT UPDATE<Y>(TASK)<G>'
+[queue_definitions] li@message|script|entity
+[queue_id] ArtifactMaker_light_update_queue
+[queue_script] s@HAND ITEM LIGHT UPDATE
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@HAND ITEM LIGHT UPDATE
+[script_container_type] TASK
+[script_cooled_down] true
+[script_debug] <G>Container='<A>HAND ITEM LIGHT UPDATE<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Torch Modifications/Events.yml
+[script_name] HAND ITEM LIGHT UPDATE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Torch Modifications/Events.yml
+=======Finished with Debug Data=======

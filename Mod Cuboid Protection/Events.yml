@@ -14,12 +14,12 @@ Cuboid Protection Event:
         - define q_ID display_queue_<player.name>
         - if <queue.exists[<def[q_ID]>]> {
             - define size <def[q_ID].as_queue.size>
-            - define max_displays <script.yaml_keys[player_max_display_queue]>
+            - define max_displays <script.yaml_key[player_max_display_queue]>
             - if <def[size].is[more].than[<def[max_displays]>]> determine cancelled
             }
         
         - define text "<escape:li@<blue>This place is|<green>owned by|<yellow><def[owner].formatted>>"
         - define location "<proc[Entity Display Location].context[<player>]>"
-        - run "Display" "def:<def[location]>|<def[text]>|<script.yaml_keys[display_time]>" id:<def[q_ID]>
+        - run "Display" "def:<def[location]>|<def[text]>|<script.yaml_key[display_time]>" id:<def[q_ID]>
         - determine cancelled
         

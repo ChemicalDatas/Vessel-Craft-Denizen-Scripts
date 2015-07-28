@@ -32,7 +32,7 @@ Lockpicking:
         - determine passively fulfilled
         - define inventory <player.location.cursor_on[10].inventory>
         - define lock_type "<def[inventory].list_contents.get[1].display.before[ ]>"
-        - define debug_output "Lock difficulty is: <script.yaml_keys[lock type.<def[lock_type].strip_color>]>"
+        - define debug_output "Lock difficulty is: <script.yaml_key[lock type.<def[lock_type].strip_color>]>"
         - narrate "<def[debug_output]>"
         
         

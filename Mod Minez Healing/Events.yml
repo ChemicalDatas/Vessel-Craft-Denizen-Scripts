@@ -40,10 +40,10 @@ Healing Mechanic:
             - define salved <context.entity.has_flag[salved]>
             - if <def[bandaged]> 
               && <def[salved]> {
-                - define time "<script.yaml_keys[heal time]>"
-                - define cooldown "<script.yaml_keys[cooldown time]>"
-                - define healed "<script.yaml_keys[healer heal msg]>"
-                - define target_heal_msg "<script.yaml_keys[target heal msg]>"
+                - define time "<script.yaml_key[heal time]>"
+                - define cooldown "<script.yaml_key[cooldown time]>"
+                - define healed "<script.yaml_key[healer heal msg]>"
+                - define target_heal_msg "<script.yaml_key[target heal msg]>"
                 
                 - narrate <def[target_heal_msg]> targets:<context.entity>
                 - narrate "<def[healed]> <context.entity.name>"

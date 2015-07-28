@@ -77,24 +77,24 @@ Block Healing Listener:
         
         - if !<queue.exists[<def[queue_id]>]>
           run "Yaml Save"
-          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+          def:<script.yaml_key[database_path]>|<script.yaml_key[database_id]>
           id:<def[queue_id]>
-          delay:<script.yaml_keys[dump_breakable_delay]>
+          delay:<script.yaml_key[dump_breakable_delay]>
         
         
         on server start:
         - run "Yaml Load"
-          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+          def:<script.yaml_key[database_path]>|<script.yaml_key[database_id]>
         
         
         - run "Auto breakable Restore"
-          def:<script.yaml_keys[database_id]>|<script.yaml_keys[load_write_save_delay]>
-          delay:<script.yaml_keys[auto_restore_on_start_delay]>
+          def:<script.yaml_key[database_id]>|<script.yaml_key[load_write_save_delay]>
+          delay:<script.yaml_key[auto_restore_on_start_delay]>
         
         
         on server stop:
         - run "Yaml Save"
-          def:<script.yaml_keys[database_path]>|<script.yaml_keys[database_id]>
+          def:<script.yaml_key[database_path]>|<script.yaml_key[database_id]>
         
         
         on entity explodes:
@@ -105,10 +105,10 @@ Block Healing Listener:
           exploded_block_sets.<util.random.duuid>
         
         - define yaml_id
-          <script.yaml_keys[database_id]>
+          <script.yaml_key[database_id]>
         
         - define delay
-          <script.yaml_keys[restore_delay]>
+          <script.yaml_key[restore_delay]>
         
         - run "Save breakable"
           def:<def[yaml_id]>|<def[locations].escaped>|<def[path]>
@@ -131,10 +131,10 @@ Block Healing Listener:
           burned_block_sets.<util.random.duuid>
         
         - define yaml_id
-          <script.yaml_keys[database_id]>
+          <script.yaml_key[database_id]>
         
         - define delay
-          <script.yaml_keys[restore_delay]>
+          <script.yaml_key[restore_delay]>
         
         - run "Save breakable"
           def:<def[yaml_id]>|<def[location].escaped>|<def[path]>
@@ -188,7 +188,7 @@ Block Healing Listener:
     
     shatter_then_replace:        
     - define materials
-      <script.yaml_keys[breakable_list].as_list>
+      <script.yaml_key[breakable_list].as_list>
     
     #- narrate "<blue>projectile hits blocks"
     
@@ -196,7 +196,7 @@ Block Healing Listener:
       broken_block_sets.<util.random.duuid>
     
     - define recur_limit
-      <script.yaml_keys[recursion_limit]>
+      <script.yaml_key[recursion_limit]>
     
     - define target_blocks
       "<proc[Build Connected Block List].context[<def[locations].escaped>|<def[materials].escaped>|<def[recur_limit]>]>"
@@ -207,10 +207,10 @@ Block Healing Listener:
         }
     
     - define yaml_id
-      <script.yaml_keys[database_id]>
+      <script.yaml_key[database_id]>
     
     - define delay
-      <script.yaml_keys[restore_delay]>
+      <script.yaml_key[restore_delay]>
     
     
     - run "Save breakable" def:<def[yaml_id]>|<def[target_blocks].escaped>|<def[path]>

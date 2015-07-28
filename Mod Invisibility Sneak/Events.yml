@@ -18,14 +18,14 @@ Invisibility Sneak:
     #- faraway
     events:
         on player starts sneaking:
-        - foreach <script.yaml_keys[checks].as_list> {
+        - foreach <script.yaml_key[checks].as_list> {
             - if <def[value].is[==].to[nearby]>
               define contains !
               else
               define contains ''
             
             - define distance
-              <script.yaml_keys[<def[value]>]>
+              <script.yaml_key[<def[value]>]>
               
             - if %contains%<player.location.find.entities.within[<def[distance]>].exclude[<player>].is_empty>
               queue clear

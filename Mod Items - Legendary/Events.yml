@@ -63,8 +63,8 @@ Item in Hand Script Event Injector 2:
         - inject locally path:Injector
         
         on player damaged:
-        - define path "on player damaged by <context.cause>"
-        - inject locally path:Injector
+        #- define path "on player damaged by <context.cause>"
+        #- inject locally path:Injector
         
         on player damages block:
         - define path "on player damages <context.material>"
@@ -136,9 +136,9 @@ Item in Hand Script Event Injector 2:
         - inject locally path:Injector
 
     Injector:
-    - define script <player.item_in_hand.scriptname.as_script||true>
-    - if <def[script]> queue clear
-    - if <def[script].yaml_key[<def[path]>]||true> queue clear
+    - define script <player.item_in_hand.scriptname.as_script||no_item_script>
+    - if <def[script]> == no_item_script queue clear
+    - if <def[script].yaml_key[<def[path]>]||no_script_path> == no_script_path queue clear
     - inject <def[script]> path:<def[path]>
 #
 

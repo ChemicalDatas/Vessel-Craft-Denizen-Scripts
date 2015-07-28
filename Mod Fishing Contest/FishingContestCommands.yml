@@ -64,7 +64,7 @@ Fishing_Contest:
             
             - flag server
               <script.name>.announced_contest_available
-              duration:<script.yaml_keys[fishing_contest_availability_announcement]>
+              duration:<script.yaml_key[fishing_contest_availability_announcement]>
             
             }
         
@@ -78,11 +78,11 @@ Fishing_Contest:
             
             - flag server
               <script.name>.participants:|:<player>
-              duration:<script.yaml_keys[fishing_contest_data_timeout]>
+              duration:<script.yaml_key[fishing_contest_data_timeout]>
             
             - flag server
               <script.name>.scores.<player>:0
-              duration:<script.yaml_keys[fishing_contest_data_timeout]>
+              duration:<script.yaml_key[fishing_contest_data_timeout]>
             
             }
         
@@ -91,10 +91,10 @@ Fishing_Contest:
             
                 - flag server
                   <script.name>.active
-                  duration:<script.yaml_keys[fishing_contest_timeout]>
+                  duration:<script.yaml_key[fishing_contest_timeout]>
                 
                 - flag server
-                  <script.name>.wining_score:<script.yaml_keys[fishing_contest_score_to]>
+                  <script.name>.wining_score:<script.yaml_key[fishing_contest_score_to]>
                 
                 - announce "<magic>ii<gold>Fishing contest has <italic><underline><light_purple>COMMENCED!"
                 
@@ -130,13 +130,13 @@ Fishing_Contest:
               "<gold><player.name> <reset>has captured <server.flag[<script.name>.scores.<player>].as_int> fish and won the contest!"
             
             - announce
-              "<gray>Please wait <script.yaml_keys[fishing_contest_win_cooldown].formatted> while we restock your local fishing holes to start another contest."
+              "<gray>Please wait <script.yaml_key[fishing_contest_win_cooldown].formatted> while we restock your local fishing holes to start another contest."
             
             - inject locally reset
             
             - flag server
               <script.name>.cooldown
-              duration:<script.yaml_keys[fishing_contest_win_cooldown]>
+              duration:<script.yaml_key[fishing_contest_win_cooldown]>
             }
         
     #Reset command and auto run on server start

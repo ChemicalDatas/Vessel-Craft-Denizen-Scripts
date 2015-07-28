@@ -1,0 +1,15 @@
+    
+#Controller for interacting, giving, taking, breaking
+Npc Action Tick:
+    type: task
+    script:
+    #set to listen to flag changes / clears / expiration
+    - flag <npc> flag_intrests.action:perform
+    - while true {
+        - queue pause
+        - foreach <npc.flag[action.perform].as_list> {
+            - chat "I was instructed to perform <def[value]>"
+            - flag <npc> action.perform:<-:<def[value]>
+            }
+        }
+

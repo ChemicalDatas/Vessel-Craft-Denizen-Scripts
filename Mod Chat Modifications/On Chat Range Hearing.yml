@@ -5,14 +5,14 @@ Player Chat Canceling:
     type: world
     events:
         on player chats:
-        - determine passively cancelled
+        #- determine passively cancelled
 
 Player Chat Local Notification:
     type: world
     events:
         on player chats:
-        - run "Message Nearby Players of Chat"
-          def:<context.message>
+       # - run "Message Nearby Players of Chat"
+       #   def:<context.message>
     
 
 Message Nearby Players of Chat:

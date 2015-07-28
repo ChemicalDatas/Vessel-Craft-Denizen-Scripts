@@ -21,16 +21,16 @@ Luminescent Items:
         on entity damages entity:
         - if <context.damager.item_in_hand.simple||none> != i@torch
           queue clear
-        - define max "<script.yaml_keys[success max]>"
-        - define min "<script.yaml_keys[success min]>"
+        - define max "<script.yaml_key[success max]>"
+        - define min "<script.yaml_key[success min]>"
         - define roll <util.random.int[0].to[<def[max]>]>
         - if !<def[roll].is[or_more].than[<def[min]>]> queue clear
         - narrate "<gray>You set your enemies on <red>fire<yellow>!"
-        - define duration <script.yaml_keys[duration]>
+        - define duration <script.yaml_key[duration]>
         - burn <context.entity> duration:%duration%
         
         on entity targets:
-        - if !<script.yaml_keys[affected_mobs].contains[<context.entity.name>]> queue clear
+        - if !<script.yaml_key[affected_mobs].contains[<context.entity.name>]> queue clear
         - if !<context.reason.contains[closest_player]>                         queue clear
         - if !<context.target.item_in_hand.simple.is[===].to[i@torch]>          queue clear
         - determine cancelled
@@ -52,9 +52,9 @@ Hand Item Light Update:
         - queue clear
         }
 
-    - while <def[script].yaml_keys[luminescent_items].contains[<def[entity].item_in_hand.simple>]> {
+    - while <def[script].yaml_key[luminescent_items].contains[<def[entity].item_in_hand.simple>]> {
         
-        - wait <def[script].yaml_keys[light_time_update]>
+        - wait <def[script].yaml_key[light_time_update]>
         
         - define location
           <def[entity].location.simple.as_location>
@@ -66,7 +66,7 @@ Hand Item Light Update:
         #change lightning according to scripted values
         - light
           <def[location]>
-          <def[script].yaml_keys[light_levels.<def[entity].item_in_hand.simple>]||reset>
+          <def[script].yaml_key[light_levels.<def[entity].item_in_hand.simple>]||reset>
           duration:d@1m
         
         #reset old lightning if last_location exists

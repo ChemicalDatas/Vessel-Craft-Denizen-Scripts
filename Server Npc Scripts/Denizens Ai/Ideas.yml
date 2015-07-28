@@ -1,0 +1,35 @@
+#
+# A framework to provide users to create scripts for npcs to perform 
+# actions based off a set of events.
+#
+# npc quest name
+#   - steps
+#       - 01
+#           - greet player
+#           - walk to switch
+#           - say "both switches need to be fliped"
+#           - wait_for_event "on player switches"
+#           - walk "to next open area"
+#           - wait_for_event "player nearby"
+#           - start_next_event
+#       - 05
+#           - say "this is a big auditorium"
+#           - wait d@10s
+#           - while_engaged_script "narrate|Help me find some lights here, look for a switch"
+#           - engage
+#           - while_wait_for_local_event "Lights_turn_on" "wander_nearby"
+#           - start_next_event
+#       - 10
+#           - Spawn Knight_Commander assignment:Npc_AI
+#           - say_as_npc Knight_Commander "The light bill runs high if the light is on. I think ill need to take out some lights..."
+#           - set_targets npc:Knight_Commander targets:<player>|<npc>
+#           - wait_for_event Entity_Death def:Knight_Commander
+#           - start_next_event
+#
+#
+#
+
+
+npc quester:
+    type: assignment
+    

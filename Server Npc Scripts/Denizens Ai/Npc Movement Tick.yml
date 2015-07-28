@@ -1,0 +1,185 @@
+pathing_algo:
+    #returns points that the npc can path to
+    type: procedure
+    definitions: location|location2
+    script:
+    #if distance between target and npc is greather than <pathing distance>
+    # divide distance 1/2
+    # define first <proc[pathing_algo].context[location|1/2location2]>
+    # else
+    # if !<location2.find_path[location].radius[2].is_empty>
+    # path from start to finish
+    
+#needs to task memory if theres any instructions for a location that need to be followed for an area
+Npc Movement Tick:
+    type: task
+    #speed: 0t
+    name: <blue>[<script.name>]<reset>
+    script:
+    - define speed                      .67
+    - define target                     no_target
+    - define queue_sleep_time           indefinite
+    - define range                      auto_range
+    - define leap_upon_succesful_navi   true
+    - flag <npc> movement.last_navi_state:completed
+    #set to resume on flag changes / clears / expiration
+    - flag <npc> flag_intrests.movement:|:li@last_navi_state|targets
+    - while true {
+        - inject locally "path:Queue Sleep"
+        - announce ""
+        - announce "<script.yaml_key[name]> <blue>navi_code<&co> <yellow>navistate <npc.flag[movement.last_navi_state]>"
+        - inject locally "path:navistate <npc.flag[movement.last_navi_state]>"
+        }
+    
+    navistate started:
+    - define expected_travel_distance <npc.location.distance[<npc.navigator.target_location||<npc.location>>]||0>
+    - define last_travel_distance <def[last_travel_distance]||<def[expected_travel_distance]>>
+    - define expected_travel_time <def[expected_travel_distance].div[<def[speed]>].as_duration>
+    - define last_location <npc.location>
+    - wait d@1s
+    - define distance_per_second <npc.location.distance[<def[last_location]>]>
+    - chat "distance<&co> <def[expected_travel_distance]> exp_time<&co> <def[expected_travel_time].formatted> dist_per_second<&co> <def[distance_per_second]>" no_target
+    - define queue_sleep_time <def[expected_travel_time]>
+    - if <def[last_travel_distance].round.is[==].to[<def[expected_travel_distance].round>]> {
+        - define last_travel_distance:!
+        - inject locally "teleport to safe location"
+        }
+    - while next
+    
+    navistate completed:
+    #decide what type of target and what kind of tactics to follow.
+    # if entity, perform a follow procedure
+    # if location, perform a walk to location
+    # if a notable, perform look for instructions for walkto
+    # if instructions, get closest side and run through
+    #   li@instructions li@loc|loc|loc|loc
+    - if <def[target]> != no_target
+      define target no_target
+    
+    - if <npc.has_flag[movement.targets]> {
+        - define target <npc.flag[movement.targets]||no_target>
+        - announce "<script.yaml_key[name]> <green>new target<&co> <def[target]>"
+        - flag <npc> movement.targets:<-:<def[target]>
+        }
+    
+    - if <def[target]> == no_target {
+        - define queue_sleep_time indefinite
+        - while next
+        }
+    
+    - define range auto_range
+    - announce "<script.yaml_key[name]> <gold>target type<reset><&co> <def[target].type>"
+    #- inject locally "target <def[target].type>"
+    - if <def[target].type> == location {
+        - if <def[leap_upon_succesful_navi]||false> {
+            - define x <npc.location.x.sub[<def[target].x>].mul[-2]>
+            - define z <npc.location.z.sub[<def[target].z>].mul[-2]>
+            - announce "<script.yaml_key[name]> leaping to target"
+            - shoot <npc> destination:<def[target].add[<def[x]>,0,<def[z]>]> height:2
+            - define x:!
+            - define z:!
+            - define leap_upon_succesful_navi:!
+            - wait d@1s
+            }
+        - announce "<script.yaml_key[name]> walking to target"
+        - walk <npc> <def[target]> speed:<def[speed]> <def[range]>
+        }
+    #- if <def[target].type> == entity
+    #- if <def[target].type> == notable
+    #- if <def[target].type> == instructions
+    #- if <def[target].type> == chunk
+    
+    add extra range:
+    #Each time add some extra range untill a successful navigate, then try a leap
+    - if <def[range].as_int||not_int> == not_int {
+        - define range 1
+        } else {
+        - define range <def[range].add[2]>
+        }
+    
+    teleport to safe location:
+    - inject locally "add extra range"
+    - define cuboid "<proc[Cube Surrounding Location].context[<npc.location>|<def[range]>]>"
+    - define safe_spots <def[cuboid].get_spawnable_blocks>
+    - announce "safespots <def[safe_spots].size>"
+    - teleport <npc> <def[safe_spots].random>
+    - define safe_spots:!
+    
+    
+    #needs to extra manuver
+    #no path to the location
+    navistate stuck:
+    #this gets fired along with canceled, but canceled is the last to change the flag.
+    
+    navistate canceled:
+    - if !<npc.location.sub[0,.5,0].material.is_solid>
+      || <npc.location.material.is_solid>
+      inject locally "teleport to safe location"
+    
+    #for the extra long targets across multiple chunks
+    - if <npc.location.distance[<def[target]>].is[more].than[<npc.navigator.range>]>
+    
+    - define x <npc.location.x.sub[<def[target].x>].mul[-2]>
+    - define z <npc.location.z.sub[<def[target].z>].mul[-2]>
+    - announce "<script.yaml_key[name]> leaping to target"
+    - shoot <npc> destination:<def[target].add[<def[x]>,0,<def[z]>]> height:2
+    - define x:!
+    - define z:!
+    - wait d@1s
+#    - if !<npc.location.find_path[<def[target]>].is_empty||false> {
+#        - define queue_sleep_time d@1s
+#        - while next
+#        }
+    - inject locally "add extra range"
+    - define sub_target "<proc[Cube surrounding location].context[<def[target]>|<def[range]>].get_spawnable_blocks.random>"
+    - walk <npc> <def[sub_target]> speed:<def[speed]> radius:<def[range]>
+    - define sub_target:!
+    - define queue_sleep_time d@2s
+    
+    target location:
+    target instruction:
+    target follow:
+    target walkto:
+    
+    
+    #thread sleep
+    Queue Sleep:
+    - if <def[queue_sleep_time]> != indefinite {
+        - define wake_queue <npc.id>_movement_queue_wakeup
+        - if !<queue.exists[<def[wake_queue]>]> {
+            - run "Queue Wake" def:<queue>|<def[queue_sleep_time]> id:<def[wake_queue]>
+            } else {
+            - queue <def[wake_queue].as_queue> clear
+            - run "Queue Wake" def:<queue>|<def[queue_sleep_time]> id:<def[wake_queue]>
+            }
+        }
+    
+    - announce "<script.yaml_key[name]> sleeping for<&co> <def[queue_sleep_time].formatted||<def[queue_sleep_time]>>"
+    - queue pause
+    - if !<npc.location.get_chunk.is_loaded>
+      chunkload <npc.location.get_chunk> duration:5m
+    
+
+
+Npc Movement Sanity Delayed Check:
+    type: task
+    script:
+    - if <def[last_location].distance[<npc.location>].is[or_less].than[.1]>
+      || <npc.flag[movement.is_stuck]||false>
+      || !<npc.location.sub[0,.5,0].material.is_solid>
+      || <npc.location.add[0,.51,0].material.is_solid> {
+        - if <npc.location.material.contains[fence]> {
+            - switch <npc.location> state:toggle duration:d@1s
+            - while next
+            }
+        - define direction li@1,0,0|0,0,1|-1,0,0|0,0,-1
+        - define possibles li@
+        - foreach <def[direction]> {
+            - define target_location <npc.location.add[<def[value]>]>
+            - if <def[target_location].below.material.is_solid>
+              && !<def[target_location].material.is_solid>
+              && !<def[target_location].material.is_occluding>
+              && !<def[target_location].above.material.is_solid>
+              define possibles <def[possibles].include[<def[target_location]>]>
+        }
+    

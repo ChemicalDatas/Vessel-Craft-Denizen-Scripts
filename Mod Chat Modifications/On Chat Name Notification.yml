@@ -17,7 +17,7 @@ Player Chat Notification:
             - define target_string  "<def[message].after[@].split[ ].get[first]>"
             - define target         <server.match_player[<def[target_string]>]>
             - if !<def[target].has_flag[chat_notifications]> queue clear
-            - playsound <def[target]> sound:<script.yaml_key[values.noise_type]> volume:<script.yaml_key[values.volume]> pitch:<script.yaml_keys[values.pitch]>
+            - playsound <def[target]> sound:<script.yaml_key[values.noise_type]> volume:<script.yaml_key[values.volume]> pitch:<script.yaml_key[values.pitch]>
             }
 
 Ping Player:

@@ -31,7 +31,7 @@ Mod Scripted Fire Protection:
     type: world
     events:
         on server start:
-        - announce "<script.yaml_keys[script_name]>: Your server is being protected against fires now." to_console
+        - announce "<script.yaml_key[script_name]>: Your server is being protected against fires now." to_console
         
         on block burns:
         - define location <context.location>
@@ -40,9 +40,9 @@ Mod Scripted Fire Protection:
         #could modify to handle bukkit enums too
         # The next lines are to build up a queue to check the size of.
         # The intent is that the queue will count down when its executed the tasks at hand.
-        #- if "<script.yaml_keys[blocks].contains[<def[location].material>]>" {} 
-        #- if "<script.yaml_keys[enums].contains[<def[location].material.bukkit_enum>]>" {} 
-        - run ModifyBlock def:<def[location]>|<def[location].material> id:fire_restoration delay:<script.yaml_keys[fire_restoration_delay]>
+        #- if "<script.yaml_key[blocks].contains[<def[location].material>]>" {} 
+        #- if "<script.yaml_key[enums].contains[<def[location].material.bukkit_enum>]>" {} 
+        - run ModifyBlock def:<def[location]>|<def[location].material> id:fire_restoration delay:<script.yaml_key[fire_restoration_delay]>
         
         - define size <def[queue].size||0>
         
@@ -57,10 +57,10 @@ Mod Scripted Fire Protection:
               <def[fire_locations].size>
             
             - define text1
-              "<script.yaml_keys[script_name]> <red>Server has a fire emergency"
+              "<script.yaml_key[script_name]> <red>Server has a fire emergency"
             
             - define text2
-              "<script.yaml_keys[script_name]> <red>fire blocks nearby<&co> <yellow><def[num_fire_blocks]> <blue>@location<&co> <yellow><def[location].simple>"
+              "<script.yaml_key[script_name]> <red>fire blocks nearby<&co> <yellow><def[num_fire_blocks]> <blue>@location<&co> <yellow><def[location].simple>"
             
             - narrate <def[text1]>
               targets:<def[announce_targets]>
@@ -75,14 +75,14 @@ Mod Scripted Fire Protection:
             - determine cancelled
             }
         
-        - if <def[size].is[or_more].than[<script.yaml_keys[fire_emergency]>]> {
+        - if <def[size].is[or_more].than[<script.yaml_key[fire_emergency]>]> {
             - if !<server.has_flag[fire_emergency]>
               flag server fire_emergency
               duration:60
             }
         
-        - if <def[size].is[more].than[<script.yaml_keys[fire_warning]>]> 
-          && <def[size].is[less].than[<script.yaml_keys[fire_emergency]>]> {
+        - if <def[size].is[more].than[<script.yaml_key[fire_warning]>]> 
+          && <def[size].is[less].than[<script.yaml_key[fire_emergency]>]> {
             - if !<server.has_flag[fire_warning]>
               flag server fire_warning
               duration:60

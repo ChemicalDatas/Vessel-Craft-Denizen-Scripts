@@ -16,8 +16,8 @@ Lightning Strike Range:
         #todo: adjust script to redirect lightning to conductive entities
         #Lightning re-direction
         on lightning strikes:
-        - define range "<script.yaml_keys[attraction range]>"
-        - define target_blocks "<script.yaml_keys[attractive blocks]>"
+        - define range "<script.yaml_key[attraction range]>"
+        - define target_blocks "<script.yaml_key[attractive blocks]>"
         - define location <context.location>
         
         #Use a cuboid to determine a better string location outset a square then add height to the sky block checking
@@ -38,7 +38,7 @@ Lightning Strike Range:
         
         on lightning strikes:
         #Check for conductive materials if there are within ammount move lightning
-        - define range "<script.yaml_keys[attraction range]>"
+        - define range "<script.yaml_key[attraction range]>"
         - define location <context.location>
         - define entities <def[location].find.living_entities.within[<def[range]>]>
         #If theres entities within the range of the lightning, encour splash damage based on distance

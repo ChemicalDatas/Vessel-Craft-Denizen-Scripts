@@ -1,0 +1,17 @@
+
+Queue Wake:
+    type: task
+    definitions: queue|time
+    default_time: d@10s
+    type_queue: as_queue
+    type_time: as_duration
+    script:
+    - inject typecheck
+    - announce "<light_purple><script.name> Waking queue<&co> <def[queue]> in<&co> <def[time].formatted>"
+    - wait <def[time]||<script.yaml_key[default_time]>>
+    - if !<queue.exists[<def[queue].id||no_queue_id>]> {
+        - announce "<light_purple><script.name> Queue<&co> <def[queue]> did not exist."
+        - queue clear
+        }
+    - announce "<light_purple><script.name> waking queue <def[queue]>"
+    - queue <def[queue]> resume

@@ -8,7 +8,7 @@ Auto Sync:
         on server start:
         - while true {
             - run "Scripted Time Changer"
-            - wait <script.yaml_keys[delay]>
+            - wait <script.yaml_key[delay]>
             }
         
     

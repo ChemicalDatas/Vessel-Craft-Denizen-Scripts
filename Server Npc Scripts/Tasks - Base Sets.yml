@@ -336,7 +336,7 @@ Narrate:
     definitions: words|format
     default_format: plain
     script:
-    - define format format<&co><def[format].unescaped||<script.yaml_keys[default_format]>>
+    - define format format<&co><def[format].unescaped||<script.yaml_key[default_format]>>
     - narrate <def[words].unescaped> <def[format]>
       
 

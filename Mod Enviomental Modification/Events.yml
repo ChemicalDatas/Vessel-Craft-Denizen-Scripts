@@ -1,0 +1,5 @@
+world update events:
+    type: world
+    events:
+        on block spreads:
+        - announce "[<script.name>] block is spreading..."

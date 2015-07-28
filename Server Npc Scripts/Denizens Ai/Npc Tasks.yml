@@ -1,0 +1,68 @@
+#
+#Sets of tasks designed to work within a running queue always running queue pause, inject within a while true script.
+#
+
+Npc Teleport:
+    type: task
+    script:
+    - define definition teleport_location
+    - inject IfDefinition
+    - teleport <npc> <def[teleport_location]>
+    - define definition:!
+
+# A script thats a backup for a missing definition
+# Calls an action with the npc that performs an action to get the definion
+# Then returns false but messages the npc that it needs a definition
+# Required the - define definition '' to exist <def[definition].exists> must be true
+
+IfDefinition:
+    type: task
+    script:
+    - if !<def[definition].exists> {
+        - define message "<script.name> Definition did not exist! will not search try to define anything."
+        - event "Script Generates Error" context:message|<def[message]>|queue|<queue>|script|<queue.script>
+        - wait d@1m
+        - while next
+        }
+    - action "get definition" "context:definition|<def[definition]>"
+    - action "get definition <def[definition]>"
+    - chat "<script.name>ive started looking for that information. <def[definition]||No_def_text> <def[%definition%]||No_def_value>"
+    - define definition:!
+    - if <queue> == "q@Npc_Logic_Tick" 
+      while next
+    - chat "<script.name> This was not in the logic tick"
+    #- queue clear
+    
+
+Npc Wander Nearby:
+    type: task
+    script:
+    - if !<def[current_wander_location].exists> {
+        - if !<npc.has_flag[curent_wander_location]>
+          flag npc curent_wander_location:<npc.location>
+        - define current_wander_location <npc.flag[curent_wander_location]>
+        }
+      
+    - if !<npc.has_flag[wander_range]>
+      flag npc wander_range:10
+    
+    - if !<npc.has_flag[wander_range_height]>
+      flag npc wander_range_height:10
+    
+    - define location
+      <npc.flag[curent_wander_location]>
+    
+    - define range
+      <npc.flag[wander_range]>
+    
+    - define cuboid
+      cu@<def[location].add[%range%,2,%range%]>|<def[location].sub[%range%,2,%range%]>
+    
+    - define locations
+      <def[cuboid].get_spawnable_blocks>
+    
+    - ~walk <npc>
+      <def[locations].random>
+      speed:<npc.flag[walk_speed]||.67>
+      auto_range
+    

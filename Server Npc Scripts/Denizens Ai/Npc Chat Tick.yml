@@ -1,0 +1,23 @@
+
+
+
+#controlls the chat the npc does and its response to the player
+Npc Chat Tick:
+    type: task
+    script:
+    #set to listen to flag changes / clears / expiration
+    #set to resume chat queue if this flag is changed
+    - flag <npc> flag_intrests.chat:talked_to_by|chat
+    - while true {
+        - queue pause
+        - define player <npc.flag[chat.talked_to_by]>
+        - define player_chat_history <def[player].chat_history_list>
+        - chat "The last thing youve said to me is<&co> <def[player_chat_history].first>"
+        }
+    
+    get noun:
+    #This is where this tries to find the object through memory references
+    get verb:
+    get adverb:
+    get:
+    

@@ -148,7 +148,7 @@ Class3SeriesWeapon:
     - <yellow>????
     - ''
     - ''
-    - <italic><light_purple>class series<&co> <red><script.yaml_keys[Class]>
+    - <italic><light_purple>class series<&co> <red><script.yaml_key[Class]>
     - <yellow>MagicAnchorId<&co> <proc[__Return__].context[GetClass3SeriesID|LinkAnchorId]>
 
 CSeriesHelper:

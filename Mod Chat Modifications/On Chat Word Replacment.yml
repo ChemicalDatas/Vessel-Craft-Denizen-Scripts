@@ -8,8 +8,8 @@ Player Word Replacement:
     type: world
     events:
         on server start:
-        - define path <script.yaml_keys[path]>
-        - define id <script.yaml_keys[id]>
+        - define path <script.yaml_key[path]>
+        - define id <script.yaml_key[id]>
         - run "Yaml Load" def:<def[path]>|<def[id]>
         
         on player chats:
@@ -17,8 +17,8 @@ Player Word Replacement:
         
         on reload_database command:
         - determine passively fulfilled
-        - define path <script.yaml_keys[path]>
-        - define id <script.yaml_keys[id]>
+        - define path <script.yaml_key[path]>
+        - define id <script.yaml_key[id]>
         - run "Yaml Load" def:<def[path]>|<def[id]>
         - narrate "See console for details on database."
     

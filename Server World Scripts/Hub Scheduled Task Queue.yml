@@ -13,7 +13,7 @@ Scheduled Task For Server Time:
                 - define name <def[task].get[1]>
                 - define args <def[task].get[2].to[<def[task].size>]>
                 
-                - announce "<script.yaml_keys[header]>: Running task: <def[task]>" to_console
+                - announce "<script.yaml_key[header]>: Running task: <def[task]>" to_console
                 - run <def[name]> def:<def[args]>
                 }
             }

@@ -73,7 +73,12 @@ Update Display Line:
 Remove Stray Display:
     type: task
     definitions: location|range
+    type_location: as_location
+    type_range: as_int
+    default_location: <player.location>
+    default_range: 10
     script:
+    - inject typecheck
     - if <def[range]> == null define range 10
     - define target <def[location].find.entities[Armor_Stand].within[<def[range]>]>
     - remove <def[target]>
@@ -143,7 +148,7 @@ Display Base:
     - foreach <def[text_list].reverse> {
         - define line <proc[Iconize].context[<def[value]>]>
         - define new_y <def[loop_index].mul[.25]>
-        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:<script.yaml_keys[default_small]>,Marker:<script.yaml_keys[default_marker]>,Invisible:<script.yaml_keys[default_invisible]>,Invulnerable:<script.yaml_keys[default_invulenerable]>,NoBasePlate:<script.yaml_keys[default_nobaseplate]>,NoGravity:<script.yaml_keys[default_nogravity]>,PersistenceRequired:<def[persistant]>}"
+        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:<script.yaml_key[default_small]>,Marker:<script.yaml_key[default_marker]>,Invisible:<script.yaml_key[default_invisible]>,Invulnerable:<script.yaml_key[default_invulenerable]>,NoBasePlate:<script.yaml_key[default_nobaseplate]>,NoGravity:<script.yaml_key[default_nogravity]>,PersistenceRequired:<def[persistant]>}"
         - define new_stands <def[location].add[0,<def[new_y]>,0].find.entities[Armor_Stand].within[1]>
         - define display_entities <def[display_entities].include[<def[new_stands]>]>
         }
@@ -160,6 +165,7 @@ Display:
     type: task
     definitions: location|text|display_time
     script:
+    - wait d@1t
     - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>|no_title]>"
     - wait <def[display_time]||d@30t>
     - remove <def[display_entities].unescaped>
@@ -173,7 +179,7 @@ Server Display:
     - define text <def[text].escaped>
     - define flag displays.<def[flag]>
     - if <server.has_flag[<def[flag]>]> {
-        - announce "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
+        - narrate "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
         - remove <server.flag[<def[flag]>].as_list>
         - flag server <def[flag]>:!
         }
@@ -238,7 +244,7 @@ Determine Selection Index:
       define player_pitch 0
     
     #the location passed to this is the entity location, not the nameplate location
-    - define location <def[location].add[0,<script.yaml_keys[nameplate_entitylocation_offset]>,0]>
+    - define location <def[location].add[0,<script.yaml_key[nameplate_entitylocation_offset]>,0]>
     #- announce "trying <player.chat_history_list.first>"
     #- define location <def[location].add[0,<player.chat_history_list.first>,0]>
     

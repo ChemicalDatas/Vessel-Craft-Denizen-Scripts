@@ -6,7 +6,7 @@ type parse unittests:
     default_type_tests: li@as_boolean|as_decimal|as_int|as_money|as_list|as_script|as_queue|as_duration|as_string|as_chunk|as_color|as_cuboid|as_entity|as_inventory|as_item|as_location|as_material|as_npc|as_player|as_world|as_plugin
     script:
     - define type_list li@
-    - define type_tests <def[type_tests].unescaped.as_list||<script.yaml_keys[default_type_tests]>>
+    - define type_tests <def[type_tests].unescaped.as_list||<script.yaml_key[default_type_tests]>>
     - foreach <def[type_tests]> {
         - if <def[element].%value%||didnt_parse> != didnt_parse {
             - define type_list <def[type_list].include[<def[value]>]>

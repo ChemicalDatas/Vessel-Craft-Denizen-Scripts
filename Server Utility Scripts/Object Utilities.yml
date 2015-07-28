@@ -10,7 +10,7 @@ Object Database Startup:
     path: script_database/object_database.yml
     events:
         on server start:
-        - run "yaml load" def:<script.yaml_keys[path]>|temp_objects
+        - run "yaml load" def:<script.yaml_key[path]>|temp_objects
         
         on server shutdown:
         - announce "<script.name> performing shutdown routine."
@@ -63,7 +63,7 @@ Object:
         - queue clear
         }
     - define ignored_values li@
-    - define ignored_values <def[ignored_values].include[<script.yaml_keys[definitions].as_list>]>
+    - define ignored_values <def[ignored_values].include[<script.yaml_key[definitions].as_list>]>
     - define ignored_values <def[ignored_values].include[li@attribute_list|loop_index|ignored_values|value]>
     - define attribute_list li@
     - foreach <queue.definitions> {
@@ -84,7 +84,7 @@ Object:
     
     set:
     - define ignored_values li@
-    - define ignored_values <def[ignored_values].include[<script.yaml_keys[definitions].as_list>]>
+    - define ignored_values <def[ignored_values].include[<script.yaml_key[definitions].as_list>]>
     - define ignored_values <def[ignored_values].include[li@|loop_index|ignored_values|value]>
     - foreach <queue.definitions> {
         - if <def[ignored_values].contains[<def[value]>]> foreach next

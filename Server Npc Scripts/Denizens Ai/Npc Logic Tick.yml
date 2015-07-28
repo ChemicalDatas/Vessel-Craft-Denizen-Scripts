@@ -1,0 +1,28 @@
+#The main logic tick that determines the objectives for the other controllers
+#This needs to set the path points for the movement tick to follow
+#
+# define target-actions actions: give talk
+#                       movements: follow walkto
+#                       input: find, see, detect, hear, feel
+#
+#The logic tick issues Instruction packs to the other ticks
+#   movement
+#   memory: "m@gold|p@chemical_datas|player"
+Npc Logic Tick:
+    type: task
+    script:
+    #set to listen to flag changes / clears / expiration
+    - flag <npc> flag_intrests.logic:event_intrest
+    - define current_task none
+    #npc intrests fall along players, blocks (utilities), named areas (cuboids, notables)
+    - while true {
+        - define objective "<npc.flag[objective].as_list.first||npc wander logic>"
+        - queue pause
+        - if !<def[objective].as_script.yaml_key[definitions].is_empty||true> {
+            - announce "A logic objective of <def[objective]> required extra definitions. Please use the new version that are to be injected."
+            - while next
+            }
+        - chat "Starting tick <def[loop_index]><&co> <def[objective]>" no_target
+        - inject <def[objective]>
+        - chat "Finished tick <def[loop_index]><&co> <def[objective]>" no_target
+        }

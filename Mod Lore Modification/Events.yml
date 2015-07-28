@@ -30,10 +30,10 @@ Lore Modification Event Detection:
             }
         
         
-        - if <script.yaml_keys[restricted_actions]> contains <context.action> {
+        - if <script.yaml_key[restricted_actions]> contains <context.action> {
             - event "player steals item" context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determinations
             }
-        - if <script.yaml_keys[suspicious_actions]> contains <context.action> {
+        - if <script.yaml_key[suspicious_actions]> contains <context.action> {
             - event "player steals item" context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determinations
             }
             

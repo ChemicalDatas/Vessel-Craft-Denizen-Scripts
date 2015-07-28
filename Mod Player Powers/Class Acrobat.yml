@@ -43,34 +43,34 @@
         #   ./ex flag player "slots.crouch jump:->:acrobat power jump"
         on acrobat power jump:
         - define cost
-          "<script.yaml_keys[power jump cost]>"
+          "<script.yaml_key[power jump cost]>"
          
         - define energy_type
-          "<script.yaml_keys[energy type]>"
+          "<script.yaml_key[energy type]>"
           
         - define cooldown
-          "<script.yaml_keys[power jump cooldown time]>"
+          "<script.yaml_key[power jump cooldown time]>"
           
         - define cooldown_script
-          "<script.yaml_keys[cooldown script]>"
+          "<script.yaml_key[cooldown script]>"
           
         - define cooldown_script_args
-          "<script.yaml_keys[cooldown script args]>"
+          "<script.yaml_key[cooldown script args]>"
         
         - define time
-          "<script.yaml_keys[warm up time]>"
+          "<script.yaml_key[warm up time]>"
           
         - define condition
-          "<script.yaml_keys[warm up effect condition]>"
+          "<script.yaml_key[warm up effect condition]>"
           
         - define script
-          "<script.yaml_keys[warm up support script]>"
+          "<script.yaml_key[warm up support script]>"
           
         - define script_delay
-          "<script.yaml_keys[warm up effect delay]>"
+          "<script.yaml_key[warm up effect delay]>"
           
         - define args
-          "<script.yaml_keys[warm up support script args]>"
+          "<script.yaml_key[warm up support script args]>"
         
         
         # Start the warm up event the wait for it to resume this script

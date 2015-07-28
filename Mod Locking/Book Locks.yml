@@ -32,7 +32,7 @@ Book Locking:
         - determine passively fulfilled
         - define inventory <player.location.cursor_on[10].inventory>
         - define lock_type "<def[inventory].list_contents.get[1].display.before[ ]>"
-        - define debug_output "Lock difficulty is: <script.yaml_keys[lock type.<def[lock_type].strip_color>]>"
+        - define debug_output "Lock difficulty is: <script.yaml_key[lock type.<def[lock_type].strip_color>]>"
         - narrate "<def[debug_output]>"
         
         
@@ -238,7 +238,7 @@ Book Lock Events:
     type: world
     events:
         on player breaks block:
-        - define lockable <script.yaml_keys[lockable]>
+        - define lockable <script.yaml_key[lockable]>
         - if !<def[lockable].contains[<context.location.material.bukkit_enum>]> queue clear
         - define location <context.location>
         - inject locally "path:Build Locked Object Event"
@@ -247,7 +247,7 @@ Book Lock Events:
         
         on player right clicks block:
         #- announce "<context.location.material.bukkit_enum>"
-        - define lockable <script.yaml_keys[lockable]>
+        - define lockable <script.yaml_key[lockable]>
         - if !<def[lockable].contains[<context.location.material.bukkit_enum>]> queue clear
         - define location <context.location>
         - inject locally "path:Build Locked Object Event"

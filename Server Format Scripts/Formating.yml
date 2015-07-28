@@ -38,7 +38,7 @@ Color Codes Announcment:
     - yellow/&e
     - white/&f
     script:
-    - define colors <script.yaml_keys[colors]>
+    - define colors <script.yaml_key[colors]>
     - foreach <def[colors]> {
         - define key <def[value].split[/].first>
         - define valu <def[colors].map_get[<def[key]>]>
