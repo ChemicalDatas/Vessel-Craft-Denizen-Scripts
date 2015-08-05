@@ -35,10 +35,10 @@ Determine Word Replacement:
     type: procedure
     definitions: word
     script:
-    - define replacement <def[word].replace[<&dot>].with[$dot$]>
-    - define replacement <yaml[word_replacement].read[database.%replacement%]>
-    - define replacement <def[replacement].replace[$dot$].with[<&dot>]>
-    - if <def[replacement]> != null {
-        - define word <def[replacement]>
+    - define path database.<def[word].escaped>
+    - announce "checking for path <red><def[path]>"
+    - if <yaml[word_replacement].contains[<def[path]>]> {
+        - determine <yaml[word_replacement].read[<def[path]>]>
+        } else {
+        - determine <def[word]>
         }
-    - determine <def[word]>
