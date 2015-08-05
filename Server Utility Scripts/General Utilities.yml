@@ -177,7 +177,7 @@ Threshold Random Success:
     
 
 
-"Word Index":
+Word Index:
     #############################################################################################################################
     #                                                                                                                           #
     # Finds the index of the target_word that it matches in words                                                               #
@@ -198,7 +198,7 @@ Threshold Random Success:
     
 
 
-"Letters Within":
+Letters Within:
     #############################################################################################################################
     #                                                                                                                           #
     # Finds the last string that's in between 2 characters and including the characters                                         #
@@ -208,16 +208,35 @@ Threshold Random Success:
     type: procedure
     definitions: words|last|first
     script:
-    - if "<def[words].last_index_of[<def[last]>]>" >= 1 {
+    - if <def[words].last_index_of[<def[last]>]> >= 1 {
         - define end "<def[words].last_index_of[<def[last]>]>"
-        - if "<def[words].last_index_of[<def[first]>]>" >= 1 {
-            - define start "<def[words].last_index_of[<def[first]>]>"
-            - define target "<def[words].substring[<def[start]>,<def[end]>]>"
-            - determine <def[target]>
+        - if <def[words].last_index_of[<def[first]>]> >= 1 {
+            - define start <def[words].last_index_of[<def[first]>]>
+            - determine <def[words].substring[<def[start]>,<def[end]>]>
             }
         }
     - determine ''
-    
+
+#new letters within
+nlw:
+    type: procedure
+    definitions: words|regex|group
+    default_regex: \[(.*?)\]
+    default_group: 0
+    script:
+    - inject typecheck
+    #- define yaml_check_list li@
+    #- define next_word "<def[words].regex[<def[regex]>].group[0]||>"
+    - narrate "<red><def[words]>"
+    - narrate "<gold><def[regex]> <def[group]>"
+    - narrate "<blue><def[words].regex[<def[regex]>].group[<def[group]>]||failed tag>"
+    - narrate "<yellow><def[words].regex[.*(\d).*].group[1]||did not fill tag>"
+    - determine "<def[words].regex[<def[regex]>].group[<def[group]>]||>"
+    #- while "<def[next_word].is[==].to[].not>" {
+    #    - define words
+    #    - define yaml_check_list
+    #    - define next_word
+    #    }
 
 #info: Just a playing script
 Lazer:
@@ -388,7 +407,6 @@ Repeated String:
     # Searches for all bracketed words to find replacement icons                                                                #
     # Based off of the procedure 'Modify Words V5'                                                                              #
     #                                                                                                                           #
-    # This returns null if it receives an empty string ''                                                                       #
     #                                                                                                                           #
     # Whatever this returns is the string that the caller gets.                                                                 #
     #                                                                                                                           #
@@ -400,7 +418,10 @@ Repeated String:
     - if <def[words]> == "" determine ""
     - define replaceme "<proc[Letters Within].context[<def[words]>|<&rb>|<&lb>]||none>"
     
-    - if <def[replaceme]> == '' || <def[replaceme]> == none determine <def[words].unescaped>
+    - if <def[replaceme]> == ''
+      || <def[replaceme]> == none
+      determine <def[words].unescaped>
+    
     - define replacement "<proc[Determine Word Replacement].context[<def[replaceme]>]>"
     - define set <def[words].replace[<def[replaceme]>].with[<def[replacement].escaped>]>
     - determine <proc[Iconize].context[<def[set]>]>
@@ -409,7 +430,7 @@ Repeated String:
 "Generate Relative Location List":
     #############################################################################################################################
     #                                                                                                                           #
-    # todo: figure out why this is returning an item with-out the li@                                                        #
+    # todo: figure out why this is returning an item with-out the li@                                                           #
     #           And fix it and the subscripts that use this.                                                                    #
     # A procedure for getting a list of relative locations from a base location                                                 #
     # operator is optional as it determines the operation done to both points.                                                  #
@@ -447,7 +468,7 @@ Repeated String:
 "Move Schematic":
     #############################################################################################################################
     #                                                                                                                           #
-    # todo: finishme / write examples                                                                                        #  
+    # todo: finishme / write examples                                                                                           #  
     #                                                                                                                           #
     #############################################################################################################################
     #old location is a refrence point to where... the initial refrence point was?
@@ -460,7 +481,7 @@ Repeated String:
 "Get Schematic":
     #############################################################################################################################
     #                                                                                                                           #
-    # todo: finishme / write examples                                                                                        #
+    # todo: finishme / write examples                                                                                           #
     #                                                                                                                           #
     #############################################################################################################################
     #A script that returns a schem name but in the process gets a schematic of a cuboid in server memory
@@ -474,7 +495,7 @@ Repeated String:
 "Rotate Schematic":
     #############################################################################################################################
     #                                                                                                                           #
-    # todo: finishme / write examples                                                                                        # 
+    # todo: finishme / write examples                                                                                           # 
     # schematic list is a list of schematics to load into memory                                                                #
     # rotation type is how this schedules the rotation of schematics. In list form.                                             #
     #   options are:                                                                                                            #
@@ -498,7 +519,7 @@ Repeated String:
 
 #################################################################################################################################
 #                                                                                                                               #
-#todo: make a block moving script that switches places with the blocks its replacing...                                      #
+#todo: make a block moving script that switches places with the blocks its replacing...                                         #
 #           like for water... and burying objects in stone / sand? Like animating sinking.                                      #
 #                                                                                                                               #
 #################################################################################################################################
@@ -506,9 +527,9 @@ Repeated String:
 "Move Block List":
     #############################################################################################################################
     #                                                                                                                           #
-    # fixme: fix the generate location list from relative issue with creating an list with-out the 'li@'                     #
-    # todo: maybe make it just show to 1 player? maybe optional?                                                             #
-    # todo: modify block and showfake take block lists and 1 material                                                        #
+    # fixme: fix the generate location list from relative issue with creating an list with-out the 'li@'                        #
+    # todo: maybe make it just show to 1 player? maybe optional?                                                                #
+    # todo: modify block and showfake take block lists and 1 material                                                           #
     #            id like to take advantage of java run abilities and not scripted methods...                                    #
     # Requires 3 args:                                                                                                          #
     #  block list                                                                                                               #
@@ -597,9 +618,11 @@ Wait for Valid Player:
     #
     #
     type: task
+    definitions: duration|max_wait
+    default_duration: d@1s
+    default_max_wait: 20
     script:
-    - if !<def[duration].exists>    define duration d@1s
-    - if !<def[max_wait].exists>    define max_wait 20
+    - inject typecheck
     - wait <def[duration]>
     - if <player||not_valid_player> == not_valid_player {
         - define message "<script.name> Failed to get a valid player"
