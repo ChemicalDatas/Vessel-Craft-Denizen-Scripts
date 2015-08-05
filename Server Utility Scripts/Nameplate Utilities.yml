@@ -79,9 +79,6 @@ Remove Stray Display:
     default_range: 10
     script:
     - inject typecheck
-    - foreach <queue.definitions.as_list> {
-        - announce "<script.name> %value% <def[%value%]>"
-        }
     - define target <def[location].find.entities[Armor_Stand].within[<def[range]>]>
     - remove <def[target]>
     - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
@@ -113,6 +110,7 @@ Display Base:
     default_nogravity: 1b
     script:
     # Raise error if recieved bad arguments
+    - inject typecheck
     - if <def[location]||none> == none 
       || <def[location]||none> == null {
         - define message "<script.name> requires that a location is not null."
@@ -227,7 +225,7 @@ Context Menu:
     
     - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
     - ^define arguments <def[argument_list].get[<def[option_selected]>]>
-    - ^announce "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - ^narrate "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
     - run <def[script]> def:<def[arguments].unescaped> instantly
 
 Determine Selection Index:
