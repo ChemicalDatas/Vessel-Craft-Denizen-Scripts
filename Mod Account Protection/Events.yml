@@ -7,7 +7,7 @@ On Join Player Account Management:
     script_cooldown: d@1s
     events:
         on server start:
-        - announce "<script.yaml_key[mod_title]> is actively protecting player accounts!" to_console
+        - announce "<parse:<parse:<script.yaml_key[mod_title]>>> is actively protecting player accounts!" to_console
         
         on player joins:
         - inject "wait for valid player"
@@ -52,20 +52,20 @@ On Join Player Account Management:
         on login command:
         - determine passively fulfilled
         - if <player.has_flag[AccountProtection.EnteredPassword]> {
-            - narrate "<script.yaml_key[mod_title]> <green>You<&sq>ve already entered your password."
+            - narrate "<parse:<script.yaml_key[mod_title]>> <green>You<&sq>ve already entered your password."
             - queue clear
             }
         - if <player.flag[AccountProtection.Password]||no_password> != <context.args.escaped> {
-            - narrate "<script.yaml_key[mod_title]> <red>Incorrect Password for <player.name.display||<player.name>>"
+            - narrate "<parse:<script.yaml_key[mod_title]>> <red>Incorrect Password for <player.name.display||<player.name>>"
             - queue clear
             }
-        - narrate "<script.yaml_key[mod_title]> Welcome back <yellow><player.name>"
+        - narrate "<parse:<script.yaml_key[mod_title]>> Welcome back <yellow><player.name>"
         - if <player.has_permission[<script.yaml_key[login_every_time_permission]>]> {
             - if <player.has_flag[ignore_login_every_time]> {
-                - narrate "<script.yaml_key[mod_title]> Want to login each time?<&nl>
+                - narrate "<parse:<script.yaml_key[mod_title]>> Want to login each time?<&nl>
                             ./ex flag <&lt>player<&gt> ignore_login_every_time:!"
                 } else {
-                - narrate "<script.yaml_key[mod_title]><&nl>
+                - narrate "<parse:<script.yaml_key[mod_title]>><&nl>
                             If you tire of logging in each time do<&nl>
                             ./ex flag <&lt>player<&gt> ignore_login_every_time<&nl>
                             <yellow>That will allow you to ignore the permission check.<&nl>
@@ -77,12 +77,12 @@ On Join Player Account Management:
         on setpass command:
         - determine passively fulfilled
         - if <context.args.is_empty> {
-            - narrate "<script.yaml_key[mod_title]> You didnt enter anything. You need to enter some password."
+            - narrate "<parse:<script.yaml_key[mod_title]>> You didnt enter anything. You need to enter some password."
             - queue clear
             }
         - define args <context.args>
         - flag <player> AccountProtection.Password:<def[args].escaped>
-        - narrate "<script.yaml_key[mod_title]> <blue>You've set your password to <gold><&sq><def[args].space_separated||<def[args]>><&sq> <green><player.name.display||<player.name>>"
+        - narrate "<parse:<script.yaml_key[mod_title]>> <blue>You've set your password to <gold><&sq><def[args].space_separated||<def[args]>><&sq> <green><player.name.display||<player.name>>"
     
     
     
@@ -100,12 +100,12 @@ On Join Player Account Management:
     #Allows script to continue if theres no protections involved.
     command password check:
     - if !<player.has_flag[AccountProtection.Password]> {
-        - narrate "<script.yaml_key[mod_title]>
+        - narrate "<parse:<script.yaml_key[mod_title]>>
           <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
         - determine fulfilled
         }
     - if !<player.has_flag[AccountProtection.EnteredPassword]> {
-        - narrate "<script.yaml_key[mod_title]> <red>You need to enter your <red>PASSWORD."
+        - narrate "<parse:<script.yaml_key[mod_title]>> <red>You need to enter your <red>PASSWORD."
         - narrate "<blue>./login (password)"
         - determine fulfilled
         }
@@ -113,15 +113,14 @@ On Join Player Account Management:
 
     #Allows script to continue if theres no protections involved.
     action password check:
-    - announce "<script.name> cooldown<&co> <script.yaml_key[script_cooldown]>"
     - cooldown <script.yaml_key[script_cooldown]> s:<script.name>
     - if !<player.has_flag[AccountProtection.Password]> {
-        - narrate "<script.yaml_key[mod_title]>
+        - narrate "<parse:<script.yaml_key[mod_title]>>
           <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
         - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
         }
     - if !<player.has_flag[AccountProtection.EnteredPassword]> {
-        - narrate "<script.yaml_key[mod_title]> <red>You need to enter your <red>PASSWORD."
+        - narrate "<parse:<script.yaml_key[mod_title]>> <red>You need to enter your <red>PASSWORD."
         - narrate "<blue>./login (password)"
         - teleport <player> <player.bed_spawn||<player.world.spawn_location>>
         }
