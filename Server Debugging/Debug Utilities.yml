@@ -462,7 +462,7 @@ typecheck:
         - ^define __present_definitions <queue.definitions.exclude[<def[__ignored_values]>]>
         - ^define __missing_definitions <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
         - foreach <def[__missing_definitions]> {
-            - if <queue.script.yaml_key[default_<def[value]>]||Queue_Haz_No_default_value_listed_herz> != Queue_Haz_No_default_value_listed_herz {
+            - if <queue.script.yaml_key[default_<def[value]>]||<queue.script><&dot>yaml_key<&lb><def[value]><&rb>> != <queue.script><&dot>yaml_key<&lb><def[value]><&rb> {
                 - define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
                 - define %value% <parse:<queue.script.yaml_key[default_<def[value]>]>>
                 }
