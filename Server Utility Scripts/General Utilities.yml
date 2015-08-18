@@ -622,11 +622,15 @@ Wait for Valid Player:
     default_duration: d@1s
     default_max_wait: 20
     script:
+    - define duration <def[duration]||<script.yaml_key[default_duration]>>
+    - define max_wait <def[max_wait]||<script.yaml_key[default_max_wait]>>
     - inject typecheck
+    # This might work except this is meant to be injected... denizen only registers the 1st and the last injection for a script,
+    # so when type checking searches the queues script or <script> it will never find the stuff inbetween, the script that this will be normaly.
+    # It used to work so this is for a note to check on later. Leaving it on will not matter as it only does a few checks before not proceeding anywhere.
     - wait <def[duration]>
     - if <player||not_valid_player> == not_valid_player {
-        - define message "<script.name> Failed to get a valid player"
-        #- announce <def[message]> to_console
+        - define message "<queue.script.name> Failed to get a valid player"
         - event "script generates error" context:message|<def[message]>|script|<queue.script>|queue|<queue>
         - queue clear
         }
