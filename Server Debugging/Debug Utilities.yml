@@ -490,6 +490,8 @@ typecheck:
                 }
             }
         }
+    - define loop_index:!
+    - define value:!
     
 __tstchecking:
     type: task
