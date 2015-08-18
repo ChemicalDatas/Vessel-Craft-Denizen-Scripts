@@ -460,15 +460,15 @@ typecheck:
     # finds default values and missing values then defines those within the script
     - if <def[__required_script_definitions]> != none {
         - ^define __present_definitions <queue.definitions.exclude[<def[__ignored_values]>]>
-        - define __missing_definitions <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
+        - ^define __missing_definitions <def[__required_script_definitions].exclude[<def[__present_definitions]>]>
         - foreach <def[__missing_definitions]> {
-            - if <queue.script.yaml_key[default_<def[value]>]||none> != none {
+            - if <queue.script.yaml_key[default_<def[value]>]||Queue_Haz_No_default_value_listed_herz> != Queue_Haz_No_default_value_listed_herz {
                 - define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
                 - define %value% <parse:<queue.script.yaml_key[default_<def[value]>]>>
                 }
             }
         - if !<def[__missing_definitions].is_empty> {
-            - ^define __message "Definition(s) failed type check.<&nl>
+            - ^define __message "Definition(s) failed presence check.<&nl>
               Required definitions<&co> <red><def[__required_script_definitions].space_separated><blue><&nl>
               Missing definitions<&co> <red><def[__missing_definitions].space_separated>"
 
