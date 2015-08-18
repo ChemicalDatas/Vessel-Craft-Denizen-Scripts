@@ -36,7 +36,6 @@ Determine Word Replacement:
     definitions: word
     script:
     - define path database.<def[word].escaped>
-    - announce "checking for path <red><def[path]>"
     - if <yaml[word_replacement].contains[<def[path]>]> {
         - determine <yaml[word_replacement].read[<def[path]>]>
         } else {
