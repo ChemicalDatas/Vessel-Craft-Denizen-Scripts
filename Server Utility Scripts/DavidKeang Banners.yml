@@ -1,0 +1,601 @@
+# ======================= #
+# Author:  KeangDavid     #
+# Version:  1.1.1         #
+# Denizen: 0.9.6-SNAPSHOT #
+# Build:   237            #
+# Core:    1.05           #
+# ======================= #
+# MUST USE BUILD 237 OR LATTER!
+
+# ----- Banners Command ----- #
+BannersCommand:
+  type: command
+  debug: false
+  name: banners
+  description: gives banners
+  usage: /banners [banner]
+  permission: dCustom.banner
+  permission message: <red>Permission needed, <script.yaml_key[permission]>
+  aliases:
+  - banner
+  script:
+  - if <c.args.size.is[==].to[0]> {
+    - narrate "<green>========== Banner Help =========="
+    - narrate "<dark_aqua>/banner spell [banners]<aqua>: gives the [banners] typed."
+    - narrate "<dark_aqua>/banner get [banner]<aqua>: gives the specified [banner]."
+    - queue clear }
+    
+  - if <c.args.get[1].is[==].to[spell]> {
+    - define text <c.raw_args.after[spell<&sp>]>
+    - repeat <def[text].length> {
+      - define banner <def[text].char_at[%value%]>
+      - if <c.args.get[1].is[==].to[.]> define banner period
+      - if <c.args.get[1].is[==].to[!]> define banner exclamation
+      - if <c.args.get[1].is[==].to[?]> define banner question
+      - if "<c.args.get[1].is[==].to[ ]>" define banner space
+      - if <server.list_scripts.contains[s@banner_%banner%]> give banner_%banner%
+        else give banner_question
+      }
+    }
+    
+  - if <c.args.get[1].is[==].to[get]> {
+    - define banner <c.args.get[2]>
+    - if <server.list_scripts.contains[s@banner_%banner%]> {
+      - give banner_%banner%
+      } else {
+      - narrate "<red>banner_%banner% not found." }
+    }
+# ----- Banners Command End ----- #
+
+
+# ----- SYMBOLS ----- #
+# Reference: http://imgur.com/gallery/D9KhL
+# ----------------------------------------------- #
+banner_arrowleft:
+  type: item
+  no_id: true
+  pattern:
+  - white/rhombus_middle
+  - white/half_vertical_mirror
+  - black/square_top_right
+  - black/square_bottom_right
+  - black/triangles_bottom
+  - black/triangles_top
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_arrowright:
+  type: item
+  no_id: true
+  pattern:
+  - white/rhombus_middle
+  - white/half_vertical
+  - black/square_top_left
+  - black/square_bottom_left
+  - black/triangles_bottom
+  - black/triangles_top
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_arrowup:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_center
+  - black/curly_border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_arrowdown:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_bottom
+  - white/stripe_center
+  - black/curly_border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+# ----- SYMBOLS END ----- #
+
+
+# ----- PUNCTUATION ----- #
+# Reference: http://imgur.com/gallery/D9KhL
+# ----------------------------------------------- #
+banner_period:
+  type: item
+  no_id: true
+  pattern:
+  - white/triangles_bottom
+  - black/stripe_right
+  - black/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_exclamation:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_center
+  - black/stripe_bottom
+  - white/triangles_bottom
+  - black/stripe_right
+  - black/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_question:
+  type: item
+  no_id: true
+  pattern:
+  - black/half_horizontal
+  - white/stripe_right
+  - black/stripe_left
+  - black/square_bottom_right
+  - white/stripe_top
+  - black/border
+  material: i@banner[base_color=white;patterns=<script.yaml_key[pattern]>]
+  
+banner_quotation:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - black/triangles_top
+  - black/straight_cross
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_space:
+  type: item
+  no_id: true
+  material: i@banner[base_color=black]
+  
+banner_pipe:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_center
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_coma:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_center
+  - black/rhombus_middle
+  - black/stripe_top
+  - black/curly_border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_semicolon:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - black/stripe_left
+  - white/square_bottom_left
+  - black/half_vertical_mirror
+  - black/curly_border
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_colon:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_center
+  - black/rhombus_middle
+  - black/stripe_downleft
+  - black/stripe_downright
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+  
+banner_apostrophe:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_center
+  - black/diagonal_left_mirror
+  - black/diagonal_right
+  - black/stripe_downleft
+  - black/curly_border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+# ----- PUNCTUATION END ----- #
+
+
+# ----- UPERCASE LETTERS ----- #
+# Reference: http://imgur.com/gallery/D9KhL
+# ----------------------------------------------- #
+banner_A:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - white/stripe_right
+  - white/stripe_top
+  - white/stripe_middle
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_B:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - white/stripe_bottom
+  - white/stripe_middle
+  - white/stripe_top
+  - black/curly_border
+  - white/stripe_left
+  - white/stripe_middle
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_C:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - black/stripe_middle
+  - white/stripe_bottom
+  - white/stripe_top
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_D:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - white/stripe_top
+  - white/stripe_bottom
+  - black/curly_border
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_E:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_middle
+  - white/stripe_left
+  - white/stripe_top
+  - white/stripe_bottom
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_F:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_middle
+  - white/stripe_left
+  - white/stripe_top
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_G:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - black/half_horizontal
+  - white/stripe_left
+  - white/stripe_top
+  - white/stripe_bottom
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_H:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - white/stripe_left
+  - white/stripe_middle
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_I:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_bottom
+  - white/stripe_center
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_J:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - black/half_horizontal
+  - white/stripe_bottom
+  - white/stripe_right
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_K:
+  type: item
+  no_id: true
+  pattern:
+  - white/half_vertical
+  - white/cross
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_L:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - white/stripe_bottom
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_M:
+  type: item
+  no_id: true
+  pattern:
+  - white/triangle_top
+  - black/triangles_top
+  - white/stripe_right
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_N:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - white/stripe_downright
+  - white/stripe_right
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_O:
+  type: item
+  no_id: true
+  pattern:
+  - black/rhombus_middle
+  - white/stripe_right
+  - white/stripe_left
+  - black/border
+  material: i@banner[base_color=white;patterns=<script.yaml_key[pattern]>]
+
+banner_P:
+  type: item
+  no_id: true
+  pattern:
+  - white/half_horizontal
+  - black/stripe_center
+  - white/stripe_top
+  - white/stripe_middle
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_Q:
+  type: item
+  no_id: true
+  pattern:
+  - black/rhombus_middle
+  - white/stripe_right
+  - white/square_bottom_right
+  - white/stripe_left
+  - black/border
+  material: i@banner[base_color=white;patterns=<script.yaml_key[pattern]>]
+
+banner_R:
+  type: item
+  no_id: true
+  pattern:
+  - white/half_horizontal
+  - white/stripe_left
+  - white/stripe_downright
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_S:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_bottom
+  - white/stripe_top
+  - white/stripe_downright
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_T:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_center
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_U:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - white/stripe_bottom
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_V:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - black/square_bottom_left
+  - white/stripe_downleft
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_W:
+  type: item
+  no_id: true
+  pattern:
+  - white/triangle_bottom
+  - black/triangles_bottom
+  - white/stripe_right
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_X:
+  type: item
+  no_id: true
+  pattern:
+  - white/cross
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_Y:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_downright
+  - black/square_bottom_right
+  - black/stripe_right
+  - white/stripe_downleft
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_Z:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_bottom
+  - white/stripe_downleft
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+# ----- UPERCASE LETTERS END ----- #
+
+
+# ----- NUMBERS ----- #
+# Resource: http://www.needcoolshoes.com/banner
+# ----------------------------------------------- #
+banner_0:
+  type: item
+  no_id: true
+  pattern:
+  - black/rhombus_middle
+  - white/stripe_right
+  - white/stripe_downright
+  - white/stripe_left
+  - black/border
+  material: i@banner[base_color=white;patterns=<script.yaml_key[pattern]>]
+
+banner_1:
+  type: item
+  no_id: true
+  pattern:
+  - white/square_top_left
+  - white/stripe_center
+  - white/stripe_bottom
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_2:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_left
+  - black/half_horizontal_mirror
+  - black/stripe_middle
+  - white/stripe_downleft
+  - white/stripe_bottom
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_3:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_top
+  - white/stripe_middle
+  - white/stripe_bottom
+  - white/stripe_right
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_4:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - black/half_horizontal_mirror
+  - white/stripe_right
+  - white/stripe_middle
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_5:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_bottom
+  - black/rhombus_middle
+  - white/stripe_top
+  - white/stripe_downright
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_6:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - black/half_horizontal
+  - white/stripe_top
+  - white/stripe_bottom
+  - white/stripe_middle
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_7:
+  type: item
+  no_id: true
+  pattern:
+  - white/half_vertical_mirror
+  - white/stripe_top
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_8:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_right
+  - white/stripe_top
+  - white/stripe_bottom
+  - white/stripe_middle
+  - white/stripe_left
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+
+banner_9:
+  type: item
+  no_id: true
+  pattern:
+  - white/stripe_left
+  - black/half_horizontal_mirror
+  - white/stripe_top
+  - white/stripe_bottom
+  - white/stripe_middle
+  - white/stripe_right
+  - black/border
+  material: i@banner[patterns=<script.yaml_key[pattern]>]
+# ----- PUNCTUATION END ----- #
