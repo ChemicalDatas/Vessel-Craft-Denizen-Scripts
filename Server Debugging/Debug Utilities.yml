@@ -468,7 +468,7 @@ typecheck:
                 }
             }
         - if !<def[__missing_definitions].is_empty> {
-            - ^define __message "Definition(s) failed presence check.<&nl>
+            - ^define __message "Definition(s) failed existance check.<&nl>
               Required definitions<&co> <red><def[__required_script_definitions].space_separated><blue><&nl>
               Missing definitions<&co> <red><def[__missing_definitions].space_separated>"
 
@@ -481,7 +481,10 @@ typecheck:
             - if <def[__accessor]> == none foreach next
             - ^define __expected_value <def[%value%].%__accessor%||failed_tag>
             - if <def[__expected_value]> == failed_tag {
-                - ^define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
+                - ^define __message "Definition(s) failed type check.<&nl>
+                  def<&co><def[value]> value<&co><def[%value%]><&nl>
+                  type_check<&co><def[__accessor]>"
+
                 - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
                 - queue clear
                 }
