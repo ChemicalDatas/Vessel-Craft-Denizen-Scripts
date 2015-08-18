@@ -48,7 +48,7 @@ Color Codes Announcment:
     
 Formatted:
     type: format
-    format: "<proc[Iconize].context[<text>]>"
+    format: "<proc[Iconize].context[<parse:<text>>]>"
     
 Plain:
     type: format
