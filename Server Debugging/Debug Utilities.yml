@@ -422,13 +422,6 @@ __queuet:
     - narrate ""
     - narrate ""
     
-#typeprep performs a check on the input types, raises errors if incorrect types
-#type prep provides unescaping
-typePrep:
-    type: task
-    speed: 0t
-    script:
-    
 
 #todo: check if using not only type checking but default_values too....
 #Its possible to use <el@type.type>, .as_list returns list, and "strings" return elements.
@@ -473,11 +466,14 @@ typecheck:
                 - define __missing_definitions <def[__missing_definitions].exclude[<def[value]>]>
                 - define %value% <parse:<queue.script.yaml_key[default_<def[value]>]>>
                 }
-            - if !<def[__missing_definitions].is_empty> {
-                - ^define __message "Definition(s) failed type check. Missing definitions<&co> <red><def[__missing_definitions].space_separated>"
-                - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
-                - queue clear
-                }
+            }
+        - if !<def[__missing_definitions].is_empty> {
+            - ^define __message "Definition(s) failed type check.<&nl>
+              Required definitions<&co> <red><def[__required_script_definitions].space_separated><blue><&nl>
+              Missing definitions<&co> <red><def[__missing_definitions].space_separated>"
+
+            - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+            - queue clear
             }
         - foreach <def[__present_definitions]> {
             - if <def[value].starts_with[__]> foreach next
@@ -486,8 +482,7 @@ typecheck:
             - ^define __expected_value <def[%value%].%__accessor%||failed_tag>
             - if <def[__expected_value]> == failed_tag {
                 - ^define __message "Definition(s) failed type check. def<&co><def[value]> value<&co><def[%value%]> type_check<&co><def[__accessor]>"
-                - ^event "script generates error"
-                  context:message|<def[__message]>|script|<queue.script>|queue|<queue>
+                - ^event "script generates error" context:message|<def[__message]>|script|<queue.script>|queue|<queue>
                 - queue clear
                 }
             }
