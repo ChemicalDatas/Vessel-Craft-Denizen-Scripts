@@ -455,7 +455,7 @@ typecheck:
     type: task
     speed: 0t
     script:
-    - ^define __ignored_values li@value|loop_index|__ignored_values|__required_script_definitions|__present_definitions
+    - ^define __ignored_values li@value|loop_index|__ignored_values|__required_script_definitions|__present_definitions|__missing_definitions|__accessor|__expected_value
     - ^define __required_script_definitions <queue.script.yaml_key[definitions].as_list||none>
     # finds default values and missing values then defines those within the script
     - if <def[__required_script_definitions]> != none {
@@ -490,14 +490,15 @@ typecheck:
                 }
             }
         }
-    - define loop_index:!
-    - define value:!
+    - foreach <def[__ignored_values]> {
+        - define %value%:!
+        }
     
 __tstchecking:
     type: task
+    definitions: int|element|extra_value
     type_int: as_int
     type_element: prefix
-    definitions: int|element|extra_value
     default_int: 1
     default_extra_value: default_hardcoded_script_value
     script:
