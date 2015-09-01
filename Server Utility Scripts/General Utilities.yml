@@ -278,7 +278,7 @@ Lazer:
     - define total_size <def[string].length>
     - define left_slice <def[index]>
     - define right_slice <def[index].add[<def[len_to_display]>]>
-    - determine<def[string].substring[<def[left_slice]>,<def[right_slice]>]>
+    - determine <def[string].substring[<def[left_slice]>,<def[right_slice]>]>
 
 
 
