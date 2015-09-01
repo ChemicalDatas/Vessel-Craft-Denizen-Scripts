@@ -1,249 +1,36 @@
 # A set of vesselcraft commands
+# todo: Setup another way of having defaults, maybe a script that creates a flag that these would reference later on...
 
-Commands:
-    ############################################################################################################################
-    # A set of server commands usable on a server. Some might be useful some might not be.                                     #
-    #                                                                                                                          #
-    #                                                                                                                          #
-    ############################################################################################################################
+CommandDefaults:
     type: world
-    debug: false
-        
-    
-    ########################################################################################################################
-    #                                                                                                                      #
-    # Each "arg" is the replaceable text for each argument sent with the shortcuts command.                                #
-    #                                                                                                                      #
-    ########################################################################################################################
-    search: "he search p:arg t:arg"
-    say: "say arg"
-    express: "express arg"
-    colors: "colors"
+    title: "[<blue>Vessel<gold>Craft<reset>]"
+    teleport_history_max: 10
+    perms:
+        comds:
+            back:
+            killall:
+    message:
+        _permission denied: "<gold>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
+        facebook page: "https://www.facebook.com/VesselCraft"
+        server page: ""
+        voting page: "http://minecraft-mp.com/server-s32672"
+        teamspeak ip: "vesselcraft.minecraftnoob.com"
+        teamspeak password: "noob"
+        teamspeak download: "http://www.teamspeak.com/?page=downloads"
+        chat notify true:  "Chat Notifications <red>ON<dark_gray>. Chatting <player.name> will play a sound for you."
+        chat notify false: "Chat Notifications <red>OFF<dark_gray>. Chatting <player.name> will <red>not<dark_gray> play a sound for you."
+        place notify true:  "Place Notifications <red>ON<dark_gray>. Placing Debug is true."
+        place notify false: "Place Notifications <red>OFF<dark_gray>. Placing Debug is false."
     allowed_groups:
     - Owner
     - Admin
     - MasterBuilder
     - Moderator
     - Builder
-    
-    title: "[<blue>Vessel<gold>Craft<reset>]"
-    teleport_history_max: 10
-    
-    ########################################################################################################################
-    #                                                                                                                      #
-    # Default Messages                                                                                                     #
-    #                                                                                                                      #
-    ########################################################################################################################
-    message:
-        _permission denied: "<gold>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
-        facebook page: "https://www.facebook.com/VesselCraft"
-        server page: ""
-        
-        voting page: "http://minecraft-mp.com/server-s32672"
-        teamspeak ip: "vesselcraft.minecraftnoob.com"
-        teamspeak password: "noob"
-        teamspeak download: "http://www.teamspeak.com/?page=downloads"
-        
-        chat notify true:  "Chat Notifications <red>ON<dark_gray>. Chatting <player.name> will play a sound for you."
-        chat notify false: "Chat Notifications <red>OFF<dark_gray>. Chatting <player.name> will <red>not<dark_gray> play a sound for you."
-    
-        place notify true:  "Place Notifications <red>ON<dark_gray>. Placing Debug is true."
-        place notify false: "Place Notifications <red>OFF<dark_gray>. Placing Debug is false."
-    
-    
-    ########################################################################################################################
-    #                                                                                                                      #
-    # is permitted is the basic set for perms checking.                                                                    #
-    #                                                                                                                      #
-    ########################################################################################################################
-    is permitted:
-    - if !<context.server> {
-        - define groups <script.yaml_key[allowed_groups]>
-        - if "!<proc[In Allowed Group].context[<def[groups].escaped>]>" {
-            - narrate format:Formatted "<script.yaml_key[message._permission denied]>"
-            - queue clear
-            }
-        }
-    
     events:
+        on server start:
         on player join:
-        - if <player.has_flag[can_fly]> flag <player> can_fly:!
-        
-        on player teleports:
-        #this is checking perhaps for player type entities.... was  recent change in the underlying code....
-        #- if !<context.entity.is_player> queue clear
-        - if <player.has_flag[backtracking_teleport]> {
-            - flag player backtracking_teleport:!
-            - queue clear
-            }
-        - if <context.destination.distance[<context.origin>].is[or_less].than[5]>
-          queue clear
-        
-        
-        - flag player teleport_history:->:<context.origin>
-        
-        - if <player.flag[teleport_history].as_list.size.is[more].than[<script.yaml_key[teleport_history_max]>]> {
-            - define -_- "<proc[Flag Pop Left].context[<player>|teleport_history]>"
-            }
-        
-        on player death:
-        - flag player teleport_history:|:<context.entity.location>
-        
-        on vc command:
-        ########################################################################################################################
-        #                                                                                                                      #
-        # A command shortener based upon the data in the scripts constants: shortcut                                           #
-        # Option to change later is the ammount of arguments passed with the command.                                          #
-        # Just change the first args.get[your number] to whatever you want.                                                    #
-        #                                                                                                                      #
-        ########################################################################################################################
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        
-        - define shortcut <context.args.get[1]>
-        - define args <context.args.get[2].to[<context.args.size>]>
-        - define input <script.yaml_key[%shortcut%]>
-        - define input "<def[input].split[ ]>"
-        - define arg_index 1
-        - define new_input ""
-        
-        ########################################################################################################################
-        #                                                                                                                      #
-        # Rebuilding the command sent                                                                                          #
-        # If word = arg replace arg with the next value in the args sent with the command                                      #
-        # increment arg_index so to get next index                                                                             #
-        #                                                                                                                      #
-        ########################################################################################################################
-        - foreach <def[input]> {
-            - define next_arg <def[args].get[<def[arg_index]>]>
-            - if <def[value].contains[arg]> {
-                - define new_input "<def[new_input]> <def[value].replace[arg].with[<def[next_arg]>]>"
-                - define arg_index <def[arg_index].add[1]>
-                } else {
-                - define new_input "<def[new_input]> <def[new_value]>"
-                }
-            }
-        
-        #Just a filter from the null of a short command that's not there
-        - if <def[new_input]> != null || <def[new_input]> != "" execute as_op <def[new_input]>
-        
-        
-        on server_debug command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <server.has_flag[debug_output]> {
-            - narrate "[Server Debug] Toggled Console Output: <red>off" 
-            - flag server debug_output:!
-            } else {
-            - narrate "[Server Debug] Toggled Console Output: <red>on"
-            - flag server debug_output:true
-            }
-        
-        on debug command:
-        - determine passively fulfilled
-        - flag server
-        - define toggle_true "Debug On"
-        - define toggle_false "Debug Off"
-        - run "Toggle Flag" "def:desires_debug|%toggle_true%|%toggle_false%|Toggled"
-        
-        on dnick command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        
-        - if <context.args.size.is[more].than[1]> {
-            - define player <context.args.get[1]>
-            - define player <server.match_player[<def[player]>]||none>
-            - if <def[player]> == none {
-                - narrate "could not find a matching player for <context.args.get[1]>"
-                - queue clear
-                }
-            - define name <context.args.get[2].space_separated>
-            } else {
-            - define player <player>
-            - define name <context.args.space_separated>
-            }
-        
-        - define name <proc[Iconize].context[<def[name]>]>
-        - run "Rename Player" def:<def[name]> as:<def[player]>
-        - narrate "<gray>Trying to change <reset><def[player].name>'s <gray>name to: <reset><def[name]><reset>."
-        
-        
-        
-        on colors command:
-        - determine passively fulfilled
-        - inject "Color Codes Announcment"
-        
-
-        on bossbar command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define args <context.args.escaped>
-        - define words <proc[Iconize].context[<def[args].escaped>]>
-        - define debug_output "<red>Announcing to server online players: <green><def[words]>"
-        - narrate format:Formatted <def[debug_output]>
-        
-        - run "Boss Bar" def:<def[words]>
-        
-        
-        
-        on teamspeak command:
-        - determine passively fulfilled
-        - narrate format:Formatted "<green><script.yaml_key[message.teamspeak ip]>"
-        - narrate format:Formatted "<password>: <green><script.yaml_key[message.teamspeak password]>"
-        
-        
-        
-        on vote command:
-        - determine passively fulfilled
-        - narrate format:Formatted "<green><script.yaml_key[message.voting page]>"
-        
-        
-        
-        on webpage command:
-        - determine passively fulfilled
-        - narrate format:Formatted "<green><script.yaml_key[message.server page]>"
-        - narrate format:Formatted "<green><script.yaml_key[message.facebook page]>"
-        
-        
-        
-        
-        #as well as general clean up
-        on timesync command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <server.has_flag[pause_time_sync]> {
-            - ^narrate "The world time is <green>now <reset>syncing with server time."
-            - ^flag server "pause_time_sync:!"
-            } else {
-            - ^narrate "The world time is <red>not <reset>syncing with server time." 
-            - ^flag server "pause_time_sync:true"
-            }
-        
-        
-        
-        on clearchat command:
-        - determine passively fulfilled
-        - run "Player Chat Clearing" def:19
-
-        
-        
-
-        
-        on placenotify command:
-        - determine passively fulfilled
-        - define toggle_true "<script.yaml_key[message.place notify true]>"
-        - define toggle_false "<script.yaml_key[message.place notify false]>"
-        - run "Toggle Flag" "def:place_notifications|%toggle_true%|%toggle_false%|Toggled"
-        
-        
-        
-        on chatnotify command:
-        - determine passively fulfilled
-        - define toggle_true "<script.yaml_key[message.chat notify true]>"
-        - define toggle_false "<script.yaml_key[message.chat notify false]>"
-        - run "Toggle Flag" "def:chat_notifications|%toggle_true%|%toggle_false%|Toggled"
-        
-        
+        - if <player.has_flag[can_fly]> flag <player> can_fly:!        
         
         #on display command:
         #- determine passively fulfilled
@@ -252,287 +39,964 @@ Commands:
         #- define display "<context.args.get[1]>"
         #- define location <player.location.cursor_on[3]>
         
-        #- narrate "Summoning Display for you now."
-        #- narrate "Please step back, as its anchor is there."
-        #- narrate "Just chat to the display. It will change the display based on what you chat."
+        #- narrate  format:formatted "Summoning Display for you now."
+        #- narrate  format:formatted "Please step back, as its anchor is there."
+        #- narrate  format:formatted "Just chat to the display. It will change the display based on what you chat."
         #- execute as_op "npc create 'server display'"
         #- execute as_op "npc playerlist"
         #- invisible <player.selected_npc> toggle:true
         #- execute as_op "npc assign --set 'Nameplate Attractor'"
-        
-        on display command:
-        - determine passively fulfilled
-        - if <context.server> narrate "<script.yaml_key[title]> <blue>Must be used ingame. Sorry."
-        - inject locally "is permitted"
-        - if <context.args.is_empty> 
-          || <context.args.get[2].is[==].to[null]> {
-            - narrate "<script.yaml_key[title]> <blue>Usage is<&co> <yellow>./display (shop.swords sign.creative ..ect) (text)"
-            - queue clear
-            }
-        - define flag <context.args.get[1]>
-        - define location <player.location>
-        - define text <parse:<context.args.get[2]>>
-        - run "Server Display" def:<def[flag]>|<def[location]>|<def[text].escaped>
-        
-        
-        
-##############################################################################################################################        
-        on player changes gamemode:
-        - narrate "<script.yaml_key[title]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
-        
-        on gms command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - adjust <player> gamemode:survival
-        - narrate "<script.yaml_key[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
-        
-        on gma command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - adjust <player> gamemode:adventure
-        - narrate "<script.yaml_key[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
-        
-        on gmc command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - adjust <player> gamemode:creative
-        - narrate "<script.yaml_key[title]> <yellow>Current gamemode<&co> <light_purple><player.gamemode>"
-        
-        on fly command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <player.has_flag[can_fly]> {
-            - adjust <player> can_fly:false
-            - flag player can_fly:!
-            - narrate "<script.yaml_key[title]> <yellow>Hope your on the <red>ground."
+
+
+VesselCraft Command VC:
+    type: command
+    name: VC
+    description: A command shortner for frequently used commands. Provided there are defaults hardcoded
+    usage: /VC search
+    search: "he search p:arg t:arg"
+    say: "say arg"
+    express: "express arg"
+    colors: "colors"
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine li@
+    script:
+    ########################################################################################################################
+    #                                                                                                                      #
+    # A command shortener based upon the data in the scripts constants: shortcut                                           #
+    # Option to change later is the ammount of arguments passed with the command.                                          #
+    # Just change the first args.get[your number] to whatever you want.                                                    #
+    #                                                                                                                      #
+    ########################################################################################################################
+    - determine passively fulfilled
+    - inject locally "is permitted"
+    
+    - define shortcut <context.args.get[1]>
+    - define args <context.args.get[2].to[<context.args.size>]>
+    - define input <script.yaml_key[%shortcut%]>
+    - define input "<def[input].split[ ]>"
+    - define arg_index 1
+    - define new_input ""
+    
+    ########################################################################################################################
+    #                                                                                                                      #
+    # Rebuilding the command sent                                                                                          #
+    # If word = arg replace arg with the next value in the args sent with the command                                      #
+    # increment arg_index so to get next index                                                                             #
+    #                                                                                                                      #
+    ########################################################################################################################
+    - foreach <def[input]> {
+        - define next_arg <def[args].get[<def[arg_index]>]>
+        - if <def[value].contains[arg]> {
+            - define new_input "<def[new_input]> <def[value].replace[arg].with[<def[next_arg]>]>"
+            - define arg_index <def[arg_index].add[1]>
             } else {
-            - adjust <player> can_fly:true
-            - flag player can_fly
-            - narrate "<script.yaml_key[title]> <yellow>You can now <blue>fly!"
+            - define new_input "<def[new_input]> <def[new_value]>"
             }
-        
-        on smite command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - strike <player.location.cursor_on[100]>
-        
-        on time command:
-        - determine passively fulfilled
-        - if <context.args.is_empty> {
-            - narrate "<script.yaml_key[title]> <yellow>The time is <player.world.time> ticks"
-            - narrate "<script.yaml_key[title]> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, 0-24000)"
-            - queue clear
-            }
-        - inject locally "is permitted"
-        - define dawn 23500
-        - define morning 0
-        - define noon 6000
-        - define day 6000
-        - define dusk 12000
-        - define night 18000
-        - define accessor <context.args.get[1]>
-        - define time <def[%accessor%]||<context.args.get[1]>>
-        - if <def[time].as_int||failed_time> == failed_time {
-            - narrate "<script.yaml_key[title]> <blue>The argument you passed wasnt recogniced time. Ex<&co> <yellow>dawn, morning, noon, day, dusk, night, 0-24000"
-            - queue clear
-            }
-        - time <def[time]>t
-        - announce "<script.yaml_key[title]> <reset><player.name.display><reset> set the time to <yellow><def[time]>."
-        
-        on day command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - time 0t
-        - narrate "<script.yaml_key[title]> <yellow>Set the time to <player.world.time> ticks."
-        
-        on night command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - time 18000t
-        - narrate "<script.yaml_key[title]> <yellow>Set the time to <player.world.time> ticks."
-        
-        on sun command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - weather sunny
-        - narrate "<script.yaml_key[title]> <yellow>The weather was set to <red>SUN"
-        on storm command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - weather storm
-        - narrate "<script.yaml_key[title]> <yellow>The weather was set to <red>STORM"
-        on thunder command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - weather thunder
-        - narrate "<script.yaml_key[title]> <yellow>The weather was set to <red>THUNDER"
-        
-        on world command:
-        - determine passively fulfilled
-        - define world <context.args.get[1]||none>
-        - if !<server.list_worlds.contains[<def[world].as_world>]> {
-            - narrate "<script.yaml_key[title]> <yellow>This server contains the worlds<&co> <blue><&nl><server.list_worlds.parse[name]>"
-            - if <def[world].is[!=].to[none]>
-              narrate "<green><def[world]><yellow> was not on that list."
-            - queue clear
-            }
-        - teleport <def[world].as_world.spawn_location>
-        - narrate "<script.yaml_key[title]> <yellow>Ok, sending you to <def[world]>"
-        
-        on i command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack||1>>]
-        - define item <def[item].as_item||Not_An_Item>
-        - if <def[item].type||Not_An_Item> != "Item"  {
-            - narrate "<script.yaml_key[title]> <red>Not an item. <blue>It was<&co> <def[item].type||%item%>"
-            - queue clear
-            }
-        - narrate "<script.yaml_key[title]> <blue>Giving you <def[item].formatted>"
-        - give <def[item]>
+        }
+    
+    #Just a filter from the null of a short command that's not there
+    - if <def[new_input]> != null
+      || <def[new_input]> != ""
+      execute as_op <def[new_input]>
 
 
+VesselCraft Command Debug:
+    type: command
+    name: debug
+    description: Enables server debug announcements when a script fails.
+    usage: /debug
+    aliases:
+    - server_debug
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - if <server.has_flag[debug_output]> {
+        - narrate  format:formatted "[Server Debug] Toggled Console Output: <red>off" 
+        - flag server debug_output:!
+        } else {
+        - narrate format:formatted "[Server Debug] Toggled Console Output: <red>on"
+        - flag server debug_output:true
+        }
 
-        on ci command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define target <player||null>
-        - if !<context.args.is_empty>
-            define target <server.match_player[<context.args.get[1]>]>
-        - if <def[target]> == null {
-            - narrate "<script.yaml_key[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
-            - narrate "<script.yaml_key[title]> <blue>Usage<&co> ./ci [player]"
-            - queue clear
-            }
-        - narrate "<script.yaml_key[title]> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
-        - narrate "<script.yaml_key[title]> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
-        - inventory clear d:<def[target].inventory>
+
+# todo: when a player enters server check what thier nickname is to keep names consistent across servers
+VesselCraft Command Nickname:
+    type: command
+    name: dnick
+    description: Sets a nickname on <&lb>target<&co>valid_target<&rb>, resets the name if theres no <&rb>nick<&co>name<&lb> provided.
+    usage: /dnick <&lb>target<&co>target_name<&rb> <&lb>nick<&co>nick_name<&rb> 
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    # todo: Get a bungee wide server name and execute the nicknaming 
+    - define target <context.args.map_get[target]||<player||NO_TARGET_SPECIFIED>>
+    - define nickname "<context.args.map_get[nick]||>"
+    - define target <def[target].as_player||UNABLE_TO_FIND_PLAYER>  # player validation
+    - if !<server.object_is_valid[<def[target]>]> {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>could not find a matching player for <def[target]>"
+        - queue clear
+        }
+    - define nickname <parse:<proc[Iconize].context[<def[nickname]>]>>
+    - run "Rename Player" def:<def[nickname]> as:<def[target]>
+    - narrate format:formatted "<gray>Trying to change <reset><def[target].name>'s <gray>name to: <reset><def[nickname]><reset>."
 
 
-        on give command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <context.args.is_empty>
-          || <context.args.get[1]||no_player_specified> == "no_player_specified"
-          || <context.args.get[2].replace[minecraft<&co>].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
-            - narrate "<script.yaml_key[title]> <blue>Your input<&co> <yellow>./give <context.args.get[1]||NO_Player> <context.args.get[2]||NO_ITEM> <context.args.get[3]||NO_AMMOUNT_SPECIFIED>"
-            - narrate "<script.yaml_key[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
-            - queue clear
-            }
-        
-        - define target <server.match_player[<context.args.get[1]>]>
-        - if <def[target]> == null {
-            - narrate "<script.yaml_key[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
-            - narrate "<script.yaml_key[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
-            - queue clear
-            }
+VesselCraft Command Colors:
+    type: command
+    name: colors
+    description: Outputs Minecraft color names, and their codes.
+    usage: /colors
+    aliases:
+    - color
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine true
+    colors:
+    - bold/&l
+    - underline/&n
+    - italic/&o
+    - magic/&k
+    - strikethrough/&m
+    - reset/&r
+    - black/&0
+    - dark_blue/&1
+    - dark_green/&
+    - dark_aqua/&3
+    - dark_red/&4
+    - dark_purple/&5
+    - gold/&6
+    - gray/&7
+    - dark_gray/&8
+    - blue/&9
+    - green/&a
+    - aqua/&b
+    - red/&c
+    - light_purple/&d
+    - yellow/&e
+    - white/&f
+    script:
+    - define colors <script.yaml_key[colors]>
+    - foreach <def[colors]> {
+        - define key <def[value].split[/].first>
+        - define valu <def[colors].map_get[<def[key]>]>
+        - define color_key "<%key%><def[key]>"
+        - narrate "<def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
+        }
 
-        - define item <context.args.get[2].replace[minecraft<&co>].as_item||Not_An_Item>
-        - narrate "<script.yaml_key[title]> <blue>Giving <red><def[target].name.display||<def[target].name>> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><context.args.get[3]||1>"  targets:<player>
-        - narrate "<script.yaml_key[title]> <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>"            targets:<def[target]>
-        - give <def[item]> to:<def[target].inventory> qty:<context.args.get[3]||1>
-        
-        on leap command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define target <player||null>
-        - define strength <context.args.get[2]||1>
-        - if !<context.args.is_empty>
-            define target <server.match_player[<context.args.get[1]||null>]>
-        - if <def[target]> == null {
-            - narrate "<script.yaml_key[title]> <red>Could not find the specified target. <yellow><context.args.get[1]>"
-            - narrate "<script.yaml_key[title]> <blue>Usage<&co> ./leap (player)"
-            - queue clear
-            }
-        - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
-        
-        on ping command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define colors li@<red>|<blue>|<green>|<yellow>|<light_purple>
-        - narrate "<def[colors].random>Pong"
-         
-        on speed command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - define speed <context.args.get[1].div[5]||.2>
-        - if <player.is_flying> {
-           - adjust <player> fly_speed:<def[speed]>
-           - narrate "<script.yaml_key[title]> <blue>Set your flying speed to<&co> <yellow><def[speed].mul[5]>"
-           } else {
-           - adjust <player> walk_speed:<def[speed]>
-           - narrate "<script.yaml_key[title]> <blue>Set your walking speed to<&co> <yellow><def[speed].mul[5]>"
-           }
-        
-        #provide a targeting option from console or others
-        on mob command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <context.server> {
-            - narrate "Sorry man, Youll need to be ingame to send any mobs the way you might be looking..."
-            - queue clear
-            }
-        - if <context.args.is_empty> {
-            - narrate "<script.yaml_key[title]> <blue>Usage<&co> <light_purple>./mob cow|enderman|<&lt>server.match_player[<server.list_ops.random.name>]<&gt>"
-            - queue clear
-            }
-        - mount <parse:<context.args>> <player.location.cursor_on.above>
-        
-        #provide a targeting option to automaticaly send a player
-        on back command:
-        - determine passively fulfilled
-        - inject locally "is permitted"
-        - if <context.server> {
-            - narrate "Sorry man, Youll need to be ingame to be sent back where you were teleported from......"
-            - queue clear
-            }
-        - if !<player.has_flag[teleport_history]> {
-            - narrate "<script.yaml_key[title]> <blue>Sorry, you have no teleport history."
-            - queue clear
-            }
-        - define index <context.args.get[1]||1>
-        - if <def[index].as_int||not_an_int> == not_an_int
-          || <def[index].is[more].than[<player.flag[teleport_history].as_list.size>]> {
-            - narrate "<script.yaml_key[title]> <blue>Sorry, <yellow><def[index]> <blue>was not a number or an oversized number to use to get your history with. <red>Sending you to your last location."
-            - define index 1
-            }
-        - flag player backtracking_teleport
-        - teleport <player> <player.flag[teleport_history].as_list.reversed.get[<def[index]>]>
-        
-        
-        
-        
-#        on hurt command:
-#        - determine passively fulfilled
-#        - inject locally "is permitted"/lo
-#        - if <context.args.is_empty>
-#          || <context.args.get[1]||no_player_specified> == "no_player_specified"
-#          || <context.args.get[2].as_item.type.is[==].to[item]||unmatchable_item> == "unmatchable_item" {
-#            - narrate "<script.yaml_key[title]> <blue>Your input<&co> <yellow>./give <context.args.get[1]||NO_Player> <context.args.get[2]||NO_ITEM> <context.args.get[3]||NO_AMMOUNT_SPECIFIED>"
-#            - narrate "<script.yaml_key[title]> <blue>Usage<&co> ./give (player) (item) [ammount]"
-#            - queue clear
-#            }
-        
-        #
-        #on heal command:
-        #   also heal statuses
-        #   boost saturation
-        #   boost food
-        #on powertool command:
-        #
-        #on killall command:
-        #list server entities excluding
-        #   entites with owners
-        #   players
-        #   itemframes
-        #   armor stands
-        #
-        #INcluding
-        #   items
-        #   mobs
-        #   friendly mobs
-        #   projectiles
-        #- define targets <player.location.find.entities[].within[]>
 
+VesselCraft Command BossBar:
+    type: command
+    name: bossbar
+    description: Displays a bossbar text to the whole server
+    usage: /bossbar "li@quoted text here|in list format|for multiple lines"
+    aliases:
+    - bb
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - define args <context.args.escaped>
+    - define words <proc[Iconize].context[<def[args].escaped>]>
+    - define debug_output "<red>Announcing to server online players: <green><def[words]>"
+    - narrate format:formatted <def[debug_output]>
+    
+    - run "Boss Bar" def:<def[words]>
+
+
+# todo: create a target to send the info to
+VesselCraft Command TeamSpeak:
+    type: command
+    name: teamspeak
+    description: Gives the sender the teamspeak address and password.
+    usage: /teamspeak
+    aliases:
+    - tsaddress
+    - tslocation
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - determine passively fulfilled
+    - narrate format:formatted "<green><script.yaml_key[message.teamspeak ip]>"
+    - narrate format:formatted "<password>: <green><script.yaml_key[message.teamspeak password]>"
+
+
+# todo: create a target to send the info to
+VesselCraft Command Vote:
+    type: command
+    name: vote
+    description: Gives the sender a list of places they can vote for the server on.
+    usage: /vote
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - determine passively fulfilled
+    - narrate format:formatted "<green><script.yaml_key[message.voting page]>"
+
+
+# todo: create a target to send the info to
+VesselCraft Command webpage:
+    type: command
+    name: back
+    description: Gives the sender the webpage they can use to view extra server information.
+    usage: /webpage <&lb>int<&rb> (optional, no int defaults to last location)
+    aliases:
+    - web
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - narrate format:formatted "<green><s@CommandDefaults.yaml_key[message.server page]>"
+    - narrate format:formatted "<green><s@CommandDefaults.yaml_key[message.facebook page]>"
+
+
+VesselCraft Command TimeSync:
+    type: command
+    name: timesync
+    description: Toggles the binding of real life time to the server time.
+    usage: (/timesync /sync)
+    aliases:
+    - sync
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - if <server.has_flag[pause_time_sync]> {
+        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> The world time is <green>now <reset>syncing with server time."
+        - flag server "pause_time_sync:!"
+        } else {
+        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> The world time is <red>not <reset>syncing with server time." 
+        - flag server "pause_time_sync:true"
+        }
+
+
+VesselCraft Command ClearChat:
+    type: command
+    name: clearchat
+    description: Clears the users chat
+    usage: /clearchat
+    aliases:
+    - cc
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - if <context.server> {
+        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> You cannot do this, this is for players only"
+        - queue clear
+        }
+    - run "Player Chat Clearing" def:19
+
+
+# todo: Possible to set a target
+VesselCraft Command PlaceNotify:
+    type: command
+    name: placenotify
+    description: Toggles feedback of what block the player places.
+    usage: /placenotify
+    aliases:
+    - back
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define toggle_true "<s@CommandDefaults.yaml_key[message.place notify true]>"
+    - define toggle_false "<s@CommandDefaults.yaml_key[message.place notify false]>"
+    - run "Toggle Flag" "def:place_notifications|%toggle_true%|%toggle_false%|Toggled"
+
+
+# todo: setup multiserver notification
+# todo: setup target spefication
+VesselCraft Command ChatNotify:
+    type: command
+    name: chatnotify
+    description: Toggles the noise notification when another player says thier name.
+    usage: /chatnotify <&lb>int<&rb> (optional, no int defaults to last location)
+    aliases:
+    - cn
+    - grawl_at_meh_when_yah_say_mah_name
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define toggle_true "<script.yaml_key[message.chat notify true]>"
+    - define toggle_false "<script.yaml_key[message.chat notify false]>"
+    - run "Toggle Flag" "def:chat_notifications|%toggle_true%|%toggle_false%|Toggled"
+
+
+VesselCraft Command Display:
+    type: command
+    name: display
+    description: Creates display using the scripted displays.
+    usage: /display (path.where.stored) <&lb>text<&co>text<&rb> (optional text<&co>your_text defaults to removing the displays at the path) 
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - if <context.server> {
+        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Must be used ingame. Sorry."
+        }
+    - define path <context.args.get[1]>
+    - define text <context.args.map_get[text]>
+    - define location <player.location>
+    - define text <parse:<context.args.get[2]>>
+    - run "Server Display" def:<def[flag]>|<def[location]>|<def[text].escaped>
+
+
+##############################################################################################################################        
+VesselCraft Command GameMode Change Detection:
+    type: world
+    events:
+        on player changes gamemode:
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
+
+
+VesselCraft Command GameMode:
+    type: command
+    name: gamemode
+    description: Changes your gamemode or the targets gamemode into survival.
+    usage: /gamemode <&lb>target<&rb> (target defaults to sender)
+    aliases:
+    - gm
+    - gm0
+    - gm1
+    - gm2
+    - gms
+    - gma
+    - gms
+    - creative
+    - adventure
+    - survival
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define alias_to_argument li@gms/survival|survival/survival|gm/survival|s/survival|0/survival|gma/adventure|adventure/adventure|a/adventure|2/adventure|gmc/creative|creative/creative|c/creative|1/creative
+    - define target <context.args.get[1]||<player||NO_TARGET_SPECIFIED>>
+    - define gamemode <def[alias_to_argument].map_get[<context.alias>]||NO_MAPPABLE_GAMEMODE>
+    - if <def[gamemode]> == NO_MAPPABLE_GAMEMODE {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> Your mode <player.gamemode>. Alias commands<&co> <script.yaml_key[aliases].space_separated>"
+        - queue clear
+        }
+    - if !<server.object_is_valid[<def[target]>]> {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Failed to find a valid target<&co> <def[target]>"
+        - queue clear
+        }
+    - adjust <def[target]> gamemode:<def[gamemode]>
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
+
+
+VesselCraft Command Fly:
+    type: command
+    name: fly
+    description: Sets the target (target defaults to sender) to be allowed creative flight.
+    usage: /fly <&lb>target<&rb> (target defaults to sender)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - if <player.has_flag[can_fly]> {
+        - adjust <player> can_fly:false
+        - flag player can_fly:!
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Hope your on the <red>ground."
+        } else {
+        - adjust <player> can_fly:true
+        - flag player can_fly
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You can now <blue>fly!"
+        }
+
+
+VesselCraft Command Smite:
+    type: command
+    name: smite
+    description: Sends lightning to target (target defaults to where the sender is looking).
+    usage: /smite <&lb>p@some_valid_name.location<&rb>
+    aliases:
+    - strike
+    - lightning
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine li@
+    script:
+    # parse the text for expecting some text
+    # could be e@eid or l@location or '' or text
+    #
+    - define location <parse:<context.args.get[1]||<player||NO_SPECIFIED_TARGET>>>
+    - foreach li@as_entity|as_location {
+        - define parsed_tag <def[location].%value%>
+        - if <server.object_is_valid[<def[location]>]> {
+            - if <def[value]> == "as_entity" {
+                - define location <def[parsed_tag].location>
+                } else {
+                - define location <def[parsed_tag]>
+                }
+            - foreach stop
+            }
+        }
+    - if !<server.object_is_valid[<def[location]>]> {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> You need to specify a valid location<&co> <def[location]>"
+        - queue clear
+        }
+    - strike <player.location.cursor_on[100]>
+
+
+VesselCraft Command Time:
+    type: command
+    name: time
+    description: Sets the server time to the specified <&lb>time<&rb> argument. Else returns the current minecraft worlds time.
+    usage: /time <&lb>time<&rb> (time defaults to none)
+    aliases:
+    - timeset
+    - settime
+    - day
+    - dawn
+    - morning
+    - dusk
+    - night
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <li@dawn|morning|noon|day|dusk|night.filter[starts_with[<context.args.last>]]>
+    script:
+    - if <context.args.is_empty> {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The time is <player.world.time> ticks"
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, 0-24000)"
+        - queue clear
+        }
+    - define dawn 23500
+    - define morning 0
+    - define noon 6000
+    - define day 6000
+    - define dusk 12000
+    - define night 18000
+    - define accessor <context.args.get[1]||<context.alias>>
+    - define time <def[%accessor%]||<def[morning]>>
+    - if <def[time].as_int||failed_time> == failed_time {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>The argument you passed wasnt recogniced time. Ex<&co> <yellow>dawn, morning, noon, day, dusk, night, 0-24000"
+        - queue clear
+        }
+    - time <def[time]>t
+    - announce "<blue><&lb><red><script.name><blue><&rb><reset> <reset><player.name.display><reset> set the time to <yellow><def[time]>."
+
+
+# todo: take advantage player matching for specific weather targets
+VesselCraft Command Weather:
+    type: command
+    name: weather
+    description: Sets the servers weather, optionaly just a <&lb>world<&co>world_name<&rb>.
+    usage: /weather <&lb>sun, stor<&rb> <&rb>world<&co>world_name<&rb>(weather defaults to sun, <&lb>world<&co>world_name<&rb> defaults to all)
+    aliases:
+    - sun
+    - storm
+    - thunder
+    - setweather
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - define weathers li@sun|storm|thunder
+    - define worlds <server.list_worlds>
+    - determine <def[worlds].include[<def[weathers]>].filter[starts_with[<context.args.last>]]>
+    script:
+    - define weather <context.args.get[1]||<context.alias||NO_WEATHER_SPECIFIED>>
+    - define world <context.args.map_get[world].as_world||NO_VALID_WORLD_SPECIFIED>
+    - if <def[weather]> == NO_WEATHER_SPECIFIED {
+        - foreach <server.list_world> {
+            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red>SUN"
+            }
+        - queue clear
+        }
+    - if <def[world]> == NO_VALID_WORLD_SPECIFIED {
+        - define world ''
+        } else {
+        - define world 'world<&co><def[world]>'
+        }
+    - weather <def[weather]> <def[world]>
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> in <def[world].name||every world>."
+
+
+VesselCraft Command World:
+    type: command
+    name: world
+    description: Sends the sender/target to a specified worlds spawn location.
+    usage: /world (world) (target<&co>chemical_datas) (player defaults to command sender)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - define players <server.list_online_players.parse[name]>
+    - define worlds <server.list_worlds>
+    - determine <def[players].include[<def[worlds]>].filter[starts_with[<context.args.last>]]>
+    script:
+    - define world <context.args.get[1].as_world||NO_VALID_WORLD>
+    - define player <context.args.map_get[target].as_player||<player||NO_VALID_PLAYER_SPECIFIED>>
+    - if <def[target]> == NO_VALID_PLAYER_SPECIFIED {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You need to specify a valid player. Player<&co> <def[target]>"
+        - queue clear
+        }
+    - if <def[world]> == NO_VALID_WORLD {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>This server contains the worlds<&co><&nl><blue><server.list_worlds.parse[name].space_separated>"
+        - queue clear
+        }
+    - teleport <def[world].spawn_location>
+    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Ok, sending you to <def[world]>"
+
+
+VesselCraft Command I:
+    type: command
+    name: i
+    description: Give your self an <&lb>item<&rb>.
+    usage: /i (item) <&lb>number<&rb> (number defaults to full stack of item)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <yaml[serverinfo].read[lists.items].filter[starts_with[<context.args.last>]]>
+    script:
+    - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack||1>>]
+    - define item <def[item].as_item||Not_An_Item>
+    - if <def[item].type||Not_An_Item> != "Item" {
+        - define item_list <yaml[serverinfo].read[lists.items]>
+        - define possible_item <def[item_list].find_partial[<def[item]>]>
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>?"
+        - queue clear
+        }
+    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>"
+    - give <def[item]>
+
+
+VesselCraft Command Clear Inventory:
+    type: command
+    name: clearinventory
+    description: Clears a <&lb>targets<&rb> inventory.
+    usage: (/clearinventory /ci) <&lb>target<&co>chem<&rb> (target defaults to command sender)
+    aliases:
+    - ci
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define target <player||NO_DEFAULT_TARGET>
+    - if !<context.args.is_empty>
+        define target <server.match_player[<context.args.map_get[target]>]||NO_VALID_PLAYER>
+    - if <def[target]> == NO_DEFAULT_TARGET
+      || <def[target]> == NO_VALID_PLAYER {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Could not find the specified target. <yellow><def[target]>"
+        - queue clear
+        }
+    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
+    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
+    - inventory clear d:<def[target].inventory>
+
+
+VesselCraft Command Give:
+    type: command
+    name: give
+    description: Gives an <&lb>item<&rb> to the <&lb>target with inventory<&rb>
+    usage: /give (target with inventory) (item) <&lb>ammount<&rb> (optional, ammount defaults to 1)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - define players <server.list_online_players.parse[name]>
+    - define items <yaml[serverinfo].read[lists.item_list]>
+    - determine <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+    script:
+    - define target <context.args.get[1]||NO_TARGET_SPECIFIED>
+    - define target_id
+    - foreach li@as_player|as_npc|as_location {  # Target validation
+        - define target <def[target].%value%||FAILED_ACQUISITION>
+        - if <server.object_is_valid[<def[target]>]> {
+            - if <def[value]> == as_player || <def[value]> == as_npc define accessor name
+            - if <def[value]> == as_location define accessor location.simple
+            - define target_id <def[target].%accessor%>
+            - foreach stop
+            }
+        }
+    - define target <def[target].inventory||UNMATCHABLE_INVENTORY>
+    - define item <context.args.get[2]||NO_ITEM_SPECIFIED>
+    - define item <def[item].replace[minecraft<&co>].as_item||UNMATCHABLE_ITEM>
+    - define ammount <context.args.get[3]||1>
+    
+    - if !<server.object_is_valid[<def[target]>]>
+      || !<server.object_is_valid[<def[item]>]> {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]>"
+        - queue clear
+        }
+
+    - narrate format:formatted "<red><script.name> <blue>Giving <red><def[target_id]> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><def[ammount]>"                    targets:<player>
+    - narrate format:formatted "<red><script.name>  <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>>"    targets:<def[target]>
+    - give <def[item]> to:<def[target]> qty:<def[ammount]>
+
+
+VesselCraft Command Leap:
+    type: command
+    name: leap
+    description: Adjusts the <&lb>targets<&rb> <&rb>velocity<&rb> to <&rb>strength<&lb> in the targets looking vector. Accepts optional target|strength
+    usage: /leap <&lb>target<&rb> <&lb>strength<&rb> (optional, strength defaults to 1, target defaults to self)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define target <parse:<context.args.get[1]||<player>>>
+    - define strength <context.args.get[2]||1>
+    - if !<server.object_is_valid[<def[target]>]> {
+        - narrate  format:formatted "<yaml[serverinfo].read[servername]> <red>Could not find the specified target. <yellow><target> <red><context.args.get[1]"
+        - queue clear
+        }
+    - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+
+
+VesselCraft Command Ping:
+    type: command
+    name: ping
+    description: A command for the sender to recieve a message back from the server.
+    usage: /ping
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    colors_list: li@0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|l|n|o|k|m|r
+    script:
+    - define color <script.yaml_key[colors_list]>
+    - define color &<def[color].random>
+    - narrate  format:formatted "<%color%>Pong"
+ 
+ 
+VesselCraft Command Speed:
+    type: command
+    name: speed
+    description: When walking adjusts a players speed, or when flying adjust their flying speed
+    usage: /speed <&lb>player<&rb> <&lb>int<&rb> (optional, no int defaults to last location)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define speed <context.args.get[1].div[5]||.2>
+    - if <player.is_flying> {
+       - adjust <player> fly_speed:<def[speed]>
+       - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Set your flying speed to<&co> <blue><def[speed].mul[5]>"
+       } else {
+       - adjust <player> walk_speed:<def[speed]>
+       - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Set your walking speed to<&co> <blue><def[speed].mul[5]>"
+       }
+
+
+VesselCraft Command Mob:
+    type: command
+    name: mob
+    description: Spawns an entity(s) where the command is looking or optionaly mounted, or optionaly at a location.
+    usage: /mob (l@d_list_of_entity_types) <gray><&lb>number (optional<&co> an ammount to spawn)<&rb> <&lb>d_object.location (optional<&co> d_object must parse to a location)<&rb>
+    aliases:
+    - monster
+    - entity
+    permission: vc.commands.mob
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - define mob_list <script.yaml_key[entity_list]>
+    - define player_list <server.list_online_players.parse[name]>
+    - determine <def[mob_list].include[<def[player_list]>].filter[starts_with[<context.args.last>]]>
+    entity_list:
+    - ARROW
+    - BAT
+    - BLAZE
+    - BOAT
+    - CAVE_SPIDER
+    - CHICKEN
+    - COMPLEX_PART
+    - COW
+    - CREEPER
+    - EGG
+    - ENDER_CRYSTAL
+    - ENDER_DRAGON
+    - ENDER_PEARL
+    - ENDER_SIGNAL
+    - ENDERMAN
+    - ENDERMITE
+    - EXPERIENCE_ORB
+    - FALLING_BLOCK
+    - FIREBALL
+    - FIREWORK 
+    - FISHING_HOOK
+    - GHAST
+    - GIANT
+    - GUARDIAN
+    - HORSE
+    - IRON_GOLEM
+    - ITEM_FRAME
+    - LEASH_HITCH
+    - LIGHTNING
+    - MAGMA_CUBE
+    - MINECART
+    - MINECART_CHEST
+    - MINECART_COMMAND
+    - MINECART_FURNACE
+    - MINECART_HOPPER
+    - MINECART_MOB_SPAWNER
+    - MINECART_TNT
+    - MUSHROOM_COW
+    - OCELOT
+    - PAINTING
+    - PIG
+    - PIG_ZOMBIE
+    - PLAYER
+    - PRIMED_TNT
+    - RABBIT
+    - SHEEP
+    - SILVERFISH
+    - SKELETON
+    - SLIME
+    - SMALL_FIREBALL
+    - SNOWBALL
+    - SNOWMAN
+    - SPIDER
+    - SPLASH_POTION
+    - SQUID
+    - THROWN_EXP_BOTTLE
+    - UNKNOWN
+    - VILLAGER
+    - WEATHER
+    - WITCH
+    - WITHER
+    - WITHER_SKULL
+    - WOLF
+    - ZOMBIE
+    script:
+    # This also accepts preexisting entitys like players... be careful...
+    - define mob_list <context.args.get[1].as_list.parse[as_entity]||NONE>
+    - define ammount <context.args.get[2].as_int||1>
+    - define location <parse:<context.args.get[3]||<player.location.cursor_on[90]||NONE>>>
+    # confirms a valid location
+    - define location <def[location].as_location||NONE>
+    - if <def[mob_list].contains[NONE]>
+      || <def[location]> == NONE {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <parse:<script.yaml_key[usage]>>"
+        - queue clear
+        }
+    - define location <def[location].above>
+    - repeat <def[ammount]> {
+        - mount <def[mob_list]> <def[location]>
+        }
+
+
+VesselCraft Command Back Teleport Listener:
+    type: world
+    events:
+        on player teleports:
+        - if <player.has_flag[backtracking_teleport]> {
+            - flag player backtracking_teleport:!
+            - queue clear
+            }
+        - if <context.destination.distance[<context.origin>].is[or_less].than[10]>
+          queue clear
+        - flag player teleport_history:->:<context.origin>
+        - define max_history_size <s@CommandDefaults.yaml_key[teleport_history_max]>
+        - define size <player.flag[teleport_history].as_list.size>
+        - if <def[size].is[more].than[<def[max_history_size]>]> {
+            - define keep_locations <player.flag[teleport_history].as_list.get[2].to[<def[size]>]>
+            - flag player teleport_history:!
+            - flag player teleport_history:|:<def[keep_locations]>
+            }
+        on player death:
+        - flag player teleport_history:|:<context.entity.location>
+
+
+VesselCraft Command Back:
+    type: command
+    name: back
+    description: Return to a previously teleported from location. Keeps a history on last teleports.
+    usage: /back <&lb>int<&rb> (optional, int defaults to last location)
+    aliases:
+    - back
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <util.random.int[1].to[<s@CommandDefaults.yaml_key[teleport_history_max]>]>
+    script:
+    - if !<player.has_flag[teleport_history]> {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Sorry, you have no teleport history."
+        - queue clear
+        }
+    - define index <context.args.get[1]||1>
+    - if <def[index].as_int||not_an_int> == not_an_int
+      || <def[index].is[more].than[<player.flag[teleport_history].as_list.size>]> {
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <blue>Sorry, <yellow><def[index]> <blue>was not a number or an oversized number to use to get your history with. <red>Sending you to your last location."
+        - define index 1
+        }
+    - define target_location <player.flag[teleport_history].as_list.reverse.get[<def[index]>]>
+    - if <def[target_location].as_location||NOT_A_LOCATION> == NOT_A_LOCATION {
+        - narraet format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Youve got some wierd values that should only be locations... Contact an admin about that... <def[target_location]>"
+        - flag player teleport_histor:!
+        - queue clear
+        }
+    - flag player backtracking_teleport
+    - teleport <player> <def[target_location]>
+
+
+VesselCraft Command Hurt:
+    type: command
+    name: hurt
+    description: Damages <&lb>target<&rb> for <&lb>damage<&rb>
+    usage: /hurt (target) <&lb>damage<&rb> <&lb>cause<&co><&rb> <&lb>source<&co><&rb> (optional args<&co> damage defaults to 2, optional params<&co> cause defaults custom, source)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define target <context.args.get[1]>
+    - define damage <context.args.get[2]||2>
+    - define source <context.args.map_get[source]>
+    - define source <<parse:%source%>>
+    - define cause <context.args.map_get[cause]>
+    - if !<server.object_is_valid[<def[target]>]> {
+        -
+        }
+    - if !<server.object_is_valid[<def[source]>]> {
+        - define source ''
+        } else {
+        - define source source<&co><def[source]>
+        }
+    - hurt <def[damage]> <def[target]> cause:custom <def[source]>
+
+
+VesselCraft Command Heal:
+    type: command
+    name: heal
+    aliases:
+    - health
+    description: Heal the sender or a <&rb>target<&lb>.
+    usage: /heal <&lb>target<&rb> (target defaults to sender)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    tab complete:
+    - if !<player.is_op||<context.server>> queue clear
+    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    script:
+    - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
+    - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
+    - if !<server.object_is_valid[<def[target]>]> {
+        - define target <server.match_player[<def[target]>]||COULD_NOT_FIND_PLAYER>
+        - if !<server.object_is_valid[<def[target]>]> {
+            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <red><def[target]> <blue>was not a valid target."
+            - queue clear
+            }
+        }
+    - heal <def[target]>
+
+
+VesselCraft Command KillAll:
+    type: command
+    name: killall
+    description: Removes all entitys on the server (excluding players and tamed beasts, item frames, ect...).
+    usage: /killall <&lb>argument<&rb> (arguments specify additional entitys. -d for drops, -f for farm animals, -a for all possible targets, -i for inanimate)
+    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
+    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - define possible_arguments li@-d/dropped_items|-f/farm_animals|-s/armor|-i/inanimate
+    - define dropped_items li@dropped_item
+    - define farm_animals li@chicken|pig|horse|cow|bat|squid|iron_golem|rabbit|villager
+    - define inanimate li@armor_stand|falling_block|boat|minecart|experience_orb|arrow|dropped_item
+    - define armor li@armor_stand
+    - define default_types li@zombie|skeleton|creeper|wolf|ocelot|endermite|enderman|enderdragon|silverfish|guardian|pig_zombie|ghast|blaze|slime|magma_cube|cave_spider|spider|wither|witch
+    - define targets <def[default_types]>
+    - define entity_targets li@
+    - if !<context.args.contains[-a]> {
+        - foreach <context.args> {
+            - define list_name <def[possible_arguments].map_get[%value%]>
+            - define targets <def[targets].include[<def[%list_name%]>]>
+            }
+        } else {
+        - define targets <def[targets].include[<def[inanimate]>]>
+        - define targets <def[targets].include[<def[farm_animals]>]>
+        - define targets <def[targets].include[<def[dropped_items]>]>
+        }
+    - foreach <server.list_worlds> {
+        - foreach <def[value].list_entitys> {
+            - if <def[targets].contains[<def[value].entity_type>]> {
+                - define entity_targets <def[entity_targets].include[<def[value]>]>
+                }
+            }
+        }
+    - remove <def[entity_targets]>
 
 
