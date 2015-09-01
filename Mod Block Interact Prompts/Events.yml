@@ -1,11 +1,15 @@
 Block Interact Display Triggers:
     type: world
-    defaults:
     events:
-        on player animates ARM_SWING:
+        on player right clicks at entity:
+        - announce "Clicked entity <context.entity.name||<context.entity.type>>"
+        #on player animates ARM_SWING:
         #todo: maybe perform a facing check too
-        - if <queue.exists[<player.name>_context_menu]>
-          queue q@<player.name>_context_menu resume
+        #- announce "Animates <context.animation>"
+        - define queue <player.name>_context_menu
+        - if <queue.exists[<queue>]> {
+            - queue <def[queue].as_queue> resume
+            }
         
         on player right clicks block:
         - define queue <player.name>_context_menu
