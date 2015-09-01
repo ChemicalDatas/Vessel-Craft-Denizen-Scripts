@@ -12,43 +12,9 @@
     format: "[<bold><red>DEBUG<reset>]: <blue><text>"
     
 
-Color Codes Announcment:
-    type: task
-    colors:
-    - bold/&l
-    - underline/&n
-    - italic/&o
-    - magic/&k
-    - strikethrough/&m
-    - reset/&r
-    - black/&0
-    - dark_blue/&1
-    - dark_green/&
-    - dark_aqua/&3
-    - dark_red/&4
-    - dark_purple/&5
-    - gold/&6
-    - gray/&7
-    - dark_gray/&8
-    - blue/&9
-    - green/&a
-    - aqua/&b
-    - red/&c
-    - light_purple/&d
-    - yellow/&e
-    - white/&f
-    script:
-    - define colors <script.yaml_key[colors]>
-    - foreach <def[colors]> {
-        - define key <def[value].split[/].first>
-        - define valu <def[colors].map_get[<def[key]>]>
-        - define color_key "<%key%><def[key]>"
-        - narrate "<def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
-        }
-    
 Formatted:
     type: format
-    format: "<proc[Iconize].context[<parse:<text>>]>"
+    format: "<parse:<proc[Iconize].context[<parse:<text>>]>>"
     
 Plain:
     type: format
