@@ -15,14 +15,17 @@ Player Flagged Bonuses:
     debug: false
     events:
         on player breaks block:
-        - determine  "<proc[Bonus Handling].context[break_<context.material.name>|<player>]>"
+        - if <server.has_flag[drops.break.override]> {
+            - determine  "<proc[Bonus Handling].context[break_<context.material.name>|<player>]>"
+            }
         
         on entity dies:
         - if <context.damager||none> == none 
           queue clear
         
-        - determine  "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
-        
+        - if <server.has_flag[drops.kill.override]> {
+            - determine  "<proc[Bonus Handling].context[kill_<context.entity.name>|<context.damager>]>"
+            }
     
 
 #Searches for an event resolution in the players flagged data
