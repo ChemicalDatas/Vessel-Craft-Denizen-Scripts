@@ -7,10 +7,10 @@ Announcement Bar:
     
     events:
         on player join:
-        - wait d@2s
+        - wait d@5s
         - inject "Wait for Valid Player"
-        - define individual_greet       "<player.name.display>, <script.yaml_key[individual]>"
-        - define server_announcement    "<player.name.display> <script.yaml_key[server]>"
+        - define individual_greet       "<player.name.display>, <parse:<script.yaml_key[individual]>>"
+        - define server_announcement    "<player.name.display> <parse:<script.yaml_key[server]>>"
         - define other_players          <server.list_online_players.exclude[<player>]>
         
         #This has issues with the <player> reference as its not trimming the extra spaces in the script...
@@ -23,9 +23,7 @@ On Join Welcome Title:
     type: world
     subtitle: "Welcome back <gold><player.name>"
     title: "<blue>Vessel Craft"
-    
     events:
-    
         on player join:
-        - wait d@2s
-        - title title:<script.yaml_key[title]> subtitle:<script.yaml_key[subtitle]> targets:<player>
+        - inject "wait for valid player"
+        - title title:<parse:<script.yaml_key[title]>> subtitle:<parse:<script.yaml_key[subtitle]>> targets:<player>
