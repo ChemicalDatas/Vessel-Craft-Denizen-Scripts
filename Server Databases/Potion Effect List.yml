@@ -1,0 +1,30 @@
+Potion Effect List:
+    type: yaml data
+    effects:
+    - speed
+    - slow
+    - fast_digging
+    - slow_digging
+    - increase_damage
+    # Instant effects
+    #- instant health
+    #- instant damage
+    - jump
+    - confusion
+    - blindness
+    - regeneration
+    - damage_resistance
+    - fire_resistance
+    - water_breathing
+    - invisibility
+    - night_vision
+    - hunger
+    - weakness
+    - poison
+    - wither
+    - health_boost
+    - absorption
+    - saturation
+    # 1.9 effects (they might not be named this in denizen)
+    #- glowing
+    #- levitation

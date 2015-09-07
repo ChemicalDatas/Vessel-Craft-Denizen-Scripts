@@ -1,0 +1,160 @@
+effects list:
+    type: yaml data
+    effectlist: "BLAZE_SHOOT
+    BOW_FIRE
+    CLICK1
+    CLICK2
+    CLOUD
+    COLOURED_DUST
+    CRIT
+    DOOR_TOGGLE
+    ENDER_SIGNAL
+    EXPLOSION
+    EXPLOSION_HUGE
+    EXPLOSION_LARGE
+    EXTINGUISH
+    FIREWORKS_SPARK
+    FLAME
+    FLYING_GLYPH
+    FOOTSTEP
+    GHAST_SHOOT
+    GHAST_SHRIEK
+    HAPPY_VILLAGER
+    HEART
+    INSTANT_SPELL
+    ITEM_BREAK
+    LARGE_SMOKE
+    LAVA_POP
+    LAVADRIP
+    MAGIC_CRIT
+    MOBSPAWNER_FLAMES
+    NOTE
+    PARTICLE_SMOKE
+    PORTAL
+    POTION_BREAK
+    POTION_SWIRL
+    POTION_SWIRL_TRANSPARENT
+    RECORD_PLAY
+    SLIME
+    SMALL_SMOKE
+    SMOKE
+    SNOW_SHOVEL
+    SNOWBALL_BREAK
+    Snowball breaking
+    SPELL
+    SPLASH
+    STEP_SOUND
+    TILE_BREAK
+    TILE_DUST
+    VILLAGER_THUNDERCLOUD
+    VOID_FOG
+    WATERDRIP
+    WITCH_MAGIC
+    ZOMBIE_CHEW_IRON_DOOR
+    ZOMBIE_CHEW_WOODEN_DOOR
+    ZOMBIE_DESTROY_DOOR"
+    
+    effectlist_with_descriptions: "BLAZE_SHOOT
+    Sound of blaze firing.
+    BOW_FIRE
+    Sound of a bow firing.
+    CLICK1
+    A click sound.
+    CLICK2
+    An alternate click sound.
+    CLOUD
+    A puff of white smoke
+    COLOURED_DUST
+    Multicolored dust particles
+    CRIT
+    Critical hit particles
+    DOOR_TOGGLE
+    Sound of a door opening/closing.
+    ENDER_SIGNAL
+    An ender eye signal; a visual effect.
+    EXPLOSION
+    Explosion particles
+    EXPLOSION_HUGE
+    The biggest explosion particle effect
+    EXPLOSION_LARGE
+    A larger version of the explode particle
+    EXTINGUISH
+    Sound of fire being extinguished.
+    FIREWORKS_SPARK
+    The spark that comes off a fireworks
+    FLAME
+    Fire particles
+    FLYING_GLYPH
+    The symbols that fly towards the enchantment table
+    FOOTSTEP
+    A small gray square
+    GHAST_SHOOT
+    Sound of ghast firing.
+    GHAST_SHRIEK
+    Sound of ghast shrieking.
+    HAPPY_VILLAGER
+    The particle that appears when trading with a villager
+    HEART
+    The particle that appears when breading animals
+    INSTANT_SPELL
+    A puff of white stars
+    ITEM_BREAK
+    The particles generated when a tool breaks.
+    LARGE_SMOKE
+    The smoke particles that appears on blazes, minecarts with furnaces and fire
+    LAVA_POP
+    The particles that pop out of lava
+    LAVADRIP
+    The lava drip particle that appears on blocks under lava
+    MAGIC_CRIT
+    Blue critical hit particles
+    MOBSPAWNER_FLAMES
+    The flames seen on a mobspawner; a visual effect.
+    NOTE
+    The note that appears above note blocks
+    PARTICLE_SMOKE
+    Smoke particles
+    PORTAL
+    The particles shown at nether portals
+    POTION_BREAK
+    Visual effect of a splash potion breaking.
+    POTION_SWIRL
+    Multicolored potion effect particles
+    POTION_SWIRL_TRANSPARENT
+    Multicolored potion effect particles that are slightly transparent
+    RECORD_PLAY
+    A song from a record.
+    SLIME
+    The particle shown when a slime jumps
+    SMALL_SMOKE
+    Small gray particles
+    SMOKE
+    A visual smoke effect.
+    SNOW_SHOVEL
+    White particles
+    SNOWBALL_BREAK
+    Snowball breaking
+    SPELL
+    A puff of white potion swirls
+    SPLASH
+    Water particles
+    STEP_SOUND
+    Sound of a block breaking.
+    TILE_BREAK
+    The particles generated while breaking a block.
+    TILE_DUST
+    The particles generated while sprinting a block This particle requires a Material and data value so that the client can select the correct texture.
+    VILLAGER_THUNDERCLOUD
+    The particle that appears when hitting a villager
+    VOID_FOG
+    Small gray particles
+    WATERDRIP
+    The water drip particle that appears on blocks under water
+    WITCH_MAGIC
+    A puff of purple particles
+    ZOMBIE_CHEW_IRON_DOOR
+    Sound of zombies chewing on iron doors.
+    ZOMBIE_CHEW_WOODEN_DOOR
+    Sound of zombies chewing on wooden doors.
+    ZOMBIE_DESTROY_DOOR
+    Sound of zombies destroying a door."
