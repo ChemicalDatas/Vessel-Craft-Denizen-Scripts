@@ -982,7 +982,7 @@ VC Heal:
 VC KillAll:
     type: command
     name: killall
-    description: Removes all entitys on the server (excluding players and tamed beasts, item frames, ect...).
+    description: Removes all entitys on the server (excluding players and tamed beasts, ect...).
     usage: /killall <&lb>argument<&rb> (arguments specify additional entitys. -d for drops, -f for farm animals, -a for all possible targets, -i for inanimate)
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
@@ -992,7 +992,7 @@ VC KillAll:
     - define possible_arguments li@-d/dropped_items|-f/farm_animals|-s/armor|-i/inanimate
     - define dropped_items li@dropped_item
     - define farm_animals li@chicken|pig|horse|cow|bat|squid|iron_golem|rabbit|villager
-    - define inanimate li@armor_stand|falling_block|boat|minecart|experience_orb|arrow|dropped_item
+    - define inanimate li@falling_block|boat|minecart|experience_orb|arrow|dropped_item
     - define armor li@armor_stand
     - define default_types li@zombie|skeleton|creeper|wolf|ocelot|endermite|enderman|enderdragon|silverfish|guardian|pig_zombie|ghast|blaze|slime|magma_cube|cave_spider|spider|wither|witch
     - define targets <def[default_types]>
@@ -1008,12 +1008,15 @@ VC KillAll:
         - define targets <def[targets].include[<def[dropped_items]>]>
         }
     - foreach <server.list_worlds> {
-        - foreach <def[value].list_entitys> {
+        - foreach <def[value].living_entities||> {
             - if <def[targets].contains[<def[value].entity_type>]> {
-                - define entity_targets <def[entity_targets].include[<def[value]>]>
+                - if !<def[value].is_tamed> {
+                    - define entity_targets <def[entity_targets].include[<def[value]>]>
+                    }
                 }
             }
         }
     - remove <def[entity_targets]>
+    - narrate "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Removed <red><def[entity_targets].size> <yellow>entities."
 
 
