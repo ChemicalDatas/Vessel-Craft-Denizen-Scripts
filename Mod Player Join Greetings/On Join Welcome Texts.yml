@@ -9,8 +9,9 @@ Announcement Bar:
         on player join:
         - wait d@5s
         - inject "Wait for Valid Player"
-        - define individual_greet       "<player.name.display>, <parse:<script.yaml_key[individual]>>"
-        - define server_announcement    "<player.name.display> <parse:<script.yaml_key[server]>>"
+        - define name <player.name.display||<player.name>>
+        - define individual_greet       "<def[name]>, <parse:<script.yaml_key[individual]>>"
+        - define server_announcement    "<def[name]>, <parse:<script.yaml_key[server]>>"
         - define other_players          <server.list_online_players.exclude[<player>]>
         
         #This has issues with the <player> reference as its not trimming the extra spaces in the script...
