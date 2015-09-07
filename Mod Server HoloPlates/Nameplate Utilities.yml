@@ -1,0 +1,309 @@
+#A set of procedures designed to manipulate nameplates
+#todo: Use math to figure out what option the player is really looking at to make a better feel.
+
+
+Display Defaults:
+    type: world
+    events:
+        #on display created in <cuboids>:
+        #on display created in <cuboids> owned by <owner>:
+        #on display titled <title>:
+        #on display titled <title> in <cuboids>:
+        #- announce "[<script.name>] player clicked <context.entity.name||<context.entity.entity_type>>"
+        
+        on player right clicks:
+        #- announce "[<script.name>] player clicked at <player.target.name||<player.target.entity_type||no_target>>"
+        
+        
+        on display creation:
+        
+        #on display titled <title> in <cuboids>:
+        #<context.entitys>
+        #<context.location>
+        #<context.calling_script>
+        #<context.removal_method>
+        
+        #keep all displays stored in a display list and check if  they have a removal method, 
+        #   if not remove them maybe on shutdown or creation?
+        on player opens context menu:
+        #- announce "opens context menu"
+        on player opens title menu:
+        #- announce "opens title menu"
+        
+        #on player opens <context> menu:
+        #- announce "opens named context: <context.context> menu"
+        #on player opens <title> menu:
+        #- announce "opens named title: <context.title> menu"
+        
+        # on player selects option in context menu:
+        # on player selects option in title menu:
+        # on player selects option in <context> menu:
+        # on player selects option in <title> menu:
+        
+        # on player selects <option> in context menu:
+        # on player selects <option> in title menu:
+        # on player selects <option> in <context> menu:
+        # on player selects <option> in <title> menu:
+        
+        # on player selects <option> in context menu:
+        # on player selects <option> in <context> menu:
+
+
+
+#todo: complete me
+Update Display Line:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # A task to update a line in a display                                                                                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: task
+    definitions: line|text
+    script:
+    - define text <parse:<def[text]>>
+    - define text <proc[Iconize].context[<def[text]>]>
+    - adjust <def[entity]> custom_name:<def[text]>
+    
+
+#########################################################################################################################
+############################# Display Handlers ##########################################################################
+#########################################################################################################################
+
+Remove Stray Display:
+    type: task
+    definitions: location|range
+    type_location: as_location
+    type_range: as_int
+    default_location: <player.location>
+    default_range: 10
+    script:
+    - inject typecheck
+    - define target <def[location].find.entities[Armor_Stand].within[<def[range]>]>
+    - remove <def[target]>
+    - narrate "<blue>Cleared <red><def[target].size> <blue>stray displays."
+
+
+Display Base:
+    #############################################################################################################################
+    #                                                                                                                           #
+    # This is a procedure that creates a display. You have to capture the output of it so you can remove or store               #
+    # the display entites as you wish.                                                                                          #
+    #                                                                                                                           #
+    # When done this way that gives the scripter the power to store the entites as they desire.                                 #
+    #                                                                                                                           #
+    # Creates the entities and returns the entity list.                                                                         #
+    # Youll need to choose how to store the entities for removal later.                                                         #
+    #                                                                                                                           #
+    # notice: This is a script that needs to be managed by another script.                                                      #
+    #                                                                                                                           #
+    #############################################################################################################################
+    type: procedure
+    definitions: location|text_list|title|persistant
+    default_small: 1b
+    default_invulenerable: 1b
+    default_marker: 1
+    default_persistance: 1b
+    default_invisible: 1b
+    default_nobaseplate: 1b
+    default_nogravity: 1b
+    default_title: "Context Menu"
+    default_persistant: 0
+    type_location: as_location
+    type_text_list: as_list
+    type_persistant: as_int
+    script:
+    # Raise error if recieved bad arguments
+    - inject typecheck
+    #gives other scripts a say about whats displayed
+    - event "Display Creation" "context:queue|<queue>|location|<def[location]>|player|<player||<npc||none>>|text|<def[text_list]>|title|<def[title]>" save:Display
+    - define event_determination <entry[Display].determinations>
+    - if <def[event_determination].contains[cancelled]> queue clear
+    - if <def[event_determination].contains[none]> define text <def[event_determination]>
+    
+    # The meat of the script
+    - define display_entities li@
+    - define text_list <def[text_list].unescaped.as_list>
+    - define location <def[location].below>
+    - define pre_search_size <def[text_list].size>
+    - define preexisting_armor_stands <def[location].find.entities[Armor_Stand].within[<def[pre_search_size]>]>
+    #- announce "Starting text_list iteration. Text_list<&co> <def[text_list].size> <blue><def[text_list]>"
+    - foreach <def[text_list].reverse> {
+        - define line <proc[Iconize].context[<def[value]>]>
+        - define new_y <def[loop_index].mul[.25]>
+        #- announce "execute as server"
+        - execute as_server "summon ArmorStand <def[location].x> <def[location].y.add[<def[new_y]>]> <def[location].z> {CustomName:<def[line]>,CustomNameVisible:1,Small:<script.yaml_key[default_small]>,Invisible:<script.yaml_key[default_invisible]>,Invulnerable:<script.yaml_key[default_invulenerable]>,NoGravity:<script.yaml_key[default_nogravity]>}"
+        #- announce "execute as server"
+        
+        #- announce "Spawn"
+        #- spawn e@armor_stand[custom_name=<def[line]>;custom_name_visibility=true;invisible=true;invincible=true] <def[location]> persistent
+        #- announce "Spawn"
+        
+        
+        - define new_stands <def[location].add[0,<def[new_y]>,0].find.entities[Armor_Stand].within[1]>
+        - define display_entities <def[display_entities].include[<def[new_stands]>]>
+        }
+    #Can I get the entities from the determination from the event script caller? <queue.script.determination>?
+    #- event "Display Creation" "context:script|<queue.script>|queue|<queue>|display entities|<escape:<def[display_entities]>>|location|<def[location]>|player|<player>|<def[text]>|title|<def[title]>"
+    - determine <def[display_entities].deduplicate.exclude[<def[preexisting_armor_stands]>].escaped>
+
+tspwn:
+    type: task
+    definitions: name
+    script:
+    - spawn e@armor_stand[custom_name=<def[name]>;custom_name_visibility=true;invisible=true] <player.location>
+    - wait d@1s
+    - run "remove stray display"
+
+Display:
+    #
+    # The culmulation of the display sets of scripts
+    # display_time is optional as it defaults to 2 seconds
+    #
+    type: task
+    definitions: location|text|display_time
+    script:
+    - wait d@2t
+    - define display_entities "<proc[Display Base].context[<def[location]>|<def[text]>|no_title]>"
+    - wait <def[display_time]||d@30t>
+    - remove <def[display_entities].unescaped>
+    
+
+Server Display:
+    type: task
+    definitions: flag|location|text
+    script:
+    - define text <proc[iconize].context[<def[text]>]>
+    - define text <def[text].escaped>
+    - define flag displays.<def[flag]>
+    - if <server.has_flag[<def[flag]>]> {
+        - narrate "<red>Trying to remove <server.flag[<def[flag]>].as_list.size> entities"
+        - remove <server.flag[<def[flag]>].as_list>
+        - flag server <def[flag]>:!
+        }
+    - flag server "<def[flag]>:|:<proc[Display Base].context[<def[location]>|<def[text]>].unescaped>"
+
+
+
+Context Menu:
+    type: task
+    definitions: option_list|script_list|argument_list|context|title|time_out
+    script:
+    - ^define events "
+        player opens context menu|
+        player opens title menu|
+        player opens <def[context]> menu|
+        player opens <def[title]> menu"
+    
+    - ^define context "
+        context<&co>
+        options     |<def[option_list]>|
+        scripts     |<def[script_list]>|
+        arguments   |<def[argument_list]>|
+        context     |<def[context]>|
+        title       |<def[title]>|
+        timeout     |<def[time_out]>"
+    
+    - ^event <def[events]> <def[context]> save:context_readjust
+    - ^if <entry[context_readjust].determinations.contains[cancelled]> queue clear
+    
+    - ^define time_out <def[time_out]||d@10s>
+    - ^define options <def[option_list].unescaped>
+    - ^define scripts <def[script_list].unescaped>
+    - ^define argument_list <def[argument_list].unescaped>
+    - ^define num_options <def[options].size>
+    
+    - ^define display_location "<proc[Entity Display Location].context[<player>]>"
+    - announce "creating displays now"
+    - ^define displays_list "<proc[Display Base].context[<def[display_location]>|<def[option_list]>]||li@>"
+    - announce "finishing creating displays"
+    - run "Context Menu Display Timeout" def:<def[displays_list]> delay:<def[time_out]> id:<player.name>_display_timeout
+    - queue pause
+    - queue queue:q@<player.name>_display_timeout stop
+    - ^remove <def[displays_list].unescaped>
+    - ^define option_selected "<proc[Determine Selection Index].context[<def[num_options]>|<def[display_location]>]>"
+    
+    - ^define script <def[scripts].reverse.get[<def[option_selected]>]>
+    - ^define arguments <def[argument_list].get[<def[option_selected]>]>
+    - ^narrate "<green>Running <gold><def[script]> <reset>with: <blue><def[arguments]>"
+    - run <def[script]> def:<def[arguments].unescaped> instantly
+
+Determine Selection Index:
+    type: procedure
+    definitions: num_options|location
+    type_location: as_location
+    nameplate_entitylocation_offset: -1.6
+    script:
+    #- announce ""
+    #- announce ""
+    - inject typecheck
+    - define player_loc <player.eye_location>
+    - define player_pitch <player.location.pitch.mul[-1]>
+    
+    #todo:change me, Id like the player to be able to look down on a display
+    - if <def[player_pitch].is[less].than[0]>
+      define player_pitch 0
+    
+    #the location passed to this is the entity location, not the nameplate location
+    - define location <def[location].add[0,<script.yaml_key[nameplate_entitylocation_offset]>,0]>
+    #- announce "trying <player.chat_history_list.first>"
+    #- define location <def[location].add[0,<player.chat_history_list.first>,0]>
+    
+    #if player is looking horizontal to up else looking down
+    - if <def[player_pitch].is[less].than[0]> {
+        - define trig_funct acos
+        - define player_pitch <def[player_pitch].mul[-1]>
+        } else {
+        - define trig_funct acos
+        }
+    
+    #if <poi_b_y_diff> is -
+    #point_b
+    - define y_difference  <def[location].y.sub[<def[player_loc].y>]>
+    - define point_b <def[location].sub[0,<def[y_difference]>,0]>
+    
+    #figuring the adjacent side
+    - define adjacent <def[player_loc].distance[<def[point_b]>]>
+    
+    
+    - define closest_sign_index 1
+    - define last_smallest_difference 360
+    #- announce ""
+    #- announce "<script.name> starting angle checking."
+    #- announce "player_y<&co> <def[player_loc].y> loc_y<&co> <def[location].y> <&nl>y_difference<&co> <def[y_difference]> <&nl>point_b_y<&co> <def[point_b].y> <&nl>side_a_length <def[side_a_length]>"
+    - repeat <def[num_options]> {
+        #- announce ""
+        - define sign_location <def[location].add[0,<def[value].mul[.25]>,0]>
+        - define hypotenuse <player.location.distance[<def[sign_location]>]>
+        #- announce "sign_loc_y<&co> <def[sign_location].y> point_b_y<&co> <def[point_b].y> side_b_length<&co> <def[side_b_length]>"
+        
+        - define ratio <def[adjacent].div[<def[hypotenuse]>]>
+        - define target_angle <def[ratio].%trig_funct%.to_degrees>
+        
+        #- announce "ratio <def[ratio]> target_angle<&co> <def[target_angle]>"
+        #- announce "target_angle <def[target_angle]>"
+        #- announce "player pitch <def[player_pitch]>"
+        
+        #- announce "player<&co> <player.location.pitch> sign<&co> <def[value]> atan<&co> <def[angle]>"
+        - define angle_difference <def[target_angle].sub[<def[player_pitch]>]>
+        #- announce "angle_difference <def[angle_difference]> <def[last_smallest_difference]> smaller? <def[angle_difference].abs.is[less].than[<def[last_smallest_difference]>]>"
+        - if <def[angle_difference].abs.is[less].than[<def[last_smallest_difference]>]> {
+            - define last_smallest_difference <def[angle_difference].abs>
+            - define closest_sign_index <def[value]>
+            }
+        #- announce "last_smallest_difference<&co> <def[last_smallest_difference]> which is index<&co> <def[closest_sign_index]>"
+        }
+    #- announce "<gold>index<&co> <def[closest_sign_index]>"
+    - determine <def[closest_sign_index]>
+    
+Context Menu Display Timeout:
+    #
+    # Removes entities after the timeout
+    # Destroys the players display queue
+    #
+    type: task
+    definitions: displays
+    type_displays: as_list # as_entity would mean just 1, were expecting a list here
+    script:
+    - inject typecheck
+    - remove <def[displays].unescaped>
+    - queue q@<player.name>_context_menu stop
