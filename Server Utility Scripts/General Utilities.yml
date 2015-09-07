@@ -643,3 +643,28 @@ Wait for Valid Player:
             }
         }
     
+
+
+__Return__:
+    #
+    # Executes code from a script container, This will None unless the code determines the return
+    #
+    type: procedure
+    definitions: script|path
+    script:
+    - define return None
+    - inject <def[script]> path:<def[path]>
+    - determine <def[return]>
+    
+
+
+define_map_arguments:
+    type: task
+    script:
+    - foreach <queue.definitions> {
+        - define <def[value].split[/].get[1]> <def[%value%].split[/].get[2]>
+        }
+    - define loop_index:!
+    - define value:!
+
+
