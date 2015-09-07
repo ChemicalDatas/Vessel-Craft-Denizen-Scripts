@@ -1,0 +1,7 @@
+On Join Player Gamemode Changer:
+    type: world
+    join_gamemode: adventure
+    events:
+        on player joins:
+        - inject "wait for valid player"
+        - adjust <player> gamemode:<script.yaml_key[join_gamemode]>
