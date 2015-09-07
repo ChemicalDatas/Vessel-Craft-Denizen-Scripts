@@ -1,16 +1,45 @@
 # A set of vesselcraft commands
 # todo: Setup another way of having defaults, maybe a script that creates a flag that these would reference later on...
 
+
 CommandDefaults:
-    type: world
+    type: yaml data
     title: "[<blue>Vessel<gold>Craft<reset>]"
     teleport_history_max: 10
-    perms:
-        comds:
-            back:
-            killall:
+    permissions:
+        commands:
+            vc: vesselcraft.command.vc
+            debug: vesselcraft.command.debug
+            nickname: vesselcraft.command.nickname
+            colors: vesselcraft.command.colors
+            bossbar: vesselcraft.command.bossbar
+            teamspeak: vesselcraft.command.teamspeak
+            webpage: vesselcraft.command.webpage
+            vote: vesselcraft.command.vote
+            timesync: vesselcraft.command.timesync
+            clearchat: vesselcraft.command.clearchat
+            placenotify: vesselcraft.command.placenotify
+            chatnotify: vesselcraft.command.chatnotify
+            display: vesselcraft.command.display
+            gamemode: vesselcraft.command.gamemode
+            fly: vesselcraft.command.fly
+            smite: vesselcraft.command.smite
+            time: vesselcraft.command.time
+            weather: vesselcraft.command.weather
+            world: vesselcraft.command.world
+            i: vesselcraft.command.i
+            clearinventory: vesselcraft.command.clearinventory
+            give: vesselcraft.command.give
+            leap: vesselcraft.command.leap
+            ping: vesselcraft.command.ping
+            speed: vesselcraft.command.speed
+            mob: vesselcraft.command.mob
+            back: vesselcraft.command.back
+            hurt: vesselcraft.command.hurt
+            heal: vesselcraft.command.heal
+            killall: vesselcraft.command.killall
     message:
-        _permission denied: "<gold>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
+        _permission denied: "<red>[smile]<blue><player.name.display> <red>You are not allowed to use this command."
         facebook page: "https://www.facebook.com/VesselCraft"
         server page: ""
         voting page: "http://minecraft-mp.com/server-s32672"
@@ -21,34 +50,9 @@ CommandDefaults:
         chat notify false: "Chat Notifications <red>OFF<dark_gray>. Chatting <player.name> will <red>not<dark_gray> play a sound for you."
         place notify true:  "Place Notifications <red>ON<dark_gray>. Placing Debug is true."
         place notify false: "Place Notifications <red>OFF<dark_gray>. Placing Debug is false."
-    allowed_groups:
-    - Owner
-    - Admin
-    - MasterBuilder
-    - Moderator
-    - Builder
-    events:
-        on server start:
-        on player join:
-        - if <player.has_flag[can_fly]> flag <player> can_fly:!        
-        
-        #on display command:
-        #- determine passively fulfilled
-        #- inject locally "is permitted"
-        
-        #- define display "<context.args.get[1]>"
-        #- define location <player.location.cursor_on[3]>
-        
-        #- narrate  format:formatted "Summoning Display for you now."
-        #- narrate  format:formatted "Please step back, as its anchor is there."
-        #- narrate  format:formatted "Just chat to the display. It will change the display based on what you chat."
-        #- execute as_op "npc create 'server display'"
-        #- execute as_op "npc playerlist"
-        #- invisible <player.selected_npc> toggle:true
-        #- execute as_op "npc assign --set 'Nameplate Attractor'"
 
 
-VesselCraft Command VC:
+VC VC:
     type: command
     name: VC
     description: A command shortner for frequently used commands. Provided there are defaults hardcoded
@@ -57,8 +61,8 @@ VesselCraft Command VC:
     say: "say arg"
     express: "express arg"
     colors: "colors"
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -105,35 +109,35 @@ VesselCraft Command VC:
       execute as_op <def[new_input]>
 
 
-VesselCraft Command Debug:
+VC Debug:
     type: command
     name: debug
     description: Enables server debug announcements when a script fails.
     usage: /debug
     aliases:
     - server_debug
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
     - if <server.has_flag[debug_output]> {
-        - narrate  format:formatted "[Server Debug] Toggled Console Output: <red>off" 
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>off" 
         - flag server debug_output:!
         } else {
-        - narrate format:formatted "[Server Debug] Toggled Console Output: <red>on"
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>on"
         - flag server debug_output:true
         }
 
 
 # todo: when a player enters server check what thier nickname is to keep names consistent across servers
-VesselCraft Command Nickname:
+VC Nickname:
     type: command
     name: dnick
     description: Sets a nickname on <&lb>target<&co>valid_target<&rb>, resets the name if theres no <&rb>nick<&co>name<&lb> provided.
     usage: /dnick <&lb>target<&co>target_name<&rb> <&lb>nick<&co>nick_name<&rb> 
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -153,15 +157,15 @@ VesselCraft Command Nickname:
     - narrate format:formatted "<gray>Trying to change <reset><def[target].name>'s <gray>name to: <reset><def[nickname]><reset>."
 
 
-VesselCraft Command Colors:
+VC Colors:
     type: command
     name: colors
     description: Outputs Minecraft color names, and their codes.
     usage: /colors
     aliases:
     - color
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine true
     colors:
@@ -197,15 +201,15 @@ VesselCraft Command Colors:
         }
 
 
-VesselCraft Command BossBar:
+VC BossBar:
     type: command
     name: bossbar
     description: Displays a bossbar text to the whole server
     usage: /bossbar "li@quoted text here|in list format|for multiple lines"
     aliases:
     - bb
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -218,7 +222,7 @@ VesselCraft Command BossBar:
 
 
 # todo: create a target to send the info to
-VesselCraft Command TeamSpeak:
+VC TeamSpeak:
     type: command
     name: teamspeak
     description: Gives the sender the teamspeak address and password.
@@ -226,8 +230,8 @@ VesselCraft Command TeamSpeak:
     aliases:
     - tsaddress
     - tslocation
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -237,13 +241,13 @@ VesselCraft Command TeamSpeak:
 
 
 # todo: create a target to send the info to
-VesselCraft Command Vote:
+VC Vote:
     type: command
     name: vote
     description: Gives the sender a list of places they can vote for the server on.
     usage: /vote
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -252,15 +256,15 @@ VesselCraft Command Vote:
 
 
 # todo: create a target to send the info to
-VesselCraft Command webpage:
+VC webpage:
     type: command
     name: back
     description: Gives the sender the webpage they can use to view extra server information.
     usage: /webpage <&lb>int<&rb> (optional, no int defaults to last location)
     aliases:
     - web
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -268,15 +272,15 @@ VesselCraft Command webpage:
     - narrate format:formatted "<green><s@CommandDefaults.yaml_key[message.facebook page]>"
 
 
-VesselCraft Command TimeSync:
+VC TimeSync:
     type: command
     name: timesync
     description: Toggles the binding of real life time to the server time.
     usage: (/timesync /sync)
     aliases:
     - sync
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -289,15 +293,15 @@ VesselCraft Command TimeSync:
         }
 
 
-VesselCraft Command ClearChat:
+VC ClearChat:
     type: command
     name: clearchat
     description: Clears the users chat
     usage: /clearchat
     aliases:
     - cc
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
@@ -309,15 +313,15 @@ VesselCraft Command ClearChat:
 
 
 # todo: Possible to set a target
-VesselCraft Command PlaceNotify:
+VC PlaceNotify:
     type: command
     name: placenotify
     description: Toggles feedback of what block the player places.
     usage: /placenotify
     aliases:
     - back
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -331,7 +335,7 @@ VesselCraft Command PlaceNotify:
 
 # todo: setup multiserver notification
 # todo: setup target spefication
-VesselCraft Command ChatNotify:
+VC ChatNotify:
     type: command
     name: chatnotify
     description: Toggles the noise notification when another player says thier name.
@@ -339,8 +343,8 @@ VesselCraft Command ChatNotify:
     aliases:
     - cn
     - grawl_at_meh_when_yah_say_mah_name
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -352,13 +356,13 @@ VesselCraft Command ChatNotify:
     - run "Toggle Flag" "def:chat_notifications|%toggle_true%|%toggle_false%|Toggled"
 
 
-VesselCraft Command Display:
+VC Display:
     type: command
     name: display
     description: Creates display using the scripted displays.
     usage: /display (path.where.stored) <&lb>text<&co>text<&rb> (optional text<&co>your_text defaults to removing the displays at the path) 
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -376,14 +380,14 @@ VesselCraft Command Display:
 
 
 ##############################################################################################################################        
-VesselCraft Command GameMode Change Detection:
+VC GameMode Change Detection:
     type: world
     events:
         on player changes gamemode:
         - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
 
 
-VesselCraft Command GameMode:
+VC GameMode:
     type: command
     name: gamemode
     description: Changes your gamemode or the targets gamemode into survival.
@@ -399,8 +403,8 @@ VesselCraft Command GameMode:
     - creative
     - adventure
     - survival
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -422,13 +426,20 @@ VesselCraft Command GameMode:
     - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
 
 
-VesselCraft Command Fly:
+VC Fly Event Listener:
+    type: world
+    events:
+        on player join:
+        - if <player.has_flag[can_fly]> flag <player> can_fly:!
+
+
+VC Fly:
     type: command
     name: fly
     description: Sets the target (target defaults to sender) to be allowed creative flight.
     usage: /fly <&lb>target<&rb> (target defaults to sender)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -446,7 +457,7 @@ VesselCraft Command Fly:
         }
 
 
-VesselCraft Command Smite:
+VC Smite:
     type: command
     name: smite
     description: Sends lightning to target (target defaults to where the sender is looking).
@@ -454,8 +465,8 @@ VesselCraft Command Smite:
     aliases:
     - strike
     - lightning
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -484,7 +495,7 @@ VesselCraft Command Smite:
     - strike <player.location.cursor_on[100]>
 
 
-VesselCraft Command Time:
+VC Time:
     type: command
     name: time
     description: Sets the server time to the specified <&lb>time<&rb> argument. Else returns the current minecraft worlds time.
@@ -497,8 +508,8 @@ VesselCraft Command Time:
     - morning
     - dusk
     - night
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -527,7 +538,7 @@ VesselCraft Command Time:
 
 
 # todo: take advantage player matching for specific weather targets
-VesselCraft Command Weather:
+VC Weather:
     type: command
     name: weather
     description: Sets the servers weather, optionaly just a <&lb>world<&co>world_name<&rb>.
@@ -537,8 +548,8 @@ VesselCraft Command Weather:
     - storm
     - thunder
     - setweather
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -564,13 +575,13 @@ VesselCraft Command Weather:
     - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> in <def[world].name||every world>."
 
 
-VesselCraft Command World:
+VC World:
     type: command
     name: world
     description: Sends the sender/target to a specified worlds spawn location.
     usage: /world (world) (target<&co>chemical_datas) (player defaults to command sender)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -593,13 +604,13 @@ VesselCraft Command World:
     - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Ok, sending you to <def[world]>"
 
 
-VesselCraft Command I:
+VC I:
     type: command
     name: i
     description: Give your self an <&lb>item<&rb>.
     usage: /i (item) <&lb>number<&rb> (number defaults to full stack of item)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -618,15 +629,15 @@ VesselCraft Command I:
     - give <def[item]>
 
 
-VesselCraft Command Clear Inventory:
+VC Clear Inventory:
     type: command
     name: clearinventory
     description: Clears a <&lb>targets<&rb> inventory.
     usage: (/clearinventory /ci) <&lb>target<&co>chem<&rb> (target defaults to command sender)
     aliases:
     - ci
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -646,13 +657,13 @@ VesselCraft Command Clear Inventory:
     - inventory clear d:<def[target].inventory>
 
 
-VesselCraft Command Give:
+VC Give:
     type: command
     name: give
     description: Gives an <&lb>item<&rb> to the <&lb>target with inventory<&rb>
     usage: /give (target with inventory) (item) <&lb>ammount<&rb> (optional, ammount defaults to 1)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -663,7 +674,8 @@ VesselCraft Command Give:
     script:
     - define target <context.args.get[1]||NO_TARGET_SPECIFIED>
     - define target_id
-    - foreach li@as_player|as_npc|as_location {  # Target validation
+    # Target validation
+    - foreach li@as_player|as_npc|as_location {
         - define target <def[target].%value%||FAILED_ACQUISITION>
         - if <server.object_is_valid[<def[target]>]> {
             - if <def[value]> == as_player || <def[value]> == as_npc define accessor name
@@ -688,13 +700,13 @@ VesselCraft Command Give:
     - give <def[item]> to:<def[target]> qty:<def[ammount]>
 
 
-VesselCraft Command Leap:
+VC Leap:
     type: command
     name: leap
     description: Adjusts the <&lb>targets<&rb> <&rb>velocity<&rb> to <&rb>strength<&lb> in the targets looking vector. Accepts optional target|strength
     usage: /leap <&lb>target<&rb> <&lb>strength<&rb> (optional, strength defaults to 1, target defaults to self)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -710,13 +722,13 @@ VesselCraft Command Leap:
     - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
 
 
-VesselCraft Command Ping:
+VC Ping:
     type: command
     name: ping
     description: A command for the sender to recieve a message back from the server.
     usage: /ping
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     colors_list: li@0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|l|n|o|k|m|r
@@ -726,13 +738,13 @@ VesselCraft Command Ping:
     - narrate  format:formatted "<%color%>Pong"
  
  
-VesselCraft Command Speed:
+VC Speed:
     type: command
     name: speed
     description: When walking adjusts a players speed, or when flying adjust their flying speed
     usage: /speed <&lb>player<&rb> <&lb>int<&rb> (optional, no int defaults to last location)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -749,7 +761,7 @@ VesselCraft Command Speed:
        }
 
 
-VesselCraft Command Mob:
+VC Mob:
     type: command
     name: mob
     description: Spawns an entity(s) where the command is looking or optionaly mounted, or optionaly at a location.
@@ -757,8 +769,8 @@ VesselCraft Command Mob:
     aliases:
     - monster
     - entity
-    permission: vc.commands.mob
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -849,7 +861,7 @@ VesselCraft Command Mob:
         }
 
 
-VesselCraft Command Back Teleport Listener:
+VC Back Teleport Listener:
     type: world
     events:
         on player teleports:
@@ -871,15 +883,15 @@ VesselCraft Command Back Teleport Listener:
         - flag player teleport_history:|:<context.entity.location>
 
 
-VesselCraft Command Back:
+VC Back:
     type: command
     name: back
     description: Return to a previously teleported from location. Keeps a history on last teleports.
     usage: /back <&lb>int<&rb> (optional, int defaults to last location)
     aliases:
     - back
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -906,13 +918,13 @@ VesselCraft Command Back:
     - teleport <player> <def[target_location]>
 
 
-VesselCraft Command Hurt:
+VC Hurt:
     type: command
     name: hurt
     description: Damages <&lb>target<&rb> for <&lb>damage<&rb>
     usage: /hurt (target) <&lb>damage<&rb> <&lb>cause<&co><&rb> <&lb>source<&co><&rb> (optional args<&co> damage defaults to 2, optional params<&co> cause defaults custom, source)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
@@ -935,20 +947,46 @@ VesselCraft Command Hurt:
     - hurt <def[damage]> <def[target]> cause:custom <def[source]>
 
 
-VesselCraft Command Heal:
+VC Heal:
     type: command
     name: heal
     aliases:
     - health
     description: Heal the sender or a <&rb>target<&lb>.
     usage: /heal <&lb>target<&rb> (target defaults to sender)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    effect_list:
+    effects:
+    - speed
+    - slowness
+    - haste
+    - mining fatigue
+    - strength
+    - instant health
+    - instant damage
+    - jump boost
+    - nausea
+    - regeneration
+    - resistance
+    - fire resistance
+    - water breathing
+    - invisibility
+    - night vision
+    - hunger
+    - weakness
+    - poison
+    - wither
+    - health boost
+    - absorption
+    - saturation
+    - glowing
+    - levitation
     script:
     - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
     - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
@@ -960,15 +998,19 @@ VesselCraft Command Heal:
             }
         }
     - heal <def[target]>
+    - feed amt:20 target:<def[target]>
+    - foreach <script.yaml_keys[effects]> {
+        - cast <def[value]> remove <def[target]>
+        }
 
 
-VesselCraft Command KillAll:
+VC KillAll:
     type: command
     name: killall
     description: Removes all entitys on the server (excluding players and tamed beasts, item frames, ect...).
     usage: /killall <&lb>argument<&rb> (arguments specify additional entitys. -d for drops, -f for farm animals, -a for all possible targets, -i for inanimate)
-    permission: <parse:<s@CommandDefaults.yaml_key[perms.cmds.<script.yaml_key[name]>]>>
-    permission message: <parse:<s@CommandDefaults.yaml_key[no_permission]>>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
