@@ -56,7 +56,7 @@ Hand Item Light Update:
         
         - wait <def[script].yaml_key[light_time_update]>
         
-        - if ! <def[entity].is_spawned> queue clear
+        - if !<def[entity].is_spawned> queue clear
         
         - define location
           <def[entity].location.simple.as_location>
