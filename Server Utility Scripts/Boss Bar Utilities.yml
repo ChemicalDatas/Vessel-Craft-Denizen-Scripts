@@ -10,16 +10,19 @@ Boss Bar Base:
     definitions: message|p_list|bar
     speed: 0t
     script:
-    - if <server.list_online_players.is_empty> queue clear
-    - if <def[message]||none> != none {
-        - if <def[bar]||none> != none {
-            - adjust <def[p_list].unescaped||<server.list_online_players>> "show_boss_bar:<def[bar]>|<def[message].unescaped||>"
+    - define p_list <def[p_list].unescaped||<server.list_online_players>>
+    - if <def[p_list].is_empty> queue clear
+    - define message <def[message].unescaped||None>
+    - define bar <def[bar]||None>
+    - if <def[message]> != None {
+        - if <def[bar]> != None {
+            - adjust <def[p_list]> "show_boss_bar:<def[bar]>|<def[message]>"
             } else {
-            - adjust <def[p_list].unescaped||<server.list_online_players>> "show_boss_bar:<def[message].unescaped||>"
+            - adjust <def[p_list]> "show_boss_bar:<def[message]>"
             }
         - queue clear
         }
-    - adjust "<def[p_list].unescaped||<server.list_online_players>>" "show_boss_bar:"
+    - adjust "<def[p_list]>" "show_boss_bar:"
 
 
 Boss Bar:
