@@ -44,17 +44,19 @@ Hand Item Light Update:
     type: task
     definitions: script|entity
     speed: 0t
+    default_script: "s@Luminescent Items"
+    type_script: as_script
+    type_entity: as_entity
     script:
-    - if !<server.list_scripts.contains[<def[script]||none]>]>
-      || !<def[entity].is_spawned||false> {
-        - define message "Incorrect input for <script.name><&co> script<&co> <def[script]||none> entity<&co> <def[entity]||none>"
-        - event "Script Generates Error" context:queue|<queue>|script|<script>|message|<def[message]>
-        - queue clear
-        }
-
+    - inject typecheck
+    
+    - if ! <def[entity].is_spawned> queue clear
+    
     - while <def[script].yaml_key[luminescent_items].contains[<def[entity].item_in_hand.simple>]> {
         
         - wait <def[script].yaml_key[light_time_update]>
+        
+        - if ! <def[entity].is_spawned> queue clear
         
         - define location
           <def[entity].location.simple.as_location>
