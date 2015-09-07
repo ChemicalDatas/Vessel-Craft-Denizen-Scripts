@@ -1,6 +1,9 @@
 Bungee Announce:
     type: world
     events:
+        # Events
+        # On server Join for new announcements
+        # Random announcements
         on server start:
         #on announce command:
         #- determine passively fulfilled
