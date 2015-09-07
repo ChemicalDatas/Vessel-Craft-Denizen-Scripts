@@ -13,10 +13,10 @@ Block Interact Display Triggers:
         
         on player right clicks block:
         - define queue <player.name>_context_menu
-        - if <queue.exists[<def[queue]>]> {
-            - narrate "<gray>You already have a menu open."
-            - queue clear
-            }
+        #- if <queue.exists[<def[queue]>]> {
+        #    - narrate "<gray>You already have a menu open."
+        #    - queue clear
+        #`    }
         
         - if <player.item_in_hand> == i@air {
             - define options_list   <escape:li@Narrate|Search>
@@ -24,6 +24,7 @@ Block Interact Display Triggers:
             - define argument_list  "<escape:li@<escape:li@<context.location.material>|SAI>|Nothing to search for yet...>"
             - define title options
             - define context "Block Interact"
+            - run Display def:<context.location>|<def[options_list]>|d@10s
             - run "Context Menu" def:<def[options_list]>|<def[script_list]>|<def[argument_list]>|<def[context]>|<def[title]>|d@20s id:<def[queue]>
             }
         
