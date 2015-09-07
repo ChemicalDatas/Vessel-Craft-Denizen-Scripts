@@ -139,8 +139,8 @@ Controller Event Detection2:
         on player scrolls their hotbar:
         - define event_list         li@
         - define context_list       li@
-        - define location           <player.location.cursor_on.simple.as_location>
-        - define target             <player.target||<player.location.cursor_on.simple.as_location>>
+        - define location           <player.location.cursor_on.simple.as_location||<player.location>>
+        - define target             <player.target||<player>>
         
         - define duration 
           "<script.yaml_key[focus counter]>"
@@ -165,11 +165,10 @@ Controller Event Detection2:
         
         
         #adding entity / block focus event
-        - if <def[target].is[==].to[<def[location]>]> {
-            - define event_list
-              "<def[event_list].include[player focuses on block|player focuses on <def[location].material>]>"
-            
-            } else {
+        - define event_list
+          "<def[event_list].include[player focuses on block|player focuses on <def[location].material>]>"
+        
+        - if <def[target].is_spawned> {
             
             - define event_list
               "<def[event_list].include[player focuses on entity|player focuses on <def[target].entity_type>]>"
@@ -222,11 +221,11 @@ Controller Event Detection:
         - define event_list li@
         - define context    li@
         
-        - if <player.is_sprinting>
+        - if <player.is_sprinting||false>
           define event_list
           "<def[event_list].include[player sprint right click]>"
           
-        - if <player.is_sneaking>
+        - if <player.is_sneaking||false>
           define event_list
           "<def[event_list].include[player sneak right click]>"
           
@@ -249,7 +248,7 @@ Controller Event Detection:
         on player left clicks:
         - define event_list li@
         - define context li@
-        - if <player.is_sprinting> 
+        - if <player.is_sprinting||false>
           define event_list
           "<def[event_list].include[player sprint left click]>"
           
@@ -271,7 +270,7 @@ Controller Event Detection:
         on player starts sneaking:
         - wait 5t
         
-        - if !<player.is_sneaking>
+        - if !<player.is_sneaking||false>
           queue clear
         
         - define context    li@
@@ -292,7 +291,7 @@ Controller Event Detection:
         - define event_list li@
         - define context    li@
         - wait 1t
-        - if <player.is_sprinting>
+        - if <player.is_sprinting||false>
           define event_list
           "<def[event_list].include[player sudden start]>"
           
