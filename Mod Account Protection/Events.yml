@@ -11,44 +11,41 @@ On Join Player Account Management:
         
         on player joins:
         - inject "wait for valid player"
-        - adjust <player> gamemode:adventure
-        - define location <player.bed_spawn||<player.world.spawn_location>>
-        - define location_arround "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
-        - teleport <player> <def[location_arround].get_spawnable_blocks.random>
-        #Ops and * permission users will always have the permission
-        #This is a way to not even check
-        - if <player.has_flag[ignore_login_every_time]>
-          queue clear
+        # Ops and * permission users will always have the permission
+        # This is a way to not even check
+        - if <player.has_flag[ignore_login_every_time]> queue clear
         - if <player.has_permission[<script.yaml_key[login_every_time_permission]>]>
           flag player AccountProtection.EnteredPassword:!
         
         on player toggles flight:
-        - inject locally "path:eligible for password protection"
-        - inject locally "path:action password check"
+        - cooldown <script.yaml_key[script_cooldown]> s:<script>
+        - inject locally "path:dont continue if achieved permission"
+        - inject locally "path:action password determination"
         
         on player uses portal:
-        - inject locally "path:eligible for password protection"
-        - inject locally "path:action password check"
+        - cooldown <script.yaml_key[script_cooldown]> s:<script>
+        - inject locally "path:dont continue if achieved permission"
+        - inject locally "path:action password determination"
         
         on player steps on block:
-        - if <script.cooldown[<player>].is[!=].to[d@0t]>
-          queue clear
-        - inject locally "path:eligible for password protection"
-        - inject locally "path:action password check"
+        - inject locally "path:dont continue if script is not cooled down"
+        - cooldown <script.yaml_key[script_cooldown]> s:<script>
+        - inject locally "path:dont continue if achieved permission"
+        - inject locally "path:action password determination"
         
         on player jumps:
-        - if <script.cooldown[<player>].is[!=].to[d@0t]>
-          queue clear
-        - inject locally "path:eligible for password protection"
-        - inject locally "path:action password check"
+        - inject locally "path:dont continue if script is not cooled down"
+        - cooldown <script.yaml_key[script_cooldown]> s:<script>
+        - inject locally "path:dont continue if achieved permission"
+        - inject locally "path:action password determination"
         
         on command:
-        - if <context.server>
-          queue clear
-        - inject locally "path:eligible for password protection"
-        - inject locally "path:command password check"
+        - if <context.server> queue clear
+        - cooldown <script.yaml_key[script_cooldown]> s:<script>
+        - inject locally "path:dont continue if achieved permission"
+        - inject locally "path:command password determination"
         
-        
+        # todo: Create a separate script for the command
         on login command:
         - determine passively fulfilled
         - if <player.has_flag[AccountProtection.EnteredPassword]> {
@@ -74,6 +71,7 @@ On Join Player Account Management:
             }
         - flag player AccountProtection.EnteredPassword:true duration:<script.yaml_key[password_token_lifetime]>
         
+        # todo: Create a separate script for the command
         on setpass command:
         - determine passively fulfilled
         - if <context.args.is_empty> {
@@ -84,26 +82,26 @@ On Join Player Account Management:
         - flag <player> AccountProtection.Password:<def[args].escaped>
         - narrate "<parse:<script.yaml_key[mod_title]>> <blue>You've set your password to <gold><&sq><def[args].space_separated||<def[args]>><&sq> <green><player.name.display||<player.name>>"
     
+    dont continue if script is not cooled down:
+    - if <script.cooldown[<player>].is[!=].to[d@0t]> queue clear
+    
+    #Allows script to continue if theres no protections involved.
+    dont continue if achieved permission:
+    - if <player.has_flag[AccountProtection.EnteredPassword]> queue clear
+    - if !<player.has_permission[<script.yaml_key[password_required_permission]>]> queue clear
     
     
     #Allows script to continue if theres no protections involved.
-    eligible for password protection:
-    - cooldown <script.yaml_key[script_cooldown]> s:<script>
-    - if <player.has_flag[AccountProtection.EnteredPassword]>
-      queue clear
-    
-    - if !<player.has_permission[<script.yaml_key[password_required_permission]>]>
-      queue clear
-    
-    
-    
-    #Allows script to continue if theres no protections involved.
-    command password check:
+    command password determination:
+    # Player has not set a password
     - if !<player.has_flag[AccountProtection.Password]> {
         - narrate "<parse:<script.yaml_key[mod_title]>>
           <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
         - determine fulfilled
         }
+    # ./login (password) if its correct, it sets a flag on the player for success
+    # This checks if thats a success if not tells bukkit that the command has been handled completly, not allowing 
+    # other commands to proceed.
     - if !<player.has_flag[AccountProtection.EnteredPassword]> {
         - narrate "<parse:<script.yaml_key[mod_title]>> <red>You need to enter your <red>PASSWORD."
         - narrate "<blue>./login (password)"
@@ -112,7 +110,7 @@ On Join Player Account Management:
 
 
     #Allows script to continue if theres no protections involved.
-    action password check:
+    action password determination:
     - cooldown <script.yaml_key[script_cooldown]> s:<script.name>
     - if !<player.has_flag[AccountProtection.Password]> {
         - narrate "<parse:<script.yaml_key[mod_title]>>
