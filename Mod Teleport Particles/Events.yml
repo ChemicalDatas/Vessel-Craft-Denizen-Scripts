@@ -1,6 +1,6 @@
 Player Teleport ENDER_SIGNAL Particles:
-  type: world
-  events:
-    on player teleports:
-    - playeffect    li@<context.origin>|<context.destination> effect:ENDER_SIGNAL
-    - playsound     li@<context.origin>|<context.destination> effect:ENDERMAN_TELEPORT
+    type: world
+    events:
+        on player teleports:
+        - playeffect    li@<context.origin>|<context.destination> effect:ENDER_SIGNAL
+        - playsound     li@<context.origin>|<context.destination> effect:ENDERMAN_TELEPORT
