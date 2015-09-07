@@ -961,32 +961,6 @@ VC Heal:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
-    effect_list:
-    effects:
-    - speed
-    - slowness
-    - haste
-    - mining fatigue
-    - strength
-    - instant health
-    - instant damage
-    - jump boost
-    - nausea
-    - regeneration
-    - resistance
-    - fire resistance
-    - water breathing
-    - invisibility
-    - night vision
-    - hunger
-    - weakness
-    - poison
-    - wither
-    - health boost
-    - absorption
-    - saturation
-    - glowing
-    - levitation
     script:
     - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
     - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
@@ -998,8 +972,9 @@ VC Heal:
             }
         }
     - heal <def[target]>
+    - adjust <def[target]> saturation:10
     - feed amt:20 target:<def[target]>
-    - foreach <script.yaml_keys[effects]> {
+    - foreach "<s@Potion Effects List.yaml_key[effects]>" {
         - cast <def[value]> remove <def[target]>
         }
 
