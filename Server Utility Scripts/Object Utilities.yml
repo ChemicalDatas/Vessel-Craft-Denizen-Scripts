@@ -12,7 +12,9 @@ Object Database Startup:
         on server start:
         - run "yaml load" def:<script.yaml_key[path]>|temp_objects
         
-        on server shutdown:
+        # on server shutdown.
+        on stop command:
+        - determine passively fulfilled
         - announce "<script.name> performing shutdown routine."
 
 #note: to avoid a obscure bugs, objects might need to have the queue id prefixed to the object_id
@@ -42,6 +44,9 @@ Object:
     definitions: yaml_id|object_id|method
     script:
     #- inject "Announce Arguments Passed"
+    # todo: reformat the ignored values to include .starts_with[__]
+    # todo: add a method called delete to remove the yaml object from memory right away instead of waiting for the server to restart.
+    # todo: change the adding or getting attributes with a map_get if possible. A key: value option style
     - define yaml_id <def[yaml_id]||temp_objects>
     - if !<yaml.list.contains[<def[yaml_id]>]> {
         - event "script generates error" "context:message|invalid yaml id<&co> <def[yaml_id]>|script|<script>|queue|<queue>"
