@@ -27,7 +27,7 @@ Vote Tracker:
 
     Thanks for Voting:
     - if !<player.has_flag[vote_thanked]> {
-        - define thanks "<red>[bheart]<reset>Thanks for your <green>continued <reset>support <blue><player.name.display><reset>.<red>[bheart]"
+        - define thanks "<red>[bheart]<reset>Thanks for your <green>continued <reset>support <blue><player.name.display||<player.name>><reset>.<red>[bheart]"
         - define thanks "<proc[Iconize].context[<def[thanks]>]>"
         - flag <player> vote_thaked duration:d@1h 
         - run "Boss Bar" def:<def[thanks]>|<player>|200|d@10s
