@@ -121,7 +121,7 @@ SAI Listener:
     script:
     #
     # - foreach <<def[script]>.constants[catch words].as_list> {
-    #   - define catcher <def[script].constant[catch words.<def[value]>]>
+    #   - define catcher <def[script].yaml_key[catch words.<def[value]>]>
     #   - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
     #       - run <def[value]> def:<def[text]>|
     #       }
@@ -131,7 +131,7 @@ SAI Listener:
     - wait 1
     
     #Op Handling
-    - ^define catcher "<def[script].constant[catch words.op].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.op].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "I Handle Op issues" format:SAI
         - run op_handling def:<def[text]>
@@ -140,7 +140,7 @@ SAI Listener:
     
     
     #Transportation 
-    - ^define catcher "<def[script].constant[catch words.transportation].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.transportation].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "teleport thinggs" format:SAI
         - run tp_handling def:<def[text]>
@@ -149,7 +149,7 @@ SAI Listener:
     
     
     #Spawning
-    - ^define catcher "<def[script].constant[catch words.spawn].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.spawn].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Im not sure if I can do that for you..." format:SAI
         - run spawn_handling def:<def[text]>
@@ -158,7 +158,7 @@ SAI Listener:
     
     
     #Gamemode
-    - ^define catcher "<def[script].constant[catch words.gamemode].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.gamemode].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "You asked me to handle a game mode change for you" format:SAI
         - run gamemode_handling def:<def[text]>
@@ -167,7 +167,7 @@ SAI Listener:
     
     
     #Messaging
-    - ^define catcher "<def[script].constant[catch words.spawn].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.spawn].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "I will deliver that message to them for you." format:SAI
         - run message_handling def:<def[text]>
@@ -176,7 +176,7 @@ SAI Listener:
     
     
     #Discipline
-    - ^define catcher "<def[script].constant[catch words.discipline].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.discipline].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Ok, Ill shall enter into heavy hand mode. <&nl>Let me get my gloves on." format:SAI
         - run spawn_handling def:<def[text]>
@@ -185,7 +185,7 @@ SAI Listener:
     
     
     #special
-    - ^define catcher "<def[script].constant[catch words.special].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.special].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Special Commands I see?" format:SAI
         - run special_effect_handling def:<def[text]>
@@ -193,7 +193,7 @@ SAI Listener:
         }
 
     
-    - ^define catcher "<def[script].constant[catch words.desire].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.desire].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "You know, id like to tell you what I want every now and then..." format:SAI
         - run desire_handling def:<def[text]>
@@ -202,7 +202,7 @@ SAI Listener:
     
     
     
-    - ^define catcher "<def[script].constant[catch words.information].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.information].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Let me see what I can find for you." format:SAI
         - run information_handling def:<def[text]>
@@ -211,7 +211,7 @@ SAI Listener:
 
     
     
-    - ^define catcher "<def[script].constant[catch words.s helper].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.s helper].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Im not sure if I can do that for you..." format:SAI
         - run script_helper def:<def[text]>
@@ -220,7 +220,7 @@ SAI Listener:
     
     
     
-    - ^define catcher "<def[script].constant[catch words.permission].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.permission].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Well, some ones going to be happy with their new ability. [smile]" format:SAI
         - run permission_helper def:<def[text]>
@@ -229,7 +229,7 @@ SAI Listener:
         
     
     
-    - ^define catcher "<def[script].constant[catch words.icons].escaped>"
+    - ^define catcher "<def[script].yaml_key[catch words.icons].escaped>"
     - if "<proc[String Contains Regex].context[<def[text]>|<def[catcher]>]>" {
         - announce "Im not sure if I can do that for you..." format:SAI
         - run icon_information def:<def[text]>
@@ -240,7 +240,7 @@ SAI Listener:
     - announce "<&dq><def[text].replace[sai ]><&dq>" format:SAI 
 
 
-"String Contains Regex":
+String Contains Regex:
     #
     # This might be a little slower than checking if <something.contains[word]>
     # Regex is slower than word checking. Better for complexity but slower
