@@ -922,7 +922,7 @@ VC Hurt:
     type: command
     name: hurt
     description: Damages <&lb>target<&rb> for <&lb>damage<&rb>
-    usage: /hurt (target) <&lb>damage<&rb> <&lb>cause<&co><&rb> <&lb>source<&co><&rb> (optional args<&co> damage defaults to 2, optional params<&co> cause defaults custom, source)
+    usage: /hurt (target) <&lb>damage<&rb> <&lb>cause<&co><&rb> (optional args<&co> damage defaults to 2, optional params<&co> cause defaults custom)
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
@@ -931,20 +931,17 @@ VC Hurt:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
     script:
-    - define target <context.args.get[1]>
+    - define target <parse:<context.args.get[1]>>
+    - if <def[target].as_entity||NOT_VALID_ENTITY> == NOT_VALID_ENTITY {
+        - define target <server.match_player[<def[target]>]||NO_MATCHABLE_PLAYER>
+        - if <def[target]> == NO_MATCHABLE_PLAYER {
+            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> You need a valid object target."
+            - queue clear
+            }
+        }
     - define damage <context.args.get[2]||2>
-    - define source <context.args.map_get[source]>
-    - define source <<parse:%source%>>
-    - define cause <context.args.map_get[cause]>
-    - if !<server.object_is_valid[<def[target]>]> {
-        -
-        }
-    - if !<server.object_is_valid[<def[source]>]> {
-        - define source ''
-        } else {
-        - define source source<&co><def[source]>
-        }
-    - hurt <def[damage]> <def[target]> cause:custom <def[source]>
+    - define cause <context.args.map_get[cause]||custom>
+    - hurt <def[damage]> <def[target]> cause:<def[cause]>
 
 
 VC Heal:
@@ -977,6 +974,9 @@ VC Heal:
     - foreach "<s@Potion Effects List.yaml_key[effects]>" {
         - cast <def[value]> remove <def[target]>
         }
+    - define actor <tern[<context.server>]:server||<player.name.display||<player.name>>>
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>You were healed by <red><def[actor]><yellow> [smile]"
 
 
 VC KillAll:
