@@ -1,0 +1,9 @@
+Bungee Announce:
+    type: world
+    events:
+        on server start:
+        #on announce command:
+        #- determine passively fulfilled
+        #- bungee all {
+        #    - announce "<parse:<proc[iconize].context[<context.args.space_separated>]>>"
+        #    }
