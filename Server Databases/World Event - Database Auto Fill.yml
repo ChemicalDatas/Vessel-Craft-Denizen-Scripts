@@ -5,9 +5,8 @@
 
 #info: havnt figured out the icon_crack yet. That might be where the auto script for filling this out might come in handy.
 
-"SAI Database Manager":
-    type: task
-    
+SAI Database Manager:
+    type: yaml data
     database location names:
     - player
     - entity

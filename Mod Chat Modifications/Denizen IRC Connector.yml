@@ -1,0 +1,61 @@
+
+IRC_Connector:
+    type: world
+    events:
+        on server start:
+        - run s@IRC_Connect
+        - flag server IRC_Mode:true
+    # Bash script creates a file that if exists will set IRC_Mode to true and enable the "t" command
+    # for IRC chatting. I use it from the console like this "t chat message stuff"
+    
+        on irc command:
+        - if <server.flag[IRC_Mode]> != true {
+          - queue clear
+          }
+        - define message "<context.args.separated_by[ ]>"
+        - define message_parsed "<def[message].replace[&red].with[<Red>]>"
+        - announce "<&1>Me<&co> <&3><def[message_parsed]>"
+        - irc message "ircchannel@irc.esper.net#denizen-dev" "<def[message_parsed]>"
+        - determine fulfilled
+    
+    # Ignore the replace red, thats just for funsies
+    
+        on irc message:
+        - if <context.speaker> == Chemical_Datas {
+          - queue clear
+          }
+        - if <server.flag[IRC_Mode]> != true {
+          - queue clear
+          }
+        - announce "<&1><context.speaker><&co><&3> <context.message><&r><&3>"
+    
+    # If the speaker is me, don't trigger it as its already triggered by the irc command. 
+    
+        on irc raw message:
+        - define channel "#denizen-dev"
+        - if "<context.raw_message.contains_any_case_sensitive_text[QUIT]>" {
+          - announce "<&e><context.raw_message.before[!].after[<&co>]> has quit!"
+          } else if "<context.raw_message.contains_any_case_sensitive_text[PART <def[channel]>]>" {
+          - announce "<&e><context.raw_message.before[ ]> has left the room!"
+          } else if "<context.raw_message.contains_any_case_sensitive_text[JOIN <def[channel]>]>" {
+          - if <context.raw_message.before[!].after[<&co>]> == Chem {
+            - announce "<&e>Connected!"
+            - queue clear
+            }
+          - announce "<&e><context.raw_message.before[!].after[<&co>]> has joined!"
+          }
+
+# When the IRC sends a chat message i get it as an announce. I turned denizen debug off to make things clearer (/denizen debug -b && /denizen debug)
+
+IRC_Connect:
+    type: task
+    debug: true
+    script:
+    - 
+    - ~irc connect ircserver@irc.esper.net
+    - wait 5s
+    - irc raw ircserver@irc.esper.net "USER Chem Chem_ Chem__ Chemii"
+    - irc raw ircserver@irc.esper.net "NICK Chem"
+    - irc join "ircchannel@irc.esper.net#denizen-dev"
+
+# User is for alternative nicknames in case its taken but you can just change it to Chem
