@@ -5,6 +5,10 @@
 #entity references already filled out.
 
 
+# todo: Refractor scripts that are npc based from the ones that are general server based.\
+# the general server based can be moved to a server folder. 
+# todo: rename the npc based scripts to include in the name "NPC Cast Spell", "NPC Walk To"
+
 ################################################################################################
 ####################### Dynamic Sets ###########################################################
 ################################################################################################
@@ -532,13 +536,16 @@ Remove:
     # Removes an entity
     type: procedure
     definitions: entities
+    default_entities: as_list.parse[as_entity]
     script:
+    - inject typechecking
     - define entities <def[entities].unescaped.as_list||li@>
     - if <def[entities].is_empty> queue clear
     - define not_spawned_entities li@
     - foreach <def[entities]> {
-        - if !<def[value].is_spawned> {
-            - announce "entity <def[value]> dosn't seem to be spawned..." to_console
+        - if !<def[value].is_spawned||true> {
+            - define message "entity <def[value]> dosn't seem to be spawned..." to_console
+            - event "script generates error" def:queue|<queue.script>|script|<script>|message|<def[message]>
             - define not_spawned_entities <def[not_spawned_entities].include[<def[value]>]>
             }
         }
