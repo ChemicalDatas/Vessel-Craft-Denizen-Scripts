@@ -258,7 +258,7 @@ VC Vote:
 # todo: create a target to send the info to
 VC webpage:
     type: command
-    name: back
+    name: webpage
     description: Gives the sender the webpage they can use to view extra server information.
     usage: /webpage <&lb>int<&rb> (optional, no int defaults to last location)
     aliases:
@@ -319,7 +319,7 @@ VC PlaceNotify:
     description: Toggles feedback of what block the player places.
     usage: /placenotify
     aliases:
-    - back
+    - whatsthatblock
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
