@@ -479,7 +479,7 @@ typecheck:
             - if <def[value].starts_with[__]> foreach next
             - ^define __accessor <queue.script.yaml_key[type_%value%]||none>
             - if <def[__accessor]> == none foreach next
-            - ^define __expected_value <def[%value%].%__accessor%||failed_tag>
+            - ^define __expected_value <parse:<&lt>def[%value%].%__accessor%<&pipe><&pipe>failed_tag<&gt>>
             - if <def[__expected_value]> == failed_tag {
                 - ^define __message "Definition(s) failed type check.<&nl>
                   def<&co><def[value]> value<&co><def[%value%]><&nl>
@@ -493,20 +493,32 @@ typecheck:
     - foreach <def[__ignored_values]> {
         - define %value%:!
         }
+    - define loop_index:!
+    - define value:!
     
 __tstchecking:
     type: task
-    definitions: int|element|extra_value
+    definitions: int|element|restricted_list|extra_value
     type_int: as_int
     type_element: prefix
+    type_restricted_list: parse[name]
     default_int: 1
     default_extra_value: default_hardcoded_script_value
     script:
     - inject typecheck
+    - foreach <queue.definitions> {
+        - announce "Value<&co> <def[value]><&co> <def[%value%]>"
+        }
     - announce "the extra value was<&co> <def[extra_value]>"
-    - announce "<script.name> completed its task and did not raise an error."
+    - announce "<script.name> completed and errors were raised if any."
 
-
+THE FUTURE OF DEBUG SCRIPTING:
+    type: task
+    definitions: accessor
+    script:
+    - announce "%accessor%"
+    - define list <server.list_online_players>
+    - announce "<parse:<&lt>def[list].%accessor%<&gt>>"
 
 
 
