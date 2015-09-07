@@ -123,11 +123,7 @@ Threshold Random Success:
     debug: false
     definitions: words|character|replacement
     script:
-    - if <def[words].contains[<def[character]>]> {
-        - determine <def[words].replace[<def[character]>].with[<def[replacement]>]>
-        } else {
-        - determine <def[words]>
-        }
+    - determine <def[words].replace[<def[character]>].with[<def[replacement]>]>
     
 
 #fixme: This dose not work currently... 
