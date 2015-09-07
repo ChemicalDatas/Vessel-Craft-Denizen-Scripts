@@ -4,5 +4,5 @@ Void Spawn Teleportation:
     on player damaged by void:
     - if <player.location.y.is[or_more].than[0]> queue clear
     - adjust <player> fall_distance:0.0
-    - teleport <player> <player.world.spawn_location>
+    - teleport <player> <player.world.spawn_location.above>
     - determine cancelled
