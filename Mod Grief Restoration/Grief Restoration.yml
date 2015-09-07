@@ -92,7 +92,8 @@ Block Healing Listener:
           delay:<script.yaml_key[auto_restore_on_start_delay]>
         
         
-        on server stop:
+        on stop command:
+        - determine passively fulfilled
         - run "Yaml Save"
           def:<script.yaml_key[database_path]>|<script.yaml_key[database_id]>
         
@@ -186,11 +187,9 @@ Block Healing Listener:
           path:shatter_then_replace
         
     
-    shatter_then_replace:        
+    shatter_then_replace:
     - define materials
       <script.yaml_key[breakable_list].as_list>
-    
-    #- narrate "<blue>projectile hits blocks"
     
     - define path
       broken_block_sets.<util.random.duuid>
@@ -224,8 +223,8 @@ Break breakable:
     definitions: block_list
     type_block_list: as_list
     script:
-    - inject typechecking
     - define block_list <def[block_list].unescaped>
+    #- inject typechecking
     - foreach <def[block_list]> {
         - playsound <def[value]> sound:breakable
         - playeffect <def[value]> effect:iconcrack_<def[value].material.id> qty:5
