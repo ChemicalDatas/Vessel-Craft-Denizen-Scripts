@@ -627,8 +627,7 @@ Wait for Valid Player:
     - while !<player.is_spawned||false> {
         - wait <def[duration]>
         - if <def[loop_index].is[or_more].than[<def[max_wait]>]> {
-            - define message "Player failed to spawn"
-            - event "script generates error" context:message|<def[message]>|script|<queue.script>|queue|<queue>
+            - debug error "Player failed to spawn"
             - queue clear
             }
         }

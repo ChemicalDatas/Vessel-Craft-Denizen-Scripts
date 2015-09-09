@@ -50,22 +50,22 @@ Object:
     # todo: replace the checks with - inject typecheck
     - define yaml_id <def[yaml_id]||temp_objects>
     - if !<yaml.list.contains[<def[yaml_id]>]> {
-        - event "script generates error" "context:message|invalid yaml id<&co> <def[yaml_id]>|script|<script>|queue|<queue>"
+        - debug error "invalid yaml id<&co> <def[yaml_id]>"
         - queue clear
         }
     - if <def[object_id]||none> == none {
-        - event "script generates error" "context:message|invalid object id<&co> <def[object_id]>|script|<script>|queue|<queue>"
+        - debug error "invalid object id<&co> <def[object_id]>"
         - queue clear
         }
     - if <def[method]||none> == none {
-        - event "script generates error" "context:message|Need an method refrence|script|<script>|queue|<queue>"
+        - debug "Need an method refrence"
         - queue clear
         }
     - inject <def[method]> locally
     
     get:
     - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
-        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - debug "Object<&co> <red><def[object_id]><reset> does not exist."
         - queue clear
         }
     - define ignored_values li@
@@ -78,7 +78,7 @@ Object:
             #I choose to raise the error instead of returning none
             #This mimicks a global variable and there isnt anyway to remove it unless the server restarts.
             #
-            - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> dose not have attribute<&co> <red><def[%value%]>|script|<script>|queue|<queue>"
+            - debug error "Object<&co> <red><def[object_id]><reset> dose not have attribute<&co> <red><def[%value%]>"
             - foreach next
             }
         # include the attribute and add it to the attribute_list as escaped data (it could be a list)
@@ -110,7 +110,7 @@ Object:
     
     clear:
     - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
-        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - debug error "Object<&co> <red><def[object_id]><reset> does not exist."
         - queue clear
         }
     - yaml id:<def[yaml_id]> set <def[object_id]>:!
@@ -118,7 +118,7 @@ Object:
     
     attributes:
     - if !<yaml[<def[yaml_id]>].contains[<def[object_id]>]> {
-        - event "script generates error" "context:message|Object<&co> <red><def[object_id]><reset> does not exist.|script|<script>|queue|<queue>"
+        - debug error "Object<&co> <red><def[object_id]><reset> does not exist."
         - queue clear
         }
     - determine <yaml[<def[yaml_id]>].list_deep_keys[<def[object_id]>]>
