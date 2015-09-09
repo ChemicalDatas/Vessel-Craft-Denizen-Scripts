@@ -10,8 +10,8 @@ Boss Bar Base:
     definitions: message|p_list|bar
     speed: 0t
     script:
-    - define p_list <def[p_list].unescaped||<server.list_online_players>>
-    - if <def[p_list].is_empty> queue clear
+    - define p_list <def[p_list].unescaped||<server.list_online_players||li@>>
+    - if <def[p_list].is_empty||true> queue clear
     - define message <def[message].unescaped||None>
     - define bar <def[bar]||None>
     - if <def[message]> != None {
@@ -32,15 +32,16 @@ Boss Bar:
     definitions: word_list|p_list|bar|delay
     speed: 0t
     script:
-    - ^define p_list    <def[p_list]||<server.list_online_players.escaped>>
+    - ^define p_list    <def[p_list].unescaped||<server.list_online_players||li@>>
+    - if <def[p_list]> == null queue clear
     - ^define delay     <def[delay].as_duration||d@40t>
     - ^define bar       <def[bar]||200>
-    - ^define next_delay d@0t
     - foreach <def[word_list].unescaped.as_list> {
-        - run "Boss Bar Base" def:<def[value]>|<def[p_list]>|<def[bar]> delay:<def[next_delay].as_duration> instantly
-        - define next_delay d@<def[next_delay].in_ticks.add[<def[delay].in_ticks>]>t
+        - run "Boss Bar Base" def:<def[value]>|<def[p_list].escaped>|<def[bar]> instantly
+        - wait <def[delay]>
         }
-    - run "Boss Bar Base" def:|<def[p_list]>| delay:<def[next_delay]> instantly
+    - if <def[p_list].is_empty||true> queue clear
+    - run "Boss Bar Base" def:|<def[p_list]>| instantly
 
 
 
