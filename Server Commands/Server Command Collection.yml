@@ -391,7 +391,7 @@ VC GameMode:
     type: command
     name: gamemode
     description: Changes your gamemode or the targets gamemode into survival.
-    usage: /gamemode <&lb>target<&rb> (target defaults to sender)
+    usage: /gamemode <&lb>(gm indicator 0,1,2,s,a,c)<&rb> <&lb>target<&rb> (target defaults to sender, target is always the last argument.)
     aliases:
     - gm
     - gm0
@@ -409,21 +409,34 @@ VC GameMode:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
+    - define argu_list li@0|1|2|a|s|c
     - determine <server.list_online_players[name].filter[starts_with[<context.args.last>]]>
     script:
-    - define alias_to_argument li@gms/survival|survival/survival|gm/survival|s/survival|0/survival|gma/adventure|adventure/adventure|a/adventure|2/adventure|gmc/creative|creative/creative|c/creative|1/creative
-    - define target <context.args.get[1]||<player||NO_TARGET_SPECIFIED>>
-    - define gamemode <def[alias_to_argument].map_get[<context.alias>]||NO_MAPPABLE_GAMEMODE>
-    - if <def[gamemode]> == NO_MAPPABLE_GAMEMODE {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> Your mode <player.gamemode>. Alias commands<&co> <script.yaml_key[aliases].space_separated>"
-        - queue clear
+    - define alias_to_argument li@gms/survival|survival/survival|gm0/survival|s/survival|0/survival|gm2/adventure|gma/adventure|adventure/adventure|a/adventure|2/adventure|gmc/creative|gm1/creative|creative/creative|c/creative|1/creative
+    - define arg <context.args.get[1]||NO_ARGUMENT>
+    - define gamemode <def[alias_to_argument].map_get[<context.alias>]||<def[alias_to_argument].map_get[<def[arg]>]||NO_ALIAS_GAMEMODE>>
+    - define target <player||SERVER>
+    - define indicated_target <context.args.last||<player||NO_INDICATED_TARGET>>
+    # name matching
+    # parsing
+    - define matching_target <server.match_players[<def[indicated_target]>]||NO_MATCHING_TARGET>
+    - define parsed_target <parse:<&lt><def[indicated_target]><&pipe><&pipe>NOT_A_PARSEABLE_TARGET<&gt>>
+    - if <def[matching_target]> != NO_MATCHING_TARGET {
+        - define target <def[matching_target]>
         }
-    - if !<server.object_is_valid[<def[target]>]> {
+    - if <def[parsed_target].is_player||false> {
+        - define target <def[parsed_target]>
+        }
+    - if !<server.list_online_players.contains[<def[target]>]> {
         - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Failed to find a valid target<&co> <def[target]>"
         - queue clear
         }
-    - adjust <def[target]> gamemode:<def[gamemode]>
+    - if <def[gamemode]> == NO_ALIAS_GAMEMODE {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Targets gamemode <red><def[target].gamemode><yellow>. Alias commands<&co> <blue><script.yaml_key[aliases].space_separated>"
+        - queue clear
+        }
     - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
+    - adjust <def[target]> gamemode:<def[gamemode]>
 
 
 VC Fly Event Listener:
@@ -601,7 +614,7 @@ VC World:
         - queue clear
         }
     - teleport <def[world].spawn_location>
-    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Ok, sending you to <def[world]>"
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Ok, sending you to <def[world]>"
 
 
 VC I:
@@ -615,17 +628,17 @@ VC I:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - determine <yaml[serverinfo].read[lists.items].filter[starts_with[<context.args.last>]]>
+    - determine <yaml[database].read[lists.items].filter[starts_with[<context.args.last>]]>
     script:
     - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack||1>>]
     - define item <def[item].as_item||Not_An_Item>
     - if <def[item].type||Not_An_Item> != "Item" {
-        - define item_list <yaml[serverinfo].read[lists.items]>
+        - define item_list <yaml[database].read[lists.items]>
         - define possible_item <def[item_list].find_partial[<def[item]>]>
         - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>?"
         - queue clear
         }
-    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>"
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>"
     - give <def[item]>
 
 
@@ -652,8 +665,8 @@ VC Clear Inventory:
         - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Could not find the specified target. <yellow><def[target]>"
         - queue clear
         }
-    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
-    - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
     - inventory clear d:<def[target].inventory>
 
 
