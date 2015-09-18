@@ -1,0 +1,60 @@
+Tool Remains:
+    type: world
+    file: "Databases/Server Item Database.yml"
+    path: database.item
+    id: database
+    save_duration: d@1h
+    # The location 
+    ScriptDefaults: "SAI Database Manager"
+    #default mcmmo salvage starts at lvl 600 repair
+    mcmmo_full_salvage: 600
+    events:
+        on server start:
+        - run "Yaml Load" def:<script.yaml_key[file]>|<script.yaml_key[id]>
+        - repeat true {
+            - wait <script.yaml_key[save_duration]>
+            - run "Yaml Save" def:<script.yaml_key[file]>|<script.yaml_key[id]>
+            }
+        
+        on savetoolyaml command:
+        - determine passively fulfilled
+        - if !<yaml.list.contains[<script.yaml_key[id]>]> {
+            - yaml create id:<script.yaml_key[id]>
+            }
+        - run "Yaml Save" def:<script.yaml_key[file]>|<script.yaml_key[id]>
+        - narrate "Saved yaml save file for <script.name>"
+        
+        on item crafted:
+        - define path <script.yaml_key[path]>.<context.item.simple>.recipe
+        - define id <script.yaml_key[id]>
+        - define recipe <context.recipe.escaped>
+        - if !<yaml[<def[id]>].contains[<def[path]>]> {
+            - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
+            - narrate format:SAI "Hmmmmm, I<&sq>ve never seen that made before... Ill have to remember that..."
+            - queue clear
+            }
+        - define known_recipes <yaml[<def[id]>].read[<def[path]>]>
+        - if !<def[known_recipes].contains[<def[recipe]>]> {
+            - narrate format:SAI "Hmmmmm, I didnt know that could be made like that... Ill have to remember that..."
+            - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
+            - queue clear
+            }
+        - narrate format:SAI "Ive seen that before."
+        
+        on player breaks item:
+        - define id <script.yaml_key[id]>
+        - define items <yaml[<def[id]>].read[<script.yaml_key[path]>.<context.item.simple>.recipe]||NO_RECIPIE_FOR_ITEM>
+        - if <def[items]> == NO_RECIPIE_FOR_ITEM {
+            - narrate format:SAI "<blue>Sorry, cannot give you anything back, as I dont know what it was made of."
+            - queue clear
+            }
+        - define items <def[items].unescaped>
+        - define items <def[items].exclude[i@air]>
+        - define size <def[items].size>
+        - define player_skill <player.mcmmo.level[repair]>
+        - define ratio <def[player_skill].div[<script.yaml_key[mcmmo_full_salvage]>]>
+        - define max_possible_return <def[size].mul[<def[ratio]>]>
+        - define salvagable_items_back <util.random.int[0].to[<def[ratio].as_int>]>
+        - narrate format:SAI "With your repair skill of<&co> <def[player_skill]>, you were able to gather <def[salvagable_items_back]> fragments of your tool."
+        - drop <def[items].random[<def[salvagable_items_back]>]> <player.location>
+        
