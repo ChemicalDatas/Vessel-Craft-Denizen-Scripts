@@ -545,7 +545,7 @@ Remove:
     - foreach <def[entities]> {
         - if !<def[value].is_spawned||false> {
             - define message "entity <def[value]> dosn't seem to be spawned..." to_console
-            - event "script generates error" def:queue|<queue.script>|script|<script>|message|<def[message]>
+            - debug error <def[message]>
             - define not_spawned_entities <def[not_spawned_entities].include[<def[value]>]>
             }
         }
