@@ -19,8 +19,7 @@ IfDefinition:
     type: task
     script:
     - if !<def[definition].exists> {
-        - define message "<script.name> Definition did not exist! will not search try to define anything."
-        - event "Script Generates Error" context:message|<def[message]>|queue|<queue>|script|<queue.script>
+        - debug error "<script.name> Definition did not exist! will not search try to define anything."
         - wait d@1m
         - while next
         }
