@@ -56,7 +56,8 @@ Lore Modification Event Detection:
         on player steals item:
         - define item <context.item>
         - define old_lore "<def[item].lore||>"
-        - define new_lore "<proc[List Append Right].context[<def[old_lore]>|<red>stolen from <context.owner||Unknown>]>"
+        - define message "<red>stolen from <blue><context.owner||unknown>"
+        - define new_lore <def[old_lore].include[<def[message>]>
         - determine "<proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>"
     
         #player cant be looking at player
