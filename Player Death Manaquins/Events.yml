@@ -5,7 +5,7 @@ On Death Body Generation Event:
         on player death:
         - create player <context.entity.name.display> <context.entity.location> save:body
         - define npc <entry[body].created_npc>
-        - adjust <def[npc]> "set_assignment:s@dead body assignment"
+        - assignment set "script:dead body assignment"
         - inventory swap d:<def[npc].inventory> o:<player.inventory>
         - define time <script.yaml_key[body_decay_time]>
         - narrate "<red>You have <def[time].formatted> to get back to your body to get its loot."
@@ -31,7 +31,12 @@ dead body assignment:
         #right click loot
         #shift right click pickup body
         on click:
-        - define age_millis <server.current_time_millis.sub_int[<npc.flag[date_of_death]>]>
+        - define time <server.current_time_millis>
+        - if !<npc.has_flag[date_of_death]> {
+            - remove <npc>
+            - queue clear
+            }
+        - define age_millis <def[time].sub_int[<npc.flag[date_of_death]>]>
         - narrate "The body appears to be <def[age_millis].div[1000].as_duration.formatted> old..."
         - inventory open d:<npc.inventory>
         
@@ -42,6 +47,6 @@ dead body assignment:
           remove <npc>
         
         on remove:
-        - announce "The body of <npc.name> is decaying."
+        - announce "The body of <npc.name> decayed."
         #maybe one day put a gravestone there with a chest underneath with date and name and reason of death
         # Gravestone? maybe a temp gravestone then....
