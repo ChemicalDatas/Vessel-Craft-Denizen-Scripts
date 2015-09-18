@@ -150,13 +150,23 @@ Resume Queue:
 ####################### Animation Sets #########################################################
 ################################################################################################
 
+Lay Down:
+    type: task
+    definitions:
+    script:
+    - define location <npc.location>
+    - define material <def[location].material>
+    - modifyblock <def[location]> m@bed_block no_physics
+    - run Animate SLEEP
+    - modifyblock <def[location]> <def[material]> no_physics
+
 Animate:
     type: task
     definitions: animation
     script:
     - animate <npc>
       animation:<def[animation]>
-    
+
 Animate Chest:
     type: task
     definitions: location|open_close
