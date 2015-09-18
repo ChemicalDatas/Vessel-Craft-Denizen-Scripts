@@ -5,8 +5,12 @@ On Join Player Location Management:
         - flag player bed_spawn:<context.location>
         on player joins:
         - inject "wait for valid player"
-        - define location <player.flag[bed_spawn]||None>
-        - if <def[location]> == None define location <player.location.world.spawn_location>
-        - define location_arround "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
-        - define target <def[location_arround].get_spawnable_blocks.random>
-        - teleport <player> <def[target].above>
+        - if !<player.has_flag[bed_spawn]> {
+            - define location <player.location.world.spawn_location>
+            } else {
+            - define location <player.flag[bed_spawn]>
+            }
+        - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
+        - define spawnable_locations <def[cuboid].get_spawnable_blocks||<def[location].as_list>>
+        - define location <def[spawnable_locations].random>
+        - teleport <player> <def[location].above>
