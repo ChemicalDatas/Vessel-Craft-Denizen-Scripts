@@ -25,25 +25,6 @@ DynamicExecute:
       "ex <def[command]> <def[args].unescaped||>"
     
 
-Event:
-    type: task
-    definitions: event_list|context_list
-    script:
-    - event
-      <def[event_list].unescaped>
-      context:<def[context_list].unescaped>
-    
-
-Action:
-    type: task
-    definitions: action_list|context_list
-    script:
-    - action
-      <def[action_list].unescaped>
-      <npc>
-      context:<def[context_list].unescaped>
-    
-
 ################################################################################################
 ####################### Constant Sets ##########################################################
 ################################################################################################
@@ -96,14 +77,7 @@ Walk Near Anchor:
 ####################### Delay Sets #############################################################
 ################################################################################################
 
-Wait:
-    type: task
-    definitions: delay
-    script:
-    - wait <def[delay]||d@1s>
-
-Delay:
-    #This is iffy as this requires a queue id. It might work as intended, or might not.
+NPCDelay:
     type: task
     definitions: delay
     script:
@@ -114,7 +88,7 @@ Delay:
       delay:<def[delay]||d@1s>
     
 
-Pause Queue:
+NPCPause Queue:
     #This pauses the queue.
     #Generally used after a walk to command as something will need to resume the queue afterwards.
     #The npc assignment contains an 'on complete navigation' action. That should resume the queue
@@ -131,7 +105,7 @@ Pause Queue:
     #- announce "Pausing <red>Queue  (resuming when a resume queue is called...)"
 
 
-Resume Queue:
+NPCResume Queue:
     #This resumes the queue. This should be used in some sort of action like 'on travel complete'
     #As this should resume an Npc-action_queue.
     type: task
@@ -160,23 +134,14 @@ Lay Down:
     - run Animate SLEEP
     - modifyblock <def[location]> <def[material]> no_physics
 
-Animate:
+Npc Animate:
     type: task
     definitions: animation
     script:
     - animate <npc>
       animation:<def[animation]>
 
-Animate Chest:
-    type: task
-    definitions: location|open_close
-    script:
-    - animatechest <def[location]>
-      <def[open_close]||close>
-      sound:true
-      <server.list_online_players>
-
-Look:
+NPC Look:
     type: task
     definitions: location|time
     script:
@@ -184,7 +149,7 @@ Look:
       <def[location]>
       duration:<def[time]||d@2s>
 
-Animate Interact:
+NPC Animate Interact:
     type: task
     speed: 12t
     script:
@@ -297,65 +262,15 @@ Arrived At Navigation Target:
     - flag npc
       navigation_targets:!
     
-Completed A Navigation Target:
-    type: task
-    script:
-    #Pop nav waypoints
-    - flag npc
-      nav_waypoints:<-:<>
-    
+
 
 ################################################################################################
 ####################### Feed Back Sets #########################################################
 ################################################################################################
 
-Sound:
-    #volume and pitch optional.
-    type: task
-    definitions: sound|volume|pitch
-    script:
-    - playsound <npc.location>
-      sound:<def[sound]>
-      volume:<def[volume]|10>
-      pitch:<def[pitch]||1>
-    
-
-PlayEffect:
-    #Everything after effect is optional.
-    #data|visibility|qty|offset|targets|locations
-    type: task
-    definitions: location|effect|extra_args
-    script:
-    - playeffect <def[location]>
-      effect:<def[effect]>
-      <def[extra_args].unescaped||>
 
 
-#todo: optimise this so it looks more realistic
-Effect:
-    #Everything after effect is optional.
-    #data|visibility|qty|offset|targets|locations
-    type: task
-    definitions: effect|extra_args
-    script:
-    - playeffect <npc.location>
-      effect:<def[effect]>
-      <def[extra_args].unescaped||>
-
-
-Narrate:
-    #Takes a set of words to narrate
-    #and optionally a escaped format.
-    type: task
-    definitions: words|format
-    default_format: plain
-    script:
-    - define format format<&co><def[format].unescaped||<script.yaml_key[default_format]>>
-    - narrate <def[words].unescaped> <def[format]>
-      
-
-Eat Effect:
-    #Yeah, this looks funny, and there's a lot of repeated code. But it flows smoothly when used. Good Enough.
+Npc Eat Effect:
     type: task
     definitions: item
     script:
@@ -372,8 +287,7 @@ Eat Effect:
         }
     
 
-Drink Effect:
-    #Yeah, this looks funny, and there's a lot of repeated code. But it flows smoothly when used. Good Enough.
+Npc Drink Effect:
     type: task
     definitions: item
     script:
@@ -390,7 +304,7 @@ Drink Effect:
 ####################### Environment Changing Sets ##############################################
 ################################################################################################
 
-Break:
+Npc Break:
     #This is an denizen automated script
     type: task
     definitions: location
@@ -398,57 +312,25 @@ Break:
     - break <def[location]>
     #The npc should have a npc task execute for on break
     
-Pop Block:
-    #The first custom block breaking. 
-    type: task
-    definitions: location
-    script:
-    - modifyblock
-      <def[location]>
-      m@air
-    
-    - drop
-      <def[location].material.item>
-      <def[location]>
-
-
-Modifyblock:
-    type: task
-    definitions: locations_list|material
-    script:
-    - modifyblock
-      <def[locations_list].unescaped>
-      <def[material]>
-
-
-Switch:
-    #state can be on | off | toggle
-    type: task
-    definitions: location|state|duration
-    script:
-    - switch <def[location]>
-      state:<def[state]||toggle>
-      duration:<def[duration]>
-    
 
 
 ################################################################################################
 ####################### Npc State Sets #########################################################
 ################################################################################################
 
-Engage:
+Npc Engage:
     type: task
     definitions: time
     script:
     - engage <def[time]||d@10s>
 
-DisEngage:
+Npc DisEngage:
     type: task
     script:
     - disengage
     
 
-Equip:
+Npc Equip:
     #This requires that all arguments be filled out. If 1 is missing it will equip air
     #On the npc instead.
     type: task
@@ -461,48 +343,30 @@ Equip:
       legs:<def[legs]||i@air>
       boots:<def[boots]||i@air>
     
-Equip Args:
+Npc Equip Args:
     type: task
     definitions: args
     script:
     - equip <npc>
       <def[args].unescaped>
 
-Equip Target Args:
-    type: task
-    definitions: target|args
-    script:
-    - equip <def[target]>
-      <def[args].unescaped>
-    
-
-Head:
+Npc Head:
     type: task
     definitions: skin
     script:
     - head <npc>
       skin:<def[skin]||<p@chemical_datas>>
 
-Nameplate:
-    type: task
-    definitions: chat_color|text|targets
-    script:
-    - define targets
-      <def[targets]||<player>>
-    
-    - nameplate <def[chat_color]>
-      set:<def[text]>
-      target:<def[targets]>
-    
 
-Rename:
+Npc Rename:
     type: task
     definitions: name|npc
     script:
     - rename <def[npc]||<npc>>
       npc:<def[npc]>
 
-Change Skin:
+
+Npc Change Skin:
     type: task
     definitions: skin_name
     script:
@@ -514,52 +378,19 @@ Change Skin:
     
 
 
-Despawn:
-    type: task
-    definitions: npcs
+NPC Despawn:
+    type: procedure
+    definitions: targets
     script:
-    - despawn <def[npcs].unescaped.as_list||<npc>>
+    - define targets <def[targets].unescaped.as_list||<npc>>
+    - despawn <def[targets]>
+    - determine <def[targets]>
     
 
-Spawn:
-    # Spawns an entity|s
+NPC Remove:
     type: procedure
-    definitions: entitys|location|target|persistent
     script:
-    - if <def[persistent]||no> == no
-      define persistent ""
-      else
-      define persistent persistent
-      
-    - if <def[target]||none> == none
-      define target ""
-      else
-      define target target:<def[target]>
-      
-    - spawn <def[entitys].unescaped>
-      <def[location]>
-      <def[target]>
-      <def[persistent]>
-
-
-Remove:
-    # Removes an entity
-    type: procedure
-    definitions: entities
-    default_entities: as_list.parse[as_entity]
-    script:
-    - inject typechecking
-    - define entities <def[entities].unescaped.as_list||li@>
-    - if <def[entities].is_empty> queue clear
-    - define not_spawned_entities li@
-    - foreach <def[entities]> {
-        - if !<def[value].is_spawned||false> {
-            - define message "entity <def[value]> dosn't seem to be spawned..." to_console
-            - debug error <def[message]>
-            - define not_spawned_entities <def[not_spawned_entities].include[<def[value]>]>
-            }
-        }
-    - remove <def[entities].exclude[<def[not_spawned_entities]>]>
+    - if <npc.is_spawned> remove <npc>
 
 
 ################################################################################################
@@ -666,7 +497,7 @@ Entity Get Target Entity:
         }
     - determine <def[target]||none>
 
-Inter React:
+Npc Inter React:
     #Based on what the npc is looking at
     # Creates a world event in which whatever should be listening to.
 

@@ -1,0 +1,257 @@
+
+Event:
+    type: task
+    definitions: event_list|context_list
+    script:
+    - event
+      <def[event_list].unescaped>
+      context:<def[context_list].unescaped>
+    
+
+Action:
+    type: task
+    definitions: action_list|context_list
+    script:
+    - action
+      <def[action_list].unescaped>
+      <npc>
+      context:<def[context_list].unescaped>
+    
+
+Look:
+    type: procedure
+    definitions: target|location
+    script:
+    - look <def[target]>
+      <def[location]>
+      duration: <def[time]||d@2s>
+
+Wait:
+    type: task
+    definitions: delay
+    script:
+    - wait <def[delay]||d@1s>
+    
+
+Animate:
+    type: procedure
+    definitions: target|animation
+    script:
+    - if !<def[target].is_spawned||false>
+      || <def[animation]||None> == None {
+        - debug error "You need to specify a target and animation. target<&co> <def[target]> animation<&co> <def[animation]>"
+        }
+    - animate <def[target]> <def[animation]>
+    
+
+Animate Chest:
+    type: task
+    definitions: location|open_close
+    script:
+    - animatechest <def[location]>
+      <def[open_close]||close>
+      sound:true
+      <server.list_online_players>
+    
+
+Sound:
+    #volume and pitch optional.
+    type: task
+    definitions: sound|volume|pitch
+    script:
+    - playsound <npc.location>
+      sound:<def[sound]>
+      volume:<def[volume]|10>
+      pitch:<def[pitch]||1>
+    
+
+PlayEffect:
+    #Everything after effect is optional.
+    #data|visibility|qty|offset|targets|locations
+    type: task
+    definitions: location|effect|extra_args
+    script:
+    - playeffect <def[location]>
+      effect:<def[effect]>
+      <def[extra_args].unescaped||>
+
+
+#todo: optimise this so it looks more realistic
+Effect:
+    #Everything after effect is optional.
+    #data|visibility|qty|offset|targets|locations
+    type: task
+    definitions: effect|extra_args
+    script:
+    - playeffect <npc.location>
+      effect:<def[effect]>
+      <def[extra_args].unescaped||>
+
+
+Narrate:
+    #Takes a set of words to narrate
+    #and optionally a escaped format.
+    type: task
+    definitions: words|format
+    default_format: plain
+    script:
+    - define format format<&co><def[format].unescaped||<script.yaml_key[default_format]>>
+    - narrate <def[words].unescaped> <def[format]>
+      
+
+Eat Effect:
+    type: procedure
+    definitions: item|location
+    script:
+    - define item_id
+      <def[item].id>
+      
+    - define effect
+      iconcrack_<def[item_id]>
+      
+    - repeat 5 {
+        - playsound <def[location]> sound:EAT volume:10 pitch:0
+        - playeffect <def[location]> effect:<def[effect]> qty:10
+        - wait d@3t
+        }
+    
+Drink Effct:
+    type: procedure
+    definitions: item|location
+    script:
+    - define item_id <def[item].id>
+    - define effect iconcrack_<def[item_id]>
+    - repeat 5 {
+        - playsound <def[location]> sound:DRINK volume:10 pitch:0
+        - playeffect <def[location]> effect:<def[effect]> qty:10
+        - wait d@3t
+        }
+    
+
+Pop Block:
+    #The first custom block breaking. 
+    type: task
+    definitions: location
+    script:
+    - modifyblock
+      <def[location]>
+      m@air
+    
+    - drop
+      <def[location].material.item>
+      <def[location]>
+
+
+Modifyblock:
+    type: task
+    definitions: locations_list|material
+    script:
+    - modifyblock
+      <def[locations_list].unescaped>
+      <def[material]>
+
+
+Switch:
+    #state can be on | off | toggle
+    type: task
+    definitions: location|state|duration
+    script:
+    - switch <def[location]>
+      state:<def[state]||toggle>
+      duration:<def[duration]>
+    
+
+
+Equip Args:
+    type: task
+    definitions: target|args
+    script:
+    - equip <def[target]>
+      <def[args].unescaped>
+    
+
+Equip:
+    type: task
+    definitions: target|args
+    script:
+    - equip <def[target]>
+      <def[args].unescaped>
+    
+
+Head:
+    type: task
+    definitions: target|head_name
+    script:
+    - head def[target]>
+      skin:<def[head_name]||<server.list_ops.random>>
+
+
+
+Spawn:
+    # Spawns an entity|s
+    type: procedure
+    definitions: entitys|location|target|persistent
+    script:
+    - if <def[persistent]||no> == no
+      define persistent ""
+      else
+      define persistent persistent
+      
+    - if <def[target]||none> == none
+      define target ""
+      else
+      define target target:<def[target]>
+      
+    - spawn <def[entitys].unescaped>
+      <def[location]>
+      <def[target]>
+      <def[persistent]>
+      save:spawned
+    
+    - determine <entry[spawned].spawned_entities>
+
+MCSpawn:
+    # Spawn using the minecraft command spawn
+    type: procedure
+    definitions: args
+    script:
+    - execute as_server "summon <def[args].unescaped>"
+
+
+Remove:
+    # Removes an entity
+    type: procedure
+    definitions: entities
+    script:
+    - define entities <def[entities].unescaped.as_list||li@>
+    - if <def[entities].is_empty> queue clear
+    - define not_spawned_entities li@
+    - foreach <def[entities]> {
+        - if !<def[value].is_spawned||false> {
+            - define not_spawned_entities <def[not_spawned_entities].include[<def[value]>]>
+            }
+        }
+    - define removed_entities <def[entities].exclude[<def[not_spawned_entities]>]>
+    
+    - remove <def[removed_entities]>
+    
+    - determine <def[removed_entities]> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
