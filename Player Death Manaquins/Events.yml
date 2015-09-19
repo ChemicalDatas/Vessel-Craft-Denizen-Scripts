@@ -3,7 +3,7 @@ On Death Body Generation Event:
     type: world
     events:
         on player death:
-        - create player <context.entity.name.display> <context.entity.location> save:body
+        - create player <context.entity.name.display||<context.entity.name>> <context.entity.location> save:body
         - define npc <entry[body].created_npc>
         - assignment set "script:dead body assignment"
         - inventory swap d:<def[npc].inventory> o:<player.inventory>
