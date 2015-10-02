@@ -656,4 +656,34 @@ define_map_arguments:
     - define loop_index:!
     - define value:!
 
+define map arguments from default definitions:
+    type: task
+    script:
+    - foreach <queue.definitions> {
+        - if <def[value].as_int||no_an_default_argument> != no_an_default_argument {
+            - define <def[value].split[/].get[1]> <def[%value%].split[/].get[2]>
+            - define <def[value]>:!
+            }
+        }
+    - define loop_index:!
+    - define value:!
 
+
+itertoolsCountNext:
+    #stores the unique id, then each time run returns the unique id + 1
+    #todo: replace with a unique id from a temp yaml source
+    type: procedure
+    definitions: unique_id|start
+    script:
+    - if !<def[unique_id].exists> {
+        - debug error "unique_id is required <def[unique_id]||no_unique_id_passed>"
+        - queue clear
+        }
+    - define flag <script.name>.<def[unique_id]>
+    - if <def[start].exists> flag server <def[flag]>:<def[start]>
+    - if !<server.has_flag[<def[flag]>]> flag server <def[flag]>:0
+    - flag server <def[flag]>:++
+    - determine <server.flag[<def[flag]>]>
+    
+    
+    
