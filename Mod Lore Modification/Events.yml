@@ -4,6 +4,10 @@ Lore Modification Event Detection:
     suspicious_actions: "PICKUP_ALL PICKUP_HALF PICKUP_ONE PICKUP_SOME PLACE_ALL PLACE_ONE PLACE_SOME SWAP_WITH_CURSOR"
     ignored_inventory_types: li@workbench
     events:
+        # player steals from chest
+        # player steals from player
+        # player steals from npc
+        # player steals from self?
         on player clicks in inventory:
         - define inventory <context.inventory>
         - define slot <context.raw_slot>
@@ -30,6 +34,8 @@ Lore Modification Event Detection:
             - define owner <def[inventory].id_holder.name>
             }
         
+        - if <def[inventory].id_holder.name> == <player.name> queue clear
+        
         - if <script.yaml_key[restricted_actions]> contains <context.action> {
             - event "player steals item" context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determinations
             }
@@ -55,7 +61,7 @@ Lore Modification Event Detection:
         
         on player steals item:
         - define item <context.item>
-        - define old_lore "<def[item].lore||>"
+        - define old_lore "<def[item].lore||li@>"
         - define message "<red>stolen from <blue><context.owner||unknown>"
         - define new_lore <def[old_lore].include[<def[message>]>
         - determine "<proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>"
