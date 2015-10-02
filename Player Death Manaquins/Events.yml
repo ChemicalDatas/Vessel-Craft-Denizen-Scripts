@@ -5,8 +5,8 @@ On Death Body Generation Event:
         on player death:
         - create player <context.entity.name.display||<context.entity.name>> <context.entity.location> save:body
         - define npc <entry[body].created_npc>
-        - assignment set "script:dead body assignment"
-        - inventory swap d:<def[npc].inventory> o:<player.inventory>
+        - adjust <def[npc]> "set_assignment:dead body assignment"
+        - inventory swap destination:<def[npc].inventory> origin:<player.inventory>
         - define time <script.yaml_key[body_decay_time]>
         - narrate "<red>You have <def[time].formatted> to get back to your body to get its loot."
         - determine NO_DROPS_OR_XP
