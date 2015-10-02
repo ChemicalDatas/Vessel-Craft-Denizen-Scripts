@@ -1,0 +1,25 @@
+
+
+Multi Jump:
+    type: world
+    jumps_max: 1
+    flag_path: <script.name>.num_of_jumps
+    events:
+        on player steps on block:
+        - if !<context.location.material.is_solid> queue clear
+        - define flag <parse:<script.yaml_key[flag_path]>>
+        - if <player.has_flag[<def[flag]>]> {
+            - flag <player> <def[flag]>:!
+            }
+        
+        on player toggles flight:
+        - if <player.has_flag[command_triggered_fly_mode]> queue clear
+        - determine passively cancelled
+        - define flag <parse:<script.yaml_key[flag_path]>>
+        - flag <player> <def[flag]>:++ duration:10
+        - if <player.has_flag[<def[flag]>]> {
+            - if <player.flag[<def[flag]>].is[more].than[<script.yaml_key[jumps_max]>]> {
+                - queue clear
+                }
+            }
+        - adjust <player> velocity:<player.location.direction.vector>
