@@ -1,0 +1,34 @@
+# A test Script that copies the player and puts an armor stand
+# yaml record
+# translatable to a armor stand record
+# translatable to an entity record
+# translatable to a book record
+# translatable to a command record
+# Translatable to a summon command using the yaml.to_json
+
+
+Record Yaml:
+    # Takes a yaml id, it should be already loaded
+    # The prodecure is the extraction method used to give the yaml
+    # The procedure should return some flag syntax mainly "path(action)value"
+    # flag syntax http://mcmonkey.org/denizen/lngs/#flag_system
+    type: procedure
+    definitions: yaml_id|data_extraction_procedure|data
+    script:
+    - if !<def[yaml_id].exists>
+      || !<def[data_extraction_procedure].exists>
+      || !<def[data].exists> {
+        - debug error "Needs required definitions. yaml_id<&co> <def[yaml_id]> data_extraction_procedure<&co> <def[data_extraction_procedure]> data<&co> <def[data]>"
+        }
+    - define written_data <proc[<def[data_extraction_procedure]>].context[<def[data]>]||FAILED_TAG>
+    - if <def[written_data]> == FAILED_TAG {
+        - if <def[data_extraction_procedure].as_script||NO_SCRIPT> == NO_SCRIPT {
+            - debug error "not a valid script. procedure<&co> <def[data_extraction_procedure]>"
+            - queue clear
+            }
+        - debug error "procedure<&co> <def[data_extraction_procedure]> failed to parse."
+        - queue clear
+        }
+    - yaml id:<def[yaml_id]> set <def[written_data]>
+    
+
