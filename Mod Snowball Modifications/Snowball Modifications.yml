@@ -3,9 +3,18 @@ Snowball Events:
     events:
         on projectile hits block:
         - announce "hit block"
-        on snow_ball hits block:
+        on snowball hits block:
         - define material <context.location.material>
         - announce "<script.name>"
         - if <def[material].name> == fire modifyblock <context.location> m@air
         - if <def[material].name> == stationary_lava modifyblock <context.location> m@obsidian
         - if <def[material]> == m@stationary_lava,2 modifyblock <context.location> m@cobblestone
+    
+
+Snowball Eventz:
+    type: world
+    events:
+        on snow_ball hits block:
+        - announce "snowball hits block!"
+        on projectile hits block:
+        - announce "<script.name> <context.location.material> <context.projectile>"
