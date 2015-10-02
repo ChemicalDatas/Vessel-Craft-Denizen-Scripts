@@ -126,6 +126,170 @@ Object:
     
 
 
+object events:
+    type: world
+    events:
+        dobject request channel:
+        - define object <context.object>
+        - define channel_name object_communication_channel.<def[object]>
+        - flag server <def[channel_name]>
+        - determine <context.object>
+        dobject closes channel:
+        - define object <context.object>
+        - define channel_name object_communication_channel.<def[object]>
+        - flag server <def[channel_name]>:!
+        - determine Success
+
+
+
+queue definitions event:
+    # Composes all definitions of a queue into an event in the form of <context.(definition_name)>
+    # Must Specify an queue to get from and an event name to fire under.
+    type: task
+    definitions: event_list|queue
+    type_queue: as_queue
+    type_event_list: as_list
+    script:
+    - inject typecheck
+    - define context_data li@
+    - define queue <def[queue].as_queue>
+    - foreach <def[queue].definitions> {
+        - define data "<def[value]>|<def[queue].definition[<def[value]>].escape>"
+        - define context_data <def[context].include[<def[data]>]>
+        }
+    - event <def[event_list].unescaped> <def[context_data]>
+
+
+queue definitions action:
+    # Composes all definitions of a queue into an action in the form of <context.(definition_name)>
+    # Must Specify an queue to get from and an event name to fire under, as also have an attached npc.
+    type: task
+    definitions: event_list|queue
+    type_queue: as_queue
+    type_event_list: as_list
+    script:
+    - inject typecheck
+    - define context_data li@
+    - define queue <def[queue].as_queue>
+    - foreach <def[queue].definitions> {
+        - define data "<def[value]>|<def[queue].definition[<def[value]>].escape>"
+        - define context_data <def[context].include[<def[data]>]>
+        }
+    - action <def[event_list].unescaped> <def[queue].npc> <def[context_data]>
+
+
+
+
+
+
+# an running queue that represents an object, persistance related to internal definitions
+# interacted with by utility scripts in an service interface manner
+dobject:
+    # there isnt any adding definitions to this task after created unless...
+    # a way for this queue to inject scripts to manipulate
+    # the init_script is required to start the body_script,
+    #
+    #
+    type: task
+    definitions: enter_exit_script|body_script
+    type_enter_exit_script: as_script
+    type_body_script: as_script
+    script:
+    - inject typecheck
+    - inject <def[enter_exit_script]>
+
+dobject_enter_exit:
+    type: task
+    script:
+    - define flag communication_channel_<queue.id>
+    - event "dobject request channel" context:object|<queue> save:channel
+    - define __communication_channel <entry[channel].determinations.first>
+    - inject <def[body_script]>
+    - event "dobject closes channel" context:object|<queue>
+    
+
+dobject_body:
+    type: task
+    script:
+    - while true {
+        - inject <server.flag[<def[flag]>].first>
+        - flag server <def[flag]>:!
+        - flag server <def[flag]>:|:<server.flag[<def[flag]>].get[2].to[<server.flag[<def[flag]>].size>]>
+        - queue pause
+        }
+
+
+queue_get:
+    # Retrieve definitions directly from a running queue
+    type: procedure
+    definitions: queue|definition
+    type_queue: as_queue
+    script:
+    - inject typecheck
+    - announce "<script.name> queue<&co> <def[queue]> <def[definition]>"
+    - define retrieved_values <def[queue].as_queue.definition[<def[definition]>]>
+    - determine <def[retrieved_values]>
+
+
+queue_set:
+    # sends a task through the message queue for the object to process
+    # the message should be a single line, map_get format, s@injectionDefine_script/variables to define 
+    type: task
+    definitions: queue|attribute|value
+    queue_type: as_queue
+    script:
+    - inject typecheck 
+    - if !<queue.exists[<def[queue]>]> {
+        - debug error "queue <def[queue]> dose not exist!"
+        - queue clear
+        }
+
+
+plog:
+    type: task
+    definitions: head|body
+    script:
+    - if <def[body].is[==].to[true]> {
+        - define head <def[head]>
+        }
+
+query:
+    type: procedure
+    definitions: facts|query
+    script:
+    - define truth_list li@
+    - foreach <def[facts].unescaped||li@> {
+        - if <def[value].contains[<def[query]>]> {
+            - define <def[truth_list].include[<def[value]>]>
+            }
+        }
+    - determine <def[truth_list]>
+
+# get a query from
+rdefine:
+    type: task
+    definitions: 
+
+
+tqueue:
+    type: task
+    definitions: p1|p2
+    script:
+    - announce "<script.name> <queue.id> definitions<&co> <def[p1]> <def[p2]>"
+    - queue pause
+    - announce "finishing <script.name>"
+
+tqueue2:
+    type: task
+    definitions: p3
+    script:
+    - foreach <queue.definitions> {
+        - announce "definitions in queue<&co> <queue.id> %value% <def[%value%]>"
+        }
+
+
+
+
 
 
 
