@@ -1,5 +1,16 @@
 world update events:
     type: world
     events:
+        on player walks:
+        # place dirt on grass, shorten grass
+        
         on block spreads:
-        - announce "[<script.name>] block is spreading..."
+        #- announce "[<script.name>] <context.material> is spreading... <context.location.simple>" to_ops
+        
+        # Place trees, flowers, grass, long grass, mushrooms?, grow leaves?, Trees put down roots?
+        on structure grows:
+        #- announce "[<script.name>] <context.structure> is is growing... <context.new_materials> <context.blocks.parse[simple]>" to_ops
+        
+        # Melt an area of snow, erode blocks, drop leaves, grow leaves?, drop logs?
+        on block physics:
+        #- announce "[<script.name>] <context.location.material> physics update... <context.location.simple> <context.new_material>"
