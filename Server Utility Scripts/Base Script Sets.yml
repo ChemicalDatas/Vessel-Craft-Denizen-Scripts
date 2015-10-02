@@ -234,7 +234,10 @@ Remove:
     
     - remove <def[removed_entities]>
     
-    - determine <def[removed_entities]> 
+    # This might cause some issues, best to keep an eye on it.
+    - if <queue.type> == instant {
+        - determine <def[removed_entities]>
+        }
 
 
 
