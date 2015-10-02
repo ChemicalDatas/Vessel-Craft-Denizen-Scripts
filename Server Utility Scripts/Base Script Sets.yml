@@ -1,4 +1,3 @@
-
 Event:
     type: task
     definitions: event_list|context_list
@@ -24,7 +23,7 @@ Look:
     script:
     - look <def[target]>
       <def[location]>
-      duration: <def[time]||d@2s>
+      duration:<def[time]||d@2s>
 
 Wait:
     type: task
