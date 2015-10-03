@@ -687,12 +687,3 @@ itertoolsCountNext:
     - determine <server.flag[<def[flag]>]>
     
     
-    
-Check Queue Stats:
-    type: task
-    script:
-    - foreach "<queue.stats.split[<&nl>Event ]>" {
-        - if "<def[value].contains[(0 script fires)]>" foreach next
-        - narrate "<def[value]>"
-        - wait d@2s
-        }
