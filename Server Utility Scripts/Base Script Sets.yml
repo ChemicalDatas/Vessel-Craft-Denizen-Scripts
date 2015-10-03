@@ -206,8 +206,11 @@ Spawn:
       <def[target]>
       <def[persistent]>
       save:spawned
+
+    - if <queue.type> == instant {
+        - determine <entry[spawned].spawned_entities>
+        }
     
-    - determine <entry[spawned].spawned_entities>
 
 MCSpawn:
     # Spawn using the minecraft command spawn
@@ -238,10 +241,6 @@ Remove:
     - if <queue.type> == instant {
         - determine <def[removed_entities]>
         }
-
-
-
-
 
 
 
