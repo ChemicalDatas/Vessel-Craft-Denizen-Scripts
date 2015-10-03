@@ -1,0 +1,152 @@
+2015-09-09 13:53:06 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC LEAP] <--- Generated an error.
+The message is as follows:
+Tag <yaml[serverinfo].read[servername]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.4725
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -63,12,-543,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC LEAP_FpInterestLf
+[queue_commands] li@QUEUE clear|ADJUST <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+[queue_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[queue_definitions] li@strength|target
+[queue_id] VC LEAP_FpInterestLf
+[queue_script] s@VC LEAP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC LEAP
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC LEAP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-09 13:53:06 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC LEAP] <--- Generated an error.
+The message is as follows:
+Tag <target> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.4725
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -63,12,-543,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC LEAP_FpInterestLf
+[queue_commands] li@QUEUE clear|ADJUST <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+[queue_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[queue_definitions] li@strength|target
+[queue_id] VC LEAP_FpInterestLf
+[queue_script] s@VC LEAP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC LEAP
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC LEAP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-18 03:53:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC LEAP] <--- Generated an error.
+The message is as follows:
+Tag <yaml[serverinfo].read[servername]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 154
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,7,-550,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC LEAP_ContactedActivatedMelbourne
+[queue_commands] li@QUEUE clear|ADJUST <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+[queue_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[queue_definitions] li@strength|target
+[queue_id] VC LEAP_ContactedActivatedMelbourne
+[queue_script] s@VC LEAP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC LEAP
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC LEAP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-18 03:53:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC LEAP] <--- Generated an error.
+The message is as follows:
+Tag <target> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 154
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,7,-550,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC LEAP_ContactedActivatedMelbourne
+[queue_commands] li@QUEUE clear|ADJUST <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
+[queue_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[queue_definitions] li@strength|target
+[queue_id] VC LEAP_ContactedActivatedMelbourne
+[queue_script] s@VC LEAP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC LEAP
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC LEAP<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC LEAP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======

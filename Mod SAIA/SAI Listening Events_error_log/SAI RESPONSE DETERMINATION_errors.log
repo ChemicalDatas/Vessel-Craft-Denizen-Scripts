@@ -1,0 +1,38 @@
+2015-09-09 17:07:51 [WARNING] =======SCRIPTDEBUG=======
+Script: [SAI RESPONSE DETERMINATION] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@sai tp|SAI
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,7,-583,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@SAI RESPONSE DETERMINATION_ToddWarrenQueensland
+[queue_commands] li@QUEUE clear|DEFINE catcher <def[script].yaml_key[catch words.spawn].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Im not sure if I can do that for you... format:SAI - run spawn_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.gamemode].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce You asked me to handle a game mode change for you format:SAI - run gamemode_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.spawn].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce I will deliver that message to them for you. format:SAI - run message_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.discipline].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Ok, Ill shall enter into heavy hand mode. <&nl>Let me get my gloves on. format:SAI - run spawn_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.special].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Special Commands I see? format:SAI - run special_effect_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.desire].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce You know, id like to tell you what I want every now and then... format:SAI - run desire_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.information].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Let me see what I can find for you. format:SAI - run information_handling def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.s helper].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Im not sure if I can do that for you... format:SAI - run script_helper def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.permission].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Well, some ones going to be happy with their new ability. [smile] format:SAI - run permission_helper def:<def[text]> - queue clear }|DEFINE catcher <def[script].yaml_key[catch words.icons].escaped>|IF <proc[String Contains Regex].context[<def[text]>|<def[catcher]>]> { - announce Im not sure if I can do that for you... format:SAI - run icon_information def:<def[text]> - queue clear }|ANNOUNCE Im afraid I didnt understand your last statment... format:SAI|ANNOUNCE <&dq><def[text].replace[sai ]><&dq> format:SAI
+[queue_debug] <G>Container='<A>SAI RESPONSE DETERMINATION<Y>(TASK)<G>'
+[queue_definitions] li@catcher|text|script
+[queue_id] SAI RESPONSE DETERMINATION_ToddWarrenQueensland
+[queue_script] s@SAI RESPONSE DETERMINATION
+[queue_size] 23
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@SAI RESPONSE DETERMINATION
+[script_container_type] TASK
+[script_cooled_down] true
+[script_debug] <G>Container='<A>SAI RESPONSE DETERMINATION<Y>(TASK)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod SAIA/SAI Listening Events.yml
+[script_name] SAI RESPONSE DETERMINATION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod SAIA/SAI Listening Events.yml
+=======Finished with Debug Data=======

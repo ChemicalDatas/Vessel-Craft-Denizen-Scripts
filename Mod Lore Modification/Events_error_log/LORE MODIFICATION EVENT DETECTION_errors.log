@@ -1,0 +1,176 @@
+2015-09-19 14:33:48 [WARNING] =======SCRIPTDEBUG=======
+Script: [LORE MODIFICATION EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <def[old_lore].include[<def[message>]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -73,7,-580,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@npc[holder=n@85]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_target] n@85
+[queue] q@LORE MODIFICATION EVENT DETECTION_UniversitiesNamespaceSierra
+[queue_commands] li@DETERMINE <proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>
+[queue_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@item|old_lore|message
+[queue_id] LORE MODIFICATION EVENT DETECTION_UniversitiesNamespaceSierra
+[queue_script] s@LORE MODIFICATION EVENT DETECTION
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@LORE MODIFICATION EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+[script_name] LORE MODIFICATION EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+=======Finished with Debug Data=======
+2015-09-19 14:39:24 [WARNING] =======SCRIPTDEBUG=======
+Script: [LORE MODIFICATION EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <def[inventory.id_holer.name.is[==].to[Chemical_Datas]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,7,-576,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@npc[holder=n@86]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_target] n@86
+[queue] q@LORE MODIFICATION EVENT DETECTION_GramsCoordinationComplaints
+[queue_commands] li@IF <script.yaml_key[restricted_actions]> contains <context.action> { - event player steals item context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determinations }|IF <script.yaml_key[suspicious_actions]> contains <context.action> { - event player steals item context:item|<def[item]>|inventory|<def[inventory]>|owner|<def[owner]> save:determinations }|DEFINE results <entry[determinations].determinations>|IF <def[results].contains[cancelled]> determine cancelled|DETERMINE passively cancelled|TAKE <def[item]> from:<def[inventory]> qty:<def[item].qty>|GIVE <def[results]>
+[queue_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@owner|item|slot|inventory
+[queue_id] LORE MODIFICATION EVENT DETECTION_GramsCoordinationComplaints
+[queue_script] s@LORE MODIFICATION EVENT DETECTION
+[queue_size] 7
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@LORE MODIFICATION EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+[script_name] LORE MODIFICATION EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+=======Finished with Debug Data=======
+2015-09-19 14:39:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [LORE MODIFICATION EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <def[message> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,7,-576,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@npc[holder=n@86]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_target] n@86
+[queue] q@LORE MODIFICATION EVENT DETECTION_RidRotaryWithdrawal
+[queue_commands] li@DETERMINE <proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>
+[queue_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@item|old_lore|message
+[queue_id] LORE MODIFICATION EVENT DETECTION_RidRotaryWithdrawal
+[queue_script] s@LORE MODIFICATION EVENT DETECTION
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@LORE MODIFICATION EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+[script_name] LORE MODIFICATION EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+=======Finished with Debug Data=======
+2015-09-19 14:43:43 [WARNING] =======SCRIPTDEBUG=======
+Script: [LORE MODIFICATION EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <def[message> is invalid!
+[npc] n@88
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@DATE_OF_DEATH|DEADBODY
+[npc_has_assignment] true
+[npc_id] 88
+[npc_inventory] li@i@white_wool[quantity=64]
+[npc_location] -71,7,-552,Hub
+[npc_lookclose] false
+[npc_name] nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_script] s@DEAD BODY ASSIGNMENT
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -73,7,-552,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@npc[holder=n@88]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@88
+[player_target] n@88
+[queue] q@LORE MODIFICATION EVENT DETECTION_GuaranteeEmeraldExtension
+[queue_commands] li@DETERMINE <proc[Modify Lore].context[<def[item]>|<def[new_lore]>]>
+[queue_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@item|old_lore|message
+[queue_id] LORE MODIFICATION EVENT DETECTION_GuaranteeEmeraldExtension
+[queue_script] s@LORE MODIFICATION EVENT DETECTION
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@LORE MODIFICATION EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>LORE MODIFICATION EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+[script_name] LORE MODIFICATION EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Lore Modification/Events.yml
+=======Finished with Debug Data=======

@@ -1,0 +1,1356 @@
+2015-09-19 16:56:14 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <player.location.vector> is invalid!
+[npc] n@92
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -72,8,-555,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_MaryFreelyBlank
+[queue_commands] li@
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_MaryFreelyBlank
+[queue_script] s@DOUBLE JUMP
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:01:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -84,14,-558,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_JuniorConcludedBasic
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@path
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_JuniorConcludedBasic
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:01:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0099714985
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -81,16,-561,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_PublishedTouristPolymer
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@path
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_PublishedTouristPolymer
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:01:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0099714985
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -76,17,-565,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_KennethCnetCitysearch
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@path
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_KennethCnetCitysearch
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:01:43 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -62,16,-573,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_ClickingHotmailShowtimes
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@path
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_ClickingHotmailShowtimes
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:01:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 7.6545854
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -67,10,-569,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_ReachesInternshipBrief
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@path
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_ReachesInternshipBrief
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:02:46 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -74,8,-555,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_MigrationTriesConsoles
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_MigrationTriesConsoles
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:02:49 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -74,8,-554,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_SciencesTitledDesign
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_SciencesTitledDesign
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:03:56 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -78,8,-556,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_PulseJpgJournalists
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_PulseJpgJournalists
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:03:59 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -78,8,-549,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_CellularThousandShareholders
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_CellularThousandShareholders
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:04:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -72,8,-556,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_WhomSharpJazz
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_WhomSharpJazz
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:04:04 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -79,8,-554,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_TelevisionResultedWool
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_TelevisionResultedWool
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:04:07 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -78,8,-545,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_WidescreenCadillacSetting
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_WidescreenCadillacSetting
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:04:24 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -80,8,-540,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_LeagueMoonRp
+[queue_commands] li@FLAG <player> <def[flag]>:++ duration:10|IF <player.has_flag[<def[flag]>]> { - if <player.flag[<def[flag]>].is[or_more].than[<script.yaml_keys[jumps_max]>]> { - narrate Exceeded max jumps - queue clear } }|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_LeagueMoonRp
+[queue_script] s@DOUBLE JUMP
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:04:24 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_keys[jumps_max]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -80,8,-540,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_LeagueMoonRp
+[queue_commands] li@ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_LeagueMoonRp
+[queue_script] s@DOUBLE JUMP
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:12:09 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -75,10,-556,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_DealtimeSecretaryBoc
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_DealtimeSecretaryBoc
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:10 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -76,10,-554,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_FeelSunriseNewsletter
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_FeelSunriseNewsletter
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:11 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -79,11,-553,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_DivSignatureBooty
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_DivSignatureBooty
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.06868232
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -79,13,-552,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_SportsIncentivesMusicians
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_SportsIncentivesMusicians
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:50 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,11,-550,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_TransfersProcessesPeople
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_TransfersProcessesPeople
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:50 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -71,12,-548,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_PlentyCompileP
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_PlentyCompileP
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:51 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 1.8953176
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -75,18,-546,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_ApnicVillagePlayboy
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_ApnicVillagePlayboy
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======
+2015-09-19 17:13:52 [WARNING] =======SCRIPTDEBUG=======
+Script: [DOUBLE JUMP] <--- Generated an error.
+The message is as follows:
+Tag <script.yaml_key[max_jumps]> is invalid!
+[npc] n@92
+[npc_anchors] li@
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@
+[npc_has_assignment] false
+[npc_id] 92
+[npc_inventory] li@
+[npc_location] -77,7,-578,Hub
+[npc_lookclose] false
+[npc_name] Nubzilla
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 25.0
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 85
+[player_fall_distance] 1.8953176
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -78,20,-546,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@92
+[queue] q@DOUBLE JUMP_RacialPackedHb
+[queue_commands] li@QUEUE clear|ADJUST <player> velocity:<player.location.direction.vector>
+[queue_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[queue_definitions] li@flag
+[queue_determination] cancelled
+[queue_id] DOUBLE JUMP_RacialPackedHb
+[queue_script] s@DOUBLE JUMP
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DOUBLE JUMP
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DOUBLE JUMP<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+[script_name] DOUBLE JUMP
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Multi Jump/Multi Jump.yml
+=======Finished with Debug Data=======

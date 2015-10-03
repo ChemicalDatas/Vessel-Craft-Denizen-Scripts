@@ -1,11 +1,12 @@
+2015-09-07 00:36:35 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_LicenseFordDivx
+[queue] q@IRC_CONNECTOR_FreedomCoralClassification
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_LicenseFordDivx
+[queue_id] IRC_CONNECTOR_FreedomCoralClassification
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -20,15 +21,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-19 00:36:38 [WARNING] =======SCRIPTDEBUG=======
+2015-09-07 19:24:03 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_SamsungLizJohnson
+[queue] q@IRC_CONNECTOR_FinancialStripesCraft
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_SamsungLizJohnson
+[queue_id] IRC_CONNECTOR_FinancialStripesCraft
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -43,15 +44,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-19 10:40:54 [WARNING] =======SCRIPTDEBUG=======
+2015-09-07 22:55:54 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_AlbumRegardingSimon
+[queue] q@IRC_CONNECTOR_HeadlinePlasticReturned
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_AlbumRegardingSimon
+[queue_id] IRC_CONNECTOR_HeadlinePlasticReturned
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -66,15 +67,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-20 04:21:55 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 00:30:05 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_DevelopExhibitionShown
+[queue] q@IRC_CONNECTOR_MinecraftJumpingRealize
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_DevelopExhibitionShown
+[queue_id] IRC_CONNECTOR_MinecraftJumpingRealize
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -89,15 +90,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-21 22:00:14 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 09:50:38 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_TrafficBreachAd
+[queue] q@IRC_CONNECTOR_BroadcastLindaRated
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_TrafficBreachAd
+[queue_id] IRC_CONNECTOR_BroadcastLindaRated
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -112,15 +113,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-22 20:42:11 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 13:48:27 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_ChargedTubGonna
+[queue] q@IRC_CONNECTOR_StatewideMazdaVocabulary
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_ChargedTubGonna
+[queue_id] IRC_CONNECTOR_StatewideMazdaVocabulary
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -135,15 +136,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-23 13:56:43 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 14:14:05 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_RevelationMatureMine
+[queue] q@IRC_CONNECTOR_ScoreDvdSeeking
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_RevelationMatureMine
+[queue_id] IRC_CONNECTOR_ScoreDvdSeeking
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -158,15 +159,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-25 11:30:57 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 14:34:05 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_ElliottEventIntroduce
+[queue] q@IRC_CONNECTOR_WormRegularGoal
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_ElliottEventIntroduce
+[queue_id] IRC_CONNECTOR_WormRegularGoal
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -181,15 +182,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-25 14:02:28 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 15:45:35 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_ThreadedRoUltra
+[queue] q@IRC_CONNECTOR_OliveKeysCi
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_ThreadedRoUltra
+[queue_id] IRC_CONNECTOR_OliveKeysCi
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -204,15 +205,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-26 11:16:38 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 15:47:14 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_LaboratoryCondoCandidates
+[queue] q@IRC_CONNECTOR_BoomHobbyAcute
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_LaboratoryCondoCandidates
+[queue_id] IRC_CONNECTOR_BoomHobbyAcute
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -227,15 +228,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-27 14:13:08 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 18:42:31 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_SlideshowKmEs
+[queue] q@IRC_CONNECTOR_DenizenAmericasWrites
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_SlideshowKmEs
+[queue_id] IRC_CONNECTOR_DenizenAmericasWrites
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -250,15 +251,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-28 21:36:05 [WARNING] =======SCRIPTDEBUG=======
+2015-09-09 18:50:08 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_LuxembourgManufactureMid
+[queue] q@IRC_CONNECTOR_GulfGBiographies
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_LuxembourgManufactureMid
+[queue_id] IRC_CONNECTOR_GulfGBiographies
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -273,15 +274,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-29 10:34:17 [WARNING] =======SCRIPTDEBUG=======
+2015-09-13 12:46:00 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_RoughlyMirrorsVariance
+[queue] q@IRC_CONNECTOR_ForecastsLedDisable
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_RoughlyMirrorsVariance
+[queue_id] IRC_CONNECTOR_ForecastsLedDisable
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -296,15 +297,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-29 11:33:45 [WARNING] =======SCRIPTDEBUG=======
+2015-09-14 22:40:50 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_TempleWeaponMine
+[queue] q@IRC_CONNECTOR_DevelopsSustainabilityAdmission
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_TempleWeaponMine
+[queue_id] IRC_CONNECTOR_DevelopsSustainabilityAdmission
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -319,15 +320,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-29 11:34:47 [WARNING] =======SCRIPTDEBUG=======
+2015-09-14 22:42:24 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_WantNotePlymouth
+[queue] q@IRC_CONNECTOR_TemporalMarriageBasic
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_WantNotePlymouth
+[queue_id] IRC_CONNECTOR_TemporalMarriageBasic
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -342,15 +343,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-29 11:51:49 [WARNING] =======SCRIPTDEBUG=======
+2015-09-15 02:26:00 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_CruzShelfTargets
+[queue] q@IRC_CONNECTOR_EminemGroupsTechnique
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_CruzShelfTargets
+[queue_id] IRC_CONNECTOR_EminemGroupsTechnique
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -365,15 +366,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-31 09:51:40 [WARNING] =======SCRIPTDEBUG=======
+2015-09-15 10:10:25 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_CrudeStrokeFox
+[queue] q@IRC_CONNECTOR_SsCursorEnvironmental
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_CrudeStrokeFox
+[queue_id] IRC_CONNECTOR_SsCursorEnvironmental
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -388,15 +389,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-31 20:08:20 [WARNING] =======SCRIPTDEBUG=======
+2015-09-15 10:28:39 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_GregIndependenceAvi
+[queue] q@IRC_CONNECTOR_ConvertedPoTo
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_GregIndependenceAvi
+[queue_id] IRC_CONNECTOR_ConvertedPoTo
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -411,15 +412,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-08-31 22:01:11 [WARNING] =======SCRIPTDEBUG=======
+2015-09-15 10:32:04 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_CiscoQuantityWholesale
+[queue] q@IRC_CONNECTOR_DenizenPrintsPub
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_CiscoQuantityWholesale
+[queue_id] IRC_CONNECTOR_DenizenPrintsPub
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -434,15 +435,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-01 02:37:38 [WARNING] =======SCRIPTDEBUG=======
+2015-09-15 14:17:34 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_DefinitionsGradesMiracle
+[queue] q@IRC_CONNECTOR_CommittedAtlanticHundreds
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_DefinitionsGradesMiracle
+[queue_id] IRC_CONNECTOR_CommittedAtlanticHundreds
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -457,15 +458,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-01 02:53:39 [WARNING] =======SCRIPTDEBUG=======
+2015-09-16 01:35:51 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_CitizensRecordsCheck
+[queue] q@IRC_CONNECTOR_GarageLineIndustrial
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_CitizensRecordsCheck
+[queue_id] IRC_CONNECTOR_GarageLineIndustrial
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -480,15 +481,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-01 03:06:28 [WARNING] =======SCRIPTDEBUG=======
+2015-09-17 13:56:12 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_LiabilitiesAssumeAccounting
+[queue] q@IRC_CONNECTOR_EvidentDisturbedMine
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_LiabilitiesAssumeAccounting
+[queue_id] IRC_CONNECTOR_EvidentDisturbedMine
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -503,15 +504,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-01 03:52:48 [WARNING] =======SCRIPTDEBUG=======
+2015-09-18 14:25:19 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_GregoryEnquiriesAppeal
+[queue] q@IRC_CONNECTOR_DiscussRemainedExamine
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_GregoryEnquiriesAppeal
+[queue_id] IRC_CONNECTOR_DiscussRemainedExamine
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -526,15 +527,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-02 02:49:41 [WARNING] =======SCRIPTDEBUG=======
+2015-09-18 17:34:03 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_JasonCasinoStyle
+[queue] q@IRC_CONNECTOR_AddressingTwistContractor
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_JasonCasinoStyle
+[queue_id] IRC_CONNECTOR_AddressingTwistContractor
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -549,15 +550,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-03 10:42:27 [WARNING] =======SCRIPTDEBUG=======
+2015-09-18 22:43:59 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_BlastStoryBeaches
+[queue] q@IRC_CONNECTOR_ModerateEffectsMaintains
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_BlastStoryBeaches
+[queue_id] IRC_CONNECTOR_ModerateEffectsMaintains
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -572,15 +573,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-04 19:57:47 [WARNING] =======SCRIPTDEBUG=======
+2015-09-19 20:59:14 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_WingsDiaryIssues
+[queue] q@IRC_CONNECTOR_MoreoverSenCraft
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_WingsDiaryIssues
+[queue_id] IRC_CONNECTOR_MoreoverSenCraft
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -595,15 +596,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-05 12:11:25 [WARNING] =======SCRIPTDEBUG=======
+2015-09-20 09:06:38 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_ExamDatedThru
+[queue] q@IRC_CONNECTOR_NuttenDenizenLabeled
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_ExamDatedThru
+[queue_id] IRC_CONNECTOR_NuttenDenizenLabeled
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -618,15 +619,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-05 13:13:28 [WARNING] =======SCRIPTDEBUG=======
+2015-09-20 09:29:43 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_MeetingBeatFilling
+[queue] q@IRC_CONNECTOR_OccasionsBeachProven
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_MeetingBeatFilling
+[queue_id] IRC_CONNECTOR_OccasionsBeachProven
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -641,15 +642,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-05 18:23:21 [WARNING] =======SCRIPTDEBUG=======
+2015-09-20 14:36:26 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_MorrisLloydAxis
+[queue] q@IRC_CONNECTOR_ConcerningUltramAir
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_MorrisLloydAxis
+[queue_id] IRC_CONNECTOR_ConcerningUltramAir
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -664,15 +665,15 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-05 21:28:44 [WARNING] =======SCRIPTDEBUG=======
+2015-09-20 14:47:12 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_ImmunologyStuckMonetary
+[queue] q@IRC_CONNECTOR_DischargeMinecraftProperties
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_ImmunologyStuckMonetary
+[queue_id] IRC_CONNECTOR_DischargeMinecraftProperties
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t
@@ -687,15 +688,222 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
 =======Finished with Debug Data=======
-2015-09-06 11:37:44 [WARNING] =======SCRIPTDEBUG=======
+2015-09-21 15:12:04 [WARNING] =======SCRIPTDEBUG=======
 Script: [IRC_CONNECTOR] <--- Generated an error.
 The message is as follows:
 Woah!! An exception has been called with this command!
-[queue] q@IRC_CONNECTOR_OccurredModificationActively
+[queue] q@IRC_CONNECTOR_SemiconductorUpcomingQuestionnaire
 [queue_commands] li@FLAG server IRC_Mode:true
 [queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
 [queue_definitions] li@
-[queue_id] IRC_CONNECTOR_OccurredModificationActively
+[queue_id] IRC_CONNECTOR_SemiconductorUpcomingQuestionnaire
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-09-24 13:24:05 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_MalawiPhilosophyPolitical
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_MalawiPhilosophyPolitical
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-09-24 13:35:42 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_CommentsStandingsObligations
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_CommentsStandingsObligations
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-09-26 00:41:46 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_CitizensLinkedIncluded
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_CitizensLinkedIncluded
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-09-27 11:44:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_ExpressFormerGlobe
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_ExpressFormerGlobe
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-09-29 21:51:52 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_ModemsSteeringFail
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_ModemsSteeringFail
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-10-02 12:28:39 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_ProducerSortRichmond
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_ProducerSortRichmond
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-10-02 14:43:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_RubyRemainsMine
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_RubyRemainsMine
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-10-03 09:59:09 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_YourRapidlyPortion
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_YourRapidlyPortion
+[queue_script] s@IRC_CONNECTOR
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@IRC_CONNECTOR
+[script_container_type] WORLD
+[script_cooled_down] null
+[script_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+[script_name] IRC_CONNECTOR
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/Denizen IRC Connector.yml
+=======Finished with Debug Data=======
+2015-10-03 10:31:37 [WARNING] =======SCRIPTDEBUG=======
+Script: [IRC_CONNECTOR] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[queue] q@IRC_CONNECTOR_PasswordsStdPlot
+[queue_commands] li@FLAG server IRC_Mode:true
+[queue_debug] <G>Container='<A>IRC_CONNECTOR<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] IRC_CONNECTOR_PasswordsStdPlot
 [queue_script] s@IRC_CONNECTOR
 [queue_size] 1
 [queue_speed] d@0t

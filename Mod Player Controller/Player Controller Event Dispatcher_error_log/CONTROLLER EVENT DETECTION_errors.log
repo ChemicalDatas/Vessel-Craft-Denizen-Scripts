@@ -1,0 +1,76 @@
+2015-09-19 23:40:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@5ec4fbdd-3739-4b9b-b7ac-09e76830a495
+[player_chat_history] li@now to wait for more pigmen to spawn|still dose not mean i cant make them fill the whole hub if i do it right|im worng 3 mins|more like 20secs|bodys*|even with my bodsy littering it|not die in|you know me i always find fun and wired ways to kill my self in the hub the place were you should|im fine|no|hey
+[player_debug] Player='<A>p@nic208<G>'
+[player_display_name] nic208
+[player_entity_id] 133
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] nic208
+[player_location] -26,49,38,Hub
+[player_money] 100.0
+[player_name] nic208
+[player_open_inventory] in@player[holder=p@5ec4fbdd-3739-4b9b-b7ac-09e76830a495]
+[player_prefix] Player
+[player_save_name] 5E.5EC4FBDD37394B9BB7AC09E76830A495
+[queue] q@CONTROLLER EVENT DETECTION_DairyInnovationsAir
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DairyInnovationsAir
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-09-19 23:40:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@5ec4fbdd-3739-4b9b-b7ac-09e76830a495
+[player_chat_history] li@now to wait for more pigmen to spawn|still dose not mean i cant make them fill the whole hub if i do it right|im worng 3 mins|more like 20secs|bodys*|even with my bodsy littering it|not die in|you know me i always find fun and wired ways to kill my self in the hub the place were you should|im fine|no|hey
+[player_debug] Player='<A>p@nic208<G>'
+[player_display_name] nic208
+[player_entity_id] 133
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] nic208
+[player_location] -26,49,38,Hub
+[player_money] 100.0
+[player_name] nic208
+[player_open_inventory] in@player[holder=p@5ec4fbdd-3739-4b9b-b7ac-09e76830a495]
+[player_prefix] Player
+[player_save_name] 5E.5EC4FBDD37394B9BB7AC09E76830A495
+[queue] q@CONTROLLER EVENT DETECTION_DairyInnovationsAir
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DairyInnovationsAir
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======

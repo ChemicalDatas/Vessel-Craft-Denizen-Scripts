@@ -1,0 +1,137 @@
+2015-09-09 15:40:31 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC I] <--- Generated an error.
+The message is as follows:
+Tag <context.args.get[1]> is invalid!
+[queue] q@VC I_CitizensAccessibleWm
+[queue_commands] li@DEFINE item <def[item].as_item||Not_An_Item>|IF <def[item].type||Not_An_Item> != Item { - define item_list <yaml[database].read[lists.items]> - define possible_item <def[item_list].find_partial[<def[item]>]> - narrate format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>? - queue clear }|NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>|GIVE <def[item]>
+[queue_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[queue_definitions] li@
+[queue_id] VC I_CitizensAccessibleWm
+[queue_script] s@VC I
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC I
+[script_container_type] COMMAND
+[script_cooled_down] null
+[script_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC I
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-09 15:40:32 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC I] <--- Generated an error.
+The message is as follows:
+Tag <yaml[database].read[lists.items]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -70,7,-583,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC I_CitizensAccessibleWm
+[queue_commands] li@DEFINE possible_item <def[item_list].find_partial[<def[item]>]>|NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>?|QUEUE clear|NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>|GIVE <def[item]>
+[queue_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[queue_definitions] li@item
+[queue_id] VC I_CitizensAccessibleWm
+[queue_script] s@VC I
+[queue_size] 5
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC I
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC I
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-09 15:40:32 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC I] <--- Generated an error.
+The message is as follows:
+Tag <def[item_list].find_partial[<def[item]>]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -70,7,-583,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC I_CitizensAccessibleWm
+[queue_commands] li@NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>?|QUEUE clear|NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>|GIVE <def[item]>
+[queue_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[queue_definitions] li@item|item_list
+[queue_id] VC I_CitizensAccessibleWm
+[queue_script] s@VC I
+[queue_size] 4
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC I
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC I
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-09-09 15:40:32 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC I] <--- Generated an error.
+The message is as follows:
+Tag <def[possible_item].name> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 33
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -70,7,-583,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC I_CitizensAccessibleWm
+[queue_commands] li@QUEUE clear|NARRATE format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>|GIVE <def[item]>
+[queue_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[queue_definitions] li@item|item_list|possible_item
+[queue_id] VC I_CitizensAccessibleWm
+[queue_script] s@VC I
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC I
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC I<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC I
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
