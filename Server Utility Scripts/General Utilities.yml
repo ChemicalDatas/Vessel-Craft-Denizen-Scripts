@@ -647,7 +647,7 @@ __Return__:
     
 
 
-define_map_arguments:
+define map arguments:
     type: task
     script:
     - foreach <queue.definitions> {
@@ -655,6 +655,7 @@ define_map_arguments:
         }
     - define loop_index:!
     - define value:!
+
 
 define map arguments from default definitions:
     type: task
@@ -687,3 +688,11 @@ itertoolsCountNext:
     
     
     
+Check Queue Stats:
+    type: task
+    script:
+    - foreach "<queue.stats.split[<&nl>Event ]>" {
+        - if "<def[value].contains[(0 script fires)]>" foreach next
+        - narrate "<def[value]>"
+        - wait d@2s
+        }
