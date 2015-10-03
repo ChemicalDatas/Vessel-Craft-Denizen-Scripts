@@ -1,0 +1,74 @@
+# Logic Queue
+# Chat Queue
+# Movement Queue
+# Memory Storage Queue
+# Action Queue
+# Scheduling Queue
+
+# This is the base form for all scripts that goes into the 
+# Npc base tasks
+Npc Logic Task:
+    type: task
+    definitions: script
+    script:
+    - inject "Npc Queue Health Management"
+    
+Npc Chat Task:
+    type: task
+    script:
+    - inject "Npc Queue Health Management"
+    
+Npc Action Task:
+    type: task
+    script:
+    - inject "Npc Queue Health Management"
+    
+Npc Memory Task:
+    type: task
+    script:
+    - inject "Npc Queue Health Management"
+
+Npc Movement Task:
+    type: task
+    definitions:
+    script:
+    - inject "Npc Queue Health Management"
+
+Npc Queue Inject:
+    # Injects a task into a queue, then pauses after thats done
+    # This stops the queue from bleeding out its definitions
+    type: task
+    definitions: script|queue_id
+    script:
+    - run <def[script]> delay:<def[delay]||d@0t> id:<def[queue_id]>
+    - inject "Npc Queue Health Management"
+
+Npc Queue Health Management:
+    type: task
+    script:
+    - if <queue.size.is[less].than[2]> {
+        - queue pause
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
