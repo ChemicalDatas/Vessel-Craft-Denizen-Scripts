@@ -443,7 +443,13 @@ VC Fly Event Listener:
     type: world
     events:
         on player join:
-        - if <player.has_flag[can_fly]> flag <player> can_fly:!
+        - inject "wait for valid player"
+        - wait d@2s
+        # gets the player back on the ground
+        - adjust <player> can_fly:false
+        - wait d@10s
+        - adjust <player> can_fly:true
+        - if <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
 
 
 VC Fly:
@@ -459,14 +465,12 @@ VC Fly:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
     script:
-    - if <player.has_flag[can_fly]> {
-        - adjust <player> can_fly:false
-        - flag player can_fly:!
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Hope your on the <red>ground."
+    - if <player.has_flag[command_triggered_fly_mode]> {
+        - flag player command_triggered_fly_mode:!
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Toggled command flymode off."
         } else {
-        - adjust <player> can_fly:true
-        - flag player can_fly
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You can now <blue>fly!"
+        - flag player command_triggered_fly_mode
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Toggled command flymode on."
         }
 
 
