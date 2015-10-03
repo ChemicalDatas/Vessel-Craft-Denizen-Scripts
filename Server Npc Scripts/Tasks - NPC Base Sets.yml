@@ -220,6 +220,7 @@ Teleport:
       <def[location]>
     
 
+
 Wander Nearby:
     type: task
     script:
@@ -238,14 +239,20 @@ Wander Nearby:
     - define range
       <npc.flag[wander_range]>
     
+    - define height
+      <npc.flag[wander_range_height]>
+    
     - define cuboid
-      cu@<def[location].add[%range%,2,%range%]>|<def[location].sub[%range%,2,%range%]>
+      cu@<def[location].add[%range%,%height%,%range%]>|<def[location].sub[%range%,%height%,%range%]>
     
     - define locations
       <def[cuboid].get_spawnable_blocks>
     
-    - walk <npc>
-      <def[locations].random.add[.5,0,-.5]>
+    - define location
+      <def[locations].random>
+    
+    
+    - walk <npc> <def[location]>
       speed:<npc.flag[walk_speed]||.67>
       auto_range
 
