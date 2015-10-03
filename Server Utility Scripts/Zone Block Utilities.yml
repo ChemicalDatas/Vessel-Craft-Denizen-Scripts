@@ -430,9 +430,10 @@ Beacon Location:
     - define beam_locations
       li@
     
-    - foreach <def[cuboid_above].get_members> {
+    - foreach <def[cuboid_above].get_blocks> {
         - if !<def[value].material.is_transparent> {
-          define beam_locations <def[locations].include[<def[value]>]>
+            - define beam_locations <def[beam_locations].include[<def[value]>]>
+            }
         }
     
     - define beacon_base
