@@ -58,9 +58,7 @@ ScriptDebug:
         
         #on server stop
         on stop command:
-        - determine passively fulfilled
         - run "yaml save" def:<script.yaml_key[script_error_object_file]>|error_objects
-        - narrate "Saving yaml for <script.name>"
         
         on script generates error:
         - if !<server.has_flag[debug_output]> queue clear
@@ -114,7 +112,7 @@ ScriptDebug:
         #- define file /plugins/denizen/script_errors.log
         
         #output
-        - announce "<red>[<def[script].name||NOSCRIPT>] <blue><context.message>"
+        - announce "<red>[<def[script].name||NOSCRIPT>] <gold><context.message>"
         - log "=======<script.name>======="                                                                 type:warning file:<def[file]>
         - log "Script<&co> <&lb><def[script].name||Unknown Script><&rb> <--- Generated an error."           type:none file:<def[file]>
         - log "The message is as follows<&co>"                                                              type:none file:<def[file]>
