@@ -1,0 +1,13 @@
+AutoRestart:
+    type: world
+    restart_delay: d@18h-32h
+    server_getout_repeat: 6 
+    events:
+        on server start:
+        - wait <script.yaml_key[restart_delay]>
+        - while <server.list_online_players.size.is[or_more].than[1]> {
+            - wait d@10s
+            - announce "<red>[<gold><script.name><red>]<gold> The server has hit a scheduled restart time."
+            - if <def[loop_index].is[or_more].than[<script.yaml_key[server_getout_repeat]>]> while stop
+            }
+        - execute as_server restart
