@@ -93,7 +93,7 @@ Block Healing Listener:
         
         
         on stop command:
-        - determine passively fulfilled
+        #- determine passively fulfilled
         - run "Yaml Save"
           def:<script.yaml_key[database_path]>|<script.yaml_key[database_id]>
         

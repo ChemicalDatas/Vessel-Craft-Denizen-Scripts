@@ -23,11 +23,13 @@ Rideable Dragon:
         
         
         on player enters vehicle:
+        - if <context.vehicle.name> != mount queue clear
+        - if <context.vechicle.entity_type> != enderdragon queue clear
+        
+        - flag player riding_dragon
         - narrate "entered <context.vehicle.name||no name>"
         - narrate "Swing your arm to move to that location!"
         - narrate "Change your selected hotbar to increase distance or decrease it."
-        - if <context.vehicle.name> == mount
-          flag player riding_dragon
         
         on player exits vehicle:
         - narrate "exited <context.vehicle.name||no name>"

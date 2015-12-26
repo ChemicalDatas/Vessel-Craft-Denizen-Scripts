@@ -3,18 +3,11 @@
 
 Autosave:
     type: world
-    autosave_time: d@15m
-        
+    autosave_time: d@2h
     events:
         on server start:
         - while true {
             - wait <script.yaml_key[autosave_time]>
-            - inject "Citizens Denizens Autosave"
+            - execute as_server "denizen save"
+            - execute as_server "citizens save"
             }
-
-Citizens Denizens Autosave:
-    type: task
-    script:
-    - execute as_server "denizen save"
-    - execute as_server "citizens save"
-    

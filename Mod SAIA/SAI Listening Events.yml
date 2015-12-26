@@ -45,7 +45,6 @@ SAI Listener:
         - mail
         - announce
         - broadcast
-        - 
         
         discipline:
         - ban
@@ -92,12 +91,7 @@ SAI Listener:
         icons:
         - icon
         - icons
-        
-        
-        
-        
-        
-        
+    
     type: world
     events:
         on player chats:
