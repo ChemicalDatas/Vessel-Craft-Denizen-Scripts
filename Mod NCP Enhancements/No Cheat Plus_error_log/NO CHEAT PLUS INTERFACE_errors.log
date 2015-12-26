@@ -1,0 +1,23 @@
+2015-10-14 21:45:19 [WARNING] =======SCRIPTDEBUG=======
+Script: [NO CHEAT PLUS INTERFACE] <--- Generated an error.
+The message is as follows:
+Tag <def[possible_arguments]> is invalid!
+[queue] q@NO CHEAT PLUS INTERFACE_AutomaticallyMinecraftSeeks
+[queue_commands] li@
+[queue_debug] <G>Container='<A>NO CHEAT PLUS INTERFACE<Y>(COMMAND)<G>'
+[queue_definitions] li@__possible_arguments
+[queue_id] NO CHEAT PLUS INTERFACE_AutomaticallyMinecraftSeeks
+[queue_script] s@NO CHEAT PLUS INTERFACE
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@NO CHEAT PLUS INTERFACE
+[script_container_type] COMMAND
+[script_cooled_down] null
+[script_debug] <G>Container='<A>NO CHEAT PLUS INTERFACE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod NCP Enhancements/No Cheat Plus.yml
+[script_name] NO CHEAT PLUS INTERFACE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod NCP Enhancements/No Cheat Plus.yml
+=======Finished with Debug Data=======

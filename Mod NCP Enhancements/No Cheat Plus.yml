@@ -1,0 +1,95 @@
+Discontinuity Interface:
+    type: command
+    name: dncp
+    usage: /DNCP key/value key/value
+    description: No cheat plus's communication with dscript command interface
+    permissions: dncp.command
+    permission message: This is not for player use.
+    allowed help:
+    - determine false
+    tab complete:
+    - determine li@
+    checks:
+        blockbreak:
+        - direction
+        - fastbreak
+        - frequency
+        - noswing
+        - reach
+        - wrongblock
+        blockinteract:
+        - direction
+        - reach
+        - speed
+        - visible
+        blockplace:
+        - against
+        - autosign
+        - direction
+        - fastplace
+        - reach
+        - noswing
+        - speed
+        chat:
+        - color
+        - commands
+        - captcha
+        - relog
+        - logins
+        text:
+            frequency:
+            - normal
+            - shortterm
+        combined:
+        - leavebed
+        - enderpearl
+        - improale
+        - invulnerable
+        - munchhausen
+        - yawrate
+        fight:
+        - angle
+        - critical
+        - direction
+        - fastheal
+        - godmode
+        - noswing
+        - reach
+        - selfhit
+        - speed
+        inventory:
+        - drop
+        - fastclick
+        - instantbow
+        - instanteat
+        - fastconsume
+        - gutenberg
+        moving:
+        - creativefly
+        - morepackets
+        - morepacketsvehicle
+        - nofall
+        - passable
+        - survivalfly
+        net:
+        - flyingfrequency
+        - keepalivefrequency
+
+
+    script:
+    - define __possible_arguments li@player|check|violations|tags|distance|locationfrom|locationto|food|packets|blockid
+    - foreach <def[__possible_arguments]> {
+        - define %value% <context.args.map_get[<def[value]>]||NO_MAP_ARGUMENT>
+        - if <def[%value%].contains[<&lb><def[value]><&rb>]>
+          || <def[%value%]> == NO_MAP_ARGUMENT {
+            - define %value%:!
+            - foreach next
+            }
+        - announce "<script.name> value<&co> %value%<&co> <def[%value%]>"
+        }
+    
+    - inject <def[check]> locally
+    
+    passable:
+    - narrate "you failed the passable check"
+    
