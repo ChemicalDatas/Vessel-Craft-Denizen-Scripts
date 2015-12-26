@@ -8,8 +8,13 @@ Tool Remains:
     ScriptDefaults: "SAI Database Manager"
     #default mcmmo salvage starts at lvl 600 repair
     mcmmo_full_salvage: 600
+    requires_plugin: s@Depenizen
     events:
         on server start:
+        - if <server.list_plugins.contains[<script.yaml_key[requires_plugin]>]> {
+            - define message "<script.name> requires plugin <script.yaml_key[requires_plugin]>"
+            - debug error <def[message]>
+            }
         - run "Yaml Load" def:<script.yaml_key[file]>|<script.yaml_key[id]>
         - repeat true {
             - wait <script.yaml_key[save_duration]>
@@ -30,7 +35,7 @@ Tool Remains:
         - define recipe <context.recipe.escaped>
         - if !<yaml[<def[id]>].contains[<def[path]>]> {
             - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
-            - narrate format:SAI "Hmmmmm, I<&sq>ve never seen that made before... Ill have to remember that..."
+            - narrate format:SAI "Hmmmmm, I<&sq>ve never seen a <context.item.formatted> made before... Ill have to remember that..."
             - queue clear
             }
         - define known_recipes <yaml[<def[id]>].read[<def[path]>]>
