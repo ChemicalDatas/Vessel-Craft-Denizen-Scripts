@@ -559,9 +559,10 @@ VC Weather:
     type: command
     name: weather
     description: Sets the servers weather, optionaly just a <&lb>world<&co>world_name<&rb>.
-    usage: /weather <&lb>sun, stor<&rb> <&rb>world<&co>world_name<&rb>(weather defaults to sun, <&lb>world<&co>world_name<&rb> defaults to all)
+    usage: /weather <&lb>sun, storm, thunder<&rb> (weather defaults to sun)
     aliases:
     - sun
+    - sunny
     - storm
     - thunder
     - setweather
@@ -571,25 +572,20 @@ VC Weather:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - define weathers li@sun|storm|thunder
+    - define weathers li@storm|thunder|sunny
     - define worlds <server.list_worlds>
     - determine <def[worlds].include[<def[weathers]>].filter[starts_with[<context.args.last>]]>
     script:
+    - define weather_map li@sun/sunny|stormy/storm|clear/sunny|lightning/storm|rain/storm|storm/storm|thunder/thunder
     - define weather <context.args.get[1]||<context.alias||NO_WEATHER_SPECIFIED>>
-    - define world <context.args.map_get[world].as_world||NO_VALID_WORLD_SPECIFIED>
-    - if <def[weather]> == NO_WEATHER_SPECIFIED {
-        - foreach <server.list_world> {
-            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red>SUN"
-            }
+    - define weather <def[weather_map].map_get[<def[weather]>]||NO_WEATHER_SPECIFIED>
+    - if <def[weather]> == NO_WEATHER_SPECIFIED
+      || <def[weather]> == NOT_A_VALID_WEATHER {
+    	- narrate "<blue><&lb><red><script.name><blue><&rb><reset> <yellow><def[weather]> is not valid."
         - queue clear
         }
-    - if <def[world]> == NO_VALID_WORLD_SPECIFIED {
-        - define world ''
-        } else {
-        - define world 'world<&co><def[world]>'
-        }
-    - weather <def[weather]> <def[world]>
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> in <def[world].name||every world>."
+    - weather <def[weather]>
+    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> <yellow>in <red><def[world].name||every world>."
 
 
 VC World:
@@ -975,6 +971,7 @@ VC Heal:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    headder: <blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>
     script:
     - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
     - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
@@ -988,12 +985,17 @@ VC Heal:
     - heal <def[target]>
     - adjust <def[target]> saturation:10
     - feed amt:20 target:<def[target]>
+    - define healed_effects li@
     - foreach "<s@Potion Effects List.yaml_key[effects]>" {
-        - cast <def[value]> remove <def[target]>
+        - if <def[target].has_effect[<def[value]>]> {
+            - cast <def[value]> <def[target]> remove
+            - define healed_effects <def[healed_effects].include[<def[value]>]>
+            }
         }
     - define actor <tern[<context.server>]:server||<player.name.display||<player.name>>>
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>You were healed by <red><def[actor]><yellow> [smile]"
+    - narrate format:formatted "<parse:<script.yaml_key[headder]>> Healed statuses: <def[healed_effects].space_separated>"
+    - narrate format:formatted "<parse:<script.yaml_key[headder]>> You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
+    - narrate format:formatted "<parse:<script.yaml_key[headder]>> You were healed by <red><def[actor]><yellow> [smile]"
 
 
 VC KillAll:
