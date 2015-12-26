@@ -35,11 +35,10 @@ Tool Remains:
             }
         - define known_recipes <yaml[<def[id]>].read[<def[path]>]>
         - if !<def[known_recipes].contains[<def[recipe]>]> {
-            - narrate format:SAI "Hmmmmm, I didnt know that could be made like that... Ill have to remember that..."
+            - narrate format:SAI "Hmmmmm, I didnt know <gold><context.item.formatted><red> could be made like that... Ill have to remember that..."
             - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
             - queue clear
             }
-        - narrate format:SAI "Ive seen that before."
         
         on player breaks item:
         - define id <script.yaml_key[id]>
