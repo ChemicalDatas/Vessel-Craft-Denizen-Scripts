@@ -239,9 +239,9 @@ Temp Yaml Handling:
         on server start:
         - run "Yaml Load" def:_temp_yaml_location_|temp
         - while true {
+            - wait d@6h
             - yaml unload id:temp
             - yaml create id:temp
-            - wait d@6h
             }
         
     
