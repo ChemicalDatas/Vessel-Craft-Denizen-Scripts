@@ -1,0 +1,553 @@
+2015-10-24 13:46:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -864,45,-797,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@faf297cd-daed-2295-ecda-ebe54991846a
+[queue] q@RIDEABLE DRAGON_QuicklyHaveLock
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_QuicklyHaveLock
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:46:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc.location.add[0,200,0]> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -864,45,-797,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@faf297cd-daed-2295-ecda-ebe54991846a
+[queue] q@RIDEABLE DRAGON_QuicklyHaveLock
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_QuicklyHaveLock
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:46:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -864,45,-797,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@faf297cd-daed-2295-ecda-ebe54991846a
+[queue] q@RIDEABLE DRAGON_QuicklyHaveLock
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_QuicklyHaveLock
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:00 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -848,35,-795,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@96d4d5cd-8acd-917b-a835-7d4d62821ada
+[queue] q@RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc.location.add[0,200,0]> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -848,35,-795,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@96d4d5cd-8acd-917b-a835-7d4d62821ada
+[queue] q@RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -848,35,-795,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@96d4d5cd-8acd-917b-a835-7d4d62821ada
+[queue] q@RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_commands] li@WAIT d@20s|REMOVE <npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:13 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 1.1613903
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -819,37,-820,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@RIDEABLE DRAGON_QuicklyHaveLock
+[queue_commands] li@
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_QuicklyHaveLock
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:13 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 1.1613903
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -819,37,-820,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@RIDEABLE DRAGON_QuicklyHaveLock
+[queue_commands] li@
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_QuicklyHaveLock
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:21 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <npc> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -795,37,-818,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_commands] li@
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 13:47:21 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@ho yo|im back|frsdg|im back|ok|wa|see ya|go on your com. then|ar you gunna be on after that?|1-2 min|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -795,37,-818,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_commands] li@
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_id] RIDEABLE DRAGON_PortableHypotheticalShine
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 15:19:24 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -909,41,-629,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@I restarted the ide and its taking forever|It takes forever to open a program on this pc|Hi lost|Im back|dosnt do me any good|No mic though|yeah|and low memory|its old|alright|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chem
+[player_entity_id] 1609
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -913,39,-604,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[queue] q@RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_commands] li@ADJUST <entry[npc].created_npc> set_assignment:Mount Assignment|MOUNT <player>|<entry[npc].created_npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_determination] fulfilled
+[queue_id] RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 15:19:24 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <entry[npc].created_npc> is invalid!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -909,41,-629,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@I restarted the ide and its taking forever|It takes forever to open a program on this pc|Hi lost|Im back|dosnt do me any good|No mic though|yeah|and low memory|its old|alright|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chem
+[player_entity_id] 1609
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -913,39,-604,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[queue] q@RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_commands] li@MOUNT <player>|<entry[npc].created_npc>
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_determination] fulfilled
+[queue_id] RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======
+2015-10-24 15:19:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [RIDEABLE DRAGON] <--- Generated an error.
+The message is as follows:
+Tag <entry[npc].created_npc> is invalid!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -909,41,-629,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@I restarted the ide and its taking forever|It takes forever to open a program on this pc|Hi lost|Im back|dosnt do me any good|No mic though|yeah|and low memory|its old|alright|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chem
+[player_entity_id] 1609
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -913,39,-604,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[queue] q@RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_commands] li@
+[queue_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[queue_definitions] li@
+[queue_determination] fulfilled
+[queue_id] RIDEABLE DRAGON_NastyTrackbackColumnists
+[queue_script] s@RIDEABLE DRAGON
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@RIDEABLE DRAGON
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>RIDEABLE DRAGON<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+[script_name] RIDEABLE DRAGON
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Rideable Dragon/Events.yml
+=======Finished with Debug Data=======

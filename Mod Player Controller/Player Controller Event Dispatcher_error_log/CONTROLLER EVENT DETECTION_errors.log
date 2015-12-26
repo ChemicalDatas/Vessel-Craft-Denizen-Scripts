@@ -74,3 +74,2105 @@ Tag <context.location> is invalid!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
 =======Finished with Debug Data=======
+2015-10-04 13:31:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 475
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -21,49,37,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_TreasuryAdvisoryUsername
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TreasuryAdvisoryUsername
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:31:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 475
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -21,49,37,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_TreasuryAdvisoryUsername
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TreasuryAdvisoryUsername
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:33:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 505
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,59,20,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_UsageSenatorsLiving
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_UsageSenatorsLiving
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:33:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 505
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,59,20,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_UsageSenatorsLiving
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_UsageSenatorsLiving
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:33:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 505
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,59,20,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DairyDivorceWarrant
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DairyDivorceWarrant
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:33:15 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 505
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,59,20,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DairyDivorceWarrant
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DairyDivorceWarrant
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:34:48 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 506
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -42,59,19,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@b976dc98-5e2d-48c9-bc2a-a6b7d783e5cc
+[queue] q@CONTROLLER EVENT DETECTION_ToxicIndicatedSustainable
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ToxicIndicatedSustainable
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 13:34:48 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 506
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -42,59,19,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@b976dc98-5e2d-48c9-bc2a-a6b7d783e5cc
+[queue] q@CONTROLLER EVENT DETECTION_ToxicIndicatedSustainable
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ToxicIndicatedSustainable
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 14:39:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 791
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -6,49,-23,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_BrideHeadlinesPty
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_BrideHeadlinesPty
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-04 14:39:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 791
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -6,49,-23,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_BrideHeadlinesPty
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_BrideHeadlinesPty
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-06 15:52:56 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi|hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 2586
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -44,55,-25,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_MachinesMoneyJoan
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_MachinesMoneyJoan
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-06 15:52:57 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi|hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 2586
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -44,55,-25,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_MachinesMoneyJoan
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_MachinesMoneyJoan
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:22:58 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 61
+[player_fall_distance] 1.5198863
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 27,49,27,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_GriffinCounterTongue
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_GriffinCounterTongue
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:22:58 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 61
+[player_fall_distance] 1.5198863
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 27,49,27,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_GriffinCounterTongue
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_GriffinCounterTongue
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:26:48 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 61
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -101,49,-41,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_RpgPinTerminology
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_RpgPinTerminology
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:26:49 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 61
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -101,49,-41,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_RpgPinTerminology
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_RpgPinTerminology
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:31:49 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hey|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 290
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 14,108,-72,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_SupplierConventionalStating
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_SupplierConventionalStating
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-23 17:31:50 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hey|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 290
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 14,108,-72,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_SupplierConventionalStating
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_SupplierConventionalStating
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 09:16:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 111
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,50,75,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_TogetherInterracialShop
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TogetherInterracialShop
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 09:16:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 111
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -29,50,75,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_TogetherInterracialShop
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TogetherInterracialShop
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 09:17:16 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 111
+[player_fall_distance] 0.6280075
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 13,48,-37,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_SetupProcedurePrecision
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_SetupProcedurePrecision
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 09:17:16 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 111
+[player_fall_distance] 0.6280075
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] 13,48,-37,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_SetupProcedurePrecision
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_SetupProcedurePrecision
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:16:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@PIGZOMBIE|hi|whare are you.|please...|do / hub|cen you do / tps|o|are you gonna still chat like this|o|dave|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.6369845
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -100,50,22,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_FosterInventionSas
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_FosterInventionSas
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:16:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@PIGZOMBIE|hi|whare are you.|please...|do / hub|cen you do / tps|o|are you gonna still chat like this|o|dave|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.6369845
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -100,50,22,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_FosterInventionSas
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_FosterInventionSas
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:27:16 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@cen i fight something? not you.|how?|food|i found it on the gorund|mineplex has it to|cool|cen you|adam|cen you trade with him that woud be nice|sad story }':|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -936,46,-690,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@aeb66845-d05a-47d7-a269-3984cac5cc4d
+[queue] q@CONTROLLER EVENT DETECTION_ThousandEditorialsInitially
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ThousandEditorialsInitially
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:27:16 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@cen i fight something? not you.|how?|food|i found it on the gorund|mineplex has it to|cool|cen you|adam|cen you trade with him that woud be nice|sad story }':|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 554
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -936,46,-690,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@aeb66845-d05a-47d7-a269-3984cac5cc4d
+[queue] q@CONTROLLER EVENT DETECTION_ThousandEditorialsInitially
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ThousandEditorialsInitially
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:18 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -915,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_PeteRlPot
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_PeteRlPot
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:18 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -915,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_PeteRlPot
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_PeteRlPot
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:19 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -916,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_NeverGApproval
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NeverGApproval
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:19 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -916,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_NeverGApproval
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NeverGApproval
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:19 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -918,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DebateBocPressed
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DebateBocPressed
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 13:58:19 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@but cant you have team speak on a laptop?|o|so wats the problom with your compuder|thanks|im lost|tp me to you|datas|hi|dxgdfg|CHEM|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1607
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -918,41,-635,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DebateBocPressed
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DebateBocPressed
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 14:10:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@im lost|HHHEEELLLLLLOOO|HHEELLLLOO|HELLO|hello|een titns|t|!|!|!|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1997
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -86,54,21,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_NvidiaPeteEvident
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NvidiaPeteEvident
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 14:10:26 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@im lost|HHHEEELLLLLLOOO|HHEELLLLOO|HELLO|hello|een titns|t|!|!|!|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1997
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -86,54,21,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_NvidiaPeteEvident
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NvidiaPeteEvident
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 14:17:18 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@HeLlO|i got a suprise|do / hub|omg|i m l o s t|HHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR|im lost|HHHEEELLLLLLOOO|HHEELLLLOO|HELLO|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 2015
+[player_fall_distance] 4.6842704
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -43,52,111,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_CompatibleVolumeTravels
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_CompatibleVolumeTravels
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-24 14:17:18 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@HeLlO|i got a suprise|do / hub|omg|i m l o s t|HHRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR|im lost|HHHEEELLLLLLOOO|HHEELLLLOO|HELLO|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 2015
+[player_fall_distance] 4.6842704
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -43,52,111,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_CompatibleVolumeTravels
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_CompatibleVolumeTravels
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-25 16:58:59 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi|g|g|t|t|t|t|t|t|t|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 343
+[player_fall_distance] 0.46415937
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -42,59,29,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_PalPossibleCleanup
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_PalPossibleCleanup
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-25 16:58:59 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi|g|g|t|t|t|t|t|t|t|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 343
+[player_fall_distance] 0.46415937
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -42,59,29,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_PalPossibleCleanup
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_PalPossibleCleanup
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-29 14:03:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@tt|hi|hi???|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1501
+[player_fall_distance] 0.23317064
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -996,36,-199,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_HavenOperaNt
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_HavenOperaNt
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-10-29 14:03:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@tt|hi|hi???|hi
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1501
+[player_fall_distance] 0.23317064
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -996,36,-199,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_HavenOperaNt
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_HavenOperaNt
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-11-15 10:36:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 176
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -39,57,-204,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DiscussedCraftSides
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DiscussedCraftSides
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-11-15 10:36:25 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 176
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -39,57,-204,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[queue] q@CONTROLLER EVENT DETECTION_DiscussedCraftSides
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DiscussedCraftSides
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-11-15 13:33:35 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1664
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -18,49,25,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@npc[holder=n@178]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] n@179
+[queue] q@CONTROLLER EVENT DETECTION_EnhancementsIncidentCitizens
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_EnhancementsIncidentCitizens
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-11-15 13:33:36 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 1664
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -18,49,25,Hub
+[player_name] JRG_F110306
+[player_open_inventory] in@npc[holder=n@178]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] n@179
+[queue] q@CONTROLLER EVENT DETECTION_EnhancementsIncidentCitizens
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_EnhancementsIncidentCitizens
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_TargetDownloadableFirst
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TargetDownloadableFirst
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_TargetDownloadableFirst
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_TargetDownloadableFirst
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_DeletedFarmsThreats
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DeletedFarmsThreats
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:46 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_DeletedFarmsThreats
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_DeletedFarmsThreats
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:46 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_ReasoningSeptemberRehabilitation
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ReasoningSeptemberRehabilitation
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:47 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -793,69,-604,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_ReasoningSeptemberRehabilitation
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_ReasoningSeptemberRehabilitation
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:47 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -790,69,-609,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_VillaSufficientlyExperimental
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_VillaSufficientlyExperimental
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 11:18:47 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 677
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -790,69,-609,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@CONTROLLER EVENT DETECTION_VillaSufficientlyExperimental
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_VillaSufficientlyExperimental
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 16:23:56 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_display_name] 22jade
+[player_entity_id] 2169
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] 22jade
+[player_location] 4,54,21,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_open_inventory] in@player[holder=p@6e0290e2-9f16-4aca-9f25-d20da6867956]
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@CONTROLLER EVENT DETECTION_NickelCitizensBacterial
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NickelCitizensBacterial
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 16:23:56 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_display_name] 22jade
+[player_entity_id] 2169
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] 22jade
+[player_location] 4,54,21,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_open_inventory] in@player[holder=p@6e0290e2-9f16-4aca-9f25-d20da6867956]
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@CONTROLLER EVENT DETECTION_NickelCitizensBacterial
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_NickelCitizensBacterial
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 16:24:06 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Invalid context ID 'location'!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_display_name] 22jade
+[player_entity_id] 2169
+[player_fall_distance] 0.46415937
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] 22jade
+[player_location] 24,49,21,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_open_inventory] in@player[holder=p@6e0290e2-9f16-4aca-9f25-d20da6867956]
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@CONTROLLER EVENT DETECTION_IndividualsFootageNorfolk
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_IndividualsFootageNorfolk
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
+2015-12-26 16:24:06 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION] <--- Generated an error.
+The message is as follows:
+Tag <context.location> is invalid!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_display_name] 22jade
+[player_entity_id] 2169
+[player_fall_distance] 0.46415937
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] 22jade
+[player_location] 24,49,21,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_open_inventory] in@player[holder=p@6e0290e2-9f16-4aca-9f25-d20da6867956]
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@CONTROLLER EVENT DETECTION_IndividualsFootageNorfolk
+[queue_commands] li@DEFINE context <def[context].include[<def[context_element].escaped>]>|EVENT <def[event_list].unescaped> context:<def[context]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[queue_definitions] li@context|event_list
+[queue_id] CONTROLLER EVENT DETECTION_IndividualsFootageNorfolk
+[queue_script] s@CONTROLLER EVENT DETECTION
+[queue_size] 2
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======

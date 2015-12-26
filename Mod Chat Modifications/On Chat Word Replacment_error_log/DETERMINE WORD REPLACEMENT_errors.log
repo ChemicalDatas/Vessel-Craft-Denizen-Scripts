@@ -1,4 +1,4 @@
-2015-10-03 09:59:16 [WARNING] =======SCRIPTDEBUG=======
+2015-10-18 13:44:48 [WARNING] =======SCRIPTDEBUG=======
 Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
 The message is as follows:
 Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
@@ -11,18 +11,16 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [player_is_op] true
 [player_item_on_cursor] i@air
 [player_list_name] Chemical_Datas
-[player_location] -927,42,-635,Hub
-[player_money] 0.0
+[player_location] -919,41,-635,Hub
 [player_name] Chemical_Datas
 [player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
 [player_prefix] Player
 [player_save_name] 76.76F638140C0748889A478461BC8CE7BB
-[player_target] n@11
-[queue] q@DETERMINE WORD REPLACEMENT_ProductSurvivorDisclose
+[queue] q@DETERMINE WORD REPLACEMENT_ConsiderableTaxNaturals
 [queue_commands] li@
 [queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
 [queue_definitions] li@path|word
-[queue_id] DETERMINE WORD REPLACEMENT_ProductSurvivorDisclose
+[queue_id] DETERMINE WORD REPLACEMENT_ConsiderableTaxNaturals
 [queue_script] s@DETERMINE WORD REPLACEMENT
 [queue_size] 0
 [queue_speed] d@0t
@@ -37,7 +35,7 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
 =======Finished with Debug Data=======
-2015-10-03 09:59:28 [WARNING] =======SCRIPTDEBUG=======
+2015-10-18 13:45:03 [WARNING] =======SCRIPTDEBUG=======
 Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
 The message is as follows:
 Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
@@ -51,16 +49,15 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [player_item_on_cursor] i@air
 [player_list_name] Chemical_Datas
 [player_location] -929,46,-640,Hub
-[player_money] 0.0
 [player_name] Chemical_Datas
 [player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
 [player_prefix] Player
 [player_save_name] 76.76F638140C0748889A478461BC8CE7BB
-[queue] q@DETERMINE WORD REPLACEMENT_ConsumptionScanningChecks
+[queue] q@DETERMINE WORD REPLACEMENT_PalestinianCitizensDenizen
 [queue_commands] li@
 [queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
 [queue_definitions] li@path|word
-[queue_id] DETERMINE WORD REPLACEMENT_ConsumptionScanningChecks
+[queue_id] DETERMINE WORD REPLACEMENT_PalestinianCitizensDenizen
 [queue_script] s@DETERMINE WORD REPLACEMENT
 [queue_size] 0
 [queue_speed] d@0t
@@ -75,7 +72,7 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
 =======Finished with Debug Data=======
-2015-10-03 09:59:30 [WARNING] =======SCRIPTDEBUG=======
+2015-10-18 13:54:16 [WARNING] =======SCRIPTDEBUG=======
 Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
 The message is as follows:
 Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
@@ -83,23 +80,58 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [player_chat_history] li@
 [player_debug] Player='<A>p@Chemical_Datas<G>'
 [player_display_name] Chemical_Datas
-[player_entity_id] 297
+[player_entity_id] 32
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -930,44,-635,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@DETERMINE WORD REPLACEMENT_TotalsBackedTribes
+[queue_commands] li@
+[queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[queue_definitions] li@path|word
+[queue_id] DETERMINE WORD REPLACEMENT_TotalsBackedTribes
+[queue_script] s@DETERMINE WORD REPLACEMENT
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DETERMINE WORD REPLACEMENT
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+[script_name] DETERMINE WORD REPLACEMENT
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+=======Finished with Debug Data=======
+2015-10-18 13:54:31 [WARNING] =======SCRIPTDEBUG=======
+Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
+The message is as follows:
+Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 32
 [player_fall_distance] 0.0
 [player_is_op] true
 [player_item_on_cursor] i@air
 [player_list_name] Chemical_Datas
 [player_location] -929,46,-640,Hub
-[player_money] 0.0
 [player_name] Chemical_Datas
 [player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
 [player_prefix] Player
 [player_save_name] 76.76F638140C0748889A478461BC8CE7BB
-[player_target] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
-[queue] q@DETERMINE WORD REPLACEMENT_LifestyleExcelBackground
+[queue] q@DETERMINE WORD REPLACEMENT_TurnsFpRu
 [queue_commands] li@
 [queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
 [queue_definitions] li@path|word
-[queue_id] DETERMINE WORD REPLACEMENT_LifestyleExcelBackground
+[queue_id] DETERMINE WORD REPLACEMENT_TurnsFpRu
 [queue_script] s@DETERMINE WORD REPLACEMENT
 [queue_size] 0
 [queue_speed] d@0t
@@ -114,7 +146,7 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
 =======Finished with Debug Data=======
-2015-10-03 09:59:34 [WARNING] =======SCRIPTDEBUG=======
+2015-10-18 14:20:26 [WARNING] =======SCRIPTDEBUG=======
 Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
 The message is as follows:
 Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
@@ -122,22 +154,132 @@ Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTIO
 [player_chat_history] li@
 [player_debug] Player='<A>p@Chemical_Datas<G>'
 [player_display_name] Chemical_Datas
-[player_entity_id] 297
+[player_entity_id] 38
 [player_fall_distance] 0.0
 [player_is_op] true
 [player_item_on_cursor] i@air
 [player_list_name] Chemical_Datas
-[player_location] -929,43,-637,Hub
-[player_money] 0.0
+[player_location] -930,44,-635,Hub
 [player_name] Chemical_Datas
 [player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
 [player_prefix] Player
 [player_save_name] 76.76F638140C0748889A478461BC8CE7BB
-[queue] q@DETERMINE WORD REPLACEMENT_GriffinLovesAw
+[queue] q@DETERMINE WORD REPLACEMENT_SauceCycleCharm
 [queue_commands] li@
 [queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
 [queue_definitions] li@path|word
-[queue_id] DETERMINE WORD REPLACEMENT_GriffinLovesAw
+[queue_id] DETERMINE WORD REPLACEMENT_SauceCycleCharm
+[queue_script] s@DETERMINE WORD REPLACEMENT
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DETERMINE WORD REPLACEMENT
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+[script_name] DETERMINE WORD REPLACEMENT
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+=======Finished with Debug Data=======
+2015-10-18 14:20:41 [WARNING] =======SCRIPTDEBUG=======
+Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
+The message is as follows:
+Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 38
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -929,46,-640,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@DETERMINE WORD REPLACEMENT_AdvantageHelenaWriting
+[queue_commands] li@
+[queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[queue_definitions] li@path|word
+[queue_id] DETERMINE WORD REPLACEMENT_AdvantageHelenaWriting
+[queue_script] s@DETERMINE WORD REPLACEMENT
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DETERMINE WORD REPLACEMENT
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+[script_name] DETERMINE WORD REPLACEMENT
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+=======Finished with Debug Data=======
+2015-10-18 14:28:18 [WARNING] =======SCRIPTDEBUG=======
+Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
+The message is as follows:
+Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 40
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -930,45,-638,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@DETERMINE WORD REPLACEMENT_HalifaxWrVinyl
+[queue_commands] li@
+[queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[queue_definitions] li@path|word
+[queue_id] DETERMINE WORD REPLACEMENT_HalifaxWrVinyl
+[queue_script] s@DETERMINE WORD REPLACEMENT
+[queue_size] 0
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@DETERMINE WORD REPLACEMENT
+[script_container_type] PROCEDURE
+[script_cooled_down] true
+[script_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+[script_name] DETERMINE WORD REPLACEMENT
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Chat Modifications/On Chat Word Replacment.yml
+=======Finished with Debug Data=======
+2015-10-18 14:28:31 [WARNING] =======SCRIPTDEBUG=======
+Script: [DETERMINE WORD REPLACEMENT] <--- Generated an error.
+The message is as follows:
+Tag <yaml[word_replacement].contains[database.&lb&sscVC GAMEMODE CHANGE DETECTION&ss9&rb]> is invalid!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 40
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -929,46,-640,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@DETERMINE WORD REPLACEMENT_StillCastingTravis
+[queue_commands] li@
+[queue_debug] <G>Container='<A>DETERMINE WORD REPLACEMENT<Y>(PROCEDURE)<G>'
+[queue_definitions] li@path|word
+[queue_id] DETERMINE WORD REPLACEMENT_StillCastingTravis
 [queue_script] s@DETERMINE WORD REPLACEMENT
 [queue_size] 0
 [queue_speed] d@0t

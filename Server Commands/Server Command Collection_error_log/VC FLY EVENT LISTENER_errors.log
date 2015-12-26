@@ -350,3 +350,701 @@ Woah!! An exception has been called with this command!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
 =======Finished with Debug Data=======
+2015-10-03 21:19:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@20223bdd-ce3f-4dd3-9511-f51fa82e1054
+[player_chat_history] li@
+[player_debug] Player='<A>p@Danester45<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_money] 100.0
+[player_name] Danester45
+[player_prefix] Player
+[player_save_name] 20.20223BDDCE3F4DD39511F51FA82E1054
+[queue] q@VC FLY EVENT LISTENER_AssemblyOtherMe
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_AssemblyOtherMe
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-03 21:19:12 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@20223bdd-ce3f-4dd3-9511-f51fa82e1054
+[player_chat_history] li@
+[player_debug] Player='<A>p@Danester45<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_money] 100.0
+[player_name] Danester45
+[player_prefix] Player
+[player_save_name] 20.20223BDDCE3F4DD39511F51FA82E1054
+[queue] q@VC FLY EVENT LISTENER_AssemblyOtherMe
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_AssemblyOtherMe
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-05 17:23:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@dc671ea9-ccd2-4ce2-b95a-fcb0940eb164
+[player_chat_history] li@
+[player_debug] Player='<A>p@DipPineTree<G>'
+[player_is_op] false
+[player_location] -39,60,19,Hub
+[player_money] 100.0
+[player_name] DipPineTree
+[player_prefix] Player
+[player_save_name] DC.DC671EA9CCD24CE2B95AFCB0940EB164
+[queue] q@VC FLY EVENT LISTENER_RadioSurroundingGnome
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_RadioSurroundingGnome
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-05 17:23:12 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@dc671ea9-ccd2-4ce2-b95a-fcb0940eb164
+[player_chat_history] li@
+[player_debug] Player='<A>p@DipPineTree<G>'
+[player_is_op] false
+[player_location] -39,60,19,Hub
+[player_money] 100.0
+[player_name] DipPineTree
+[player_prefix] Player
+[player_save_name] DC.DC671EA9CCD24CE2B95AFCB0940EB164
+[queue] q@VC FLY EVENT LISTENER_RadioSurroundingGnome
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_RadioSurroundingGnome
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-18 13:29:58 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_is_op] true
+[player_location] -929,45,-640,Hub
+[player_name] Chemical_Datas
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC FLY EVENT LISTENER_HintsKongProjectors
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_HintsKongProjectors
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-11-30 12:13:49 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@aa93cd23-e2e3-43d5-b52c-6b59ac44d7ed
+[player_chat_history] li@
+[player_debug] Player='<A>p@A_Swift_Arrow<G>'
+[player_is_op] false
+[player_location] -41,59,19,Hub
+[player_name] A_Swift_Arrow
+[player_prefix] Player
+[player_save_name] AA.AA93CD23E2E343D5B52C6B59AC44D7ED
+[queue] q@VC FLY EVENT LISTENER_AllocationEngAddressed
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_AllocationEngAddressed
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-01 18:32:01 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@cd5a461a-3dd7-4376-923d-f6c3ca945fd6
+[player_chat_history] li@
+[player_debug] Player='<A>p@notimegamer123<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_name] notimegamer123
+[player_prefix] Player
+[player_save_name] CD.CD5A461A3DD74376923DF6C3CA945FD6
+[queue] q@VC FLY EVENT LISTENER_CamePSales
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_CamePSales
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-01 18:32:11 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@cd5a461a-3dd7-4376-923d-f6c3ca945fd6
+[player_chat_history] li@
+[player_debug] Player='<A>p@notimegamer123<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_name] notimegamer123
+[player_prefix] Player
+[player_save_name] CD.CD5A461A3DD74376923DF6C3CA945FD6
+[queue] q@VC FLY EVENT LISTENER_CamePSales
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_CamePSales
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-03 20:40:16 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@d7cdab1d-8727-44ed-b9d0-872d8089bacd
+[player_chat_history] li@
+[player_debug] Player='<A>p@iDrBacon<G>'
+[player_is_op] true
+[player_location] -39,59,21,Hub
+[player_name] iDrBacon
+[player_prefix] Player
+[player_save_name] D7.D7CDAB1D872744EDB9D0872D8089BACD
+[queue] q@VC FLY EVENT LISTENER_TribunalPoliceFolders
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_TribunalPoliceFolders
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-05 21:53:38 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@d7cdab1d-8727-44ed-b9d0-872d8089bacd
+[player_chat_history] li@
+[player_debug] Player='<A>p@iDrBacon<G>'
+[player_is_op] true
+[player_location] -42,59,21,Hub
+[player_name] iDrBacon
+[player_prefix] Player
+[player_save_name] D7.D7CDAB1D872744EDB9D0872D8089BACD
+[queue] q@VC FLY EVENT LISTENER_LocatedThrownHits
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_LocatedThrownHits
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-25 15:08:08 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@8c8de554-e4d5-4680-95f4-227896359293
+[player_chat_history] li@
+[player_debug] Player='<A>p@SkippyLoves<G>'
+[player_is_op] false
+[player_location] -14,59,21,Hub
+[player_money] 100.0
+[player_name] SkippyLoves
+[player_prefix] Player
+[player_save_name] 8C.8C8DE554E4D5468095F4227896359293
+[queue] q@VC FLY EVENT LISTENER_BryantSponsorHorizontal
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_BryantSponsorHorizontal
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-25 17:40:35 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@9669302e-f80e-4673-bc5f-76c73df9cb9a
+[player_chat_history] li@
+[player_debug] Player='<A>p@Void_Chaser<G>'
+[player_is_op] false
+[player_location] -41,60,22,Hub
+[player_money] 100.0
+[player_name] Void_Chaser
+[player_prefix] Player
+[player_save_name] 96.9669302EF80E4673BC5F76C73DF9CB9A
+[queue] q@VC FLY EVENT LISTENER_PeriodicWarrantyBoats
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_PeriodicWarrantyBoats
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-25 17:40:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@9669302e-f80e-4673-bc5f-76c73df9cb9a
+[player_chat_history] li@
+[player_debug] Player='<A>p@Void_Chaser<G>'
+[player_is_op] false
+[player_location] -41,60,22,Hub
+[player_money] 100.0
+[player_name] Void_Chaser
+[player_prefix] Player
+[player_save_name] 96.9669302EF80E4673BC5F76C73DF9CB9A
+[queue] q@VC FLY EVENT LISTENER_PeriodicWarrantyBoats
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_PeriodicWarrantyBoats
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-25 18:05:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@40bcd5ce-8fa5-437c-877e-5247c04a4ee6
+[player_chat_history] li@
+[player_debug] Player='<A>p@Batata_Atomic<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_money] 100.0
+[player_name] Batata_Atomic
+[player_prefix] Player
+[player_save_name] 40.40BCD5CE8FA5437C877E5247C04A4EE6
+[queue] q@VC FLY EVENT LISTENER_WtPresentedFund
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_WtPresentedFund
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-25 18:05:55 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@40bcd5ce-8fa5-437c-877e-5247c04a4ee6
+[player_chat_history] li@
+[player_debug] Player='<A>p@Batata_Atomic<G>'
+[player_is_op] false
+[player_location] -42,59,21,Hub
+[player_money] 100.0
+[player_name] Batata_Atomic
+[player_prefix] Player
+[player_save_name] 40.40BCD5CE8FA5437C877E5247C04A4EE6
+[queue] q@VC FLY EVENT LISTENER_WtPresentedFund
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_WtPresentedFund
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 10:08:40 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_is_op] false
+[player_location] -41,60,24,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@VC FLY EVENT LISTENER_WithDenizenEyes
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_WithDenizenEyes
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 10:08:42 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_is_op] false
+[player_location] -41,60,24,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@VC FLY EVENT LISTENER_SpotPixelAccordance
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_SpotPixelAccordance
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 10:08:51 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_is_op] false
+[player_location] -41,60,24,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@VC FLY EVENT LISTENER_WithDenizenEyes
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_WithDenizenEyes
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 13:14:28 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@8c8de554-e4d5-4680-95f4-227896359293
+[player_chat_history] li@
+[player_debug] Player='<A>p@SkippyLoves<G>'
+[player_is_op] false
+[player_location] -40,59,21,Hub
+[player_money] 100.0
+[player_name] SkippyLoves
+[player_prefix] Player
+[player_save_name] 8C.8C8DE554E4D5468095F4227896359293
+[queue] q@VC FLY EVENT LISTENER_SentencesFeedingCompete
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_SentencesFeedingCompete
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 14:54:53 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@sai hi
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_is_op] true
+[player_location] -929,44,-636,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC FLY EVENT LISTENER_TopicCitizensIndicators
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_TopicCitizensIndicators
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 14:56:44 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@hru|sai hi
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_is_op] true
+[player_location] -929,45,-638,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC FLY EVENT LISTENER_TotallyHpGuns
+[queue_commands] li@IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_TotallyHpGuns
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 1
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 16:42:45 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC FLY EVENT LISTENER] <--- Generated an error.
+The message is as follows:
+Woah!! An exception has been called with this command!
+[player] p@6e0290e2-9f16-4aca-9f25-d20da6867956
+[player_chat_history] li@
+[player_debug] Player='<A>p@22jade<G>'
+[player_is_op] false
+[player_location] -42,60,20,Hub
+[player_money] 100.0
+[player_name] 22jade
+[player_prefix] Player
+[player_save_name] 6E.6E0290E29F164ACA9F25D20DA6867956
+[queue] q@VC FLY EVENT LISTENER_YouRipSharp
+[queue_commands] li@WAIT d@10s|ADJUST <player> can_fly:true|IF <player.has_flag[command_triggered_fly_mode]> flag <player> command_triggered_fly_mode:!
+[queue_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[queue_definitions] li@duration|max_wait
+[queue_id] VC FLY EVENT LISTENER_YouRipSharp
+[queue_script] s@VC FLY EVENT LISTENER
+[queue_size] 3
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Timed
+[script] s@VC FLY EVENT LISTENER
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC FLY EVENT LISTENER<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC FLY EVENT LISTENER
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======

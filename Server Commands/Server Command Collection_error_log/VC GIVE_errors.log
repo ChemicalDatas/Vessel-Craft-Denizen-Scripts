@@ -282,3 +282,373 @@ Woah! Invalid arguments were specified!
 [script_prefix] Container
 [script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
 =======Finished with Debug Data=======
+2015-10-24 13:24:12 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Tag <yaml[serverinfo].read[lists.item_list]> is invalid!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -910,41,-628,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@no big deal|eh|what on the ground?|special tokens|yep|not yet|what do you think about the double jump?|the issues ive got with it is that the queue runs out then all the definitions in it disappear|Hi ai runs off of a central looping queue|Adam in my npc that Im working on|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 291
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -916,41,-627,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[player_target] p@c72661f1-4195-45c2-b438-a75249b91f44
+[queue] q@VC GIVE_WarsHousingSullivan
+[queue_commands] li@DETERMINE <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@players
+[queue_id] VC GIVE_WarsHousingSullivan
+[queue_script] s@VC GIVE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-24 13:24:20 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Tag <yaml[serverinfo].read[lists.item_list]> is invalid!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -910,41,-628,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@no big deal|eh|what on the ground?|special tokens|yep|not yet|what do you think about the double jump?|the issues ive got with it is that the queue runs out then all the definitions in it disappear|Hi ai runs off of a central looping queue|Adam in my npc that Im working on|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 291
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -916,41,-627,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[player_target] p@c72661f1-4195-45c2-b438-a75249b91f44
+[queue] q@VC GIVE_AlphaHopefullyDental
+[queue_commands] li@DETERMINE <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@players
+[queue_id] VC GIVE_AlphaHopefullyDental
+[queue_script] s@VC GIVE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-24 13:24:23 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -910,41,-628,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@no big deal|eh|what on the ground?|special tokens|yep|not yet|what do you think about the double jump?|the issues ive got with it is that the queue runs out then all the definitions in it disappear|Hi ai runs off of a central looping queue|Adam in my npc that Im working on|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 291
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -916,41,-627,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[player_target] p@c72661f1-4195-45c2-b438-a75249b91f44
+[queue] q@VC GIVE_ChargingBettyRobinson
+[queue_commands] li@FOREACH li@as_player|as_npc|as_location { - define target <def[target].%value%||FAILED_ACQUISITION> - if <server.object_is_valid[<def[target]>]> { - if <def[value]> == as_player || <def[value]> == as_npc define accessor name - if <def[value]> == as_location define accessor location.simple - define target_id <def[target].%accessor%> - foreach stop } }|DEFINE target <def[target].inventory||UNMATCHABLE_INVENTORY>|DEFINE item <context.args.get[2]||NO_ITEM_SPECIFIED>|DEFINE item <def[item].replace[minecraft<&co>].as_item||UNMATCHABLE_ITEM>|DEFINE ammount <context.args.get[3]||1>|IF !<server.object_is_valid[<def[target]>]> || !<server.object_is_valid[<def[item]>]> { - narrate format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]> - queue clear }|NARRATE format:formatted <red><script.name> <blue>Giving <red><def[target_id]> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><def[ammount]> targets:<player>|NARRATE format:formatted <red><script.name>  <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>> targets:<def[target]>|GIVE <def[item]> to:<def[target]> qty:<def[ammount]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@target
+[queue_id] VC GIVE_ChargingBettyRobinson
+[queue_script] s@VC GIVE
+[queue_size] 9
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-24 13:24:34 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Tag <yaml[serverinfo].read[lists.item_list]> is invalid!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -910,41,-628,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@no big deal|eh|what on the ground?|special tokens|yep|not yet|what do you think about the double jump?|the issues ive got with it is that the queue runs out then all the definitions in it disappear|Hi ai runs off of a central looping queue|Adam in my npc that Im working on|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 291
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -916,41,-627,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[player_target] p@c72661f1-4195-45c2-b438-a75249b91f44
+[queue] q@VC GIVE_StevenNbcGilbert
+[queue_commands] li@DETERMINE <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@players
+[queue_id] VC GIVE_StevenNbcGilbert
+[queue_script] s@VC GIVE
+[queue_size] 1
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-10-24 13:24:35 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[npc] n@11
+[npc_anchors] li@null
+[npc_attack_range] 3.0625
+[npc_avoid_water] false
+[npc_engaged] false
+[npc_flags] li@TACTIC_STACK|SIGHT_RANGE|CURENT_WANDER_LOCATION|WANDER_RANGE|WANDER_RANGE_HEIGHT|MOVEMENT|MOVEMENT.WAYPOINTS|MOVEMENT.LAST_NAVI_STATE|MOVEMENT.TARGETS|TALKED_TO_BY|INTRESTS|INTRESTS.MOVEMENT|FLAG_INTRESTS!|CHAT|CHAT.TALKED_TO_BY|LOGIC|FLAG_INTRESTS|FLAG_INTRESTS.LOGIC|FLAG_INTRESTS.CHAT|FLAG_INTRESTS.ACTION|FLAG_INTRESTS.MOVEMENT|FLAG_INTRESTS.MEMORY
+[npc_has_assignment] true
+[npc_id] 11
+[npc_inventory] li@i@bone_meal
+[npc_location] -910,41,-628,Hub
+[npc_lookclose] true
+[npc_name] Adam
+[npc_navigating] false
+[npc_owner] server
+[npc_protected] true
+[npc_range] 114.70119
+[npc_script] s@DENIZEN
+[npc_speed] 1.0
+[npc_speed_modifier] 1.0
+[npc_teleport_on_stuck] true
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@no big deal|eh|what on the ground?|special tokens|yep|not yet|what do you think about the double jump?|the issues ive got with it is that the queue runs out then all the definitions in it disappear|Hi ai runs off of a central looping queue|Adam in my npc that Im working on|Im not at my computer
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 291
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -916,41,-627,Hub
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[player_selected_npc] n@11
+[queue] q@VC GIVE_PubliclyPaperGroundwater
+[queue_commands] li@FOREACH li@as_player|as_npc|as_location { - define target <def[target].%value%||FAILED_ACQUISITION> - if <server.object_is_valid[<def[target]>]> { - if <def[value]> == as_player || <def[value]> == as_npc define accessor name - if <def[value]> == as_location define accessor location.simple - define target_id <def[target].%accessor%> - foreach stop } }|DEFINE target <def[target].inventory||UNMATCHABLE_INVENTORY>|DEFINE item <context.args.get[2]||NO_ITEM_SPECIFIED>|DEFINE item <def[item].replace[minecraft<&co>].as_item||UNMATCHABLE_ITEM>|DEFINE ammount <context.args.get[3]||1>|IF !<server.object_is_valid[<def[target]>]> || !<server.object_is_valid[<def[item]>]> { - narrate format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]> - queue clear }|NARRATE format:formatted <red><script.name> <blue>Giving <red><def[target_id]> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><def[ammount]> targets:<player>|NARRATE format:formatted <red><script.name>  <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>> targets:<def[target]>|GIVE <def[item]> to:<def[target]> qty:<def[ammount]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@target
+[queue_id] VC GIVE_PubliclyPaperGroundwater
+[queue_script] s@VC GIVE
+[queue_size] 9
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 16:42:33 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@hru|sai hi
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 1687
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -70,7,-583,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC GIVE_RickyOrganisationsFossil
+[queue_commands] li@FOREACH li@as_player|as_npc|as_location { - define target <def[target].%value%||FAILED_ACQUISITION> - if <server.object_is_valid[<def[target]>]> { - if <def[value]> == as_player || <def[value]> == as_npc define accessor name - if <def[value]> == as_location define accessor location.simple - define target_id <def[target].%accessor%> - foreach stop } }|DEFINE target <def[target].inventory||UNMATCHABLE_INVENTORY>|DEFINE item <context.args.get[2]||NO_ITEM_SPECIFIED>|DEFINE item <def[item].replace[minecraft<&co>].as_item||UNMATCHABLE_ITEM>|DEFINE ammount <context.args.get[3]||1>|IF !<server.object_is_valid[<def[target]>]> || !<server.object_is_valid[<def[item]>]> { - narrate format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]> - queue clear }|NARRATE format:formatted <red><script.name> <blue>Giving <red><def[target_id]> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><def[ammount]> targets:<player>|NARRATE format:formatted <red><script.name>  <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>> targets:<def[target]>|GIVE <def[item]> to:<def[target]> qty:<def[ammount]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@target
+[queue_id] VC GIVE_RickyOrganisationsFossil
+[queue_script] s@VC GIVE
+[queue_size] 9
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======
+2015-12-26 16:44:04 [WARNING] =======SCRIPTDEBUG=======
+Script: [VC GIVE] <--- Generated an error.
+The message is as follows:
+Woah! Invalid arguments were specified!
+[player] p@76f63814-0c07-4888-9a47-8461bc8ce7bb
+[player_chat_history] li@hru|sai hi
+[player_debug] Player='<A>p@Chemical_Datas<G>'
+[player_display_name] Chemical_Datas
+[player_entity_id] 1687
+[player_fall_distance] 0.0
+[player_is_op] true
+[player_item_on_cursor] i@air
+[player_list_name] Chemical_Datas
+[player_location] -68,7,-582,Hub
+[player_money] 0.0
+[player_name] Chemical_Datas
+[player_open_inventory] in@player[holder=p@76f63814-0c07-4888-9a47-8461bc8ce7bb]
+[player_prefix] Player
+[player_save_name] 76.76F638140C0748889A478461BC8CE7BB
+[queue] q@VC GIVE_CitizensMinorFrequently
+[queue_commands] li@FOREACH li@as_player|as_npc|as_location { - define target <def[target].%value%||FAILED_ACQUISITION> - if <server.object_is_valid[<def[target]>]> { - if <def[value]> == as_player || <def[value]> == as_npc define accessor name - if <def[value]> == as_location define accessor location.simple - define target_id <def[target].%accessor%> - foreach stop } }|DEFINE target <def[target].inventory||UNMATCHABLE_INVENTORY>|DEFINE item <context.args.get[2]||NO_ITEM_SPECIFIED>|DEFINE item <def[item].replace[minecraft<&co>].as_item||UNMATCHABLE_ITEM>|DEFINE ammount <context.args.get[3]||1>|IF !<server.object_is_valid[<def[target]>]> || !<server.object_is_valid[<def[item]>]> { - narrate format:formatted <blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]> - queue clear }|NARRATE format:formatted <red><script.name> <blue>Giving <red><def[target_id]> <green><def[item].formatted||<def[item].simple>><blue>. Qty<&co> <yellow><def[ammount]> targets:<player>|NARRATE format:formatted <red><script.name>  <blue>Giving you <def[item].formatted||<def[item].simple>>. <yellow>Present from<&co> <green><player.name.display||<player.name||Console>> targets:<def[target]>|GIVE <def[item]> to:<def[target]> qty:<def[ammount]>
+[queue_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[queue_definitions] li@target
+[queue_id] VC GIVE_CitizensMinorFrequently
+[queue_script] s@VC GIVE
+[queue_size] 9
+[queue_speed] d@0.0s
+[queue_state] running
+[queue_type] Instant
+[script] s@VC GIVE
+[script_container_type] COMMAND
+[script_cooled_down] true
+[script_debug] <G>Container='<A>VC GIVE<Y>(COMMAND)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+[script_name] VC GIVE
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Server Commands/Server Command Collection.yml
+=======Finished with Debug Data=======

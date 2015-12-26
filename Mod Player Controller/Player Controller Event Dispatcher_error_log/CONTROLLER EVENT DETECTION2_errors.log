@@ -1,0 +1,39 @@
+2015-10-06 15:56:13 [WARNING] =======SCRIPTDEBUG=======
+Script: [CONTROLLER EVENT DETECTION2] <--- Generated an error.
+The message is as follows:
+Tag <def[entity].location> is invalid!
+[player] p@c72661f1-4195-45c2-b438-a75249b91f44
+[player_chat_history] li@hi|hello
+[player_debug] Player='<A>p@JRG_F110306<G>'
+[player_display_name] JRG_F110306
+[player_entity_id] 2586
+[player_fall_distance] 0.0
+[player_is_op] false
+[player_item_on_cursor] i@air
+[player_list_name] JRG_F110306
+[player_location] -39,51,-38,Hub
+[player_money] 100.0
+[player_name] JRG_F110306
+[player_open_inventory] in@player[holder=p@c72661f1-4195-45c2-b438-a75249b91f44]
+[player_prefix] Player
+[player_save_name] C7.C72661F1419545C2B438A75249B91F44
+[player_target] e@58dfc34a-511e-436e-bc20-2170740014ce
+[queue] q@CONTROLLER EVENT DETECTION2_FinBibleMice
+[queue_commands] li@DEFINE key <player.name>.<script.name>.<def[action]>.<def[entity]>|RUN Write Timed Data def:++|<def[key]>|<def[duration]>|temp instantly|DEFINE event_list li@|DEFINE event_list <def[event_list].include[player concentrates|player concentrates on entity|player concentrates on <def[entity].entity_type>]>|EVENT <def[event_list]> context:entity|<def[entity]>|level|<yaml[temp].read[<def[key]>]>|location|<def[location]>
+[queue_debug] <G>Container='<A>CONTROLLER EVENT DETECTION2<Y>(WORLD)<G>'
+[queue_definitions] li@duration|action|entity
+[queue_id] CONTROLLER EVENT DETECTION2_FinBibleMice
+[queue_script] s@CONTROLLER EVENT DETECTION2
+[queue_size] 5
+[queue_speed] d@0t
+[queue_state] running
+[queue_type] Instant
+[script] s@CONTROLLER EVENT DETECTION2
+[script_container_type] WORLD
+[script_cooled_down] true
+[script_debug] <G>Container='<A>CONTROLLER EVENT DETECTION2<Y>(WORLD)<G>'
+[script_filename] G:/Vessel Craft Minecraft Server/Vessel Craft Hub/plugins/Denizen/scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+[script_name] CONTROLLER EVENT DETECTION2
+[script_prefix] Container
+[script_relative_filename] /scripts/Vessel-Craft-Denizen-Scripts/Mod Player Controller/Player Controller Event Dispatcher.yml
+=======Finished with Debug Data=======
