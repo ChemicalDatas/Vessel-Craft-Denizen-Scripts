@@ -1,9 +1,30 @@
 #
 # A set of scripts to record stats about the server for the owner to determine the servers health
 #
+
 Server Health Ping:
     type: world
+    tps_bottom: 16
+    tps_check_time: d@1m
     events:
+        on server start:
+        - while true {
+            - wait <script.yaml_key[tps_check_time]>
+            - define total_tps 0
+            - foreach <server.recent_tps> {
+                - define total_tps <def[total_tps].add[<def[value]>]>
+                }
+            - define avg_tps <def[total_tps].div[<server.recent_tps.size>]>
+            - if <def[avg_tps].is[less].than[<script.yaml_key[tps_bottom]>]> {
+                - announce "restarting the server, it'll be back up in like 15 seconds!"
+                - wait d@2s
+                - execute as_server "save-all"
+                - execute as_server "denizen save-all"
+                - execute as_server "citizens save"
+                - wait d@5s
+                - execute as_server restart
+                }
+            }
         on queuestats command:
         - determine passively fulfilled
         - run "Check Queue Stats"
@@ -31,10 +52,8 @@ Check Queue Stats:
         }
 
 
-#./ex run ncptest
-ncptest:
+get ncp lag output:
     type: task
-    speed: 0t
     script:
     - define extra_spike_info 
       "li@ms within the last 40 to 60 minutes.|<&ns><&ns><&ns><&ns> TPS lag <&ns><&ns><&ns><&ns>|Perc.[time]"
@@ -68,5 +87,5 @@ ncptest:
     
     
     - announce "<gold>spike data<&co> <red><def[lag_spikes_data]>"
-    - announce "<gold>tick data<&co> <red><def[avg_tick_data]>"
+    - announce "<gold>tps lag percents for 1s 3.3s and 270s <&co> <red><def[avg_tick_data]>"
     
