@@ -10,7 +10,7 @@ On Join Player Location Management:
             } else {
             - define location <player.flag[bed_spawn]>
             }
-        - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|3]>"
-        - define spawnable_locations <def[cuboid].get_spawnable_blocks||<def[location].as_list>>
+        - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|2]>"
+        - define spawnable_locations <def[cuboid].spawnable_blocks||<def[location].as_list>>
         - define location <def[spawnable_locations].random>
-        - teleport <player> <def[location].above>
+        - teleport <player> <def[location].center.add[0,1.5,0]>
