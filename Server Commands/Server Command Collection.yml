@@ -511,7 +511,8 @@ VC Smite:
         }
     - strike <player.location.cursor_on[100]>
 
-
+# http://english-the-easy-way.com/Vocabulary/Words_Relating_Time_Day.html
+# shall I add these?
 VC Time:
     type: command
     name: time
