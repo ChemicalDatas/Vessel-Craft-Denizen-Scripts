@@ -687,3 +687,95 @@ itertoolsCountNext:
     - determine <server.flag[<def[flag]>]>
     
     
+
+Queue Level Variable:
+    # Creates a queue that only contains variables
+    # Modify those variables with a message_queue
+    # define vars li@name1/var1|name2:!|
+    # init the vars
+    # run "Queue Level Variable" def:<def[vars]> id:<def[queue_id]>
+    # modify the vars
+    # run "Queue Level Variable" def:<def[new_vars]> id:<def[queue_id]>
+    # queue <def[queue_id].as_queue> resume
+    # get the vars
+    # define queue_var <proc[queue var retrieve].context[<def[queue_id]>|<def[ids_to_retrieve]>]>
+    #
+    type: task
+    script:
+    - if !<def[__definition_map].exists> {
+        - define __definition_map li@
+        }
+    # define a custom var name
+    # map custom_var_name to old_name
+    # define __<custom_var_name> value
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define _map_var <def[__definition_map].map_get[<def[value]>]||NO_MAP_VAR> 
+        - if <def[_map_var]> == NO_MAP_VAR {
+            - define _name __<util.uuid>
+            - define __definition_map <def[__definition_map].include[<def[value]>/<def[_name]>]>
+            } else {
+            - define _name <def[_map_var]>
+            }
+        - define <def[_name]> <def[%value%]>
+        }
+    # definition scrubbing
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define <def[value]>:!
+        }
+    - queue <queue> pause
+    
+
+
+
+world matcher:
+    type: procedure
+    definitions: lookup
+    script:
+    - define list <server.list_worlds>
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define world <def[list].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
+    - if <def[world]> != NO_MATCHABLE_WORLD determine <def[world].as_world>
+    
+
+item matcher:
+    type: procedure
+    definitions: lookup
+    script:
+    - define list <server.list_worlds>
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define items <def[list].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
+    - if <def[player]> != NO_MATCHABLE_WORLD determine <def[items].get[1]>
+    
+
+material matcher:
+    type: procedure
+    definitions: lookup
+    look_type: parse[name].starts_with[<def[lookup]>]
+    script:
+    - define list <server.list_materials>
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define materials <def[list].filter[parse[name].starts_with[<def[lookup]>]]||NO_MATCHABLE_MATERIAL>
+    - if <def[material]> != NO_MATCHABLE_MATERIAL determine <def[materials]>
+    
+
+list filters:
+    # performs a recursive filter with each extra argument on provided list
+    # returns a list of materials that qualify
+    # filters list for each filter
+    #
+    # - define op_chem <proc[list_filters].context[<server.list_online_players.escaped>|is_op|name.contains[chem]]>
+    # - define transparrent_solids = <proc[list filters].context[<server.list_materials.escaped>|as_material.is_solid|as_material.is_transparrent]>
+    type: procedure
+    definitions: __list
+    script:
+    - define __list <def[__list].unescaped>
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define __list <def[__list].filter[<def[%value%]>]>
+        }
+    - determine <def[__list]>

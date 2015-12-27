@@ -677,59 +677,6 @@ VC Weather:
     - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> <yellow>in <red><def[world].name||every world>."
 
 
-world matcher:
-    type: procedure
-    definitions: lookup
-    script:
-    - define wlist <server.list_worlds>
-    - if <def[wlist].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define world <def[wlist].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
-    - if <def[world]> != NO_MATCHABLE_WORLD determine <def[world].as_world>
-    
-
-item matcher:
-    type: procedure
-    definitions: lookup
-    script:
-    - define materials <server.list_worlds>
-    - if <def[wlist].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define world <def[wlist].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
-    - if <def[player]> != NO_MATCHABLE_WORLD determine <def[player].get[1]>
-    
-
-material matcher:
-    type: procedure
-    definitions: lookup
-    look_type: parse[name].starts_with[<def[lookup]>]
-    script:
-    - define mlist <server.list_materials>
-    - if <def[mlist].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define material <def[mlist].filter[parse[name].starts_with[<def[lookup]>]]||NO_MATCHABLE_MATERIAL>
-    - if <def[material]> != NO_MATCHABLE_MATERIAL determine <def[material].first>
-    
-
-list filters:
-    # performs a recursive filter with each extra argument on provided list
-    # returns a list of materials that qualify
-    # filters list for each filter
-    #
-    # - define op_chem <proc[list_filters].context[<server.list_online_players.escaped>|is_op|name.contains[chem]]>
-    # - define transparrent_solids = <proc[list filters].context[<server.list_materials.escaped>|as_material.is_solid|as_material.is_transparrent]>
-    type: procedure
-    definitions: __list
-    script:
-    - define __list <def[__list].unescaped>
-    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
-        - define __list <def[__list].filter[<def[%value%]>]>
-        }
-    - determine <def[__list]>
-
 VC World:
     type: command
     name: world
