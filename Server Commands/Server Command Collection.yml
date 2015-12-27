@@ -520,38 +520,41 @@ VC Time:
     aliases:
     - timeset
     - settime
-    - day
     - dawn
     - morning
+    - noon
+    - day
     - dusk
     - night
+    - midnight
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    time_map:
+        dawn: 23500
+        morning: 0
+        noon: 6000
+        day: 6000
+        dusk: 12000
+        night: 14000
+        midnight: 18000
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - determine <li@dawn|morning|noon|day|dusk|night.filter[starts_with[<context.args.last>]]>
     script:
-    - if <context.args.is_empty> {
+    - define time <context.args.get[1]||<context.alias||NO_TIME_SPECIFIED>>
+    - define intended_time <script.yaml_key[time_map.<def[time]>]||NO_TIME_SPECIFIED>
+    - if "<proc[is between numbers].context[0|<def[time]>|24000]||false>" {
+        - define intended_time <def[time]>
+        }
+    - if <def[intended_time]> == NO_TIME_SPECIFIED {
         - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The time is <player.world.time> ticks"
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, 0-24000)"
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, midnight, 0-24000)"
         - queue clear
         }
-    - define dawn 23500
-    - define morning 0
-    - define noon 6000
-    - define day 6000
-    - define dusk 12000
-    - define night 18000
-    - define accessor <context.args.get[1]||<context.alias>>
-    - define time <def[%accessor%]||<def[morning]>>
-    - if <def[time].as_int||failed_time> == failed_time {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>The argument you passed wasnt recogniced time. Ex<&co> <yellow>dawn, morning, noon, day, dusk, night, 0-24000"
-        - queue clear
-        }
-    - time <def[time]>t
-    - announce "<blue><&lb><red><script.name><blue><&rb><reset> <reset><player.name.display><reset> set the time to <yellow><def[time]>."
+    - time <def[intended_time]>t
+    - announce "<blue><&lb><red><script.name><blue><&rb><reset> <red><player.name.display><reset> set the time to <yellow><def[time]>."
 
 
 # todo: take advantage player matching for specific weather targets
@@ -573,7 +576,6 @@ VC Weather:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - define weathers li@storm|thunder|sunny
-    - define worlds <server.list_worlds>
     - determine <def[worlds].include[<def[weathers]>].filter[starts_with[<context.args.last>]]>
     script:
     - define weather_map li@sun/sunny|stormy/storm|clear/sunny|lightning/storm|rain/storm|storm/storm|thunder/thunder
