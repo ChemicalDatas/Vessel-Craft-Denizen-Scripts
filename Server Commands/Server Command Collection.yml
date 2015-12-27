@@ -8,6 +8,10 @@ CommandDefaults:
     teleport_history_max: 10
     permissions:
         commands:
+            icons: vesselcraft.command.icons
+            save_database: vesselcraft.command.save_database
+            load_database: vesselcraft.command.load_database
+            console_mode: vesselcraft.command.console_mode
             vc: vesselcraft.command.vc
             debug: vesselcraft.command.debug
             nickname: vesselcraft.command.nickname
@@ -199,6 +203,88 @@ VC Colors:
         - define color_key "<%key%><def[key]>"
         - narrate "<def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
         }
+
+
+VC Reload Databases:
+    type: command
+    name: reload_database
+    descriptions: Reloads selected_databases or all loaded.
+    usage: /reload_database [id-list|li@id_list|all]
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - if <context.args.is_empty> {
+        - narrate "<script.yaml_key[usage]>"
+        - queue clear
+        }
+    - if <context.args.contains[all]> {
+        - define yaml <yaml.list>
+        } else {
+        - define yaml <yaml.list.filter[contains_any[<context.args.exclude[all]>]]>
+        }
+    - foreach <def[yaml]> {
+        - run "yaml load" def:|<def[value]>
+        }
+
+
+VC Save Databases:
+    type: command
+    name: save_database
+    descriptions: Saves selected_databases or all loaded.
+    usage: /save_database [d_base1|d_base2|all]
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - if <context.args.is_empty> {
+        - narrate "<script.yaml_key[usage]>"
+        - queue clear
+        }
+    - if <context.args.contains[all]> {
+        - define yaml <yaml.list>
+        } else {
+        - define yaml <yaml.list.filter[contains_any[<context.args.exclude[all]>]]>
+        }
+    - foreach <def[yaml]> {
+        - run "yaml save" def:|<def[value]>
+        }
+
+# todo: finish me, and companion script
+VC Console Mode:
+    type: command
+    name: console_mode
+    description: Redirects console output to the players chat
+    usage: /console_mode
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - narrate 'finish me'
+
+
+
+VC Icons:
+    type: command
+    name: icons
+    description: Narrates to the user the icons avaiable for use.
+    usage: /icons
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - determine passively fulfilled
+    - define list li@
+    - foreach <yaml[word_replacement].list_keys[database]> {
+        - define key <def[value].replace[&rb].with[<&rb>].replace[&lb].with[<&lb>]>
+        - define value <yaml[word_replacement].read[database.<def[value]>]>
+        - define list "<def[list].include[<gray><def[key].pad_right[18].with[.]><gold><def[value]>]>"
+        }
+    - narrate "<def[list].alphanumeric.separated_by[       ]>"
 
 
 VC BossBar:
@@ -562,7 +648,7 @@ VC Time:
 VC Weather:
     type: command
     name: weather
-    description: Sets the servers weather, optionaly just a <&lb>world<&co>world_name<&rb>.
+    description: Sets the servers weather.
     usage: /weather <&lb>sun, storm, thunder<&rb> (weather defaults to sun)
     aliases:
     - sun
@@ -576,8 +662,8 @@ VC Weather:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - define weathers li@storm|thunder|sunny
-    - determine <def[worlds].include[<def[weathers]>].filter[starts_with[<context.args.last>]]>
+    - define weathers <script.yaml_key[aliases]>
+    - determine <def[weathers].filter[starts_with[<context.args.last||>]]>
     script:
     - define weather_map li@sun/sunny|stormy/storm|clear/sunny|lightning/storm|rain/storm|storm/storm|thunder/thunder
     - define weather <context.args.get[1]||<context.alias||NO_WEATHER_SPECIFIED>>
@@ -591,6 +677,59 @@ VC Weather:
     - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> <yellow>in <red><def[world].name||every world>."
 
 
+world matcher:
+    type: procedure
+    definitions: lookup
+    script:
+    - define wlist <server.list_worlds>
+    - if <def[wlist].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define world <def[wlist].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
+    - if <def[world]> != NO_MATCHABLE_WORLD determine <def[world].as_world>
+    
+
+item matcher:
+    type: procedure
+    definitions: lookup
+    script:
+    - define materials <server.list_worlds>
+    - if <def[wlist].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define world <def[wlist].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
+    - if <def[player]> != NO_MATCHABLE_WORLD determine <def[player].get[1]>
+    
+
+material matcher:
+    type: procedure
+    definitions: lookup
+    look_type: parse[name].starts_with[<def[lookup]>]
+    script:
+    - define mlist <server.list_materials>
+    - if <def[mlist].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define material <def[mlist].filter[parse[name].starts_with[<def[lookup]>]]||NO_MATCHABLE_MATERIAL>
+    - if <def[material]> != NO_MATCHABLE_MATERIAL determine <def[material].first>
+    
+
+list filters:
+    # performs a recursive filter with each extra argument on provided list
+    # returns a list of materials that qualify
+    # filters list for each filter
+    #
+    # - define op_chem <proc[list_filters].context[<server.list_online_players.escaped>|is_op|name.contains[chem]]>
+    # - define transparrent_solids = <proc[list filters].context[<server.list_materials.escaped>|as_material.is_solid|as_material.is_transparrent]>
+    type: procedure
+    definitions: __list
+    script:
+    - define __list <def[__list].unescaped>
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define __list <def[__list].filter[<def[%value%]>]>
+        }
+    - determine <def[__list]>
+
 VC World:
     type: command
     name: world
@@ -603,13 +742,13 @@ VC World:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - define players <server.list_online_players.parse[name]>
-    - define worlds <server.list_worlds>
-    - determine <def[players].include[<def[worlds]>].filter[starts_with[<context.args.last>]]>
+    - define worlds <server.list_worlds.parse[name]>
+    - determine <def[players].include[<def[worlds]>].filter[starts_with[<context.args.last||>]]>
     script:
     - define world <context.args.get[1].as_world||NO_VALID_WORLD>
-    - define player <context.args.map_get[target].as_player||<player||NO_VALID_PLAYER_SPECIFIED>>
-    - if <def[target]> == NO_VALID_PLAYER_SPECIFIED {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You need to specify a valid player. Player<&co> <def[target]>"
+    - define player <proc[player matcher].context[<context.args.map_get[]>]>
+    - if <def[player]> == NO_VALID_PLAYER_SPECIFIED {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You need to specify a valid player. Player<&co> <def[player]>"
         - queue clear
         }
     - if <def[world]> == NO_VALID_WORLD {
