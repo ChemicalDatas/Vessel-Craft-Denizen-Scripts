@@ -144,6 +144,7 @@ Flag Operator:
     script:
     - flag %reference% %flag%[%index%]:%value%
 
+
 "Flag Pop Index":
     #
     # todo: updateme
@@ -176,6 +177,7 @@ Flag Operator:
     - determine %return%
 
 
+# todo: depreciate script in favor of built in list.get_indexes(or whatever) tag
 Flag Index That Contains:
     #
     # A procedure that returns a list of indexs int that contains the value supplied
@@ -200,10 +202,24 @@ Yaml Load:
     # creates a new yaml in memory if the location dosnt already have that path.
     # Usable when the server starts so that there is a yaml id in server memory already.
     # Youll need to schedule a regular save or on shutdown a saving feature.
+    # Saves all ids to a map of id/path for later reference
+    # the flag used: <script.name>.yaml_id_path_map
     #
     type: task
     definitions: path|id
     script:
+    - define flag <script.name>.path_map.<def[id]>
+    - if !<server.has_flag[<def[flag]>]> {
+        - flag server <def[flag]>:<def[path]||>
+        - announce "Found new id mapping for id:(<def[id]>) path:(<def[path]>)"      format:Database_Formatting to_console
+        }
+    - if <def[path]> = '' {
+        - define path <server.flag[<def[flag]>]>
+        - announce "Using prestored id path mapping:(<def[id]>) path:(<def[path]>)"  format:Database_Formatting to_console
+        } else {
+        - flag server <def[flag]>:<def[path]>
+        - announce "Updating path of:(<def[id]>) path:(<def[path]>)"                 format:Database_Formatting to_console
+        }
     - if <server.has_file[<def[path]>]> {
         - announce "Found and loading file: <def[path]>"                             format:Database_Formatting to_console
         - yaml load:<def[path]> id:<def[id]>
@@ -212,8 +228,9 @@ Yaml Load:
         - announce "Creating fresh yaml database: <def[id]>"                         format:Database_Formatting to_console
         - yaml create id:<def[id]>
         }
+    - define path <def[path].escaped>
     - if <yaml.list.contains[<def[id]>]> {
-        - announce "Database creation for: <def[id]> <blue>SUCCESSFULL!"             format:Database_Formatting to_console
+        - announce "Database loading for: <def[id]> <blue>SUCCESSFULL!"              format:Database_Formatting to_console
         } else {
         - announce "Database id: <def[id]> <red>~~~~~~~failed to load.~~~~~~~~~~~"   format:Database_Formatting to_console
         }
@@ -223,6 +240,15 @@ Yaml Save:
     type: task
     definitions: path|id
     script:
+    - if <def[path]> == ''{
+        - define flag "<s@yaml load.name>.path_map.<def[id]>"
+        - if <server.has_flag[<def[flag]>]> {
+            - define path <server.flag[<def[flag]>]>
+            } else {
+            - debug error "Must have a an valid yaml id<&co> <def[id]> attempted_path<&co> <def[path]>"
+            - queue clear
+            }
+        }
     - announce "Saving id: <def[id]> <def[path]>"                                     format:Database_Formatting to_console
     - yaml savefile:<def[path]> id:<def[id]>
     
