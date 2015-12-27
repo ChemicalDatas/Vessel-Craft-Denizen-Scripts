@@ -20,7 +20,7 @@
 
 Schematic Events:
     type: world
-    database_path: "scripts/Server Databases/Anivox.yml"
+    database_path: "Databases/Anivox.yml"
     events:
         on server start:
         - run "yaml load" def:<script.yaml_key[database_path]>|anivox_data
