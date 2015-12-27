@@ -135,7 +135,7 @@ Meets Black White List:
 
 
 
-"Is Between Numbers":
+Is Between Numbers:
     #
     # Performs a check to see wether the_checked is in between the 2 ints
     # Inclusive of the first element being checked: "or_more"
@@ -147,10 +147,13 @@ Meets Black White List:
     type: procedure
     definitions: 1st|the_checked|2nd
     script:
-    - if <def[the_checked].is[or_more].than[%2nd%]> && <def[the_checked].is[less].than[%1st%]> {
+    - define 1st <def[1st].as_int>
+    - define 2nd <def[2nd].as_int>
+    - define the_checked <def[the_checked].as_int>
+    - if <def[the_checked].is[or_more].than[<def[2nd]>]> && <def[the_checked].is[less].than[<def[1st]>]> {
         - determine true
         }
-    - if <def[the_checked].is[or_more].than[%1st%]> && <def[the_checked].is[less].than[%2nd%]> {
+    - if <def[the_checked].is[or_more].than[<def[1st]>]> && <def[the_checked].is[less].than[<def[2nd]>]> {
         - determine true
         }
     - determine false
