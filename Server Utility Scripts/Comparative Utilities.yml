@@ -146,10 +146,11 @@ Is Between Numbers:
     #
     type: procedure
     definitions: 1st|the_checked|2nd
+    type_1st: as_int
+    type_2nd: as_int
+    type_the_checked: as_int
     script:
-    - define 1st <def[1st].as_int>
-    - define 2nd <def[2nd].as_int>
-    - define the_checked <def[the_checked].as_int>
+    - inject typecheck
     - if <def[the_checked].is[or_more].than[<def[2nd]>]> && <def[the_checked].is[less].than[<def[1st]>]> {
         - determine true
         }
