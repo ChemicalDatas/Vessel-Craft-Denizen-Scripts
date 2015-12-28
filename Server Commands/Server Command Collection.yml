@@ -126,7 +126,7 @@ VC Debug:
     - determine <player.is_op||<context.server>>
     script:
     - if <server.has_flag[debug_output]> {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>off" 
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>off" 
         - flag server debug_output:!
         } else {
         - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>on"
@@ -477,44 +477,53 @@ VC GameMode:
     type: command
     name: gamemode
     description: Changes your gamemode or the targets gamemode into survival.
-    usage: /gamemode <&lb>(gm indicator 0,1,2,s,a,c)<&rb> <&lb>target<&rb> (target defaults to sender, target is always the last argument.)
-    aliases:
+    usage: /gamemode <&lb>(gm indicator 0,1,2,s,a,c,sp)<&rb> <&lb>target<&rb> (target defaults to sender, target is always the last argument.)
+    alias:
     - gm
     - gm0
     - gm1
     - gm2
+    - gm3
     - gms
     - gma
     - gms
+    - gmsp
     - creative
     - adventure
     - survival
+    - spectator
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - define argu_list li@0|1|2|a|s|c
-    - determine <server.list_online_players[name].filter[starts_with[<context.args.last>]]>
+    - determine [<server.match_player[<context.args.last>]>]
+    mode_map:
+        survival: survival
+        gms: survival
+        gm0: survival
+        0: survival
+        creative: creative
+        gmc: creative
+        gm1: creative
+        1: creative
+        adventure: adventure
+        gma: adventure
+        gm2: adventure
+        2: adventure
+        spectator: spectator
+        gmsp: spectator
+        gm3: spectator
+        3: spectator
     script:
-    - define alias_to_argument li@gms/survival|survival/survival|gm0/survival|s/survival|0/survival|gm2/adventure|gma/adventure|adventure/adventure|a/adventure|2/adventure|gmc/creative|gm1/creative|creative/creative|c/creative|1/creative
-    - define arg <context.args.get[1]||NO_ARGUMENT>
-    - define gamemode <def[alias_to_argument].map_get[<context.alias>]||<def[alias_to_argument].map_get[<def[arg]>]||NO_ALIAS_GAMEMODE>>
-    - define target <player||SERVER>
-    - define indicated_target <context.args.last||<player||NO_INDICATED_TARGET>>
-    # name matching
-    # parsing
-    - define matching_target <server.match_players[<def[indicated_target]>]||NO_MATCHING_TARGET>
-    - define parsed_target <parse:<&lt><def[indicated_target]><&pipe><&pipe>NOT_A_PARSEABLE_TARGET<&gt>>
-    - if <def[matching_target]> != NO_MATCHING_TARGET {
-        - define target <def[matching_target]>
-        }
-    - if <def[parsed_target].is_player||false> {
-        - define target <def[parsed_target]>
-        }
-    - if !<server.list_online_players.contains[<def[target]>]> {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Failed to find a valid target<&co> <def[target]>"
+    - define arg <context.args.first||NO_ARGUMENT>
+    - define arg2 <context.args.last||NO_ARGUMENT>
+    - define gamemode <script.yaml_key[mode_map.<def[arg]||<context.alias>>]||NO_GAMEMODE>
+    - define target <def[arg2]||<player.name||NO_INDICATED_TARGET>>
+    - define target <server.match_players[<def[target]>]||<player||NO_MATCHING_TARGET>>
+    - if <def[target]> == NO_MATCHING_TARGET {
+        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Must specify a valid target: <def[arg2]>"
         - queue clear
         }
     - if <def[gamemode]> == NO_ALIAS_GAMEMODE {
