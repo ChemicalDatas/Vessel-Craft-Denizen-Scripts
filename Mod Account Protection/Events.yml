@@ -111,16 +111,17 @@ On Join Player Account Management:
 
     #Allows script to continue if theres no protections involved.
     action password determination:
+    - define loc  <player.bed_spawn.center.add[0,2,0]||<player.world.spawn_location.above>>
     - cooldown <script.yaml_key[script_cooldown]> s:<script.name>
     - if !<player.has_flag[AccountProtection.Password]> {
         - narrate "<parse:<script.yaml_key[mod_title]>>
           <gray>Youll need to set your password with <blue>./setpass <red>(Your password)"
-        - teleport <player> <player.bed_spawn.above||<player.world.spawn_location.above>>
+        - teleport <player> <def[location]>
         }
     - if !<player.has_flag[AccountProtection.EnteredPassword]> {
         - narrate "<parse:<script.yaml_key[mod_title]>> <red>You need to enter your <red>PASSWORD."
         - narrate "<blue>./login (password)"
-        - teleport <player> <player.bed_spawn.above||<player.world.spawn_location.above>>
+        - teleport <player> <def[location]>
         }
 
 
