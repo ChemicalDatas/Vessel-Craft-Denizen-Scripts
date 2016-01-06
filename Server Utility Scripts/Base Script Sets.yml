@@ -30,7 +30,7 @@ Wait:
     definitions: delay
     script:
     - wait <def[delay]||>
-    
+    - wait d@1t
 
 Animate:
     type: procedure
