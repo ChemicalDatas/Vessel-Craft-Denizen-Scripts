@@ -33,7 +33,7 @@ Invisibility Sneak:
         - playeffect <player.location> large_smoke qty:50
         - invisible <player> state:true
         - wait d@1s
-        - while <player.is_sneaking> {
+        - while <player.is_sneaking||false> {
             - playeffect <player.location.sub[0,1.3,0]> effect:footstep
             - wait d@15t-2s
             }
