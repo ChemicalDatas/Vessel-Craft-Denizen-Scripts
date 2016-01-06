@@ -1,7 +1,7 @@
 Tool Remains:
     type: world
     file: "Databases/Server Item Database.yml"
-    path: database.item
+    path: database.items
     id: database
     save_duration: d@1h
     # The location 
@@ -32,15 +32,15 @@ Tool Remains:
         on item crafted:
         - define path <script.yaml_key[path]>.<context.item.simple>.recipe
         - define id <script.yaml_key[id]>
-        - define recipe <context.recipe.escaped>
+        - define recipe <context.recipe.exclude[i@air].parse[simple].escaped>
         - if !<yaml[<def[id]>].contains[<def[path]>]> {
             - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
-            - narrate format:SAI "Hmmmmm, I<&sq>ve never seen a <context.item.formatted> made before... Ill have to remember that..."
+            - narrate format:SAI "Hmmmmm, I<&sq>ve never seen a <gold><context.item.formatted><blue> made before... Ill have to remember that..."
             - queue clear
             }
         - define known_recipes <yaml[<def[id]>].read[<def[path]>]>
         - if !<def[known_recipes].contains[<def[recipe]>]> {
-            - narrate format:SAI "Hmmmmm, I didnt know <gold><context.item.formatted><red> could be made like that... Ill have to remember that..."
+            - narrate format:SAI "Hmmmmm, I didnt know <gold><context.item.formatted><blue> could be made like that... Ill have to remember that..."
             - yaml id:<def[id]> set <def[path]>:|:<def[recipe]>
             - queue clear
             }
