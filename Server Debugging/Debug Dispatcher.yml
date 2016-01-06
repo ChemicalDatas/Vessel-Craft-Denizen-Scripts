@@ -41,7 +41,6 @@ Determine Error Type:
     definitions: message
     script:
      - define error_types "li@Missing Tag|Invalid dCommand|Invalid Arguments|Depreciated|Internal exception was thrown!"
-     -
      - determine <def[error_type]>
 
 
