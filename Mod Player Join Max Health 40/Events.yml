@@ -1,0 +1,9 @@
+Max Health Adjustment:
+    type: world
+    events:
+        on server start:
+        - announce "<script.name> is now adjusting player max health to 40 when they join." to_console
+        
+        on player join:
+        - inject "Wait for Valid Player"
+        - adjust <player> max_health:40
