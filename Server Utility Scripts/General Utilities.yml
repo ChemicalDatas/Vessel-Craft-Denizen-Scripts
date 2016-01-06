@@ -616,11 +616,12 @@ Wait for Valid Player:
     type: task
     definitions: duration|max_wait
     default_duration: d@1s
-    default_max_wait: 20
+    default_max_wait: 8
+    default_initial_wait: d@1t-1s
     script:
     - define duration <def[duration]||<script.yaml_key[default_duration]>>
     - define max_wait <def[max_wait]||<script.yaml_key[default_max_wait]>>
-    - wait d@1t
+    - wait <script.yaml_key[default_initial-wait]>
     - while !<player.is_spawned||false> {
         - wait <def[duration]>
         - if <def[loop_index].is[or_more].than[<def[max_wait]>]> {
@@ -740,7 +741,8 @@ item matcher:
     type: procedure
     definitions: lookup
     script:
-    - define list <server.list_worlds>
+    - define list <server.materials.parse[item]>
+    - define list <def[list].include[<yaml[database].list_keys[database.items]>]>
     - if <def[list].contains[<def[lookup]>]> {
         - determine <def[lookup]>
         }
