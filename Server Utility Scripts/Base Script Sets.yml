@@ -29,7 +29,7 @@ Wait:
     type: task
     definitions: delay
     script:
-    - wait <def[delay]||d@1s>
+    - wait <def[delay]||>
     
 
 Animate:
