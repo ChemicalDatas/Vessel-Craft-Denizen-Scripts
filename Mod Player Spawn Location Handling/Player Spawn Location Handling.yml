@@ -8,9 +8,8 @@ On Join Player Location Management:
         - if !<player.has_flag[bed_spawn]> {
             - define location <player.location.world.spawn_location>
             } else {
-            - ~define location <player.flag[bed_spawn]>
+            - define location <player.flag[bed_spawn]>
             }
-        - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|2]>"
-        - define spawnable_locations <def[cuboid].spawnable_blocks||<def[location].as_list>>
-        - define location <def[spawnable_locations].random>
-        - teleport <player> <def[location].center.add[0,1.5,0]>
+        - define cuboid "<proc[Cube Surrounding Location].context[<def[location]>|2]||<def[location].as_list>>"
+        - define location <def[cuboid].spawnable_blocks.random>
+        - teleport <player> <def[location].center.add[0,1.9,0]>
