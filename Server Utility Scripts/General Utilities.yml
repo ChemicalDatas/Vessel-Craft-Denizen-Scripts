@@ -620,10 +620,7 @@ Wait for Valid Player:
     script:
     - define duration <def[duration]||<script.yaml_key[default_duration]>>
     - define max_wait <def[max_wait]||<script.yaml_key[default_max_wait]>>
-    - inject typecheck
-    # This might work except this is meant to be injected... denizen only registers the 1st and the last injection for a script,
-    # so when type checking searches the queues script or <script> it will never find the stuff inbetween, the script that this will be normaly.
-    # It used to work so this is for a note to check on later. Leaving it on will not matter as it only does a few checks before not proceeding anywhere.
+    - wait d@1t
     - while !<player.is_spawned||false> {
         - wait <def[duration]>
         - if <def[loop_index].is[or_more].than[<def[max_wait]>]> {
