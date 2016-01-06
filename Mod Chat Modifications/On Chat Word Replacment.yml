@@ -15,12 +15,7 @@ Player Word Replacement:
         on player chats:
         - determine "<proc[Iconize].context[ <context.message.replace[\]> ]>"
         
-        on reload_database command:
-        - determine passively fulfilled
-        - define path <script.yaml_key[path]>
-        - define id <script.yaml_key[id]>
-        - run "Yaml Load" def:<def[path]>|<def[id]>
-        - narrate "See console for details on database."
+        
     
 
 # Script that replaces predefined characters for their ASCII equivalents
@@ -41,3 +36,5 @@ Determine Word Replacement:
         } else {
         - determine <def[word]>
         }
+    
+
