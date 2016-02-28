@@ -270,7 +270,7 @@ VC Console Mode:
     - determine <player.is_op||<context.server>>
     script:
     - inject defineheader
-    - narrate format:formatted "<def[header]> finish me'
+    - narrate format:formatted "<def[header]> finish me"
 
 
 
@@ -306,11 +306,10 @@ VC BossBar:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
-    - define args <context.args.escaped>
+    - define words <context.args.escaped>
     - define debug_output "<red>Announcing to server online players: <green><def[words]>"
     - inject defineheader
-    - narrate format:formatted "<def[header]> <def[debug_output]>
-    
+    - narrate format:formatted "<def[header]> <def[debug_output]>"
     - run "Boss Bar" def:<def[words]>
 
 
