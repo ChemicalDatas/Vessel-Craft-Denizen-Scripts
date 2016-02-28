@@ -214,9 +214,9 @@ Controller Event Detection:
         
         
         
-        #############################
-        # Sprint Click Catchers     #
-        #############################
+        #################################
+        # Sprint / Sneak Click Catchers #
+        #################################
         on player right clicks:
         - define event_list li@
         - define context    li@
@@ -232,9 +232,18 @@ Controller Event Detection:
         - if <def[event_list].is_empty>
           queue clear
           
+        
         #Building a tuple of information for the context, escaped
-        - define context_element
-          li@location|<context.location>
+        # d-bug handling: There should always be a location when a player clicks
+        # only seems to occur when clicking while flying and crouching at the same time
+        # I want the error to propigate down, so I wont be giving any valid d-location
+        - if <context.location||DENIZEN_BUG_OCCURED> != DENIZEN_BUG_OCCURED {
+            - define context_element
+              li@location|<context.location>
+            } else {
+            - define context_element
+              li@location|D-Bug-For-Fly-Crouch-Clicking
+            }
           
         - define context 
           <def[context].include[<def[context_element].escaped>]>
