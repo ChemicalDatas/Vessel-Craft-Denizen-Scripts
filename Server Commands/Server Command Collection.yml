@@ -48,7 +48,7 @@ CommandDefaults:
         server page: ""
         voting page: "http://minecraft-mp.com/server-s32672"
         teamspeak ip: "vesselcraft.minecraftnoob.com"
-        teamspeak password: "noob"
+        teamspeak password: "<&dq><&dq>"
         teamspeak download: "http://www.teamspeak.com/?page=downloads"
         chat notify true:  "Chat Notifications <red>ON<dark_gray>. Chatting <player.name> will play a sound for you."
         chat notify false: "Chat Notifications <red>OFF<dark_gray>. Chatting <player.name> will <red>not<dark_gray> play a sound for you."
@@ -130,7 +130,7 @@ VC Debug:
         - flag server debug_output:!
         } else {
         - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> Toggled Console Output<&co> <red>on"
-        - flag server debug_output:true
+        - flag server debug_output
         }
 
 
@@ -158,7 +158,8 @@ VC Nickname:
         }
     - define nickname <parse:<proc[Iconize].context[<def[nickname]>]>>
     - run "Rename Player" def:<def[nickname]> as:<def[target]>
-    - narrate format:formatted "<gray>Trying to change <reset><def[target].name>'s <gray>name to: <reset><def[nickname]><reset>."
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <gray>Trying to change <reset><def[target].name>'s <gray>name to: <reset><def[nickname]><reset>."
 
 
 VC Colors:
@@ -201,7 +202,8 @@ VC Colors:
         - define key <def[value].split[/].first>
         - define valu <def[colors].map_get[<def[key]>]>
         - define color_key "<%key%><def[key]>"
-        - narrate "<def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
+        - inject defineheader
+        - narrate format:formatted "<def[header]> <def[color_key].pad_right[16].with[-]> <gray><def[valu]>"
         }
 
 
@@ -226,6 +228,8 @@ VC Reload Databases:
         }
     - foreach <def[yaml]> {
         - run "yaml load" def:|<def[value]>
+        - define narration "Reloaded: <def[value]>"
+        - announce format:SAI <def[narration]> to_ops
         }
 
 
@@ -239,8 +243,9 @@ VC Save Databases:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
+    - inject defineheader
     - if <context.args.is_empty> {
-        - narrate "<script.yaml_key[usage]>"
+        - narrate format:formatted "<def[header]> <script.yaml_key[usage]>"
         - queue clear
         }
     - if <context.args.contains[all]> {
@@ -250,6 +255,7 @@ VC Save Databases:
         }
     - foreach <def[yaml]> {
         - run "yaml save" def:|<def[value]>
+        - narrate format:formatted "<def[header]> <def[narration]>" targets:<server.list_online_ops>
         }
 
 # todo: finish me, and companion script
@@ -263,7 +269,8 @@ VC Console Mode:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
-    - narrate 'finish me'
+    - inject defineheader
+    - narrate format:formatted "<def[header]> finish me'
 
 
 
@@ -284,7 +291,8 @@ VC Icons:
         - define value <yaml[word_replacement].read[database.<def[value]>]>
         - define list "<def[list].include[<gray><def[key].pad_right[18].with[.]><gold><def[value]>]>"
         }
-    - narrate "<def[list].alphanumeric.separated_by[       ]>"
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <def[list].alphanumeric.separated_by[       ]>"
 
 
 VC BossBar:
@@ -300,9 +308,9 @@ VC BossBar:
     - determine <player.is_op||<context.server>>
     script:
     - define args <context.args.escaped>
-    - define words <proc[Iconize].context[<def[args].escaped>]>
     - define debug_output "<red>Announcing to server online players: <green><def[words]>"
-    - narrate format:formatted <def[debug_output]>
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <def[debug_output]>
     
     - run "Boss Bar" def:<def[words]>
 
@@ -322,8 +330,9 @@ VC TeamSpeak:
     - determine <player.is_op||<context.server>>
     script:
     - determine passively fulfilled
-    - narrate format:formatted "<green><script.yaml_key[message.teamspeak ip]>"
-    - narrate format:formatted "<password>: <green><script.yaml_key[message.teamspeak password]>"
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <green><script.yaml_key[message.teamspeak ip]>"
+    - narrate format:formatted "<def[header]> <password>: <green><script.yaml_key[message.teamspeak password]>"
 
 
 # todo: create a target to send the info to
@@ -338,7 +347,8 @@ VC Vote:
     - determine <player.is_op||<context.server>>
     script:
     - determine passively fulfilled
-    - narrate format:formatted "<green><script.yaml_key[message.voting page]>"
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <green><script.yaml_key[message.voting page]>"
 
 
 # todo: create a target to send the info to
@@ -354,8 +364,9 @@ VC webpage:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
-    - narrate format:formatted "<green><s@CommandDefaults.yaml_key[message.server page]>"
-    - narrate format:formatted "<green><s@CommandDefaults.yaml_key[message.facebook page]>"
+    - inject defineheader
+    - narrate format:formatted "<def[header]> <green><s@CommandDefaults.yaml_key[message.server page]>"
+    - narrate format:formatted "<def[header]> <green><s@CommandDefaults.yaml_key[message.facebook page]>"
 
 
 VC TimeSync:
@@ -370,11 +381,12 @@ VC TimeSync:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
+    - inject defineheader
     - if <server.has_flag[pause_time_sync]> {
-        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> The world time is <green>now <reset>syncing with server time."
+        - narrate format:formatted "<def[header]> The world time is <green>now <reset>syncing with server time."
         - flag server "pause_time_sync:!"
         } else {
-        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> The world time is <red>not <reset>syncing with server time." 
+        - narrate format:formatted "<def[header]> The world time is <red>not <reset>syncing with server time." 
         - flag server "pause_time_sync:true"
         }
 
@@ -392,7 +404,8 @@ VC ClearChat:
     - determine <player.is_op||<context.server>>
     script:
     - if <context.server> {
-        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> You cannot do this, this is for players only"
+        - inject defineheader
+        - narrate format:formatted "<def[header]> You cannot do this, this is for players only"
         - queue clear
         }
     - run "Player Chat Clearing" def:19
@@ -456,7 +469,8 @@ VC Display:
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
     script:
     - if <context.server> {
-        - narrate "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Must be used ingame. Sorry."
+        - inject defineheader
+        - narrate format:formatted "<def[header]> <blue>Must be used ingame. Sorry."
         }
     - define path <context.args.get[1]>
     - define text <context.args.map_get[text]>
@@ -470,7 +484,8 @@ VC GameMode Change Detection:
     type: world
     events:
         on player changes gamemode:
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
+        - inject defineheader
+        - narrate format:formatted "<def[header]> <yellow>Your game mode was changed to: <light_purple><context.gamemode>"
 
 
 VC GameMode:
@@ -530,7 +545,8 @@ VC GameMode:
         - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Targets gamemode <red><def[target].gamemode><yellow>. Alias commands<&co> <blue><script.yaml_key[aliases].space_separated>"
         - queue clear
         }
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
+        - inject defineheader
+        - narrate format:formatted "<def[header]> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
     - adjust <def[target]> gamemode:<def[gamemode]>
 
 
@@ -565,7 +581,8 @@ VC Fly:
         - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Toggled command flymode off."
         } else {
         - flag player command_triggered_fly_mode
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Toggled command flymode on."
+        - inject defineheader
+        - narrate format:formatted "<def[header]> <yellow>Toggled command flymode on."
         }
 
 
@@ -650,7 +667,8 @@ VC Time:
         - queue clear
         }
     - time <def[intended_time]>t
-    - announce "<blue><&lb><red><script.name><blue><&rb><reset> <red><player.name.display><reset> set the time to <yellow><def[time]>."
+    - inject defineheader
+    - announce "<def[header]> <red><player.name.display><reset> set the time to <yellow><def[time]>."
 
 
 # todo: take advantage player matching for specific weather targets
@@ -683,7 +701,8 @@ VC Weather:
         - queue clear
         }
     - weather <def[weather]>
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The weather was set to <red><def[weather]> <yellow>in <red><def[world].name||every world>."
+    - define narration "<yellow>The weather was set to <red><def[weather]> <yellow>in <red><def[world].name||every world>."
+    - run NarrateScriptHeader def:<def[narration]>|<script>
 
 
 VC World:
@@ -697,22 +716,27 @@ VC World:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - define players <server.list_online_players.parse[name]>
-    - define worlds <server.list_worlds.parse[name]>
-    - determine <def[players].include[<def[worlds]>].filter[starts_with[<context.args.last||>]]>
+    - define players "<proc[player matcher].context[<context.args.last>].parse[name]>"
+    - define worlds "<proc[world matcher].context[<context.args.last>]>"
+    - define options <def[players].include[<def[worlds]>]>
+    - narrate "<blue>[possible options]<reset> <dark_gray><def[options].space_separated>"
+    - determine <def[options]>
     script:
     - define world <context.args.get[1].as_world||NO_VALID_WORLD>
-    - define player <proc[player matcher].context[<context.args.map_get[]>]>
+    - define player "<proc[player matcher].context[<context.args.map_get[player]||<player.name>>]>"
     - if <def[player]> == NO_VALID_PLAYER_SPECIFIED {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>You need to specify a valid player. Player<&co> <def[player]>"
+        - define narration "<yellow>You need to specify a valid player. Player<&co> <def[player]>"
+        - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
     - if <def[world]> == NO_VALID_WORLD {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>This server contains the worlds<&co><&nl><blue><server.list_worlds.parse[name].space_separated>"
+        - define narration "<yellow>This server contains the worlds<&co><&nl><blue><server.list_worlds.parse[name].space_separated>"
+        - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
     - teleport <def[world].spawn_location>
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Ok, sending you to <def[world]>"
+    - define narration "<yellow>Ok, sending you to <def[world].name>"
+    - run NarrateScriptHeader def:<def[narration]>|<script>
 
 
 VC I:
@@ -726,17 +750,17 @@ VC I:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - determine <yaml[database].read[lists.items].filter[starts_with[<context.args.last>]]>
+    - define items "<proc[item matcher].context[<context.args.last>]>"
+    - narrate "<blue>[possible items]<dark_gray> <def[items].space_separated>"
+    - determine <def[items].first>
     script:
-    - define item <context.args.get[1]>[quantity=<context.args.get[2]||<context.args.get[1].as_item.max_stack||1>>]
-    - define item <def[item].as_item||Not_An_Item>
-    - if <def[item].type||Not_An_Item> != "Item" {
-        - define item_list <yaml[database].read[lists.items]>
-        - define possible_item <def[item_list].find_partial[<def[item]>]>
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Not an item. <blue>Did you mean <def[possible_item].name>?"
-        - queue clear
-        }
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Giving you <def[item].formatted>"
+    - define items "<proc[item matcher].context[<context.args.first>]>"
+    - narrate "<blue>[possible items]<dark_gray> <def[items]>"
+    - define item <def[items].first>
+    - define quantity <context.args.last||<def[item].max_stack||1>>
+    - define target <def[item]>[quantity=<def[quantity]>]
+    - define narration "<blue>Giving you <def[item].formatted>"
+    - run NarrateScriptHeader def:<def[narration]>|<script>
     - give <def[item]>
 
 
@@ -760,11 +784,13 @@ VC Clear Inventory:
         define target <server.match_player[<context.args.map_get[target]>]||NO_VALID_PLAYER>
     - if <def[target]> == NO_DEFAULT_TARGET
       || <def[target]> == NO_VALID_PLAYER {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <red>Could not find the specified target. <yellow><def[target]>"
+        - narrate format:ScriptHeader "<red>Could not find the specified target. <yellow><def[target]>"
         - queue clear
         }
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
-    - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your inventory was <yellow>cleared." targets:<def[target]>
+    - define narration "<blue>Clearing <red><def[target].name.display||<def[target].name>><blue><&sq>s inventory"
+    - define narration2 "<blue>Your inventory was <yellow>cleared."
+    - run NarrateScriptHeader def:<def[narration]>|<script>
+    - run NarrateScriptHeader def:<def[narration2]>|<script>|<def[target]>
     - inventory clear d:<def[target].inventory>
 
 
@@ -780,8 +806,12 @@ VC Give:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - define players <server.list_online_players.parse[name]>
-    - define items <yaml[serverinfo].read[lists.item_list]>
-    - determine <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+    #
+    # - define items <yaml[serverinfo].read[lists.item_list]>
+    - define items "<proc[item matcher].context[<context.args.last>].parse[substring[3]]>"
+    - define matches <def[players].include[<def[items]>].filter[starts_with[<context.args.last>]]>
+    - narrate "<blue>[possible matches]<gold> <def[matches].space_separated>"
+    - determine <def[matches]>
     script:
     - define target <context.args.get[1]||NO_TARGET_SPECIFIED>
     - define target_id
@@ -802,7 +832,7 @@ VC Give:
     
     - if !<server.object_is_valid[<def[target]>]>
       || !<server.object_is_valid[<def[item]>]> {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target]> <def[item]> <def[ammount]>"
+        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Your input<&co> <yellow>./give <def[target].id_holder.name> <def[item]> <def[ammount]>"
         - queue clear
         }
 
@@ -1069,7 +1099,7 @@ VC Heal:
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
-    headder: <blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>
+    header: <blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>
     script:
     - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
     - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
@@ -1091,9 +1121,9 @@ VC Heal:
             }
         }
     - define actor <tern[<context.server>]:server||<player.name.display||<player.name>>>
-    - narrate format:formatted "<parse:<script.yaml_key[headder]>> Healed statuses: <def[healed_effects].space_separated>"
-    - narrate format:formatted "<parse:<script.yaml_key[headder]>> You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
-    - narrate format:formatted "<parse:<script.yaml_key[headder]>> You were healed by <red><def[actor]><yellow> [smile]"
+    - narrate format:formatted "<parse:<script.yaml_key[header]>> Healed statuses: <def[healed_effects].space_separated>"
+    - narrate format:formatted "<parse:<script.yaml_key[header]>> You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
+    - narrate format:formatted "<parse:<script.yaml_key[header]>> You were healed by <red><def[actor]><yellow> [smile]"
 
 
 VC KillAll:
