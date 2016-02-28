@@ -284,7 +284,6 @@ VC Icons:
     allowed help:
     - determine <player.is_op||<context.server>>
     script:
-    - determine passively fulfilled
     - define list li@
     - foreach <yaml[word_replacement].list_keys[database]> {
         - define key <def[value].replace[&rb].with[<&rb>].replace[&lb].with[<&lb>]>
@@ -292,7 +291,7 @@ VC Icons:
         - define list "<def[list].include[<gray><def[key].pad_right[18].with[.]><gold><def[value]>]>"
         }
     - inject defineheader
-    - narrate format:formatted "<def[header]> <def[list].alphanumeric.separated_by[       ]>"
+    - narrate "<def[header]> <def[list].alphanumeric.separated_by[       ]>"
 
 
 VC BossBar:
@@ -754,14 +753,19 @@ VC I:
     - narrate "<blue>[possible items]<dark_gray> <def[items].space_separated>"
     - determine <def[items].first>
     script:
-    - define items "<proc[item matcher].context[<context.args.first>]>"
-    - narrate "<blue>[possible items]<dark_gray> <def[items]>"
-    - define item <def[items].first>
-    - define quantity <context.args.last||<def[item].max_stack||1>>
+    - define desire <context.args.first>
+    - if <server.object_is_valid[<def[desire]>]> {
+        - define item <context.args.first>
+        } else {
+        - define items "<proc[item matcher].context[<def[desire]>]>"
+        - narrate "<blue>[possible items]<dark_gray> <def[items]>"
+        - define item <def[items].first>
+        }
+    - define quantity <context.args.get[2]||<def[item].max_stack||1>>
     - define target <def[item]>[quantity=<def[quantity]>]
     - define narration "<blue>Giving you <def[item].formatted>"
     - run NarrateScriptHeader def:<def[narration]>|<script>
-    - give <def[item]>
+    - give <def[item]> quantity:<def[quantity]>
 
 
 VC Clear Inventory:
@@ -883,7 +887,8 @@ VC Ping:
     script:
     - define color <script.yaml_key[colors_list]>
     - define color &<def[color].random>
-    - narrate  format:formatted "<%color%>Pong"
+    - inject DefineHeader
+    - narrate "<def[header]> <%color%>Pong"
  
  
 VC Speed:
@@ -899,13 +904,14 @@ VC Speed:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
     script:
+    - inject DefineHeader
     - define speed <context.args.get[1].div[5]||.2>
     - if <player.is_flying> {
        - adjust <player> fly_speed:<def[speed]>
-       - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Set your flying speed to<&co> <blue><def[speed].mul[5]>"
+       - narrate "<def[header]> <yellow>Set your flying speed to<&co> <blue><def[speed].mul[5]>"
        } else {
        - adjust <player> walk_speed:<def[speed]>
-       - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Set your walking speed to<&co> <blue><def[speed].mul[5]>"
+       - narrate "<def[header]> <yellow>Set your walking speed to<&co> <blue><def[speed].mul[5]>"
        }
 
 
@@ -923,9 +929,9 @@ VC Mob:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - define mob_list <script.yaml_key[entity_list]>
-    - define player_list <server.list_online_players.parse[name]>
-    - determine <def[mob_list].include[<def[player_list]>].filter[starts_with[<context.args.last>]]>
+    - define mob_list <script.yaml_key[entity_list].filter[starts_with[<context.args.last>]]>
+    - define player_list "<proc[match player].context[<context.args.last>]>"
+    - determine <def[mob_list].include[<def[player_list]>]>
     entity_list:
     - ARROW
     - BAT
@@ -1000,7 +1006,8 @@ VC Mob:
     - define location <def[location].as_location||NONE>
     - if <def[mob_list].contains[NONE]>
       || <def[location]> == NONE {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <parse:<script.yaml_key[usage]>>"
+        - inject DefineHeader
+        - narrate "<def[header]> <parse:<script.yaml_key[usage]>>"
         - queue clear
         }
     - define location <def[location].above>
@@ -1046,19 +1053,20 @@ VC Back:
     - if !<player.is_op||<context.server>> queue clear
     - determine <util.random.int[1].to[<s@CommandDefaults.yaml_key[teleport_history_max]>]>
     script:
+    - inject DefineHeader
     - if !<player.has_flag[teleport_history]> {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>Sorry, you have no teleport history."
+        - narrate "<def[header]> <blue>Sorry, you have no teleport history."
         - queue clear
         }
     - define index <context.args.get[1]||1>
     - if <def[index].as_int||not_an_int> == not_an_int
       || <def[index].is[more].than[<player.flag[teleport_history].as_list.size>]> {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <blue>Sorry, <yellow><def[index]> <blue>was not a number or an oversized number to use to get your history with. <red>Sending you to your last location."
+        - narrate "<def[header]> <blue>Sorry, <yellow><def[index]> <blue>was not a number or an oversized number to use to get your history with. <red>Sending you to your last location."
         - define index 1
         }
     - define target_location <player.flag[teleport_history].as_list.reverse.get[<def[index]>]>
     - if <def[target_location].as_location||NOT_A_LOCATION> == NOT_A_LOCATION {
-        - narraet format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Youve got some wierd values that should only be locations... Contact an admin about that... <def[target_location]>"
+        - narrate "<def[header]> <yellow>Youve got some wierd values that should only be locations... Contact an admin about that... <def[target_location]>"
         - flag player teleport_histor:!
         - queue clear
         }
@@ -1083,7 +1091,8 @@ VC Hurt:
     - if <def[target].as_entity||NOT_VALID_ENTITY> == NOT_VALID_ENTITY {
         - define target <server.match_player[<def[target]>]||NO_MATCHABLE_PLAYER>
         - if <def[target]> == NO_MATCHABLE_PLAYER {
-            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> You need a valid object target."
+            - inject DefineHeader
+            - narrate "<def[header]> You need a valid object target."
             - queue clear
             }
         }
@@ -1110,10 +1119,11 @@ VC Heal:
     script:
     - define target <context.args.get[1]||<player||NO_SPECIFIED_TARGET>>
     - define target <def[target].as_player||NOT_VALID_PLAYER_OBJECT>
+    - inject DefineHeader
     - if !<server.object_is_valid[<def[target]>]> {
         - define target <server.match_player[<def[target]>]||COULD_NOT_FIND_PLAYER>
         - if !<server.object_is_valid[<def[target]>]> {
-            - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <red><def[target]> <blue>was not a valid target."
+            - narrate format:formatted "<def[header]> <red><def[target]> <blue>was not a valid target."
             - queue clear
             }
         }
@@ -1128,9 +1138,9 @@ VC Heal:
             }
         }
     - define actor <tern[<context.server>]:server||<player.name.display||<player.name>>>
-    - narrate format:formatted "<parse:<script.yaml_key[header]>> Healed statuses: <def[healed_effects].space_separated>"
-    - narrate format:formatted "<parse:<script.yaml_key[header]>> You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
-    - narrate format:formatted "<parse:<script.yaml_key[header]>> You were healed by <red><def[actor]><yellow> [smile]"
+    - narrate format:formatted "<def[header]> Healed statuses<green>[biohazzard]<reset>: <def[healed_effects].space_separated>"
+    - narrate format:formatted "<def[header]> You healed <red><def[target].name.display||<def[target].name>><yellow> [smile]"
+    - narrate format:formatted "<def[header]> You were healed by <red><def[actor]><yellow> [smile]"
 
 
 VC KillAll:
@@ -1171,6 +1181,7 @@ VC KillAll:
             }
         }
     - remove <def[entity_targets]>
-    - narrate "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Removed <red><def[entity_targets].size> <yellow>entities."
+    - inject DefineHeader
+    - narrate "<def[header]> <yellow>Removed <red><def[entity_targets].size> <yellow>entities."
 
 
