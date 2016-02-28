@@ -19,3 +19,15 @@ Formatted:
 Plain:
     type: format
     format: <text>
+
+NarrateScriptHeader:
+    type: task
+    definitions: text|script|targets
+    script:
+    - define header <blue><&lb><red><def[script].name><blue><&rb><reset>
+    - narrate targets:<def[targets].unescaped||<player||li@>> "<proc[iconize].context[<def[header]> <def[text]>]>"
+
+DefineHeader:
+    type: task
+    script:
+    - define header <blue><&lb><red><queue.script.name><blue><&rb><reset>
