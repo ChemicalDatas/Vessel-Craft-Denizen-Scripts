@@ -852,14 +852,21 @@ VC Leap:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
+    - define targets "<proc[player matcher].context[<context.args.last>]>"
+    - inject DefineHeader
+    - narrate "<def[header]> possible targets<&co> <def[targets]>"
+    - determine <def[targets]>
     script:
-    - define target <parse:<context.args.get[1]||<player>>>
-    - define strength <context.args.get[2]||1>
+    - define target "<proc[player matcher].context[<context.args.first||<player>>].first>"
+    - define strength <context.args.last||1>
     - if !<server.object_is_valid[<def[target]>]> {
-        - narrate  format:formatted "<yaml[serverinfo].read[servername]> <red>Could not find the specified target. <yellow><target> <red><context.args.get[1]"
+        - inject DefineHeader
+        - narrate "<def[header]> <red>Could not find the specified target. <yellow><def[target]> <red><context.args.get[1]>"
         - queue clear
         }
+    - inject DefineHeader
+    - narrate "<def[header]> You caused <red><def[target].name><reset> to leap! (strength<&co> <def[strength]>)"
+    - narrate "<def[header]> You leap! (strength<&co> <def[strength]>)" targets:<def[target]>
     - adjust <def[target]> velocity:<def[target].location.direction.vector.mul[<def[strength]>]>
 
 
