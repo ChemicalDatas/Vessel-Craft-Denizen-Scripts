@@ -1,0 +1,47 @@
+On Chat Range Monster Attractor:
+    # When a player chats gets nearby monsters to move nearby
+    type: yamldata
+    mobs:
+    - skeleton
+    - zombie
+    - spider
+    mobs vol requirement:
+        skeleton: 20
+        zombie: 35
+        spider: 10
+    noise_ranges:
+        fireworks: 100
+        talk: 50
+    chat_modifier:
+        '&exc': 12
+        '&dot': -12
+    dummy_mob: squid
+    events:
+        on player chats:
+        #- determine passively cancelled
+        - define range <script.yaml_key[noise_ranges.talk]>
+        - define message <context.message>
+        - foreach li@starts_with|ends_with {
+            - define attrib <def[value]>
+            - foreach "li@.|!" {
+                - while <def[message].%attrib%[<def[value]>]> {
+                    - if <def[attrib]> == starts_with {
+                        - define start 2
+                        - define end <def[message].length>
+                        }
+                    - if <def[attrib]> == ends_with {
+                        - define start 1
+                        - define end <def[message].length.sub[1]>
+                        }
+                    - define message <def[message].substring[<def[start]>,<def[end]>]>
+                    - define range <def[range].add[<script.yaml_key[chat_modifier.<def[value].escaped>]>]>
+                    }
+                }
+            }
+        - define attackers <player.location.find.entities[<script.yaml_key[mobs]>].within[<def[range]>]>
+        - narrate "attackers: <def[attackers].parse[entity_type]>"
+        - walk <def[attackers]> <player.location> auto_range speed:0.4 radius:5.0
+        - narrate "range[<def[range]>] <context.message>"
+    
+    
+

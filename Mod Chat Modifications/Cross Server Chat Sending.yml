@@ -1,0 +1,12 @@
+
+Cross Server Chat Sending:
+    type: world
+    events:
+        on player chats:
+        - determine passively cancelled
+        - async:
+            - define message <context.message>
+            - define header "[<bungee.server.name>][<player.name>]"
+            - bungee <bungee.list_servers> {
+                - announce "<def[header]> <def[message]>"
+                }
