@@ -150,6 +150,9 @@ Is Between Numbers:
     type_2nd: as_int
     script:
     - inject typecheck
+    - if <def[the_checked].as_int||NAN> == NAN {
+        - determine false
+        }
     - if <def[the_checked].is[or_more].than[<def[2nd]>]> && <def[the_checked].is[less].than[<def[1st]>]> {
         - determine true
         }
@@ -200,7 +203,69 @@ Is Between Numbers:
     - determine false
 
 
+world matcher:
+    type: procedure
+    definitions: lookup
+    script:
+    - define list <server.list_worlds>
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define world <def[list].parse[name].filter[starts_with[<def[lookup]>]]>
+    - determine <def[world]>
 
 
+item matcher:
+    type: procedure
+    definitions: lookup
+    filters:
+    - starts_with[<def[lookup]>]
+    - contains[<def[lookup]>]
+    script:
+    # parsing i@ into a regular item if its
+    - if <>
+    - define lookup <def[lookup].simple||<def[lookup]>>
+    - define list <server.list_materials.parse[as_item].parse[simple].alphanumeric>
+    - define list <def[list].include[<yaml[database].list_keys[database.items].alphanumeric||li@>]>
+    
+    #Exact matching perhaps from another item match input?
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup].as_item.as_list>
+        }
+    - define list <def[list].parse[simple].parse[substring[3]]>
+    - define return <def[list].filter[starts_with[<def[lookup]>]]>
+    - define partial <def[list].find_partial[<def[lookup]>]||li@>
+    - foreach <def[partial]> {
+        - define return <def[return].include[<def[list].get[<def[value]>]>]>
+        }
+    - determine <def[return].deduplicate.parse[as_item]>
 
+
+material matcher:
+    type: procedure
+    definitions: lookup
+    look_type: parse[name].starts_with[<def[lookup]>]
+    script:
+    - define list <server.list_materials.alphanumeric>
+    - if <def[list].contains[<def[lookup]>]> {
+        - determine <def[lookup]>
+        }
+    - define return <def[list].filter[starts_with[<def[lookup]>]]>
+    - define partial <def[list].find_partial[<def[lookup]>]>
+    - foreach <def[partial]> {
+        - define return <def[return].include[<def[list].get[<def[value]>]>]>
+        }
+    - determine <def[return].parse[as_material]>
+
+
+player matcher:
+    type: procedure
+    definitions: lookup
+    look_type: starts_with[lookup]
+    script:
+    # if the player matcher got a valid p@(unique id)
+    - if !<def[lookup].exists> determine li@
+    - if <server.list_online_players.contains[<def[lookup]>]> determine <def[lookup]>
+    - define targets <server.list_online_players.parse[name].filter[starts_with[<def[lookup]>]]>
+    - determine <def[targets].parse[as_player]>
 
