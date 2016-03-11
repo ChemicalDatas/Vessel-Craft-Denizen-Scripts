@@ -322,6 +322,7 @@ VC TeamSpeak:
     aliases:
     - tsaddress
     - tslocation
+    - ts
     permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
     permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
     allowed help:
@@ -535,16 +536,16 @@ VC GameMode:
     - define gamemode <script.yaml_key[mode_map.<def[arg]||<context.alias>>]||NO_GAMEMODE>
     - define target <def[arg2]||<player.name||NO_INDICATED_TARGET>>
     - define target <server.match_players[<def[target]>]||<player||NO_MATCHING_TARGET>>
+    - inject defineheader
     - if <def[target]> == NO_MATCHING_TARGET {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Must specify a valid target: <def[arg2]>"
+        - narrate format:formatted "<def[header]> <yellow>Must specify a valid target: <def[arg2]>"
         - queue clear
         }
     - if <def[gamemode]> == NO_ALIAS_GAMEMODE {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset><&co> <yellow>Targets gamemode <red><def[target].gamemode><yellow>. Alias commands<&co> <blue><script.yaml_key[aliases].space_separated>"
+        - narrate format:formatted "<def[header]> <yellow>Targets gamemode <red><def[target].gamemode><yellow>. Alias commands<&co> <blue><script.yaml_key[aliases].space_separated>"
         - queue clear
         }
-        - inject defineheader
-        - narrate format:formatted "<def[header]> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
+    - narrate format:formatted "<def[header]> <yellow>Changed <def[target].name> to<&co> <light_purple><def[target].gamemode>"
     - adjust <def[target]> gamemode:<def[gamemode]>
 
 
@@ -574,12 +575,12 @@ VC Fly:
     - if !<player.is_op||<context.server>> queue clear
     - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.last>]]>
     script:
+    - inject defineheader
     - if <player.has_flag[command_triggered_fly_mode]> {
         - flag player command_triggered_fly_mode:!
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>Toggled command flymode off."
+        - narrate format:formatted "<def[header]> <yellow>Toggled command flymode off."
         } else {
         - flag player command_triggered_fly_mode
-        - inject defineheader
         - narrate format:formatted "<def[header]> <yellow>Toggled command flymode on."
         }
 
@@ -616,7 +617,8 @@ VC Smite:
             }
         }
     - if !<server.object_is_valid[<def[location]>]> {
-        - narrate format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> You need to specify a valid location<&co> <def[location]>"
+        - define narration "You need to specify a valid location<&co> <def[location]>"
+        - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
     - strike <player.location.cursor_on[100]>
@@ -635,6 +637,7 @@ VC Time:
     - morning
     - noon
     - day
+    - evening
     - dusk
     - night
     - midnight
@@ -645,6 +648,7 @@ VC Time:
         morning: 0
         noon: 6000
         day: 6000
+        evening: 10000
         dusk: 12000
         night: 14000
         midnight: 18000
@@ -656,12 +660,14 @@ VC Time:
     script:
     - define time <context.args.get[1]||<context.alias||NO_TIME_SPECIFIED>>
     - define intended_time <script.yaml_key[time_map.<def[time]>]||NO_TIME_SPECIFIED>
-    - if "<proc[is between numbers].context[0|<def[time]>|24000]||false>" {
+    - if "<proc[is between numbers].context[0|<def[time]>|24000]>" {
         - define intended_time <def[time]>
         }
     - if <def[intended_time]> == NO_TIME_SPECIFIED {
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <yellow>The time is <player.world.time> ticks"
-        - narrate  format:formatted "<blue><&lb><red><script.name><blue><&rb><reset> <blue>./time <yellow>(dawn, morning, noon, day, dusk, night, midnight, 0-24000)"
+        - define narration "<yellow>The time is <player.world.time> ticks"
+        - run NarrateScriptHeader def:<def[narration]>|<script>
+        - define narration "<blue>./time <yellow>(<script.yaml_key[alias].comma_separated>, 0-24000)"
+        - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
     - time <def[intended_time]>t
@@ -695,7 +701,8 @@ VC Weather:
     - define weather <def[weather_map].map_get[<def[weather]>]||NO_WEATHER_SPECIFIED>
     - if <def[weather]> == NO_WEATHER_SPECIFIED
       || <def[weather]> == NOT_A_VALID_WEATHER {
-    	- narrate "<blue><&lb><red><script.name><blue><&rb><reset> <yellow><def[weather]> is not valid."
+        - define narration "<yellow><def[weather]> is not valid."
+        - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
     - weather <def[weather]>
