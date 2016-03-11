@@ -665,8 +665,9 @@ VC Time:
         }
     - if <def[intended_time]> == NO_TIME_SPECIFIED {
         - define narration "<yellow>The time is <player.world.time> ticks"
+        - define alias <script.yaml_key[aliases]>
         - run NarrateScriptHeader def:<def[narration]>|<script>
-        - define narration "<blue>./time <yellow>(<script.yaml_key[alias].comma_separated>, 0-24000)"
+        - define narration "<blue>./time <yellow>(<script.yaml_key[aliases].comma_separated>, 0-24000)"
         - run NarrateScriptHeader def:<def[narration]>|<script>
         - queue clear
         }
