@@ -648,8 +648,8 @@ VC Time:
         morning: 0
         noon: 6000
         day: 6000
-        evening: 10000
-        dusk: 12000
+        evening: 12000
+        dusk: 12700
         night: 14000
         midnight: 18000
     allowed help:
