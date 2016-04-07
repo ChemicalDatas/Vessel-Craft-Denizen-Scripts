@@ -14,7 +14,6 @@ Object Database Startup:
         
         # on server shutdown.
         on stop command:
-        - determine passively fulfilled
         - announce "<script.name> performing shutdown routine."
 
 
@@ -289,9 +288,27 @@ tqueue2:
 
 
 
+ScriptObjectTest:
+    type: OBJECT
+    definitions: initial_args|method_flag
+    script:
+    - define change_me <def[initial_args]>
+    - while true {
+        -
+        - queue pause
+        - inject <server.flag[]> locally
+        }
+    set name:
+    - define change_me <player.
+    
+    get name:
+    - determine <def[name]>
 
-
-
+testflag:
+    type: task
+    definitions: target|flag
+    script:
+    - announce "<script.name> <%target%.flag[<def[flag]>]>"
 
 
 
