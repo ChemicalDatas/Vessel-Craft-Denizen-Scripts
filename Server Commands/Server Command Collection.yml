@@ -656,7 +656,7 @@ VC Time:
     - determine <player.is_op||<context.server>>
     tab complete:
     - if !<player.is_op||<context.server>> queue clear
-    - determine <li@dawn|morning|noon|day|dusk|night.filter[starts_with[<context.args.last>]]>
+    - determine <script.yaml_key[aliases].exclude[timeset].filter[starts_with[<context.args.last>]]>
     script:
     - define time <context.args.get[1]||<context.alias||NO_TIME_SPECIFIED>>
     - define intended_time <script.yaml_key[time_map.<def[time]>]||NO_TIME_SPECIFIED>
@@ -1190,5 +1190,223 @@ VC KillAll:
     - remove <def[entity_targets]>
     - inject DefineHeader
     - narrate "<def[header]> <yellow>Removed <red><def[entity_targets].size> <yellow>entities."
+
+
+VC Home:
+    type: command
+    name: home
+    description: Sends a player to their home.
+    usage: /home
+    tab complete: 
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine true
+    script:
+    - 
+
+
+VC SetHome:
+    type: command
+    name: sethome
+    description: Sets a home for the player.
+    usage: /home [name]
+    tab complete: 
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine true
+    script:
+    - 
+
+
+VC SetSpawn:
+    type: command
+    name: SetSpawn
+    description: Sets the spawnpoint for that world.
+    usage: /setspawn
+    tab complete: 
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC SetServerSpawn:
+    type: command
+    name: SetServerSpawn
+    description: Sets the server spawn point.
+    usage: /setserverspawn
+    tab complete: 
+    - narrate "There are no options for this command."
+    - narrate "<script.yaml_key[usage]>"
+    - determine ''
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC SetGlobalSpawn:
+    type: command
+    name: SetGlobalSpawn
+    description: Sets the spawnpoint for ./globalspawn
+    usage: /setglobalspawn
+    tab complete: 
+    - narrate "There are no options for this command."
+    - narrate "<script.yaml_key[usage]>"
+    - determine ''
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC SetFirstTimeSpawn:
+    type: command
+    name: SetFirstSpawn
+    description: Purley a server thing. Sets the first place a player spawns
+    usage: /setfirstspawn
+    tab complete: 
+    - narrate "There are no options for this command."
+    - narrate "<script.yaml_key[usage]>"
+    - determine ''
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC SetJoinSpawn:
+    type: command
+    name: SetJoinSpawn
+    description: Sets the place where a player always spawns at when joining a server.
+    usage: /setjoinspawn
+    tab complete: 
+    - narrate "There are no options for this command."
+    - narrate "<script.yaml_key[usage]>"
+    - determine ''
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC SetWarp:
+    type: command
+    name: setwarp
+    description: Sets a global warp point for extra-server travel.
+    usage: /setwarp [name of point (required)]
+    tab complete: 
+    # Get the current warp names of the server
+    - define current_warp_names
+    - determine <def[current_warp_names]>
+    permission: "<parse:<s@CommandDefaults.yaml_key[permissions.commands.<script.yaml_key[name]>]>>"
+    permission message: "<parse:<proc[iconize].context[<s@CommandDefaults.yaml_key[message._permission denied]>]>>"
+    allowed help:
+    - determine <player.is_op||<context.server>>
+    script:
+    - 
+
+
+VC Cross Server Teleportation Intention Detection:
+    type: world
+    events:
+        on player steps on beacon:
+        - define json_data li@
+        - foreach <bungee.list_servers.parse[name]> {
+            - define text "<red><&lb><blue><def[value]><red><&rb><reset>   "
+            - define color gold
+            - define hover_action show_text
+            - define hover_value '<gray>teleport to the <gold><def[value]> <gray>server.'
+            - define click_action run_command
+            - define click_value "/server <def[value]>"
+            - define json <proc[JsonExtraPackage].context[<def[text]>|<def[color]>|<def[hover_action]>|<def[hover_value]>|<def[click_action]>|<def[click_value]>]>
+            - define json_data "<def[json_data].include[<def[json]>]>"
+            }
+        - define json_command <proc[JsonPayloadPackaging].context[<def[json_data].escaped>]>
+        - execute as_server "tellraw <player.name> <def[json_command]>"
+
+
+CrossServerTeleportation:
+    #
+    # Requires functionality like this plugin:
+    # http://dev.bukkit.org/bukkit-plugins/microjump/
+    # Needs to have a command for players to get them to switch servers
+    #
+    #Expects location data to be separated as extra arguments
+    #
+    # - run CrossServerTeleportation def:server|l@location|yaw,pitch,world
+    # - run CrossServerTeleportation def:creative|l@location|world
+    # - run CrossServerTeleportation def:factions|l@location|yaw,pitch,world
+    # - run crossserverteleportation def:l@1,100,1|0.0|0.0|hub
+    # the procedure should stich the data together correctly
+    #
+    # notice l@0,0,0,world as an argument dosnt work as someplace in the bungee command
+    # it simplifies the location. So the world HAS to be added as a separate argument to be stiched
+    # - run CrossServerTeleportation def:l@location|world
+    # 
+    type: task
+    definitions: __server_target
+    script:
+    # trying to catch definitions 1,2,3,... for extra location data li@x,y,z,pitch,yaw,world
+    - define __location li@
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define __location <def[__location].include[<def[%value%]>]>
+        }
+    - define servers "<proc[Match Bungee Servers].context[<def[__server_target]>]>"
+    - if <def[servers].is_empty> {
+        - debug error "Needs a matchable bungee server name"
+        - queue clear
+        }
+    - define player <player>
+    - define server <def[servers].first>
+    - bungee <def[server]> {
+        - adjust <def[player]> location:<def[__location].separated_by[,]>
+        }
+    - define server_name <def[server].name>
+    - if <bungee.server.name> != <def[server_name]> {
+        - execute as_player "server <def[server_name]>"
+        }
+    
+
+VC Teleport Locations Startup:
+    type: world
+    events:
+        on server start:
+        - ~sql id:name connect:localhost:3306/VCTeleportLocations username:VCTeleServer password:VCTeleServer1337
+
+
+VC Store Location:
+    
+    #
+    # This Stores location data under a path for stuff like
+    # Homes, warps,                                    main key        
+    # could store it in a mysql database by path.unique.name | location | yaw | pitch | world
+    #
+    type: task
+    definitions: path
+    script:
+    - define values ('<def[path]>', '<player.location>', '<player.location.yaw>', '<player.location.pitch>, <player.location.world')
+    - sql id:locations "update:INSERT INTO locations VALUES <def[values]>;" 
+
+    
+VC Retrieve Location:
+    type: procedure
+    definitions: path
+    script:
+    - sql id:locations "query:SELECT path,location,yaw,pitch,world FROM locations WHERE id=<def[path]>;" save:location 
+    - determine <entry[location].result> 
+
 
 
