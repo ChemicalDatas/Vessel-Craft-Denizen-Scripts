@@ -87,16 +87,21 @@ Effect:
       <def[extra_args].unescaped||>
 
 
+
 Narrate:
-    #Takes a set of words to narrate
-    #and optionally a escaped format.
     type: task
     definitions: words|format
-    default_format: plain
     script:
-    - define format format<&co><def[format].unescaped||<script.yaml_key[default_format]>>
-    - narrate <def[words].unescaped> <def[format]>
-      
+    - define format <def[format]||plain>
+    - narrate format:<def[format]> <def[words].unescaped>
+
+NNarrate:
+    type: task
+    script:
+    - inject "default map definitions"
+    - narrate <def[text].unescaped> format:<def[format]||plain>
+    #- narrate <def[words].unescaped> <def[format]>
+
 
 Eat Effect:
     type: procedure
