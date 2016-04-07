@@ -261,7 +261,7 @@ Controller Event Detection:
           define event_list
           "<def[event_list].include[player sprint left click]>"
           
-        - if <player.is_sneaking>
+        - if <player.is_sneaking||false>
           define event_list
           "<def[event_list].include[player sneak left click]>"
           
@@ -321,7 +321,7 @@ Controller Event Detection:
         - define event_list li@
         - define context li@
         - wait 1t
-        - if <player.is_sneaking>
+        - if <player.is_sneaking||false>
           define event_list
           "<def[event_list].include[player sudden stop]>"
           
@@ -340,13 +340,13 @@ Controller Event Detection:
         on player jumps:
         - define event_list li@
         - define context li@
-        - if <player.is_sprinting>
+        - if <player.is_sprinting||false>
           define event_list
           "<def[event_list].include[player sprint jump]>"
         
         
         # Players with smart moving will not be able to get this event as smart moving uncrouches the player before the jump 
-        - if <player.is_sneaking>
+        - if <player.is_sneaking||false>
           define event_list
           "<def[event_list].include[player crouch jump]>"
           
