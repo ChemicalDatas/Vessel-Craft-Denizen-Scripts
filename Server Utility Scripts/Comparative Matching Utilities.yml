@@ -185,23 +185,6 @@ Is Between Numbers:
         }
     - determine true
 
-    
-"Timed Has Moved":
-    #
-    # Has a delayed task that eventually returns true.
-    # todo: find out if you can delay the rest of the script with a ~ in front of the define command
-    #
-    type: procedure
-    definitions: delay
-    script:
-    - define delay <def[delay]||d@1s>
-    - define location <player.location.simple>
-    - wait %delay%
-    - if %location% == <player.location.simple> {
-        - determine true
-        }
-    - determine false
-
 
 world matcher:
     type: procedure
@@ -268,4 +251,18 @@ player matcher:
     - if <server.list_online_players.contains[<def[lookup]>]> determine <def[lookup]>
     - define targets <server.list_online_players.parse[name].filter[starts_with[<def[lookup]>]]>
     - determine <def[targets].parse[as_player]>
+
+
+
+Match Bungee Servers:
+    type: procedure
+    definitions: name
+    type_name: as_element
+    script:
+    - inject typecheck
+    - define name server@<def[name]>
+    - determine <bungee.list_servers.filter[starts_with[<def[name]>]]>
+
+
+
 
