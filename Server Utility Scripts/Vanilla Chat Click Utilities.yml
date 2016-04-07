@@ -1,52 +1,129 @@
 #A set of test chat utilities for having chat click-able links that interact with npcs
 
-#todo: Finish me
+#
+# USAGE
+#
+#
+#on player steps on beacon:
+#- define json_data li@
+#- foreach <bungee.list_servers.parse[name]> {
+#    - define text "<red><&lb><blue><def[value]><red><&rb><reset>   "
+#    - define color gold
+#    - define hover_action show_text
+#    - define hover_value '<gray>teleport to the <gold><def[value]> <gray>server.'
+#    - define click_action run_command
+#    - define click_value "/server <def[value]>"
+#    - define json <proc[JsonExtraPackage].context[<def[text]>|<def[color]>|<def[hover_action]>|<def[hover_value]>|<def[click_action]>|<def[click_value]>]>
+#    - define json_data "<def[json_data].include[<def[json]>]>"
+#    }
+#- define json_command <proc[JsonPayloadPackaging].context[<def[json_data].escaped>]>
+#- execute as_server "tellraw <player.name> <def[json_command]>"
 
-"Red or Blue":
-    type: world
-    events:
-        on choice_selector command:
-        - foreach <context.args> {
-            - announce "Argument <def[loop_index]>:<def[value]>"
-            }
-        - determine fulfilled
 
 
-"Test Chat Links":
-    #
-    # This is an example of using denizen to construct a chat link that executes a 
-    # command that denizen then reads the arguments for...
-    # Im thinking useful for...
-    #   spells
-    #   chat inputs
-    #   world teleportations
-    #   command lists
-    #
-    # custom built commands?
-    # smite player selection
-    #   arguments command target
-    #   - foreach <server.list_online_players>
-    type: task
-    script:
-    - execute as_server "tellraw <player.name> {text:'hi there',color:'blue'}"
-    - execute as_server "tellraw <player.name> {text:'Here your Text',color:'Here your color',extra:[{text:'Here your Second Text',color:'Here your Second Color',hoverEvent:{action:'show_text',value:'Here your Hover Text'},clickEvent:{action:'run_command',value:'/choice_selector red_pill swallow_it_quickly'}}]}"
-    
-"Chat Input Formatting":
-    #all text here should be escaped then unescaped before executing
-    #
-    # "Do you want the [clickable link] or the [clickable link]?"
-    # input:
-    #   ...context[word_1|command_1|color_1|hover_text_1|hover_text_color]
-    type: procedure
-    script:
-    - foreach <queue.definitions> { 
-        - define 
+
+#todo: add fallback values, if just 1 is missing, will throw errors
+#add: http://www.minecraftforum.net/forums/minecraft-discussion/redstone-discussion-and/351959-1-9-json-text-component-for-tellraw-title-books
+# for all features
+JsonTextPayload:
+    type: "yaml data"
+    text: "<def[text]||>"
+    color: "<def[color]||white>"
+    #score:
+    #selector: "<def[selector]||>"
+    ##
+    hoverEvent: {
+        action: "<def[hover_action]||>",
+        value: "<def[hover_value]||>"
         }
-    
+    clickEvent: {
+        action: "<def[click_action]||>",
+        value: "<def[click_value]||>"
+        }
+
+
+JsonExtraPackage:
+    #This is where the json gets its tags filled in from the input
+    type: procedure
+    definitions: text|color|hover_action|hover_value|click_action|click_value
+    script:
+    - determine <parse:<s@JsonTextPayload.to_json>>
+
+
+#VC Cross Server Teleport Command Structure:
+JsonPayloadPackaging:
+    # combinds and formats the last of the json
+    type: procedure
+    definitions: payload_list
+    script:
+    - define payload_list <def[payload_list].unescaped>
+    - define text '<reset>'
+    - define text_n_payload "<def[text].format[JsonTextFormat]>,<def[payload_list].comma_separated.format[JsonExtraFormat]>"
+    - determine "<def[text_n_payload].format[JsonCurlyBracketFormat]>"
+
+
+JsonTextFormat:
+    #packages "text":"<text>"
+    type: format
+    format: "<&dq>text<&dq><&co><&dq><text><&dq>"
+
+JsonExtraFormat:
+    #packages "extra":[<text>]
+    type: format
+    format: "<&dq>extra<&dq><&co><&lb><text><&rb>"
+
+JsonCurlyBracketFormat:
+    #packages {<text>}
+    type: format
+    format: "<&lc><text><&rc>"
+
+
+
+
+###############################################
+
+
+
 JSONTest:
     type: yaml data
-    text: hello there
-    color: blue
+    text: ""
+    extra:
+    - {
+        text: "[<bungee.server.name>]",
+        color: "red",
+        hoverEvent: {
+            action: show_text,
+            value: "Teleport to server?"
+            },
+        clickEvent: {
+            action: run_command,
+            value: "/server <bungee.server.name>"
+            }
+      }
+    - {
+        text: "[<player.name.display||<player.name>>] ",
+        color: "light_gray",
+        hoverEvent: {
+            action: show_text,
+            value: "is Owner? <red><player.in_group[Owner].global||<blue>false>"
+            },
+        clickEvent: {
+            action: suggest_command,
+            value: "/msg <player.name>"
+            }
+      }
+    - {
+        text: "<def[message]>",
+        color: "light_gray",
+        hoverEvent: {
+            action: show_text,
+            value: ""
+            },
+        clickEvent: {
+            action: suggest_command,
+            value: "Hi <player.name>"
+            }
+      }
 
 tellRaw_test:
     type: command
@@ -58,23 +135,10 @@ tellRaw_test:
     allowed help:
     - determine <player||false>
     script:
-    - define cmd "tellraw <player.name> <s@JSONTest.to_json>"
+    - narrate ""
+    - define message <context.args.space_separated>
+    - define cmd "tellraw @a <parse:<s@JSONTest.to_json>>"
     #- execute as_server "tellraw <player.name> {TEXT:'hello there',COLOR:'blue'}"
     #- execute as_server "tellraw <player.name> {text:'hello there',color:'blue'}"
     - execute as_server <def[cmd]>
-    - announce "Should have: <blue><def[cmd]>"
     
-level 1 locked chest:
-    type: inventory
-    inventory: chest
-    title: Locked Chest
-    size: 45
-    definitions: 
-        tumbler: I@IRON_BLOCK
-        walls:   I@IRON_FENCE
-    slots:
-    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"
-    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
-    - "[]        [] [] [] [] [] [] [] [WALLS]"
-    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
-    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"
