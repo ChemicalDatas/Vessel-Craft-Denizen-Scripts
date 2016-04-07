@@ -114,3 +114,23 @@ Diamond Lock:
     - i@oak_planks|i@diamond_block|i@oak_planks
     - i@oak_planks|i@oak_planks|i@oak_planks
     
+
+
+
+level 1 locked chest:
+    type: inventory
+    inventory: chest
+    title: Locked Chest
+    size: 45
+    definitions: 
+        tumbler: I@IRON_BLOCK
+        walls:   I@IRON_FENCE
+    slots:
+    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"
+    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
+    - "[]        [] [] [] [] [] [] [] [WALLS]"
+    - "[WALLS]   [] [] [] [] [] [] [] [WALLS]"
+    - "[WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS] [WALLS]"
+
+
+
