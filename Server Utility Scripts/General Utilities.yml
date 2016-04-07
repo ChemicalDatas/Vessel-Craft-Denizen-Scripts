@@ -615,13 +615,13 @@ Wait for Valid Player:
     #
     type: task
     definitions: duration|max_wait
-    default_duration: d@1s
-    default_max_wait: 8
-    default_initial_wait: d@1t-1s
+    default_duration: d@5t
+    default_max_wait: 20
+    default_initial_wait: d@5t
     script:
     - define duration <def[duration]||<script.yaml_key[default_duration]>>
     - define max_wait <def[max_wait]||<script.yaml_key[default_max_wait]>>
-    - wait <script.yaml_key[default_initial-wait]>
+    - wait <script.yaml_key[default_initial_wait]>
     - while !<player.is_spawned||false> {
         - wait <def[duration]>
         - if <def[loop_index].is[or_more].than[<def[max_wait]>]> {
@@ -655,12 +655,28 @@ define map arguments:
     - define value:!
 
 
-define map arguments from default definitions:
+default map definitions:
     type: task
     script:
     - foreach <queue.definitions> {
         - if <def[value].as_int||no_an_default_argument> != no_an_default_argument {
-            - define <def[value].split[/].get[1]> <def[%value%].split[/].get[2]>
+            - define <def[%value%].split[/].get[1]> <def[%value%].split[/].get[2]>
+            - define <def[value]>:!
+            }
+        }
+    - define loop_index:!
+    - define value:!
+
+serialize map arguments:
+    type: task
+    script:
+    - foreach <queue.definitions> {
+        - if <def[value].as_int||no_an_default_argument> != no_an_default_argument {
+            - define <def[%value%].split[/].get[1]> <def[%value%].split[/].get[2]>
+            - announce "dmd: <def[value]> <def[%value%]> <def[%value%].split[/].get[1]> <def[%value%].split[/].get[2]>"
+            - define name <def[%value%].split[/].get[1]>
+            - announce "new definition: <def[name]> value: <def[%name%]>"
+            - define name:!
             - define <def[value]>:!
             }
         }
@@ -725,44 +741,6 @@ Queue Level Variable:
 
 
 
-world matcher:
-    type: procedure
-    definitions: lookup
-    script:
-    - define list <server.list_worlds>
-    - if <def[list].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define world <def[list].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
-    - if <def[world]> != NO_MATCHABLE_WORLD determine <def[world].as_world>
-    
-
-item matcher:
-    type: procedure
-    definitions: lookup
-    script:
-    - define list <server.materials.parse[item]>
-    - define list <def[list].include[<yaml[database].list_keys[database.items]>]>
-    - if <def[list].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define items <def[list].parse[name].filter[starts_with[<def[lookup]>]]||NO_MATCHABLE_WORLD>
-    - if <def[player]> != NO_MATCHABLE_WORLD determine <def[items].get[1]>
-    
-
-material matcher:
-    type: procedure
-    definitions: lookup
-    look_type: parse[name].starts_with[<def[lookup]>]
-    script:
-    - define list <server.list_materials>
-    - if <def[list].contains[<def[lookup]>]> {
-        - determine <def[lookup]>
-        }
-    - define materials <def[list].filter[parse[name].starts_with[<def[lookup]>]]||NO_MATCHABLE_MATERIAL>
-    - if <def[material]> != NO_MATCHABLE_MATERIAL determine <def[materials]>
-    
-
 list filters:
     # performs a recursive filter with each extra argument on provided list
     # returns a list of materials that qualify
@@ -778,3 +756,71 @@ list filters:
         - define __list <def[__list].filter[<def[%value%]>]>
         }
     - determine <def[__list]>
+
+
+ParseDefinitions:
+    type: procedure
+    definitions: queue
+    script:
+    - define values_list li@
+    - foreach <def[queue].definitions> {
+        - define valu <def[queue].definition[<def[value]>]>
+        - define values_list <def[values_list].include[<def[valu]>]>
+        - narrate "values_list: <def[values_list]>"
+        }
+    - determine <def[values_list].space_separated>
+
+ParseDefinitions_inject:
+    # changes the values to the name for use with <queue.definitions>
+    type: task
+    script:
+    - foreach <queue.definitions.exclude[<queue.definitions.filter[starts_with[__]]>]> {
+        - define <def[%value%].escaped> <def[%value%]>
+        - narrate "inject: <def[%value%].escaped>"
+        - define <def[value]>:!
+        }
+    - foreach <queue.definitions.filter[starts_with[__]]> {
+        - define <def[value]>:!
+        }
+    - define value:!
+    - define loop_index:!
+    
+# 2 ways, inject and a procedure
+DYNS:
+    # DYNamic Script
+    type: task
+    script:
+    - inject typecheck
+    - define args <proc[ParseDefinitions].context[<queue>]>
+    - narrate <proc[ParseDefinitions].context[<queue>]>
+    - narrate %args%
+    - narrate <def[args]>
+    - narrate <parse:%args%>
+    - define args:!
+    - narrate '<red>##################'
+    - inject ParseDefinitions_inject
+    - narrate "raw after parse: <queue.definitions>"
+    - narrate "parsed: <queue.definitions.parse[unescaped].space_separated>"
+    - define args <queue.definitions.parse[unescaped].space_separated>
+    
+    #goal
+    - narrate <queue.definitions.parse[unescaped].space_separated>
+    - narrate <parse:%args%>
+    
+
+goal script for DYNS:
+    type: task
+    script:
+    - define v <queue.definitions>
+    - choose <d[v].map_get[task]>
+        - case run
+            - run %v% (script, id, instantly, definitions)
+        - case narrate
+            - narrate <d[v].map_get[text]> targets:<d[v].map_get[targets]> format:<d[v].map_get[format]||plain>
+        - case announce
+            - announce <d[v].map_get[text]> <d[v].map_get[targets]||>
+        - case debug
+            - debug <d[v].map_get[type]> <d[v].text>
+        - case inject
+            - inject <d[v].map_get[locally]||> <d[v].map_get[script]> path:<d[v].map_get[path]||script> <d[v].map_get[instantly]||>
+    
