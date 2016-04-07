@@ -194,7 +194,6 @@ Get Debug Data:
         script/script|
         flags/list_flags|
         engaged/is_engaged|
-        anchors/anchor.list|
         inventory/inventory.list_contents|
         traits/traits|
         nearby_npcs/location.find.npcs.within[25]"
