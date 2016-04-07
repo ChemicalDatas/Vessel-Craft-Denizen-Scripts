@@ -6,7 +6,7 @@ Cross Server Chat Sending:
         - determine passively cancelled
         - async:
             - define message <context.message>
-            - define header "[<bungee.server.name>][<player.name>]"
+            - define header "<red>[<gray><bungee.server.name><red>][<green><player.name><red>]<reset>"
             - bungee <bungee.list_servers> {
                 - announce "<def[header]> <def[message]>"
                 }
